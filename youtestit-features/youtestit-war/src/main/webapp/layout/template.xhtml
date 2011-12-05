@@ -1,0 +1,85 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        dir="ltr"
+        contentType="text/html"
+        id="#{messages['project.name']}">
+<html>
+  
+  
+  <ui:remove><!--*****************************************************************
+  *    HEAD
+  *****************************************************************************-->
+  </ui:remove>
+     
+  <h:head>
+    <title>#{messages['project.name']}</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <link rel="icon" href="#{resource['img/icons/favicon.ico']}" />
+    <h:outputStylesheet name="default.css" library="stylesheet" />
+    <h:outputStylesheet name="primefaces-theme.css" library="stylesheet" />
+    <h:outputStylesheet name="richfaces-theme.css" library="stylesheet" />
+    
+    <ui:insert name="header" />
+  </h:head>
+
+
+
+  <ui:remove><!--**************************************************************
+  *    BODY
+  **************************************************************************-->
+  </ui:remove>
+  <h:body id="top">
+      <div id="container">
+      
+        <ui:remove><!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        *    CONTENT HEADER
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        </ui:remove>
+        <header id="header">
+          <div id="logo">
+              <h1><a href="#">#{messages['project.name.full']}</a></h1>
+          </div>
+          
+          <div id="menu">
+              <ui:include src="menu.xhtml"/>
+          </div>
+        </header>
+        
+        
+        <div id="headerbg">
+            <p class="text1">
+                <ui:insert name="title" />
+            </p>
+        </div>
+        
+        
+        
+        <ui:remove><!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        *    CONTENT
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        </ui:remove>
+        <div id="main">
+          <div id="page">
+            <ui:insert name="body" />
+          </div>
+            
+        </div> 
+        
+        <ui:remove><!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        *    FOOTER
+        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        </ui:remove>
+        <footer id="footer">
+            <ui:include src="footer.xhtml"/>
+        </footer>       
+      </div>
+
+  </h:body>
+
+
+</html>
+
+</f:view>

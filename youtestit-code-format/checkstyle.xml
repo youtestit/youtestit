@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+  <!-- Documentation on checkstyle rules : http://checkstyle.sourceforge.net/availablechecks.html -->
+<module name="Checker">
+  <!-- $Id$ -->
+  <property name="severity" value="warning" />
+  <property name="charset" value="UTF8" />
+  <module name="TreeWalker">
+    <module name="ConstantName">
+      <property name="id" value="RC-066 / RN-028" />
+    </module>
+    <module name="LocalFinalVariableName">
+      <property name="id" value="RN-002" />
+    </module>
+    <module name="LocalVariableName">
+      <property name="id" value="RN-003 / RN-012 / RN-015 / RN-019 / RN-024 / RN-026" />
+    </module>
+    <module name="MemberName">
+      <property name="id" value="RN-004 / RN-012 / RN-015 / RN-019 / RN-026" />
+    </module>
+    <module name="MethodName">
+      <property name="id" value="RN-005 / RN-013 / RN-014 / RN-020" />
+    </module>
+    <module name="PackageName">
+      <property name="severity" value="error" />
+      <property name="id" value="RN-006 / RN-016 / RN-021" />
+      <property name="format" value="^org.apache(\.[a-z0-9]+)*$" />
+    </module>
+    <module name="ParameterName">
+      <property name="id" value="RN-007 / RN-026" />
+    </module>
+    <module name="StaticVariableName">
+      <property name="id" value="RN-030" />
+    </module>
+    <module name="TypeName">
+      <property name="severity" value="error" />
+      <property name="id" value="RN-017 / RN-018 / RN-023 / RN-025" />
+    </module>
+    <module name="AvoidStarImport">
+      <property name="severity" value="info" />
+      <property name="id" value="RA-001" />
+    </module>
+    <module name="RedundantImport">
+      <property name="severity" value="info" />
+      <property name="id" value="RA-002/ RA-004 / RC-098" />
+    </module>
+    <module name="IllegalImport">
+      <property name="severity" value="error" />
+      <property name="id" value="RA-003 / RC-048" />
+    </module>
+    <module name="UnusedImports">
+      <property name="severity" value="info" />
+      <property name="id" value="RC-056" />
+    </module>
+
+    <module name="LineLength">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-003" />
+      <property name="max" value="120" />
+      <property name="tabWidth" value="1" />
+    </module>
+    <module name="MethodLength">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-004 / RN-020" />
+    </module>
+    <module name="ParameterNumber">
+      <property name="severity" value="error" />
+      <property name="id" value="RA-005" />
+    </module>
+    <module name="NoWhitespaceAfter">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-005 / RF-006" />
+      <property name="tokens" value="ARRAY_INIT,BNOT,DEC,DOT,INC,LNOT" />
+    </module>
+    <module name="NoWhitespaceBefore">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-005 / RF-006" />
+    </module>
+    <module name="OperatorWrap">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-007 / RC-070" />
+    </module>
+    <module name="ParenPad">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-008 / RF-033" />
+    </module>
+    <module name="WhitespaceAfter">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-010 / RF-011" />
+    </module>
+    <module name="WhitespaceAround">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-011" />
+      <property name="tokens"
+        value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,EQUAL,GE,GT,LAND,LCURLY,LE,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,QUESTION,RCURLY,SL,SLIST,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN,LITERAL_ASSERT,TYPE_EXTENSION_AND,WILDCARD_TYPE" />
+    </module>
+    <module name="ModifierOrder">
+      <property name="id" value="RF-015 / RC-066" />
+    </module>
+    <module name="RedundantModifier">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-016 / RC-099" />
+    </module>
+    <module name="AvoidNestedBlocks">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-017 / RC-081" />
+    </module>
+    <module name="EmptyBlock">
+      <property name="id" value="RC-029 / RC-060" />
+      <property name="option" value="text" />
+    </module>
+    <module name="LeftCurly">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-012 / RF-026 / RF-031" />
+      <property name="maxLineLength" value="121" />
+    </module>
+    <module name="NeedBraces">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-028" />
+    </module>
+    <module name="RightCurly">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-014 / RF-034" />
+    </module>
+    <module name="AvoidInlineConditionals">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-019 / RC-015" />
+    </module>
+    <module name="DoubleCheckedLocking">
+      <property name="severity" value="error" />
+    </module>
+    <module name="EmptyStatement">
+      <property name="id" value="RA-006 / RC-029 / RC-084" />
+    </module>
+    <module name="EqualsHashCode">
+      <property name="severity" value="error" />
+      <property name="id" value="RA-007 / RC-085" />
+    </module>
+    <module name="HiddenField">
+      <property name="severity" value="info" />
+      <property name="id" value="RN-010 / RC-001" />
+      <property name="ignoreConstructorParameter" value="true" />
+      <property name="ignoreSetter" value="true" />
+    </module>
+    <module name="IllegalInstantiation">
+      <property name="severity" value="info" />
+      <property name="id" value="RC-091" />
+    </module>
+    <module name="InnerAssignment">
+      <property name="severity" value="info" />
+      <property name="id" value="RA-008 / RC-026" />
+    </module>
+    <module name="SimplifyBooleanExpression">
+      <property name="id" value="RC-022" />
+    </module>
+    <module name="InterfaceIsType" />
+    <module name="ArrayTypeStyle">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-020" />
+    </module>
+    <module name="RegexpSinglelineJava">
+      <property name="severity" value="error" />
+      <property name="format" value="System\.out\.print" />
+      <property name="message" value="Don't log directly to Sytem.out." />
+    </module>
+    <module name="RegexpSinglelineJava">
+      <property name="severity" value="error" />
+      <property name="format" value="System\.err\.print" />
+      <property name="message" value="Don't log directly to Sytem.err." />
+    </module>
+    <module name="RegexpSinglelineJava">
+      <property name="severity" value="error" />
+      <property name="format" value="printStackTrace" />
+      <property name="message" value="Don't use printStackTrace, use a logger instead." />
+    </module>
+    <module name="UpperEll">
+      <property name="severity" value="error" />
+      <property name="id" value="RN-001 / RF-036" />
+    </module>
+    <module name="JavadocType">
+      <property name="severity" value="info" />
+      <property name="id" value="RD-003 / RD-011" />
+      <property name="scope" value="private" />
+      <property name="allowMissingParamTags" value="false" />
+      <!-- Cette property arrive a partir de Checkstyle 5.1
+      <property name="allowUnknownTags" value="false"/>
+       -->
+    </module>
+    <module name="JavadocMethod">
+      <property name="severity" value="info" />
+      <property name="id" value="RA-015 / RD-002 / RD-010 / RD-011" />
+      <property name="scope" value="private" />
+      <property name="allowUndeclaredRTE" value="false" />
+      <property name="allowThrowsTagsForSubclasses" value="false" />
+      <property name="allowMissingParamTags" value="false" />
+      <property name="allowMissingThrowsTags" value="false" />
+      <property name="allowMissingReturnTag" value="false" />
+      <property name="allowMissingJavadoc" value="false" />
+      <property name="allowMissingPropertyJavadoc" value="true" />
+      <property name="logLoadErrors" value="true" />
+      <property name="suppressLoadErrors" value="true" />
+    </module>
+    <module name="JavadocVariable">
+      <property name="severity" value="info" />
+      <property name="id" value="RD-003 / RD-011" />
+      <property name="scope" value="private" />
+    </module>
+    <module name="JavadocStyle">
+      <property name="severity" value="info" />
+      <property name="id" value="RD-001 / RD-011" />
+      <property name="scope" value="protected" />
+      <property name="excludeScope" value="private" />
+      <property name="checkFirstSentence" value="true" />
+      <property name="checkEmptyJavadoc" value="true" />
+      <property name="checkHtml" value="true" />
+    </module>
+    <module name="ImportControl">
+      <metadata name="com.atlassw.tools.eclipse.checkstyle.lastEnabledSeverity" value="info" />
+      <property name="severity" value="ignore" />
+      <property name="id" value="RA-004" />
+    </module>
+    <module name="MagicNumber">
+      <property name="severity" value="info" />
+      <property name="id" value="RA-009" />
+    </module>
+    <module name="MissingSwitchDefault">
+      <property name="id" value="RA-010 / RC-036" />
+    </module>
+    <module name="RedundantThrows">
+      <property name="id" value="RA-011 / RC-100" />
+      <property name="logLoadErrors" value="true" />
+      <property name="suppressLoadErrors" value="true" />
+    </module>
+    <module name="BooleanExpressionComplexity">
+      <property name="id" value="RA-012 / RC-082" />
+    </module>
+    <module name="FinalClass">
+      <property name="severity" value="info" />
+      <property name="id" value="RA-013 / RC-087" />
+    </module>
+    <module name="HideUtilityClassConstructor">
+      <property name="id" value="RA-014 / RC-090" />
+    </module>
+    <module name="VisibilityModifier">
+      <property name="id" value="RA-016 / RC-111" />
+    </module>
+    <module name="DefaultComesLast">
+      <property name="id" value="RC-036" />
+    </module>
+    <module name="IllegalCatch">
+      <property name="id" value="RC-049 / RC-062" />
+    </module>
+    <module name="IllegalThrows">
+      <property name="id" value="RC-049 / RC-062" />
+    </module>
+    <module name="PackageDeclaration">
+      <property name="id" value="RC-069" />
+    </module>
+    <module name="ReturnCount">
+      <property name="id" value="RC-071" />
+    </module>
+    <module name="AbstractClassName">
+      <property name="severity" value="error" />
+      <property name="id" value="RN-027" />
+    </module>
+    <module name="AnonInnerLength">
+      <property name="severity" value="info" />
+      <property name="id" value="RC-080" />
+    </module>
+    <module name="CovariantEquals">
+      <property name="id" value="RC-083" />
+    </module>
+    <module name="DeclarationOrder">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-029" />
+    </module>
+    <module name="FallThrough">
+      <property name="id" value="RC-086" />
+    </module>
+    <module name="FinalLocalVariable">
+      <property name="severity" value="info" />
+      <property name="id" value="RC-088" />
+    </module>
+
+    <module name="IllegalType">
+      <property name="severity" value="info" />
+      <property name="id" value="RC-092" />
+      <property name="tokens" value="METHOD_DEF,PARAMETER_DEF,VARIABLE_DEF" />
+    </module>
+    <module name="Indentation">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-030" />
+    </module>
+    <module name="JUnitTestCase">
+      <property name="id" value="RC-093" />
+    </module>
+    <module name="MethodParamPad">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-032" />
+    </module>
+    <module name="ModifiedControlVariable">
+      <property name="id" value="RC-094" />
+    </module>
+    <module name="MultipleStringLiterals">
+      <property name="severity" value="info" />
+      <property name="id" value="RC-095" />
+    </module>
+    <module name="MultipleVariableDeclarations">
+      <property name="severity" value="info" />
+      <property name="id" value="RC-096" />
+    </module>
+    <module name="MutableException">
+      <property name="id" value="RA-026" />
+    </module>
+    <module name="ParameterAssignment">
+      <property name="id" value="RC-097" />
+    </module>
+    <module name="SimplifyBooleanReturn">
+      <property name="id" value="RC-101" />
+    </module>
+    <module name="SuperFinalize">
+      <property name="severity" value="error" />
+      <property name="id" value="RC-102" />
+    </module>
+    <module name="ThrowsCount">
+      <property name="id" value="RC-106" />
+      <property name="max" value="6" />
+    </module>
+    <module name="TodoComment">
+      <property name="id" value="RC-107" />
+    </module>
+    <module name="TrailingComment">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-035" />
+    </module>
+    <module name="UncommentedMain">
+      <property name="severity" value="info" />
+      <property name="id" value="RC-109" />
+    </module>
+    <module name="UnnecessaryParentheses">
+      <property name="severity" value="info" />
+      <property name="id" value="RC-110" />
+    </module>
+    <module name="ExecutableStatementCount">
+      <property name="severity" value="info" />
+      <property name="id" value="RF-004" />
+      <property name="tokens" value="INSTANCE_INIT,STATIC_INIT,METHOD_DEF,CTOR_DEF" />
+    </module>
+  </module>
+  <module name="NewlineAtEndOfFile">
+    <property name="severity" value="info" />
+    <property name="id" value="RF-001" />
+  </module>
+  <module name="StrictDuplicateCode">
+    <property name="severity" value="info" />
+    <property name="id" value="RA-027" />
+  </module>
+  <module name="Translation">
+    <property name="severity" value="info" />
+    <property name="id" value="RC-108" />
+  </module>
+  <module name="FileLength">
+    <property name="severity" value="info" />
+    <property name="id" value="RF-002" />
+  </module>
+  <module name="FileTabCharacter">
+    <property name="severity" value="info" />
+    <property name="id" value="RF-009 / RC-103" />
+    <property name="eachLine" value="true" />
+    <property name="fileExtensions" value="java" />
+  </module>
+</module>

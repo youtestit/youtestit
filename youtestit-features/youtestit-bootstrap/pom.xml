@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!--
+    ============================================================================
+    = BOOTSTRAP PROJECT INFORMATIONS
+    ============================================================================
+  -->
+  <parent>
+    <groupId>org.apache</groupId>
+    <artifactId>youtestit-features</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+
+  <artifactId>youtestit-bootstrap</artifactId>
+  <packaging>ejb</packaging>
+  <name>youtestit - Bootstrap</name>
+
+
+  <!--
+    ============================================================================
+    = DEPENDENCY
+    ============================================================================
+  -->
+  <dependencies>
+
+    <!--:::::::::::::::::::::: project dependency :::::::::::::::::::::::::::-->
+    <dependency>
+      <groupId>org.apache</groupId>
+      <artifactId>youtestit-core</artifactId>
+      <type>ejb</type>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache</groupId>
+      <artifactId>youtestit-datamodel</artifactId>
+      <type>ejb</type>
+    </dependency>
+  </dependencies>
+
+
+  <!--
+    ============================================================================
+    = BUILD
+    ============================================================================
+  -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

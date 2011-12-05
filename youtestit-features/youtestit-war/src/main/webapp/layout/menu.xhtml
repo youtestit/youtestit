@@ -1,0 +1,17 @@
+<div xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+    
+    
+    <ul>
+        <ui:repeat value="#{menu.mainSection}" var="page">
+          <li class="#{menu.cssClassForCurrentView(page)}">
+              <h:link  id="link_home"
+                       outcome="/#{page}"
+                       title="#{page}"
+                       value="#{page}"/>
+          </li>
+        </ui:repeat>
+    </ul>
+    
+</div>
