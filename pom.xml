@@ -9,6 +9,12 @@
     = MAIN PROJECT INFORMATIONS
     ============================================================================
   -->
+	<parent>
+		<groupId>org.jboss.seam</groupId>
+		<artifactId>seam-parent</artifactId>
+		<version>15</version>
+	</parent>
+
   <groupId>org.apache</groupId>
   <artifactId>youtestit</artifactId>
   <version>0.1-SNAPSHOT</version>

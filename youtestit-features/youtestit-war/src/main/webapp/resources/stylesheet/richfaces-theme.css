@@ -7,3 +7,10 @@
 .rf-tab-hdr{
     color:#3D3D3D !important;
 }
+
+textarea, input[type="text"], input[type="password"], select{
+	font-size: 14px;
+	background: none repeat scroll 0 0 #FFFFFF;
+    box-shadow: 0 2px 2px #505050 inset;
+	
+}

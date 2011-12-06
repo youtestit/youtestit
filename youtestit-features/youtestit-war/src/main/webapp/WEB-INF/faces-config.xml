@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
   version="2.0">
 
-  <application>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
 
-    <resource-bundle>
-      <base-name>ongolarom.metier.resources.uitext</base-name>
-      <var>bundle</var>
-    </resource-bundle>
-    
-    
-    <resource-bundle>
-      <base-name>messages</base-name>
-      <var>messages</var>
-    </resource-bundle>
+		<navigation-case>
+			<from-action>#{currentUserManager.onLogout}</from-action>
+			<if>#{true}</if>
+			<to-view-id>/login.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 
-    
-    <locale-config>
-      <default-locale>en</default-locale>
-      <supported-locale>fr</supported-locale>
-    </locale-config>
-  </application>
+	</navigation-rule>
+
+
+
+
+
+
+
+
+	<application>
+		<resource-bundle>
+			<base-name>messages</base-name>
+			<var>messages</var>
+		</resource-bundle>
+
+
+		<locale-config>
+			<default-locale>en</default-locale>
+			<supported-locale>fr</supported-locale>
+		</locale-config>
+	</application>
 
 
 </faces-config>

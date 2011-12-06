@@ -5,7 +5,7 @@
 
   <!--
     ============================================================================
-    = CORE PROJECT INFORMATIONS
+    = COMMONS PROJECT INFORMATIONS
     ============================================================================
   -->
 	<parent>
@@ -15,9 +15,9 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>youtestit-core</artifactId>
+	<artifactId>youtestit-actions-admin</artifactId>
 	<packaging>jar</packaging>
-	<name>youtestit - core</name>
+	<name>youtestit - Administrator actions</name>
 
 
   <!--
@@ -26,43 +26,26 @@
     ============================================================================
   -->
 	<dependencies>
-		<dependency>
-			<groupId>org.apache</groupId>
-			<artifactId>youtestit-commons</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache</groupId>
-			<artifactId>youtestit-datamodel</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache</groupId>
-			<artifactId>youtestit-security</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jboss.seam.catch</groupId>
-			<artifactId>seam-catch</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jboss.seam.rest</groupId>
-			<artifactId>seam-rest-impl</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jboss.seam.rest</groupId>
-			<artifactId>seam-rest-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
+	
 	</dependencies>
 
 
-
+  <!--
+    ============================================================================
+    = BUILD
+    ============================================================================
+  -->
 	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>

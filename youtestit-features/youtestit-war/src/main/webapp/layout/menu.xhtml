@@ -4,14 +4,32 @@
     
     
     <ul>
-        <ui:repeat value="#{menu.mainSection}" var="page">
-          <li class="#{menu.cssClassForCurrentView(page)}">
-              <h:link  id="link_home"
-                       outcome="/#{page}"
-                       title="#{page}"
-                       value="#{page}"/>
-          </li>
-        </ui:repeat>
+        <li>
+          <h:link  id="link_home"
+                   outcome="/home.xhtml"
+                   title="home"
+                   value="home"/>
+        </li>
+        
+        <f:subview id="loginLink" rendered="#{identity.user==null}">
+	        <li>
+	          <h:link  id="link_login"
+	                   outcome="/login.xhtml"
+	                   title="Login"
+	                   value="Login"/>
+	        </li>
+        </f:subview>
+        
+        <f:subview id="LogoutLink" rendered="#{identity.user!=null}">
+	        <li>
+	          <a href="/smile-seam/logout" title="Logout">
+	          	Logout
+	          </a>
+	        </li>
+        </f:subview>
+                   
+                   
+        
     </ul>
     
 </div>

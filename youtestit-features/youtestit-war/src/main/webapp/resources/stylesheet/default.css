@@ -5,6 +5,9 @@ http://www.freecsstemplates.org
 Released for free under a Creative Commons Attribution 2.5 License
 */
 
+#javax_faces_developmentstage_messages{
+	display: none;	
+}
 
 body {
     margin: 0;
@@ -142,6 +145,7 @@ img.right {
 #logo {
     float: left;
     margin-top: 30px;
+    background: url(#{resource['img/theme/seam_icon.png']}) no-repeat left 50%;
 }
 
 #logo h1, #logo h2, #logo p {
@@ -150,12 +154,14 @@ img.right {
     text-transform: lowercase;
 }
 
-#logo h1 {
-    background: url(#{resource['img/theme/seam_icon.png']}) no-repeat left 50%;
+
+
+#logo h1,#logo h1 a  {
     padding-left: 37px;
     text-align: center;
-    font-size: 3.2em;
+    font-size: 2em;
     color: #000000;
+    font-family: Georgia,"Times New Roman",Times,serif;
 }
 
 #logo h1 a {

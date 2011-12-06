@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pretty-config xmlns="http://ocpsoft.com/prettyfaces/2.0.4"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
         http://ocpsoft.com/prettyfaces/2.0.4
         http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-2.0.4.xsd">
 
 
+	<url-mapping id="login">
+		<pattern value="/login"></pattern>
+		<view-id>/login.xhtml</view-id>
+	</url-mapping>
+	
+	<url-mapping id="subscrib">
+		<pattern value="/subscrib"></pattern>
+		<view-id>/subscrib.xhtml</view-id>
+	</url-mapping>
+	
+	
 
-  <url-mapping id="home">
-    <pattern value="/"></pattern>
-    <view-id>/home.xhtml</view-id>
-  </url-mapping>
+	<url-mapping id="home">
+		<pattern value="/home"></pattern>
+		<view-id>/home.xhtml</view-id>
+	</url-mapping>
 
 
-  <url-mapping id="links">
-    <pattern value="/links"></pattern>
-    <view-id>/links.xhtml</view-id>
-  </url-mapping>
+	<url-mapping id="links">
+		<pattern value="/links"></pattern>
+		<view-id>/links.xhtml</view-id>
+	</url-mapping>
+
+	<url-mapping id="logout">
+		<pattern value="/logout"></pattern>
+		<view-id>/login.xhtml</view-id>
+		<action>#{identity.logout}</action>
+	</url-mapping>
 
 </pretty-config>

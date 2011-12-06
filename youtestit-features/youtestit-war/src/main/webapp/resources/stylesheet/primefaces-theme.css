@@ -166,3 +166,7 @@
 	-webkit-box-shadow: 0px 0px 5px #505050, inset 0 2px 2px #505050;
 	box-shadow: 0px 0px 5px #505050, inset 0 2px 2px #505050;
 }
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield{
+	width: 172px;
+}

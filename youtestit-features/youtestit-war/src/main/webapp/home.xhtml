@@ -1,7 +1,7 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:s="http://jboss.org/seam/faces"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
@@ -32,7 +32,7 @@
         
             <h:panelGrid columns="2">
                 <h:graphicImage value="#{resource['img/logos/seamlogo.png']}" alt="Seam logo" />
-                <s:div styleClass="info">
+                <div class="info">
                     <p><strong>Your seam-gen project is deployed!</strong> Here are
                     some of the features this project provides:</p>
                     <ul class="bullets">
@@ -48,7 +48,7 @@
                         <li>Default CSS stylesheet</li>
                         <li>Internationalization support</li>
                     </ul>
-                </s:div>
+                </div>
             </h:panelGrid>
         </rich:panel>
       
