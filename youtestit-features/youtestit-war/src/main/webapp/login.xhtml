@@ -1,0 +1,74 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/seam/faces"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    template="layout/template.xhtml">
+
+
+    <ui:remove><!--*************************************************************
+    *    TITLE
+    *************************************************************************-->
+    </ui:remove>
+    <ui:define name="title">
+       #{messages['label.login.title']}
+    </ui:define>
+
+
+    <ui:remove><!--*************************************************************
+    *    BODY
+    *************************************************************************-->
+    </ui:remove>
+    <ui:define name="body">
+
+         <h:form id="loginForm">
+
+
+      <p:panel  id="loginFormPanel" header="#{messages['label.login.panel.title']}" >
+      
+        <p id="loginFormPanelTitle">
+            <h2>
+            	<h:outputLabel  id="loginFormPanelTitle-label" 
+                            	value="#{messages['label.login.form.title']}"/>
+            </h2>
+        </p>
+        
+	        <h:panelGrid    id="loginFormPanelGrid"
+	                        columns="2"
+	                        rowClasses="prop"
+	                        columnClasses="name,value">
+	                        
+	        			<h:outputLabel  id="username-label" for="username" value="#{messages['label.login.form.login']}"/>                
+	                    <h:inputText    id="username" value="#{credentials.username}"/>
+	                    
+	                    <h:outputLabel  id="password-label" for="password" value="#{messages['label.login.form.password']}"/>
+	                    <h:inputSecret  id="password"   value="#{credentials.password}"/>
+	
+	        </h:panelGrid>
+                
+                
+          <div>
+          	<h:link  id="link_subscrib"
+	                   outcome="/subscrib.xhtml"
+	                   title="#{messages['label.subscrib.panel.title']}"
+	                   value="#{messages['label.subscrib.title']}"/>
+          </div>
+               
+          <div class="actionButtons">
+                  <h:commandButton  id="submit"
+                                    value="#{messages['label.login.button.ok']}"
+                                    action="#{identity.login}"/>
+          </div>
+                          
+      </p:panel>
+
+
+    </h:form>
+
+
+    </ui:define>
+</ui:composition>
