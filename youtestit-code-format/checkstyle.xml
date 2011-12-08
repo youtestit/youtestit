@@ -24,7 +24,7 @@
     <module name="PackageName">
       <property name="severity" value="error" />
       <property name="id" value="RN-006 / RN-016 / RN-021" />
-      <property name="format" value="^org.apache(\.[a-z0-9]+)*$" />
+      <property name="format" value="^org.youtestit(\.[a-z0-9]+)*$" />
     </module>
     <module name="ParameterName">
       <property name="id" value="RN-007 / RN-026" />
