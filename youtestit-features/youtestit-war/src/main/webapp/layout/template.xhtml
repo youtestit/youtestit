@@ -49,7 +49,7 @@
     <h:outputStylesheet name="richfaces-theme.css" library="stylesheet" />
     -->
 
-    <link href="#{resource['stylesheet/default.css']}" rel="stylesheet" type="text/css" />
+    <link href="#{resource['stylesheet/default/main.css']}" rel="stylesheet" type="text/css" />
     <ui:insert name="meta" />
   </h:head>
 
@@ -59,56 +59,34 @@
   *    BODY
   **************************************************************************-->
   </ui:remove>
-  
-  <h:body id="top">
-      <div id="container">
+  <h:body id="body">
+    <ui:include src="header.xhtml"/>
       
-        <ui:remove><!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        *    CONTENT HEADER
-        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-        </ui:remove>
-        <header id="bbb">
-          <div id="logo">
-              <h1><a href="#">#{messages['project.name.full']}</a></h1>
-          </div>
-          
-          <div id="menu">
-              <ui:include src="menu.xhtml"/>
-          </div>
-        </header>
-        
-        
-        <div id="headerbg">
-            <p class="text1">
-                <ui:insert name="title" />
-            </p>
-        </div>
-        
-        
-        
-        <ui:remove><!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        *    CONTENT
-        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-        </ui:remove>
-        <div id="main">
-          <div id="page">
-            <ui:insert name="body" />
-          </div>
-            
-        </div> 
-        
-        <ui:remove><!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        *    FOOTER
-        +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-        </ui:remove>
-        <footer id="footer">
-            <ui:include src="footer.xhtml"/>
-        </footer>       
-      </div>
+	<section id="mainSection">
+		<menu class="breadCrumb" id ="breadCrumb">
+			<ui:insert name="breadCrumb" />
+		</menu>
+	
+	  	<div id="page">
+	  		<ui:insert name="body" />
+	  	</div>
+	</section>
 
+
+	<!--
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	+ footer
+	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+	-->
+	<footer id="footer">
+			<hr/>
+			<article id="licensed">
+				You Test It! , Licensed under the
+				<a href="http://www.apache.org/licenses/LICENSE-2.0.txt">
+					Apache licence, Version 2.0
+				</a>.
+			</article>
+	</footer>
   </h:body>
-
-
 </html>
-
 </f:view>
