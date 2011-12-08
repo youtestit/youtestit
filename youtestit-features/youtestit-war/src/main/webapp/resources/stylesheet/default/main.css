@@ -123,6 +123,10 @@ a:HOVER{
 a{text-decoration: none;}
 a:HOVER{text-decoration: underline;}
 
+#pageContent{
+	padding: 12px;	
+}
+
 /*******************************************************************************
 * HEADER 
 *******************************************************************************/
@@ -310,3 +314,98 @@ footer hr{
 .searchButton span{
 	display: none;
 }
+
+/*******************************************************************************
+* JSF DEV MESSAGES
+*******************************************************************************/
+#javax_faces_developmentstage_messages{
+	display:none;
+}
+	
+
+/*******************************************************************************
+*				CSS FOR RICHFACES AND PRIMEFACES OVERRIDES
+*******************************************************************************/
+
+input, select, textarea, button, keygen, isindex, legend, a{
+	font-size: 12px;
+}
+
+/** primefaces and richfaces panel */
+.ui-panel, .rf-p, .rf-tbp{
+	margin-top: 12px !important;
+	border-radius: 6px 6px 6px 6px;
+}
+
+
+.rf-p-hdr, .ui-widget-header{
+	color: #ffffff !important;
+	font-size: 14px;
+	background: url(#{resource['stylesheet/default/imgs/panelHeader.gif']})repeat-x !important;
+	background-position: center bottom !important;
+	border-radius: 6px 6px 0px 0px;
+	padding: 2px;
+}
+
+.rf-tab-cnt ,
+.rf-p-b,
+.ui-panel-content{
+	font-size: 12px;
+}	
+/*******************************************************************************
+* PRIMEFACES
+*******************************************************************************/
+/** primefaces border color */
+.ui-widget-content, .ui-widget-header{
+	border-color: #003448 !important;
+}
+.ui-panel .ui-panel-titlebar {
+    padding: 0;
+      height: 20px;
+}
+.ui-panel-titlebar .ui-widget-header .ui-corner-all{
+	padding: 2px;
+}
+.ui-panel .ui-panel-title{
+	margin: 0;
+}
+
+/*******************************************************************************
+* RICHFACES
+*******************************************************************************/
+.rf-tab-hdr-tabline-vis{
+	border-style: none;
+	 background:none;
+}
+
+.rf-tab-hdr-act,.rf-tab-hdr{
+	border-radius: 6px 6px 0px 0px;
+	padding-top: 4px;
+}
+
+
+.rf-tab-hdr{
+	background: url(#{resource['stylesheet/default/imgs/panelHeader-off.gif']})repeat-x;
+}
+.rf-tab-hdr-act{
+	background-color: #00567A;
+	background-image: none !important;
+	color: #FFFFFF;
+}
+.rf-tab-hdr-brd {
+	background-color:#00567A;
+	border-color:#00567A;
+}
+.rf-tab-cnt{
+	border-color:#003448;
+	border-radius: 0px 0px 6px 6px;
+}
+
+.checkablesupport 	.ui-widget-header{
+	border-radius: 0;
+	padding: 0;
+}
+.checkablesupport 	.ui-widget-header h3{
+	text-decoration: none;
+}
+ 
