@@ -22,6 +22,7 @@ public class Home implements Serializable {
     
     
     
+    
     @Inject
     Identity identity;
 
@@ -39,5 +40,8 @@ public class Home implements Serializable {
     public void setTest() {
         log.info("<<<<< set TEST <<<<<<<");
     }
+
+
+    
 
 }

@@ -31,8 +31,14 @@
 body{
 	padding: 0;
 	margin: 0;
+	background-color: #EDEDED;
 }
-
+#mainSection{
+	margin-top: -8px;
+}
+#page{
+	background-color: #ffffff;
+}
 .clear{
 	clear: both;
 	height: 0px;
@@ -368,7 +374,7 @@ input, select, textarea, button, keygen, isindex, legend, a{
 /** primefaces border color */
 .ui-widget-content, .ui-widget-header{
 	border-color: #003448 !important;
-}
+}ll
 .ui-panel .ui-panel-titlebar {
     padding: 0;
       height: 20px;
@@ -380,6 +386,50 @@ input, select, textarea, button, keygen, isindex, legend, a{
 	margin: 0;
 }
 
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
+	background: none;
+	border: none;
+	margin-top: 0;
+}
+.ui-panel-titlebar-icon .ui-corner-all .ui-state-default .ui-state-hover{
+	margin-top: 0 !important;
+}
+
+.ui-breadcrumb {
+	background: none !important;
+	border: none !important;
+}
+
+.ui-button, .ui-dialog .ui-dialog-buttonpane button {
+	border: medium none;
+    background-color: #4B4B4B;
+    background-image: url("#{resource['primefaces-bluesky/images/buttonBackground.png']}");
+    background-position: left top;
+    background-repeat: repeat-x;
+    border-color: #4B4B4B;
+    border-width: 1px;
+    color: #CCCCCC;
+    font-family: Arial,Verdana,sans-serif;
+    font-size: 10px;
+    border-radius: 6px 6px 6px 6px;
+}
+
+.ui-dialog{
+	border-radius: 6px 6px 6px 6px;
+}
+.ui-dialog .ui-dialog-titlebar{
+	 padding: 0 0 0 4px;
+}
+
+
+.ui-dialog-titlebar a,.ui-dialog-titlebar a:HOVER{
+	background: none !important;
+	background-image: none !important;
+	border: none;
+}
+.ui-dialog .ui-dialog-titlebar-close{
+	padding: 0 !important;
+}
 /*******************************************************************************
 * RICHFACES
 *******************************************************************************/

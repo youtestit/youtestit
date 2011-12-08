@@ -26,103 +26,9 @@
     *************************************************************************-->
     </ui:remove>
     <ui:define name="body">
-    
-    
-    
-        <rich:panel header="This is the panel header ">
-        
-            <h:panelGrid columns="2">
-                <h:graphicImage value="#{resource['img/logos/seamlogo.png']}" alt="Seam logo" />
-                <div class="info">
-                    <p><strong>Your seam-gen project is deployed!</strong> Here are
-                    some of the features this project provides:</p>
-                    <ul class="bullets">
-                        <li>Ant build script</li>
-                        <li>Deployment to JBoss AS (EAR or WAR)</li>
-                        <li>Development and production profiles</li>
-                        <li>Integration testing using TestNG and Embedded JBoss</li>
-                        <li>JavaBean or EJB 3.0 Seam components</li>
-                        <li>JPA entity classes</li>
-                        <li>A configurable DataSource and JPA EntityManager</li>
-                        <li>Templated Facelets views</li>
-                        <li>RichFaces panels and tables</li>
-                        <li>Default CSS stylesheet</li>
-                        <li>Internationalization support</li>
-                    </ul>
-                </div>
-            </h:panelGrid>
-        </rich:panel>
-      
-      
-        <rich:tabPanel switchType="client">
-        <rich:tab header="Overview">
-        RichFaces is a component library for JSF and an advanced framework for 
-        easily integrating AJAX capabilities into business applications.
-        <ul> 
-                <li>100+ AJAX enabled components in two libraries</li>
-                <li>a4j: page centric AJAX controls</li>
-                <li>rich: self contained, ready to use components</li>
-                <li>Whole set of JSF benefits while working with AJAX</li>
-                <li>Skinnability mechanism</li>
-                <li>Component Development Kit (CDK)</li>
-                <li>Dynamic resources handling</li>
-                <li>Testing facilities for components, actions, listeners, and
-                pages</li>
-                <li>Broad cross-browser support</li>
-                <li>Large and active community</li>
-            </ul>
-        </rich:tab>
-        <rich:tab header="JSF 2 and RichFaces 4">
-            <p>We are working hard on RichFaces 4.0 which will have full JSF
-            2 integration. That is not all though, here is a summary of updates
-            and features:</p>
-            <ul>
-                <li>Redesigned modular repository and build system.</li>
-                <li>Simplified Component Development Kit with annotations,
-                faces-config extensions, advanced templates support and more..</li>
-                <li>Ajax framework improvements extending the JSF 2
-                specification.</li>
-                <li>Component review for consistency, usability, and redesign
-                following semantic HTML principles where possible.</li>
-                <li>Both server-side and client-side performance optimization.</li>
-                <li>Strict code clean-up and review.</li>
-            </ul>
-        </rich:tab>
-    </rich:tabPanel>      
-      
-      
-       <p:panel header="F.C. Barcelona" footer="Visca el Barca!">  
-        <h:outputText value="FC Barcelona is one of only three clubs never to have been relegated from La Liga and is the most successful club in Spanish football along with Real Madrid,  
-        having won twenty La Liga titles, a record twenty-five Spanish Cups, eight Spanish Super Cups, four Eva Duarte Cups and two League Cups.  
-        They are also one of the most successful clubs  in European football having won fourteen official major trophies in total,  
-        including ten UEFA competitions. They have won three UEFA Champions League titles, a record four UEFA Cup Winners' Cups,  
-        a record three InterCities Fairs Cups (the forerunner to the UEFA Europa League), three UEFA Super Cups and one FIFA Club World Cup.  
-        The club is also the only European side to have played continental football in every season since its inception in 1955." />  
-       </p:panel>
-       
-       <p:panel id="pnl" header="About Barca" toggleable="true" closable="true" toggleSpeed="500" closeSpeed="2000" widgetVar="panel">  
-    
-          <h:outputText value="FC Barcelona is one of only three clubs never to have been relegated from La Liga and is the most successful club in Spanish football along with Real Madrid,  
-                  having won twenty La Liga titles, a record twenty-five Spanish Cups, eight Spanish Super Cups, four Eva Duarte Cups and two League Cups.  
-                  They are also one of the most successful clubs  in European football having won fourteen official major trophies in total,  
-                  including ten UEFA competitions. They have won three UEFA Champions League titles, a record four UEFA Cup Winners' Cups,  
-                  a record three InterCities Fairs Cups (the forerunner to the UEFA Europa League), three UEFA Super Cups and one FIFA Club World Cup.  
-                  The club is also the only European side to have played continental football in every season since its inception in 1955." />  
-    
-          <f:facet name="options">  
-              <p:menu>  
-                  <p:submenu label="Settings">  
-                      <p:menuitem value="Toggle" url="#" icon="/images/update.png"/>  
-                      <p:menuitem value="Remove" url="#" icon="/images/delete.png"/>  
-                  </p:submenu>  
-              </p:menu>  
-          </f:facet>  
-      </p:panel>  
-
-    
-    
-
-<h1>Lorem ipsum dolor sit amet</h1>
+  
+  
+  <h1>Lorem ipsum dolor sit amet</h1>
  consectetur adipiscing elit. Cras aliquet mattis est,
  non suscipit purus pulvinar a. In convallis aliquet ante, eget auctor nisl
  ornare id. Vestibulum volutpat, sapien eget eleifend lobortis, justo est
@@ -157,6 +63,7 @@ vulputate volutpat. Suspendisse pellentesque facilisis tortor eget tristique.
 
 
 <h5>Curabitur pretium consequat scelerisque</h5>
+
 Praesent volutpat lacinia lacinia.
 Morbi ac lacus dolor, a suscipit felis. Ut non tincidunt nulla. In bibendum
 mauris ut nisi vulputate et tempus tortor vestibulum. Nam elementum tristique
@@ -184,6 +91,8 @@ Ut tincidunt pretium lorem, non lobortis odio viverra et. Nam at ligula metus.
 Ut dolor arcu, pellentesque a pharetra nec, pellentesque vel felis. Phasellus
 eros est, elementum ut suscipit sit amet, malesuada ac mauris. Quisque luctus
 convallis enim, sed eleifend felis egestas in.
+  
+ 
 
     </ui:define>
 </ui:composition>
