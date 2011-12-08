@@ -58,7 +58,8 @@ input{
 	border-bottom: 0px;
 	border-right: 0px;
 }
-input:FOCUS,input[type="text"]:FOCUS,input[type="password"]:FOCUS,select:FOCUS{
+input:FOCUS,input[type="text"]:FOCUS,input[type="password"]:FOCUS,select:FOCUS,
+input.rf-insp-inp[type="text"]:FOCUS{
 	background-image: url(#{resource['stylesheet/default/imgs/input-focus.png']});
 	border-width: 2px;
 	border-color: #9daec6;
@@ -67,7 +68,8 @@ input:FOCUS,input[type="text"]:FOCUS,input[type="password"]:FOCUS,select:FOCUS{
 	border-right: 0px;
 }
 
-textarea, input[type="text"], input[type="password"], select{
+textarea, input[type="text"], input[type="password"], select,
+input.rf-insp-inp[type="text"]{
 	border-radius: 6px;
 	padding-left: 3px;
 	border-right:none !important;
@@ -82,6 +84,14 @@ textarea, input[type="text"], input[type="password"], select{
     border-width: 2px;
 }
 
+a, button, input{
+	outline: none !important;
+	outline-width: 0 !important;	
+}
+button, input[type="reset"], input[type="submit"], input[type="button"],
+button:HOVER, input[type="reset"]:HOVER, input[type="submit"]:HOVER, input[type="button"]:HOVER {
+	border: none;
+}
 /*******************************************************************************
 * FONT AND COLORS 
 *******************************************************************************/
@@ -118,7 +128,7 @@ a:HOVER{
 	color: #313131;
 	font-style: italic;
 	font-weight: bold; 
-	outline: none;
+	outline: none !important;
 } 
 a{text-decoration: none;}
 a:HOVER{text-decoration: underline;}
@@ -408,4 +418,24 @@ input, select, textarea, button, keygen, isindex, legend, a{
 .checkablesupport 	.ui-widget-header h3{
 	text-decoration: none;
 }
- 
+.rf-ac-itm-lbl{
+	color: #ffffff;
+}
+.rf-ac-itm-hdr {
+	padding: 0;
+	background: url(#{resource['stylesheet/default/imgs/panelHeader.gif']})repeat-x !important;
+	border:none;
+}
+.rf-ac,.rf-ac-itm-cnt{
+	border: none;
+}
+
+.rf-insp{
+	border: none;
+}
+.rf-insp-btns{
+	margin-left: -4px;	
+}
+.rf-insl-mn , .rf-insl-mx {
+	border: none;
+}
