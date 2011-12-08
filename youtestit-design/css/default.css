@@ -69,6 +69,7 @@ a,a:HOVER{
 	color: #313131;
 	font-style: italic;
 	font-weight: bold; 
+	outline: none;
 } 
 a{text-decoration: none;}
 a:HOVER{text-decoration: underline;}
