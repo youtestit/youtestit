@@ -14,7 +14,7 @@
     = FEATURE PROJECT INFORMATIONS
     ============================================================================
   -->
-	<groupId>org.apache</groupId>
+	<groupId>org.youtestit</groupId>
 	<artifactId>youtestit-features</artifactId>
 	<packaging>pom</packaging>
 	<version>0.1-SNAPSHOT</version>
@@ -163,7 +163,7 @@
 			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			-->
 			<dependency>
-				<groupId>org.apache</groupId>
+				<groupId>org.youtestit</groupId>
 				<artifactId>youtestit-commons</artifactId>
 				<version>0.1-SNAPSHOT</version>
 				<type>jar</type>
@@ -171,49 +171,49 @@
 
 
 			<dependency>
-				<groupId>org.apache</groupId>
+				<groupId>org.youtestit</groupId>
 				<artifactId>youtestit-core</artifactId>
 				<version>0.1-SNAPSHOT</version>
 				<type>jar</type>
 			</dependency>
 
 			<dependency>
-				<groupId>org.apache</groupId>
+				<groupId>org.youtestit</groupId>
 				<artifactId>youtestit-datamodel</artifactId>
 				<version>0.1-SNAPSHOT</version>
 				<type>jar</type>
 			</dependency>
 
 			<dependency>
-				<groupId>org.apache</groupId>
+				<groupId>org.youtestit</groupId>
 				<artifactId>youtestit-security</artifactId>
 				<version>0.1-SNAPSHOT</version>
 				<type>jar</type>
 			</dependency>
 
 			<dependency>
-				<groupId>org.apache</groupId>
+				<groupId>org.youtestit</groupId>
 				<artifactId>youtestit-actions-admin</artifactId>
 				<version>0.1-SNAPSHOT</version>
 				<type>jar</type>
 			</dependency>
 
 			<dependency>
-				<groupId>org.apache</groupId>
+				<groupId>org.youtestit</groupId>
 				<artifactId>youtestit-actions-user</artifactId>
 				<version>0.1-SNAPSHOT</version>
 				<type>jar</type>
 			</dependency>
 
 			<dependency>
-				<groupId>org.apache</groupId>
+				<groupId>org.youtestit</groupId>
 				<artifactId>youtestit-bootstrap</artifactId>
 				<version>0.1-SNAPSHOT</version>
 				<type>jar</type>
 			</dependency>
 
 			<dependency>
-				<groupId>org.apache</groupId>
+				<groupId>org.youtestit</groupId>
 				<artifactId>youtestit-war</artifactId>
 				<version>0.1-SNAPSHOT</version>
 				<type>war</type>

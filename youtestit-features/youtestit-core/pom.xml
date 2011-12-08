@@ -9,7 +9,7 @@
     ============================================================================
   -->
 	<parent>
-		<groupId>org.apache</groupId>
+		<groupId>org.youtestit</groupId>
 		<artifactId>youtestit-features</artifactId>
 		<version>0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
@@ -27,17 +27,17 @@
   -->
 	<dependencies>
 		<dependency>
-			<groupId>org.apache</groupId>
+			<groupId>org.youtestit</groupId>
 			<artifactId>youtestit-commons</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache</groupId>
+			<groupId>org.youtestit</groupId>
 			<artifactId>youtestit-datamodel</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache</groupId>
+			<groupId>org.youtestit</groupId>
 			<artifactId>youtestit-security</artifactId>
 		</dependency>
 

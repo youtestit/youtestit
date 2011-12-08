@@ -9,7 +9,7 @@
     ============================================================================
   -->
 	<parent>
-		<groupId>org.apache</groupId>
+		<groupId>org.youtestit</groupId>
 		<artifactId>youtestit-features</artifactId>
 		<version>0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
@@ -30,25 +30,25 @@
 
     <!--:::::::::::::::::::::: project dependency :::::::::::::::::::::::::::-->
 		<dependency>
-			<groupId>org.apache</groupId>
+			<groupId>org.youtestit</groupId>
 			<artifactId>youtestit-bootstrap</artifactId>
 			<type>jar</type>
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache</groupId>
+			<groupId>org.youtestit</groupId>
 			<artifactId>youtestit-core</artifactId>
 			<type>jar</type>
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache</groupId>
+			<groupId>org.youtestit</groupId>
 			<artifactId>youtestit-actions-admin</artifactId>
 			<type>jar</type>
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache</groupId>
+			<groupId>org.youtestit</groupId>
 			<artifactId>youtestit-actions-user</artifactId>
 			<type>jar</type>
 		</dependency>

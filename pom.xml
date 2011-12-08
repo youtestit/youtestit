@@ -15,7 +15,7 @@
 		<version>15</version>
 	</parent>
 
-  <groupId>org.apache</groupId>
+  <groupId>org.youtestit</groupId>
   <artifactId>youtestit</artifactId>
   <version>0.1-SNAPSHOT</version>
   <packaging>pom</packaging>

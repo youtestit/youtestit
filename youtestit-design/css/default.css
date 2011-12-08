@@ -1,0 +1,261 @@
+/*******************************************************************************
+* GENERIC 
+*******************************************************************************/
+body{
+	padding: 0;
+	margin: 0;
+}
+
+.clear{
+	clear: both;
+	height: 0px;
+}
+
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+
+header, section, menu, article{
+	width: 100%;
+	display: block;
+}
+
+input{
+	border-radius: 6px;
+	padding-left: 3px;
+	background-image: url(../img/input.png);
+	background-repeat:  repeat-x;
+	border-bottom: 0px;
+	border-right: 0px;
+}
+input:FOCUS{
+	background-image: url(../img/input-focus.png);
+	border-width: 2px;
+	border-color: #9daec6;
+	border-style: solid;
+	border-bottom: 0px;
+	border-right: 0px;
+}
+
+/*******************************************************************************
+* FONT AND COLORS 
+*******************************************************************************/
+body{
+	font-size: 12px;
+	color: #313131;
+}
+
+h1 {
+	font-size: 200%;
+	color:#003448;
+}
+
+h2 {
+	font-size: 160%;
+	color:#6F990D;
+}
+h3 {
+	font-size: 145%;
+	text-decoration: underline;
+}
+h4 {font-size: 130%;}
+h5 {font-size: 115%;}
+h6 {font-size: 100%;}
+
+a,a:HOVER{
+	color: #313131;
+	font-style: italic;
+	font-weight: bold; 
+} 
+a{text-decoration: none;}
+a:HOVER{text-decoration: underline;}
+
+/*******************************************************************************
+* HEADER 
+*******************************************************************************/
+header section{
+	background: url(../img/backgroundTop.gif) repeat-x;
+	height: 81px;
+}
+
+#logo{
+	background: url(../img/logo.png) no-repeat;
+    float: left;
+    height: 60px;
+    width: 210px;
+    margin: 8px;
+}
+#logo span{
+	display: none;
+}
+
+#identity{
+	float: right;
+    margin-right: 50px;
+    margin-top: 14px;
+}
+#search{
+	float: right;
+	clear: right;
+	 margin-right: 16px;
+}
+
+
+header menu{
+	background: url(../img/backgroundMenu.gif) repeat-x;
+	background-position: bottom;
+	background-color: #00567a;
+	margin: 0;
+	padding-top: 9px;
+	padding-left: 0;
+	height: 64px;
+}
+
+header menu ul{
+	list-style: none;
+	margin: 0;
+    padding: 0;
+}
+header menu li{
+	float: left;
+	margin-left: 16px;
+}
+
+header menu li a, header menu li a:HOVER{
+	display: block;
+	color: #ffffff;
+	font-style: normal;
+	font-weight: normal;
+	text-decoration: none; 
+}
+.menuSeparator{
+	background-color: #3A3A3A;
+    height: 53px;
+    width: 1px;
+}
+
+
+/*******************************************************************************
+* FOOTER 
+*******************************************************************************/
+footer {
+    background: url("../img/backgroundFooter.gif") repeat-x scroll 0 0 #ededed;
+    min-height: 70px;
+    padding: 70px 0 0;
+}
+
+footer article{
+	border:1px solid #ededed;
+	text-align: center;
+	margin-top: 12px;
+}
+
+footer hr{
+	width: 60%;
+}
+/*******************************************************************************
+* ICONS
+*******************************************************************************/
+.menuIcon{
+	display: block;
+	padding-top: 35px;
+	min-width: 36px;
+	text-align: center;
+	color: #FFFFFF;
+	background-position: center top;
+	background-repeat: no-repeat;
+	vertical-align: text-bottom;
+	text-decoration: none;
+}
+
+.menuRightIcon{
+	float: right;
+	margin-right: 22px;
+}
+
+.iconHome{
+	background-image: url(../img/icons/home-off.png);
+}
+.iconHome:HOVER{
+	background-image: url(../img/icons/home.png);
+}
+
+
+.iconCreateProject{
+	background-image: url(../img/icons/createProject-off.png);
+}
+.iconCreateProject:HOVER{
+	background-image: url(../img/icons/createProject.png);
+}
+
+
+.iconCreateTest{
+	background-image: url(../img/icons/createTest-off.png);
+}
+.iconCreateTest:HOVER{
+	background-image: url(../img/icons/createTest.png);
+}
+
+
+.iconConfigure{
+	background-image: url(../img/icons/config-off.png);
+}
+.iconConfigure:HOVER{
+	background-image: url(../img/icons/config.png);
+}
+
+.iconRun{
+	background-image: url(../img/icons/run-off.png);
+}
+.iconRun:HOVER{
+	background-image: url(../img/icons/run.png);
+}
+
+
+.iconDelete{
+	background-image: url(../img/icons/delete-off.png);
+}
+.iconDelete:HOVER{
+	background-image: url(../img/icons/delete.png);
+}
+
+
+
+.iconAdminConfig{
+	background-image: url(../img/icons/config-off.png);
+}
+.iconAdminConfig:HOVER{
+	background-image: url(../img/icons/config.png);
+}
+
+
+
+.login{
+	background: url(../img/icons/log-in.png) no-repeat;
+	float: left;
+	display: block;
+	height: 16px;
+	width: 16px;
+	margin-right: 5px;
+}
+.login span{
+	display: none;
+}
+
+#search input{
+	float: left;
+}
+.searchButton{
+	background: url(../img/icons/search.png) no-repeat;
+	float: left;
+	display: block;
+	height: 24px;
+	width: 24px;
+	margin-right: 5px;
+}
+.searchButton span{
+	display: none;
+}
