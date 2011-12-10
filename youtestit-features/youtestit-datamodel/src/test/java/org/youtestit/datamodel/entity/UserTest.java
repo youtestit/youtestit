@@ -27,14 +27,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
-import org.hibernate.ejb.Ejb3Configuration;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -104,6 +99,7 @@ public class UserTest extends AbstractEntityTest {
         
         final List<User> resultA = entityManager.createQuery(query,User.class).getResultList();
         assertNotNull(resultA);
+        assertTrue(resultA.isEmpty());
 
         beginTransaction();
         final User user = new User("joe", "joe@youtestit.org", "kqz@15#$W", "Joe", "Smith");
@@ -112,6 +108,8 @@ public class UserTest extends AbstractEntityTest {
 
         final List<User> resultB = entityManager.createQuery(query,User.class).getResultList();
         assertNotNull(resultB);
+        assertFalse(resultB.isEmpty());
+        assertTrue(resultB.size()==1);
 
     }
 

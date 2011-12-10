@@ -128,7 +128,9 @@ public class TestCaseHelper {
     public void closeEntityManager() throws ClientException {
         LOGGER.debug("closeEntityManager");
         entityManager.close();
-        emFactory.close();
+        if(emFactory!=null){
+            emFactory.close();    
+        }
         try {
             connection.close();
         } catch (SQLException e) {
