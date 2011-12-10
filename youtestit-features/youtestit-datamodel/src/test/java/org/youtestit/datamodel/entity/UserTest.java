@@ -92,92 +92,28 @@ public class UserTest extends AbstractEntityTest {
 
     }
 
-    @Test
-    public void test() throws ClientException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-        LOGGER.info("run test...");
-        final String url = "jdbc:derby:memory:database;create=true"; //
-        final String login = "";
-        final String password = "";
-        final String driver = "org.apache.derby.jdbc.EmbeddedDriver";
 
-
-        Class.forName(driver).newInstance();
-        Connection connexion = DriverManager.getConnection(url, login ,  password);
-        
-        assertNotNull(connexion);
-        
-        
-        final Properties props = new Properties();
-         props.put("hibernate.hbm2ddl.auto", "create-drop");
-         props.put("hibernate.dialect", "org.hibernate.dialect.DerbyDialect");
-         props.put("hibernate.connection.url", url);
-         props.put("hibernate.connection.driver_class",driver);
-         props.put("hibernate.connection.username", login);
-         props.put("hibernate.connection.password", password);
-        
-         final Ejb3Configuration cfg = new Ejb3Configuration();
-         cfg.addProperties(props);
-        
-         emFactory = cfg.buildEntityManagerFactory();
-        
-         entityManager = emFactory.createEntityManager();
-         assertNotNull(entityManager);
-         
-
-    }
-
-
+    /**
+     *  {@inheritDoc}
+     */
     @Override
-    public void persistanceTest() throws ClientException {
-        // final String url = "jdbc:hsqldb:mem:testdb;create=true";
-        // final String login = "sa";
-        // final String password = "sa";
-        // final String driver = "org.hsqldb.jdbcDriver";
-
-
-        // try {
-        // final Connection connexion = DriverManager.getConnection(url, login,
-        // password);
-        // assertNotNull(connexion);
-        // } catch (SQLException e) {
-        // throw new ClientException("can't connect to memory database",e);
-        // }
-        //
-        // final Properties props = new Properties();
-        // props.put("hibernate.hbm2ddl.auto", "create-drop");
-        // props.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
-        // props.put("hibernate.connection.url", "jdbc:hsqldb:mem:testdb");
-        // props.put("hibernate.connection.driver_class",
-        // "org.hsqldb.jdbcDriver");
-        // props.put("hibernate.connection.username", login);
-        // props.put("hibernate.connection.password", password);
-        //
-        // final Ejb3Configuration cfg = new Ejb3Configuration();
-        // cfg.addProperties(props);
-        //
-        // emFactory = cfg.buildEntityManagerFactory();
-        //
-        // entityManager = emFactory.createEntityManager();
-
-
-        // emFactory =
-        // Persistence.createEntityManagerFactory("testPU",properties);
-        // entityManager = emFactory.createEntityManager();
-
+    public void persistenceTest() throws ClientException {
         assertNotNull(entityManager);
 
+        String query = String.format("from %s", User.class.getSimpleName());
+        
+        final List<User> resultA = entityManager.createQuery(query,User.class).getResultList();
+        assertNotNull(resultA);
+
+        beginTransaction();
+        final User user = new User("joe", "joe@youtestit.org", "kqz@15#$W", "Joe", "Smith");
+        entityManager.persist(user);
+        commitTransaction();
+
+        final List<User> resultB = entityManager.createQuery(query,User.class).getResultList();
+        assertNotNull(resultB);
+
     }
 
-    /*
-     * Map<String, Object> props = new HashMap<String, Object>();
-     * props.put(EJBContainer.MODULES, new File [] {new File
-     * ("target/classes"),new File ("target/test-classes")});
-     * props.put(EJBContainer.APP_NAME, "youtestit");
-     * props.put(EJBContainer.PROVIDER,
-     * "org.glassfish.ejb.embedded.EJBContainerProviderImpl");
-     * 
-     * EJBContainer ejbContainer = EJBContainer.createEJBContainer(props);
-     * Context ctx = ejbContainer.getContext(); assertNotNull(ctx);
-     */
 
 }
