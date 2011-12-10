@@ -122,10 +122,6 @@
       <property name="severity" value="info" />
       <property name="id" value="RF-014 / RF-034" />
     </module>
-    <module name="AvoidInlineConditionals">
-      <property name="severity" value="info" />
-      <property name="id" value="RF-019 / RC-015" />
-    </module>
     <module name="DoubleCheckedLocking">
       <property name="severity" value="error" />
     </module>

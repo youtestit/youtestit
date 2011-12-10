@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-
-	<parent>
-		<groupId>org.apache</groupId>
-		<artifactId>youtestit</artifactId>
-		<version>0.1-SNAPSHOT</version>
-	</parent>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.apache</groupId>
+        <artifactId>youtestit</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    </parent>
 
   <!--
     ============================================================================
     = FEATURE PROJECT INFORMATIONS
     ============================================================================
   -->
-	<groupId>org.youtestit</groupId>
-	<artifactId>youtestit-features</artifactId>
-	<packaging>pom</packaging>
-	<version>0.1-SNAPSHOT</version>
-	<name>youtestit features</name>
-
-	<prerequisites>
-		<maven>3.0</maven>
-	</prerequisites>
+    <groupId>org.youtestit</groupId>
+    <artifactId>youtestit-features</artifactId>
+    <packaging>pom</packaging>
+    <version>0.1-SNAPSHOT</version>
+    <name>youtestit features</name>
+    <prerequisites>
+        <maven>3.0</maven>
+    </prerequisites>
 
 
   <!--
@@ -30,291 +28,289 @@
     = PROPERTIES
     ============================================================================
   -->
-	<properties>
-		<project.version>0.1-SNAPSHOT</project.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<seam.version>3.0.1-SNAPSHOT</seam.version>
-		<seam.security.version>3.0.0.Final</seam.security.version>
-		<seam.persistence.version>3.0.0.Final</seam.persistence.version>
-		<richfaces.version>4.0.0.Final</richfaces.version>
-		<freemarker.version>2.3.16</freemarker.version>
-		<primefaces.version>3.0.M1</primefaces.version>
-		<primefaces.themes.bluesky.version>1.0.1</primefaces.themes.bluesky.version>
-<commons-lang.version>2.6</commons-lang.version>
-		<commons-io.version>1.3.2</commons-io.version>
-	</properties>
+    <properties>
+        <project.version>0.1-SNAPSHOT</project.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <seam.version>3.0.1-SNAPSHOT</seam.version>
+        <seam.security.version>3.0.0.Final</seam.security.version>
+        <seam.persistence.version>3.0.0.Final</seam.persistence.version>
+        <richfaces.version>4.0.0.Final</richfaces.version>
+        <freemarker.version>2.3.16</freemarker.version>
+        <primefaces.version>3.0.M1</primefaces.version>
+        <primefaces.themes.bluesky.version>1.0.1</primefaces.themes.bluesky.version>
+        <commons-lang.version>2.6</commons-lang.version>
+        <commons-io.version>1.3.2</commons-io.version>
+        <junit.version>4.10</junit.version>
+        <derby.version>10.8.2.2</derby.version>
+    </properties>
 
-
+        
 
   <!--
     ============================================================================
     = MODULES
     ============================================================================
   -->
-	<modules>
+    <modules>
     <!-- Jar modules  -->
-		<module>youtestit-commons</module>
-		<module>youtestit-security</module>
-		<module>youtestit-core</module>
-		<module>youtestit-datamodel</module>
-		<module>youtestit-actions-admin</module>
-		<module>youtestit-actions-user</module>
-		<module>youtestit-war</module>
-		<module>youtestit-bootstrap</module>
-	</modules>
+        <module>youtestit-commons</module>
+        <module>youtestit-security</module>
+        <module>youtestit-core</module>
+        <module>youtestit-datamodel</module>
+        <module>youtestit-actions-admin</module>
+        <module>youtestit-actions-user</module>
+        <module>youtestit-war</module>
+        <module>youtestit-bootstrap</module>
+    </modules>
 
   <!--
     ============================================================================
     = REPOSITORIES
     ============================================================================
   -->
-	<repositories>
-
-		<repository>
-			<id>jboss-public-repository-group</id>
-			<name>JBoss Public Maven Repository Group</name>
-			<url>http://repository.jboss.org/nexus/content/groups/public</url>
-		</repository>
-
-
-		<repository>
-			<id>repository.jboss.nexus.public</id>
-			<name>JBoss Repository</name>
-			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
-		</repository>
-
-		<repository>
-			<id>ocpsoft-ocpsoft-pretty-faces</id>
-			<name>OCP Soft pretty-faces Repository</name>
-			<url>http://ocpsoft.com/repository/com/ocpsoft/</url>
-		</repository>
-
-
-
-		<repository>
-			<id>prime-repo</id>
-			<name>Prime Technology Maven Repository</name>
-			<url>http://repository.primefaces.org</url>
-			<layout>default</layout>
-		</repository>
-	</repositories>
-
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>jboss-public-repository-group-plugins</id>
-			<name>JBoss Public Maven Repository Group</name>
-			<url>http://repository.jboss.org/nexus/content/groups/public</url>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-				<updatePolicy>never</updatePolicy>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
+    <repositories>
+        <repository>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss Public Maven Repository Group</name>
+            <url>http://repository.jboss.org/nexus/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>repository.jboss.nexus.public</id>
+            <name>JBoss Repository</name>
+            <url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+        </repository>
+        <repository>
+            <id>ocpsoft-ocpsoft-pretty-faces</id>
+            <name>OCP Soft pretty-faces Repository</name>
+            <url>http://ocpsoft.com/repository/com/ocpsoft/</url>
+        </repository>
+        <repository>
+            <id>prime-repo</id>
+            <name>Prime Technology Maven Repository</name>
+            <url>http://repository.primefaces.org</url>
+            <layout>default</layout>
+        </repository>
+        <repository>
+            <id>EclipseLink Repo</id>
+            <url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jboss-public-repository-group-plugins</id>
+            <name>JBoss Public Maven Repository Group</name>
+            <url>http://repository.jboss.org/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
   <!--
     ============================================================================
     = DEPENDENCY MANAGEMENT
     ============================================================================
   -->
-	<dependencyManagement>
-		<dependencies>
+    <dependencyManagement>
+        <dependencies>
 			<!--
 			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 			+ SEAM DEPENDENCIES
 			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			-->
-			<dependency>
-				<groupId>org.jboss.seam</groupId>
-				<artifactId>seam-parent</artifactId>
-				<version>15</version>
-				<scope>import</scope>
-				<type>pom</type>
-				<exclusions>
-					<exclusion>
-						<groupId>com.ocpsoft</groupId>
-						<artifactId>prettyfaces-jsf2</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-
-			<dependency>
-				<groupId>org.jboss.seam</groupId>
-				<artifactId>seam-bom</artifactId>
-				<version>${seam.version}</version>
-				<scope>import</scope>
-				<type>pom</type>
-				<exclusions>
-					<exclusion>
-						<groupId>com.ocpsoft</groupId>
-						<artifactId>prettyfaces-jsf2</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
+            <dependency>
+                <groupId>org.jboss.seam</groupId>
+                <artifactId>seam-parent</artifactId>
+                <version>15</version>
+                <scope>import</scope>
+                <type>pom</type>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.ocpsoft</groupId>
+                        <artifactId>prettyfaces-jsf2</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.seam</groupId>
+                <artifactId>seam-bom</artifactId>
+                <version>${seam.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.ocpsoft</groupId>
+                        <artifactId>prettyfaces-jsf2</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
 
 			<!--
 			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 			+ PROJECT DEPENDENCIES
 			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			-->
-			<dependency>
-				<groupId>org.youtestit</groupId>
-				<artifactId>youtestit-commons</artifactId>
-				<version>0.1-SNAPSHOT</version>
-				<type>jar</type>
-			</dependency>
-
-
-			<dependency>
-				<groupId>org.youtestit</groupId>
-				<artifactId>youtestit-core</artifactId>
-				<version>0.1-SNAPSHOT</version>
-				<type>jar</type>
-			</dependency>
-
-			<dependency>
-				<groupId>org.youtestit</groupId>
-				<artifactId>youtestit-datamodel</artifactId>
-				<version>0.1-SNAPSHOT</version>
-				<type>jar</type>
-			</dependency>
-
-			<dependency>
-				<groupId>org.youtestit</groupId>
-				<artifactId>youtestit-security</artifactId>
-				<version>0.1-SNAPSHOT</version>
-				<type>jar</type>
-			</dependency>
-
-			<dependency>
-				<groupId>org.youtestit</groupId>
-				<artifactId>youtestit-actions-admin</artifactId>
-				<version>0.1-SNAPSHOT</version>
-				<type>jar</type>
-			</dependency>
-
-			<dependency>
-				<groupId>org.youtestit</groupId>
-				<artifactId>youtestit-actions-user</artifactId>
-				<version>0.1-SNAPSHOT</version>
-				<type>jar</type>
-			</dependency>
-
-			<dependency>
-				<groupId>org.youtestit</groupId>
-				<artifactId>youtestit-bootstrap</artifactId>
-				<version>0.1-SNAPSHOT</version>
-				<type>jar</type>
-			</dependency>
-
-			<dependency>
-				<groupId>org.youtestit</groupId>
-				<artifactId>youtestit-war</artifactId>
-				<version>0.1-SNAPSHOT</version>
-				<type>war</type>
-			</dependency>
+            <dependency>
+                <groupId>org.youtestit</groupId>
+                <artifactId>youtestit-commons</artifactId>
+                <version>0.1-SNAPSHOT</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.youtestit</groupId>
+                <artifactId>youtestit-core</artifactId>
+                <version>0.1-SNAPSHOT</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.youtestit</groupId>
+                <artifactId>youtestit-datamodel</artifactId>
+                <version>0.1-SNAPSHOT</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.youtestit</groupId>
+                <artifactId>youtestit-security</artifactId>
+                <version>0.1-SNAPSHOT</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.youtestit</groupId>
+                <artifactId>youtestit-actions-admin</artifactId>
+                <version>0.1-SNAPSHOT</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.youtestit</groupId>
+                <artifactId>youtestit-actions-user</artifactId>
+                <version>0.1-SNAPSHOT</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.youtestit</groupId>
+                <artifactId>youtestit-bootstrap</artifactId>
+                <version>0.1-SNAPSHOT</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.youtestit</groupId>
+                <artifactId>youtestit-war</artifactId>
+                <version>0.1-SNAPSHOT</version>
+                <type>war</type>
+            </dependency>
 
 			<!--
 			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 			+ OTHERs DEPENDENCIES
 			++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			-->
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-io</artifactId>
-				<version>${commons-io.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>commons-lang</groupId>
-				<artifactId>commons-lang</artifactId>
-				<version>${commons-lang.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.primefaces</groupId>
-				<artifactId>primefaces</artifactId>
-				<version>${primefaces.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.primefaces.themes</groupId>
-				<artifactId>bluesky</artifactId>
-				<version>${primefaces.themes.bluesky.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.freemarker</groupId>
-				<artifactId>freemarker</artifactId>
-				<version>${freemarker.version}</version>
-			</dependency>
-
-
-			<dependency>
-				<groupId>org.richfaces</groupId>
-				<artifactId>richfaces-bom</artifactId>
-				<version>${richfaces.version}</version>
-				<scope>import</scope>
-				<type>pom</type>
-			</dependency>
-
-
-			<dependency>
-				<groupId>org.richfaces.ui</groupId>
-				<artifactId>richfaces-components-ui</artifactId>
-				<version>${richfaces.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.richfaces.core</groupId>
-				<artifactId>richfaces-core-impl</artifactId>
-				<version>${richfaces.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.ocpsoft</groupId>
-				<artifactId>prettyfaces-jsf2</artifactId>
-				<version>3.3.0</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.jboss.seam.faces</groupId>
-				<artifactId>seam-faces</artifactId>
-				<version>${seam.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.jboss.seam.security</groupId>
-				<artifactId>seam-security</artifactId>
-				<version>${seam.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.jboss.seam.security</groupId>
-				<artifactId>seam-security-api</artifactId>
-				<version>${seam.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.jboss.seam.security</groupId>
-				<artifactId>seam-security-impl</artifactId>
-				<version>${seam.version}</version>
-				<scope>runtime</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>org.jboss.seam.security</groupId>
-				<artifactId>seam-security-external</artifactId>
-				<version>${seam.version}</version>
-			</dependency>
-
-		</dependencies>
-	</dependencyManagement>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons-lang.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.primefaces</groupId>
+                <artifactId>primefaces</artifactId>
+                <version>${primefaces.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.primefaces.themes</groupId>
+                <artifactId>bluesky</artifactId>
+                <version>${primefaces.themes.bluesky.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.richfaces</groupId>
+                <artifactId>richfaces-bom</artifactId>
+                <version>${richfaces.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.richfaces.ui</groupId>
+                <artifactId>richfaces-components-ui</artifactId>
+                <version>${richfaces.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.richfaces.core</groupId>
+                <artifactId>richfaces-core-impl</artifactId>
+                <version>${richfaces.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ocpsoft</groupId>
+                <artifactId>prettyfaces-jsf2</artifactId>
+                <version>3.3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.seam.faces</groupId>
+                <artifactId>seam-faces</artifactId>
+                <version>${seam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.seam.security</groupId>
+                <artifactId>seam-security</artifactId>
+                <version>${seam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.seam.security</groupId>
+                <artifactId>seam-security-api</artifactId>
+                <version>${seam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.seam.security</groupId>
+                <artifactId>seam-security-impl</artifactId>
+                <version>${seam.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.seam.security</groupId>
+                <artifactId>seam-security-external</artifactId>
+                <version>${seam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>hsqldb</groupId>
+                <artifactId>hsqldb</artifactId>
+                <version>1.8.0.7</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.derby</groupId>
+                <artifactId>derby</artifactId>
+                <version>${derby.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 
   <!--
@@ -322,122 +318,113 @@
     = DEPENDENCY
     ============================================================================
   -->
-	<dependencies>
-
-		<dependency>
-			<groupId>org.jboss.seam</groupId>
-			<artifactId>seam-bom</artifactId>
-			<version>${seam.version}</version>
-			<scope>compile</scope>
-			<type>pom</type>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jboss.spec</groupId>
-			<artifactId>jboss-javaee-6.0</artifactId>
-			<type>pom</type>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.seam</groupId>
+            <artifactId>seam-bom</artifactId>
+            <version>${seam.version}</version>
+            <scope>compile</scope>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.spec</groupId>
+            <artifactId>jboss-javaee-6.0</artifactId>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
  <!--
     ============================================================================
     = BUILD
     ============================================================================
   -->
-	<build>
+    <build>
 	
 		<!--
 		++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		+ PLUGIN MANAGEMENT
 		++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		-->
-		<pluginManagement>
-
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.3.2</version>
-					<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
-					</configuration>
-				</plugin>
-
-				<plugin>
-					<groupId>ch.qos.cal10n.plugins</groupId>
-					<artifactId>maven-cal10n-plugin</artifactId>
-					<version>0.7.2</version>
-				</plugin>
-
-				<plugin>
-					<artifactId>maven-ear-plugin</artifactId>
-					<version>2.4.1</version>
-				</plugin>
-
-				<plugin>
-					<artifactId>maven-ejb-plugin</artifactId>
-					<version>2.2.1</version>
-					<configuration>
-						<ejbVersion>3.0</ejbVersion>
-						<archive>
-							<manifest>
-								<addClasspath>true</addClasspath>
-							</manifest>
-						</archive>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.3.2</version>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>ch.qos.cal10n.plugins</groupId>
+                    <artifactId>maven-cal10n-plugin</artifactId>
+                    <version>0.7.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-ear-plugin</artifactId>
+                    <version>2.4.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-ejb-plugin</artifactId>
+                    <version>2.2.1</version>
+                    <configuration>
+                        <ejbVersion>3.0</ejbVersion>
+                        <archive>
+                            <manifest>
+                                <addClasspath>true</addClasspath>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 		
 		<!--
 		++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		+ PLUGINS
 		++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		-->
-		<plugins>
-
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 <!--
     ============================================================================
     = REPORTING
     ============================================================================
   -->
-	<reporting>
-		<plugins>
-			<plugin>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.6.1</version>
-				<configuration>
-					<aggregate>true</aggregate>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.5</version>
-			</plugin>
-		</plugins>
-	</reporting>
+    <reporting>
+        <plugins>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.6.1</version>
+                <configuration>
+                    <aggregate>true</aggregate>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.5</version>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>

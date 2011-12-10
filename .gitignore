@@ -5,3 +5,7 @@ target
 .classpath
 .pmd
 .project
+.checkstyle
+.log
+testdb.properties
+testdb.script
