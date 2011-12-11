@@ -52,7 +52,7 @@ public class ClientException extends Exception {
      *
      * @param errorMsg a generic error message
      */
-    public ClientException(ErrorsMSG errorMsg) {
+    public ClientException(GenericErrorsMSG errorMsg) {
         super(errorMsg.toString());
     }
     
@@ -62,7 +62,7 @@ public class ClientException extends Exception {
      * @param errorMsg a generic error message
      * @param cause the cause
      */
-    public ClientException(ErrorsMSG errorMsg, Throwable cause) {
+    public ClientException(GenericErrorsMSG errorMsg, Throwable cause) {
         super(errorMsg.toString(),cause);
     }
     

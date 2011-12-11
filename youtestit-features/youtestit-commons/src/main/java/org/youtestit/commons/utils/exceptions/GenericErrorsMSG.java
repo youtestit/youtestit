@@ -20,55 +20,30 @@
  *   ======
  *   Homepage : http://www.youtestit.org
  *   Git      : https://github.com/youtestit
-*/
+ */
 package org.youtestit.commons.utils.exceptions;
 
 
-
 /**
- * Generic errors messages.
- *
+ * InterfaceErrorsMSG
+ * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
- * @since Dec 10, 2011
+ * @since Dec 11, 2011
  */
-public enum ErrorsMSG implements  GenericErrorsMSG {
-    
-    /** The VALU e_ no t_ null. */
-    VALUE_NOT_NULL("value musn't be null!");
-    
-    
-    /** The message. */
-    private String message;
-    
-    /**
-     * Instantiates a new errors msg.
-     *
-     * @param msg the msg
-     */
-    private ErrorsMSG(final String msg){
-        this.message=msg;
-    }
-    
-    
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString(){
-        return String.format("[code-%s] >>> %s", this.ordinal(), message);
-    }
-
+public interface GenericErrorsMSG {
 
     /**
-     * Gets the message.
+     * Allow to gets the error message.
+     * 
      * @return the message
      */
-    public String getMessage() {
-        return message;
-    }
-    
-    
+    String getMessage();
+
+
+    /**
+     * Force to implement toString method
+     * 
+     * @return error message formated
+     */
+    String toString();
 }
-
-

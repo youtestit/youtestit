@@ -46,12 +46,12 @@ import org.youtestit.commons.utils.exceptions.ClientException;
  * @see org.youtestit.datamodel.entity.User
  */
 public class UserTest extends AbstractEntityTest {
-    
+
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserTest.class);
+    private static final Logger LOGGER   = LoggerFactory.getLogger(UserTest.class);
 
     /** The Constant KEY_GEST. */
     private static final String KEY_GEST = "Gest";
@@ -71,12 +71,12 @@ public class UserTest extends AbstractEntityTest {
     public void equalsHashCodeTest() throws ClientException {
         LOGGER.info("verify equals and hash code of User entity");
         final String password = "kqz@15#$W";
-        final User user = new User("joe", "joe@youtestit.org", password, "Joe", "Smith",new Profile(KEY_GEST));
-        final User userB = new User("foo", "foo@youtestit.org", password, "Foo", "Bar",new Profile(KEY_GEST));
+        final User user = new User("joe", "joe@youtestit.org", password, "Joe", "Smith", new Profile(KEY_GEST));
+        final User userB = new User("foo", "foo@youtestit.org", password, "Foo", "Bar", new Profile(KEY_GEST));
 
         assertFalse(user.equals(userB));
 
-        final User userC = new User("joe", "foo@youtestit.org", password, "Foo", "Bar",new Profile(KEY_GEST));
+        final User userC = new User("joe", "foo@youtestit.org", password, "Foo", "Bar", new Profile(KEY_GEST));
         assertTrue(user.equals(userC));
         userC.setLogin("joe2");
 
@@ -111,21 +111,21 @@ public class UserTest extends AbstractEntityTest {
         final Profile profile = new Profile(KEY_GEST);
         entityManager.persist(profile);
         commitTransaction();
-        
+
         final Profile profileSaved = entityManager.createQuery("from Profile", Profile.class).getSingleResult();
-        
-        
+
+
         // persiste user
         beginTransaction();
-        final User user = new User("joe", "joe@youtestit.org", "kqz@15#$W", "Joe", "Smith",profileSaved);
-        
+        final User user = new User("joe", "joe@youtestit.org", "kqz@15#$W", "Joe", "Smith", profileSaved);
+
         entityManager.persist(user);
         commitTransaction();
 
         final List<User> resultB = entityManager.createQuery(query, User.class).getResultList();
         assertNotNull(resultB);
         assertFalse(resultB.isEmpty());
-        assertSame(resultB.size(),1);
+        assertSame(resultB.size(), 1);
 
 
         final User userResult = resultB.get(0);
@@ -140,8 +140,48 @@ public class UserTest extends AbstractEntityTest {
         assertEquals(user.getOffice(), userResult.getOffice());
         assertEquals(user.getPassword(), userResult.getPassword());
         assertEquals(user.getPhoneNumber(), userResult.getPhoneNumber());
+    }
+
+    
+    /**
+     * Allow to tests User NamedQuery
+     *
+     * @throws ClientException the client exception
+     */
+    @Test
+    public void testNamedQuery() throws ClientException {
+        // user must have an profile
+        loadEntityManager();
+        beginTransaction();
+        final Profile profile = new Profile(KEY_GEST);
+        entityManager.persist(profile);
+        commitTransaction();
+        final Profile profileSaved = entityManager.createQuery("from Profile", Profile.class).getSingleResult();
+
+        
+        final User user = new User("joe", "joe@youtestit.org", "123", "Joe", "Smith", profileSaved);
+        final List<User> users  = new ArrayList<User>();
+        users.add(user);
+        users.add(new User("foo", "foo@youtestit.org", "1234", "Foo", "Bar", profileSaved));
+        users.add(new User("glomli", "joe@youtestit.org", "12345", "Glomli", "Roifur", profileSaved));
+        users.add(new User("lulin", "joe@youtestit.org", "123456", "lulin", "Ushissham", profileSaved));
+        
+        beginTransaction();
+        for(User userItem : users){
+            entityManager.persist(userItem);    
+        }
+        commitTransaction();
 
 
+        List<User> allUser = entityManager.createNamedQuery(User.ALL_USERS, User.class).getResultList();
+        assertNotNull(allUser);
+        assertSame(allUser.size(),users.size());
+
+        User userByLogin = entityManager.createNamedQuery(User.USER_BY_LOGIN, User.class).setParameter(
+                User.USER_BY_LOGIN_PARAM_LOGIN, "joe").getSingleResult();
+        assertNotNull(userByLogin);
+        assertEquals(user,userByLogin);
+        closeEntityManager();
     }
 
 

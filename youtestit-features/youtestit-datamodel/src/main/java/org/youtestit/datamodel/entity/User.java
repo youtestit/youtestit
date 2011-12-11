@@ -25,15 +25,13 @@ package org.youtestit.datamodel.entity;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -47,60 +45,70 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @since Dec 8, 2011
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = User.ALL_USERS, query = "FROM User"),
+    @NamedQuery(name = User.USER_BY_LOGIN, query = "FROM User WHERE login=:"+User.USER_BY_LOGIN_PARAM_LOGIN)
+})
+
 @Table(name = "yti_user")
 public class User {
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
+    public static final String ALL_USERS                 = "allUser";
+
+    public static final String USER_BY_LOGIN             = "userByLogin";
+
+    public static final String USER_BY_LOGIN_PARAM_LOGIN = "login";
 
     /** The login. */
     @Id
     @NotNull
-    private String      login;
+    private String             login;
 
     /** The email. */
     @Email
     @NotEmpty
-    private String      email;
+    private String             email;
 
     /** The password. */
     @NotEmpty
-    private String      password;
+    private String             password;
 
     /** The firstname. */
     @NotEmpty
-    private String      firstname;
+    private String             firstname;
 
     /** The lastname. */
     @NotEmpty
-    private String      lastname;
+    private String             lastname;
 
     /** The gravatar. */
-    private String      gravatar;
+    private String             gravatar;
 
     /** The phone number. */
-    private String      phoneNumber;
+    private String             phoneNumber;
 
     /** The cellular number. */
-    private String      cellularNumber;
+    private String             cellularNumber;
 
     /** The office. */
-    private String      office;
+    private String             office;
 
     /** The description. */
-    private String      description;
+    private String             description;
 
 
     /**
      * The level.
      */
     @ManyToOne
-    private Profile     profile;
+    private Profile            profile;
 
 
     /** The administrator. */
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Group.class,mappedBy="users")
-    private List<Group> groups;
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Group.class, mappedBy = "users")
+    private List<Group>        groups;
 
     // =========================================================================
     // CONSTRUCTORS
