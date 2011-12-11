@@ -25,12 +25,15 @@ package org.youtestit.datamodel.entity;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -53,51 +56,50 @@ public class User {
     /** The login. */
     @Id
     @NotNull
-    private String  login;
+    private String      login;
 
     /** The email. */
     @Email
     @NotEmpty
-    private String  email;
+    private String      email;
 
     /** The password. */
     @NotEmpty
-    private String  password;
+    private String      password;
 
     /** The firstname. */
     @NotEmpty
-    private String  firstname;
+    private String      firstname;
 
     /** The lastname. */
     @NotEmpty
-    private String  lastname;
+    private String      lastname;
 
     /** The gravatar. */
-    private String  gravatar;
+    private String      gravatar;
 
     /** The phone number. */
-    private String  phoneNumber;
+    private String      phoneNumber;
 
     /** The cellular number. */
-    private String  cellularNumber;
+    private String      cellularNumber;
 
     /** The office. */
-    private String  office;
+    private String      office;
 
     /** The description. */
-    private String  description;
-    
+    private String      description;
+
 
     /**
      * The level.
      */
-    @ManyToOne(optional = false)
-    private Profile profile;
-    
-    @ManyToMany
-    @JoinTable(name="USER_GROUP", 
-            joinColumns = @JoinColumn(name = "userId"), 
-            inverseJoinColumns = @JoinColumn(name = "groupId"))
+    @ManyToOne
+    private Profile     profile;
+
+
+    /** The administrator. */
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Group.class,mappedBy="users")
     private List<Group> groups;
 
     // =========================================================================
@@ -212,7 +214,7 @@ public class User {
         result.append("profile=");
         result.append(profile);
         result.append(sep);
-        
+
         result.append("groups=");
         result.append(groups);
         result.append("]");
@@ -423,7 +425,7 @@ public class User {
 
     /**
      * Gets the groups.
-     *
+     * 
      * @return the groups
      */
     public List<Group> getGroups() {
@@ -432,15 +434,12 @@ public class User {
 
     /**
      * Sets the groups.
-     *
+     * 
      * @param groups the new groups
      */
     public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
-    
-    
-    
 
 
 }

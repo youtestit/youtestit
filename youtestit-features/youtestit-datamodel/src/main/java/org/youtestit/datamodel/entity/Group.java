@@ -25,12 +25,15 @@ package org.youtestit.datamodel.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 
@@ -41,6 +44,7 @@ import javax.validation.constraints.NotNull;
  * @since Dec 8, 2011
  */
 @Entity
+@Table(name = "yti_group")
 public class Group {
     // =========================================================================
     // ATTRIBUTES
@@ -48,19 +52,16 @@ public class Group {
 
     /** The uid. */
     @Id
+    @NotNull
     @GeneratedValue
-    private long uid; 
+    private int uid; 
     
     /** The login. */
     @NotNull
     private String  name;
 
-
-    /** The administrator. */
-    @ManyToMany
-    @JoinTable(name="USER_GROUP", 
-            joinColumns = @JoinColumn(name = "groupId"), 
-            inverseJoinColumns = @JoinColumn(name = "userId"))
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity=User.class,cascade=CascadeType.ALL)
+    @JoinTable(name="users_goups")
     private List<User> users;
 
 
@@ -75,25 +76,31 @@ public class Group {
         super();
     }
 
-
     /**
-     * Instantiates a new profile with all require values.
+     * Instantiates a new group in unit test.
      *
      * @param uid the uid
      * @param name the name
      */
-    public Group(final long uid,final String name) {
+    protected Group(final int uid, final String name) {
         super();
         this.uid = uid;
         this.name = name;
     }
-
-    public Group(final long uid,final String name, final  List<User> users) {
+    
+    /**
+     * Instantiates a new group.
+     *
+     * @param name the name
+     * @param users the users
+     */
+    protected Group(final String name, final List<User> users) {
         super();
-        this.uid = uid;
         this.name = name;
         this.users = users;
     }
+
+
 
    
     // =========================================================================
@@ -106,7 +113,7 @@ public class Group {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + new Long(uid).hashCode();
+        result = prime * result +uid;
         return result;
     }
 
@@ -144,7 +151,8 @@ public class Group {
         result.append(name);
         result.append(sep);
 
-      
+        result.append("users=");
+        result.append(users);
         
         result.append("]");
 
@@ -162,7 +170,7 @@ public class Group {
      *
      * @return the uid
      */
-    public long getUid() {
+    public int getUid() {
         return uid;
     }
 
@@ -172,7 +180,7 @@ public class Group {
      *
      * @param uid the new uid
      */
-    public void setUid(long uid) {
+    public void setUid(int uid) {
         this.uid = uid;
     }
 
@@ -196,7 +204,6 @@ public class Group {
         this.name = name;
     }
 
-
     /**
      * Gets the users.
      *
@@ -206,7 +213,6 @@ public class Group {
         return users;
     }
 
-
     /**
      * Sets the users.
      *
@@ -215,6 +221,7 @@ public class Group {
     public void setUsers(List<User> users) {
         this.users = users;
     }
+    
+    
 
-   
 }

@@ -47,7 +47,7 @@
         <dependency>
             <groupId>org.jboss.seam.persistence</groupId>
             <artifactId>seam-persistence</artifactId>
-            <scope>test</scope>
+            <scope>provided</scope>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -114,7 +114,7 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>3.6.8.Final</version>
-            <scope>compile</scope>
+            <scope>test</scope>
              <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -131,7 +131,7 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>3.6.8.Final</version>
-            <scope>compile</scope>
+            <scope>test</scope>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>

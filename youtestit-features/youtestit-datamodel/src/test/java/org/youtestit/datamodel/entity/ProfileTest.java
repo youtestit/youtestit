@@ -42,24 +42,25 @@ import org.youtestit.commons.utils.exceptions.ClientException;
  * Test unit for User entity
  * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
- * @since Dec 9, 2011
+ * @since Dec 11, 2011
  * @see org.youtestit.datamodel.entity.User
  */
 public class ProfileTest extends AbstractEntityTest {
-    private static final String KEY_ADMIN = "admin";
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ProfileTest.class);
 
+    /** The Constant KEY_ADMIN. */
+    private static final String KEY_ADMIN = "admin";
 
     // =========================================================================
     // METHODS
     // =========================================================================
 
     /**
-     * All profile are identify by their name. Two Profile object ars equals if
+     * All profile are identify by their name. Two Profile object are equals if
      * they have the same name. It's database table ID. This test allow to check
      * it and verify if basic java usage work well with User entity
      * 
@@ -67,7 +68,7 @@ public class ProfileTest extends AbstractEntityTest {
      */
     @Test
     public void equalsHashCodeTest() throws ClientException {
-        LOGGER.info("verify equals and hash code of User entity");
+        LOGGER.info("verify equals and hash code of Profile entity");
 
         final Profile profile = new Profile(KEY_ADMIN, true, true);
         final Profile profileB = new Profile("foo", false, false);

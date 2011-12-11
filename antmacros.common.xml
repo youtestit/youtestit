@@ -1,0 +1,50 @@
+<project name="antmacros.common">
+
+	<!--
+    ============================================================================
+    = PROPERTIES
+    ============================================================================
+    -->
+	<property file="${build.properties}" />
+
+
+	<!--
+    ============================================================================
+    = OS
+    ============================================================================
+    -->
+	<condition property="osfamily-unix">
+		<os family="unix" />
+	</condition>
+	<condition property="osfamily-windows">
+		<os family="windows" />
+	</condition>   
+
+
+
+	<!--
+    ============================================================================
+    = TARGET
+    ============================================================================
+    -->
+	<target name="install" description="Install">
+		<echo>Executing mvn clean install</echo>
+		<exec executable="mvn" failonerror="true">
+			<arg value="clean" />
+			<arg value="install" />
+		</exec>
+	</target>
+	
+	<target name="install-quick" description="Install">
+		<echo>Executing mvn clean install</echo>
+		<exec executable="mvn" failonerror="true">
+			<arg value="clean" />
+			<arg value="install" />
+			<arg value="-Dmaven.test.skip=true" />
+		</exec>
+	</target>
+
+
+
+
+</project>
