@@ -72,7 +72,7 @@ public class TestCaseHelper {
     private static final Properties PROPERTIES   = loadProperties();
 
     /** The Constant CLASSES. */
-    private static final Class<?>[] CLASSES      = { User.class };
+    private static final Class<?>[] CLASSES      = { User.class,Profile.class, Group.class};
 
     /** The Constant TARGET_FILES. */
     private static final File[]     TARGET_FILES = { new File("target/classes"), new File("target/test-classes") };

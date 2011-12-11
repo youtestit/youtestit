@@ -289,6 +289,9 @@
   </rule>
   <rule ref="rulesets/imports.xml/TooManyStaticImports">
     <priority>2</priority>
+    <properties>
+        <property name="maximumStaticImports">10</property>
+    </properties>
   </rule>
   <rule ref="rulesets/j2ee.xml/DoNotCallSystemExit">
     <priority>1</priority>

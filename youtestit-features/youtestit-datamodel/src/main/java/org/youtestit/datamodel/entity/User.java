@@ -23,8 +23,14 @@
  */
 package org.youtestit.datamodel.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -43,43 +49,56 @@ public class User {
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
-    
+
     /** The login. */
     @Id
     @NotNull
-    private String login;
+    private String  login;
 
     /** The email. */
     @Email
     @NotEmpty
-    private String email;
+    private String  email;
 
     /** The password. */
     @NotEmpty
-    private String password;
+    private String  password;
 
     /** The firstname. */
     @NotEmpty
-    private String firstname;
+    private String  firstname;
 
     /** The lastname. */
     @NotEmpty
-    private String lastname;
+    private String  lastname;
 
     /** The gravatar. */
-    private String gravatar;
+    private String  gravatar;
 
     /** The phone number. */
-    private String phoneNumber;
+    private String  phoneNumber;
 
     /** The cellular number. */
-    private String cellularNumber;
+    private String  cellularNumber;
 
     /** The office. */
-    private String office;
+    private String  office;
 
     /** The description. */
-    private String description;
+    private String  description;
+    
+
+    /**
+     * The level.
+     */
+    @ManyToOne(optional = false)
+    private Profile profile;
+    
+    @ManyToMany
+    @JoinTable(name="USER_GROUP", 
+            joinColumns = @JoinColumn(name = "userId"), 
+            inverseJoinColumns = @JoinColumn(name = "groupId"))
+    private List<Group> groups;
 
     // =========================================================================
     // CONSTRUCTORS
@@ -100,14 +119,15 @@ public class User {
      * @param firstname the firstname
      * @param lastname the lastname
      */
-    public User(String login, String email, String password, String firstname,
-            String lastname) {
+    public User(final String login, final String email, final String password, final String firstname,
+            final String lastname, final Profile profile) {
         super();
         this.login = login;
         this.email = email;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.profile = profile;
     }
 
     // =========================================================================
@@ -128,7 +148,7 @@ public class User {
      * {@inheritDoc}
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         boolean result = false;
 
         if (this == obj) {
@@ -137,7 +157,7 @@ public class User {
 
         if (obj != null && getClass() == obj.getClass()) {
             final User other = (User) obj;
-            if (login != null  && login.equals(other.login)) {
+            if (login != null && login.equals(other.login)) {
                 result = true;
             }
         }
@@ -187,6 +207,14 @@ public class User {
 
         result.append("description=");
         result.append(description);
+        result.append(sep);
+
+        result.append("profile=");
+        result.append(profile);
+        result.append(sep);
+        
+        result.append("groups=");
+        result.append(groups);
         result.append("]");
 
         return result.toString();
@@ -209,7 +237,7 @@ public class User {
      * 
      * @param login the new login
      */
-    public void setLogin(String login) {
+    public void setLogin(final String login) {
         this.login = login;
     }
 
@@ -227,7 +255,7 @@ public class User {
      * 
      * @param email the new email
      */
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -245,7 +273,7 @@ public class User {
      * 
      * @param password the new password
      */
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 
@@ -263,7 +291,7 @@ public class User {
      * 
      * @param firstname the new firstname
      */
-    public void setFirstname(String firstname) {
+    public void setFirstname(final String firstname) {
         this.firstname = firstname;
     }
 
@@ -281,7 +309,7 @@ public class User {
      * 
      * @param lastname the new lastname
      */
-    public void setLastname(String lastname) {
+    public void setLastname(final String lastname) {
         this.lastname = lastname;
     }
 
@@ -299,7 +327,7 @@ public class User {
      * 
      * @param gravatar the new gravatar
      */
-    public void setGravatar(String gravatar) {
+    public void setGravatar(final String gravatar) {
         this.gravatar = gravatar;
     }
 
@@ -317,7 +345,7 @@ public class User {
      * 
      * @param phoneNumber the new phone number
      */
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(final String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -335,7 +363,7 @@ public class User {
      * 
      * @param cellularNumber the new cellular number
      */
-    public void setCellularNumber(String cellularNumber) {
+    public void setCellularNumber(final String cellularNumber) {
         this.cellularNumber = cellularNumber;
     }
 
@@ -353,7 +381,7 @@ public class User {
      * 
      * @param office the new office
      */
-    public void setOffice(String office) {
+    public void setOffice(final String office) {
         this.office = office;
     }
 
@@ -371,8 +399,48 @@ public class User {
      * 
      * @param description the new description
      */
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
+
+    /**
+     * Gets the profile.
+     * 
+     * @return the profile
+     */
+    public Profile getProfile() {
+        return profile;
+    }
+
+    /**
+     * Sets the profile.
+     * 
+     * @param profile the new profile
+     */
+    public void setProfile(final Profile profile) {
+        this.profile = profile;
+    }
+
+    /**
+     * Gets the groups.
+     *
+     * @return the groups
+     */
+    public List<Group> getGroups() {
+        return groups;
+    }
+
+    /**
+     * Sets the groups.
+     *
+     * @param groups the new groups
+     */
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
+    }
+    
+    
+    
+
 
 }

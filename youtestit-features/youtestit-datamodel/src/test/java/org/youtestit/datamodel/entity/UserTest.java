@@ -26,6 +26,8 @@ package org.youtestit.datamodel.entity;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,12 +46,15 @@ import org.youtestit.commons.utils.exceptions.ClientException;
  * @see org.youtestit.datamodel.entity.User
  */
 public class UserTest extends AbstractEntityTest {
+    
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(UserTest.class);
 
+    /** The Constant KEY_GEST. */
+    private static final String KEY_GEST = "Gest";
 
     // =========================================================================
     // METHODS
@@ -65,13 +70,13 @@ public class UserTest extends AbstractEntityTest {
     @Test
     public void equalsHashCodeTest() throws ClientException {
         LOGGER.info("verify equals and hash code of User entity");
-
-        final User user = new User("joe", "joe@youtestit.org", "kqz@15#$W", "Joe", "Smith");
-        final User userB = new User("foo", "foo@youtestit.org", "kqz@15#$W", "Foo", "Bar");
+        final String password = "kqz@15#$W";
+        final User user = new User("joe", "joe@youtestit.org", password, "Joe", "Smith",new Profile(KEY_GEST));
+        final User userB = new User("foo", "foo@youtestit.org", password, "Foo", "Bar",new Profile(KEY_GEST));
 
         assertFalse(user.equals(userB));
 
-        final User userC = new User("joe", "foo@youtestit.org", "kqz@15#$W", "Foo", "Bar");
+        final User userC = new User("joe", "foo@youtestit.org", password, "Foo", "Bar",new Profile(KEY_GEST));
         assertTrue(user.equals(userC));
         userC.setLogin("joe2");
 
@@ -89,27 +94,53 @@ public class UserTest extends AbstractEntityTest {
 
 
     /**
-     *  {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void persistenceTest() throws ClientException {
         assertNotNull(entityManager);
 
         String query = String.format("from %s", User.class.getSimpleName());
-        
-        final List<User> resultA = entityManager.createQuery(query,User.class).getResultList();
+
+        final List<User> resultA = entityManager.createQuery(query, User.class).getResultList();
         assertNotNull(resultA);
         assertTrue(resultA.isEmpty());
 
+        // user must have an profile
         beginTransaction();
-        final User user = new User("joe", "joe@youtestit.org", "kqz@15#$W", "Joe", "Smith");
+        final Profile profile = new Profile(KEY_GEST);
+        entityManager.persist(profile);
+        commitTransaction();
+        
+        final Profile profileSaved = entityManager.createQuery("from Profile", Profile.class).getSingleResult();
+        
+        
+        // persiste user
+        beginTransaction();
+        final User user = new User("joe", "joe@youtestit.org", "kqz@15#$W", "Joe", "Smith",profileSaved);
+        
         entityManager.persist(user);
         commitTransaction();
 
-        final List<User> resultB = entityManager.createQuery(query,User.class).getResultList();
+        final List<User> resultB = entityManager.createQuery(query, User.class).getResultList();
         assertNotNull(resultB);
         assertFalse(resultB.isEmpty());
-        assertTrue(resultB.size()==1);
+        assertSame(resultB.size(),1);
+
+
+        final User userResult = resultB.get(0);
+
+        assertEquals(user, userResult);
+        assertEquals(user.getCellularNumber(), userResult.getCellularNumber());
+        assertEquals(user.getDescription(), userResult.getDescription());
+        assertEquals(user.getEmail(), userResult.getEmail());
+        assertEquals(user.getFirstname(), userResult.getFirstname());
+        assertEquals(user.getGravatar(), userResult.getGravatar());
+        assertEquals(user.getLastname(), userResult.getLastname());
+        assertEquals(user.getOffice(), userResult.getOffice());
+        assertEquals(user.getPassword(), userResult.getPassword());
+        assertEquals(user.getPhoneNumber(), userResult.getPhoneNumber());
+
 
     }
 

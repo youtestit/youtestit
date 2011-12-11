@@ -49,6 +49,26 @@ public class ClientException extends Exception {
 
     /**
      * Instantiates a new client exception.
+     *
+     * @param errorMsg a generic error message
+     */
+    public ClientException(ErrorsMSG errorMsg) {
+        super(errorMsg.toString());
+    }
+    
+    /**
+     * Instantiates a new client exception.
+     *
+     * @param errorMsg a generic error message
+     * @param cause the cause
+     */
+    public ClientException(ErrorsMSG errorMsg, Throwable cause) {
+        super(errorMsg.toString(),cause);
+    }
+    
+    
+    /**
+     * Instantiates a new client exception.
      * 
      * @param message the message
      * @param cause the cause

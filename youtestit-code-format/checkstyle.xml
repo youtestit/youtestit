@@ -5,7 +5,6 @@
   <!-- $Id$ -->
   <property name="severity" value="warning" />
   <property name="charset" value="UTF8" />
-  <property name="protectedAllowed" value="true" />
   
   <module name="TreeWalker">
     <module name="ConstantName">
