@@ -75,7 +75,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
+        
+        <dependency>
+            <groupId>org.jboss.seam.solder</groupId>
+            <artifactId>seam-solder</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.glassfish</groupId>
@@ -115,7 +119,7 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>3.6.8.Final</version>
             <scope>test</scope>
-             <exclusions>
+            <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-api</artifactId>

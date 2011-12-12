@@ -102,7 +102,7 @@ public class User {
     /**
      * The level.
      */
-    @ManyToOne
+    @ManyToOne(optional=true)
     private Profile            profile;
 
 
@@ -247,7 +247,7 @@ public class User {
      * 
      * @param login the new login
      */
-    public void setLogin(final String login) {
+    protected void setLogin(final String login) {
         this.login = login;
     }
 
