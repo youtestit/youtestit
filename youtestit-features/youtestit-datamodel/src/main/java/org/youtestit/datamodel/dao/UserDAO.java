@@ -23,6 +23,7 @@
  */
 package org.youtestit.datamodel.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -48,16 +49,22 @@ import org.youtestit.datamodel.entity.User;
  */
 @Singleton
 @Named
-public class UserDAO {
+public class UserDAO implements Serializable {
+
+
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
-    private static final String ERR_USER_EXISTS = "error.entity.user.exists";
+    /** The Constant serialVersionUID. */
+    private static final long   serialVersionUID = 4258879045230285L;
 
-   
+
+    private static final String ERR_USER_EXISTS  = "error.entity.user.exists";
+
+
     @Inject
-    private Logger log;
-    
+    private Logger              log;
+
     /** The entity manager. */
     @PersistenceContext
     private EntityManager       entityManager;
@@ -109,9 +116,8 @@ public class UserDAO {
         final Sha1Encryption sha1Service = Sha1Encryption.getInstance();
         final String cryptedPassword = sha1Service.encryptToSha1(user.getPassword());
         user.setPassword(cryptedPassword);
-        
 
-        
+
         entityManager.persist(user);
     }
 
@@ -156,26 +162,26 @@ public class UserDAO {
         }
 
         User result = null;
-        try{
+        try {
             result = entityManager.createNamedQuery(User.USER_BY_LOGIN, User.class).setParameter(
                     User.USER_BY_LOGIN_PARAM_LOGIN, login).getSingleResult();
-        }catch (NoResultException e) {
-            // user can not exist. it musn't thow exception for this. 
-            if(log!=null && log.isDebugEnabled()){
+        } catch (NoResultException e) {
+            // user can not exist. it musn't thow exception for this.
+            if (log != null && log.isDebugEnabled()) {
                 log.debug("search user", e);
             }
         }
-        return result; 
+        return result;
     }
 
 
     // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     // DELETE
     // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    
+
     /**
-     *  Allow to delete a user.
-     *
+     * Allow to delete a user.
+     * 
      * @param user the user
      * @throws ClientException if an error has occur.
      */
@@ -185,11 +191,11 @@ public class UserDAO {
         }
         entityManager.remove(user);
     }
-    
-    
+
+
     /**
      * Allow to delete a user.
-     *
+     * 
      * @param users the users list to delete
      * @throws ClientException if an error has occur.
      */
@@ -197,8 +203,8 @@ public class UserDAO {
         if (users == null) {
             throw new ClientException(ErrorsMSG.VALUE_NOT_NULL);
         }
-        for(User user:users){
-            entityManager.remove(user);    
+        for (User user : users) {
+            entityManager.remove(user);
         }
     }
 }

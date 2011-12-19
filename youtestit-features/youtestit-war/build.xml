@@ -1,9 +1,9 @@
-<project name="youtestit-war" default="install-quick" basedir=".">
+<project name="youtestit-war" default="install_and_deploy" basedir=".">
 
 	<!--========================================================================
     =                              PROPERTIES
     =========================================================================-->
-	<property name="build.properties" value="build.properties" />
+	<property name="build.properties" value="../../build.properties" />
 	<import file="../../antmacros.common.xml" />
 
 	<!--========================================================================
@@ -11,6 +11,14 @@
     =========================================================================-->
 
 
+	<target name="deploy">
+		<echo> deploy ${basedir}/target/youtestit.war</echo>
+		<copyfile	forceoverwrite="true"
+					dest="${deploy.dir}/youtestit.war"
+					src="${basedir}/target/youtestit.war"/>
+	</target>
 
+	<target name="install_and_deploy" depends="install-quick,deploy"/>
+			
 
 </project>

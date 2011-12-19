@@ -1,12 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html  xmlns="http://www.w3.org/1999/xhtml"
-	   xmlns:f="http://java.sun.com/jsf/core"
-       xmlns:h="http://java.sun.com/jsf/html"
-       xmlns:ui="http://java.sun.com/jsf/facelets">
-
-<f:view contentType="text/html"
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        dir="ltr"
+        contentType="text/html"
         id="#{messages['project.name']}">
-
 <!--****************************************************************************
 *
 *   YouTestit source code:
@@ -32,12 +31,12 @@
 *   Git      : https://github.com/youtestit
 *
 *****************************************************************************-->
-
+<html>
   
   
-  <ui:remove><!--*****************************************************************
+  <ui:remove><!--***************************************************************
   *    HEAD
-  *****************************************************************************-->
+  ***************************************************************************-->
   </ui:remove>
      
   <h:head>
@@ -46,6 +45,7 @@
     <meta http-equiv="imagetoolbar" content="no" />
     <link rel="icon" href="#{resource['img/icons/favicon.ico']}" />
     <link href="#{resource['stylesheet/default/main.css']}" rel="stylesheet" type="text/css" />
+    <link href="#{resource['stylesheet/default/login.css']}" rel="stylesheet" type="text/css" />
     <ui:insert name="meta" />
     
     <!--[if IE]>
@@ -60,23 +60,9 @@
   **************************************************************************-->
   </ui:remove>
   <h:body id="body">
-    <ui:include src="header.xhtml"/>
       
 	<section id="mainSection">
-		<menu class="breadCrumb" id ="breadCrumb">
-			<ui:insert name="breadCrumb" />
-		</menu>
-		
-
-		
 	  	<div id="page">
-  			<div id="errorsMessages"> 
-				<h:messages errorClass="errorMSG" 
-							infoClass="infoMSG"
-							warnClass="warnMSG"
-							globalOnly="true" />
-			</div>
-			
 	  		<div id="pageContent">
 	  			<ui:insert name="body" />
 	  		</div>
@@ -100,8 +86,5 @@
 			</article>
 	</footer>
   </h:body>
-
-
-</f:view>
 </html>
-
+</f:view>

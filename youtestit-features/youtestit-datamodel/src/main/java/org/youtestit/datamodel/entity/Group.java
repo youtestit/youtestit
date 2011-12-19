@@ -180,7 +180,7 @@ public class Group {
      *
      * @param uid the new uid
      */
-    protected void setUid(int uid) {
+    public void setUid(int uid) {
         this.uid = uid;
     }
 

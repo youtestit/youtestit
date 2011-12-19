@@ -247,7 +247,7 @@ public class User {
      * 
      * @param login the new login
      */
-    protected void setLogin(final String login) {
+    public void setLogin(final String login) {
         this.login = login;
     }
 

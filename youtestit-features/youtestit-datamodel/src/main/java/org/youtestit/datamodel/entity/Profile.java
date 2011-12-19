@@ -168,7 +168,7 @@ public class Profile {
      * 
      * @param name the new name
      */
-    protected void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 

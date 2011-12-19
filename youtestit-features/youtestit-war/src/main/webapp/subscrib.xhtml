@@ -1,13 +1,12 @@
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:s="http://jboss.org/seam/faces"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:rich="http://richfaces.org/rich"
     xmlns:p="http://primefaces.prime.com.tr/ui"
-    template="layout/template.xhtml">
+    template="layout/template-form.xhtml">
 
 
     <ui:remove><!--*************************************************************
@@ -23,7 +22,7 @@
     *    BODY
     *************************************************************************-->
     </ui:remove>
-    <ui:define name="body">
+    <ui:define name="formContent">
 
 		<f:subview id="subscrib">
 			<h:form id="form">
@@ -38,44 +37,37 @@
 			              
 			                     
 			            <h:outputLabel id="login_label" for="login" value="#{messages['label.subscrib.form.login']}"/>
-			            <h:inputText id="login" value="#{subscrib.user.login}">
+			            <h:inputText id="login" value="#{subscribAction.user.login}">
 			            	<rich:validator />
 			            </h:inputText>
 			            <rich:message for="login" id="login_error" />
 			            
 			            
 			            <h:outputLabel id="firstName_label" for="firstName" value="#{messages['label.subscrib.form.firstName']}"/>
-			            <h:inputText id="firstName" value="#{subscrib.user.firstName}">
+			            <h:inputText id="firstName" value="#{subscribAction.user.firstname}">
 			            	<rich:validator />
 			            </h:inputText>
 			            <rich:message for="firstName" id="firstName_error"/>
 			            
 			            
 			            <h:outputLabel id="lastName_label" for="lastName" value="#{messages['label.subscrib.form.lastName']}"/>
-			            <h:inputText id="lastName" value="#{subscrib.user.lastName}">
+			            <h:inputText id="lastName" value="#{subscribAction.user.lastname}">
 			            	<rich:validator />
 			            </h:inputText>
 			            <rich:message for="lastName" id="lastName_error"/>
 			            
 			            
 			            <h:outputLabel id="email_label" for="email" value="#{messages['label.subscrib.form.email']}"/>
-			            <h:inputText id="email" value="#{subscrib.user.email}" >
+			            <h:inputText id="email" value="#{subscribAction.user.email}" >
 			            	<rich:validator />
 			            </h:inputText>
 			            <rich:message for="email" id="email_error"/>
 			            
 			            
-			            <h:outputLabel id="phone_label" for="phone" value="#{messages['label.subscrib.form.phone']}"/>
-			            <h:inputText id="phone" value="#{subscrib.user.phone}">
-			            	<rich:validator />
-			            </h:inputText>
-			            <rich:message for="phone" id="phone_error"/>
-			            
-			            
 			            
 			            <h:outputLabel id="password_label" for="password" value="#{messages['label.subscrib.form.password']}"/>
 			            <p:password id="password"
-                              value="#{subscrib.user.password}"
+                              value="#{subscribAction.user.password}"
                               promptLabel="#{messages['label.subscrib.form.password.prompt']}"
                               weakLabel="Weak"
                               goodLabel="Good"
@@ -87,7 +79,7 @@
                         
                         <h:outputLabel id="password_confirm_label" for="password_confirm" value="#{messages['label.subscrib.form.password.confirm']}"/>
 			            <p:password id="password_confirm"
-                              value="#{subscrib.confirmPassword}"
+                              value="#{subscribAction.passwordConfirm}"
                               promptLabel="#{messages['label.subscrib.form.password.prompt']}"
                               weakLabel="Weak"
                               goodLabel="Good"
@@ -100,7 +92,7 @@
 				               
 		            <div class="buttons-actions">
         		        <h:commandButton value="#{messages['label.subscrib.action.submit']}"
-                          		         action="#{subscrib.save()}"/>
+                          		         action="#{subscribAction.subscrib()}"/>
          			</div>
 				                    
 				</p:panel>

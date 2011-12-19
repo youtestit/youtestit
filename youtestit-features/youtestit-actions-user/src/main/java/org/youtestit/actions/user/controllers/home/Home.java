@@ -1,4 +1,4 @@
-package org.youtestit.actions.user.home;
+package org.youtestit.actions.user.controllers.home;
 
 import java.io.Serializable;
 
