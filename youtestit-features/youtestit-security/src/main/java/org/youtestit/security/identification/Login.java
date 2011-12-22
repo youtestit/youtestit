@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.logging.Logger;
+import org.jboss.seam.international.status.Messages;
 import org.jboss.seam.security.Authenticator;
 import org.jboss.seam.security.BaseAuthenticator;
 import org.jboss.seam.security.Credentials;
@@ -13,6 +14,7 @@ import org.jboss.seam.security.Identity;
 import org.picketlink.idm.impl.api.PasswordCredential;
 import org.picketlink.idm.impl.api.model.SimpleUser;
 import org.youtestit.commons.utils.exceptions.ClientException;
+import org.youtestit.commons.utils.exceptions.YoutestitMSG;
 import org.youtestit.commons.utils.sha1.Sha1Encryption;
 import org.youtestit.datamodel.dao.UserDAO;
 import org.youtestit.datamodel.entity.User;
@@ -27,6 +29,8 @@ public class Login extends BaseAuthenticator implements Authenticator {
     @Inject
     private UserDAO     userDAO;
 
+    @Inject
+    private Messages          messages;
 
     @Inject
     private Credentials credentials;
@@ -58,28 +62,42 @@ public class Login extends BaseAuthenticator implements Authenticator {
      */
     protected void authenticateJPA() throws ClientException {
         User user = userDAO.getUserByLogin(credentials.getUsername());
+        boolean hasNoError = true;
+        
+        if(user == null){
+            messages.error(new YoutestitMSG("error.login.user.not.exists"));
+            hasNoError = false;
+        }
+        
         
         String password = null;
-        if(credentials != null && credentials.getCredential() instanceof PasswordCredential ){
-            password =  ((PasswordCredential) credentials.getCredential()).getValue();
+        if(hasNoError){
+            if(credentials != null && credentials.getCredential() instanceof PasswordCredential ){
+                password =  ((PasswordCredential) credentials.getCredential()).getValue();
+            }    
+            if(password==null){
+                messages.error(new YoutestitMSG("error.login.password.require"));
+                hasNoError = false;
+            }    
         }
         
-        if(password==null){
-            throw new ClientException("password is require");
+        if(hasNoError){
+            final String cryptedPassword = Sha1Encryption.getInstance().encryptToSha1(password);
+            
+            if(user.getPassword().equals(cryptedPassword)){
+                loginEventSrc.fire(user);
+                setUser(new SimpleUser(user.getLogin()));
+                identity.getUser();    
+            }else{
+                messages.error(new YoutestitMSG("error.login.password.wrong"));
+                hasNoError = false;
+            }
         }
         
-        final String cryptedPassword = Sha1Encryption.getInstance().encryptToSha1(password);
-        
-        if(user.getPassword().equals(cryptedPassword)){
-            loginEventSrc.fire(user);
+        if(hasNoError){
             setStatus(AuthenticationStatus.SUCCESS);
-            setUser(new SimpleUser(user.getLogin()));
-            identity.getUser();    
         }else{
-            throw new ClientException("wrong password");
+            setStatus(AuthenticationStatus.FAILURE);   
         }
-        
     }
-
-
 }

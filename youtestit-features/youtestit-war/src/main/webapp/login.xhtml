@@ -52,6 +52,13 @@
 						<h:outputLabel  id="loginFormPanelTitle-label"  value="#{messages['label.login.form.title']}"/>
 					</h2>
 					
+					<div id="errorsMessages"> 
+						<h:messages errorClass="errorMSG" 
+									infoClass="infoMSG"
+									warnClass="warnMSG"
+									globalOnly="true" />
+					</div>
+					
 					<h:panelGrid	id="loginFormPanelGrid"
 									columns="2"
 									rowClasses="prop"
