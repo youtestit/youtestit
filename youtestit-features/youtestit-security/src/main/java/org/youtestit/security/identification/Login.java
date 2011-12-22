@@ -1,0 +1,85 @@
+package org.youtestit.security.identification;
+
+import javax.ejb.Stateful;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.jboss.logging.Logger;
+import org.jboss.seam.security.Authenticator;
+import org.jboss.seam.security.BaseAuthenticator;
+import org.jboss.seam.security.Credentials;
+import org.jboss.seam.security.Identity;
+import org.picketlink.idm.impl.api.PasswordCredential;
+import org.picketlink.idm.impl.api.model.SimpleUser;
+import org.youtestit.commons.utils.exceptions.ClientException;
+import org.youtestit.commons.utils.sha1.Sha1Encryption;
+import org.youtestit.datamodel.dao.UserDAO;
+import org.youtestit.datamodel.entity.User;
+
+@Stateful
+@Named
+public class Login extends BaseAuthenticator implements Authenticator {
+
+    @Inject
+    private Logger      log;
+
+    @Inject
+    private UserDAO     userDAO;
+
+
+    @Inject
+    private Credentials credentials;
+
+    @Inject
+    Identity            identity;
+
+    @Inject
+    @Authenticated
+    private Event<User> loginEventSrc;
+
+    @Override
+    public void authenticate() {
+        log.info("SeamAuthenticator.authenticate()");
+
+        try {
+            authenticateJPA();
+
+        } catch (ClientException e) {
+            log.error(e);
+        }
+    }
+
+    
+    /**
+     * Authenticate jpa.
+     * 
+     * @throws ClientException the client exception
+     */
+    protected void authenticateJPA() throws ClientException {
+        User user = userDAO.getUserByLogin(credentials.getUsername());
+        
+        String password = null;
+        if(credentials != null && credentials.getCredential() instanceof PasswordCredential ){
+            password =  ((PasswordCredential) credentials.getCredential()).getValue();
+        }
+        
+        if(password==null){
+            throw new ClientException("password is require");
+        }
+        
+        final String cryptedPassword = Sha1Encryption.getInstance().encryptToSha1(password);
+        
+        if(user.getPassword().equals(cryptedPassword)){
+            loginEventSrc.fire(user);
+            setStatus(AuthenticationStatus.SUCCESS);
+            setUser(new SimpleUser(user.getLogin()));
+            identity.getUser();    
+        }else{
+            throw new ClientException("wrong password");
+        }
+        
+    }
+
+
+}

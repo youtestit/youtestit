@@ -11,9 +11,9 @@
 		<view-id>/login.xhtml</view-id>
 	</url-mapping>
 	
-	<url-mapping id="subscrib">
-		<pattern value="/subscrib"></pattern>
-		<view-id>/subscrib.xhtml</view-id>
+	<url-mapping id="subscribe">
+		<pattern value="/subscribe"></pattern>
+		<view-id>/subscribe.xhtml</view-id>
 	</url-mapping>
 	
 	

@@ -39,6 +39,18 @@
             <artifactId>seam-security</artifactId>
             <scope>compile</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>org.picketlink.idm</groupId>
+            <artifactId>picketlink-idm-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.seam.faces</groupId>
+            <artifactId>seam-faces</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

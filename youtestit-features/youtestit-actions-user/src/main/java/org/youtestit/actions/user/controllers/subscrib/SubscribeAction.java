@@ -24,7 +24,9 @@
 package org.youtestit.actions.user.controllers.subscrib;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 
+import javax.enterprise.inject.Instance;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -32,7 +34,6 @@ import javax.inject.Named;
 import org.apache.commons.lang.StringUtils;
 import org.jboss.logging.Logger;
 import org.jboss.seam.international.status.Messages;
-import org.jboss.seam.international.status.builder.BundleKey;
 import org.youtestit.actions.user.helpers.Pages;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.commons.utils.exceptions.YoutestitMSG;
@@ -48,7 +49,7 @@ import org.youtestit.datamodel.entity.User;
  */
 @ViewScoped
 @Named
-public class SubscribAction implements Serializable {
+public class SubscribeAction implements Serializable {
 
 
     // =========================================================================
@@ -57,16 +58,16 @@ public class SubscribAction implements Serializable {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -654958412208946032L;
 
-    /** The log. */
     @Inject
-    private Logger            log;
+    private Logger              log;
 
     /** The user dao. */
     @Inject
     private UserDAO           userDAO;
-    
+
+
     @Inject
-    private Messages messages;
+    private Messages          messages;
 
     /** The user. */
     private User              user             = new User();
@@ -79,39 +80,41 @@ public class SubscribAction implements Serializable {
     // =========================================================================
     /**
      * Allow to user subscrib.
-     * @throws ClientException 
+     * 
+     * @throws ClientException
      */
-    public String subscrib() throws ClientException{
+    public String subscrib() throws ClientException {
         log.info("subscrib");
-        
-        if(!StringUtils.isEmpty(user.getPassword()) && !StringUtils.isEmpty(passwordConfirm)&&
-           user.getPassword().equals(passwordConfirm)){
-           return createUser();
-                
-        }else{
+
+        if (!StringUtils.isEmpty(user.getPassword()) && !StringUtils.isEmpty(passwordConfirm)
+                && user.getPassword().equals(passwordConfirm)) {
+            return createUser();
+
+        } else {
             messages.error(new YoutestitMSG("error.subscrib.password.dismatch"));
         }
-            
+
         return null;
     }
+
 
 
     // =========================================================================
     // PROTECTED
     // =========================================================================
 
-    protected String createUser() throws ClientException{
+    protected String createUser() throws ClientException {
         String result = null;
         final User dbUser = userDAO.getUserByLogin(user.getLogin());
-        
-        if(dbUser ==null){
+
+        if (dbUser == null) {
             userDAO.createUser(user);
-            result = Pages.login.toString();  
-        }else{
+            result = Pages.login.toString();
+        } else {
             messages.error(new YoutestitMSG("error.subscrib.user.exists"));
             result = Pages.subscrive.toString();
         }
-        
+
         return result;
     }
 

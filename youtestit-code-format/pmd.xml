@@ -387,7 +387,7 @@
     <priority>5</priority>
   </rule>
   <rule ref="rulesets/naming.xml/ShortVariable">
-    <priority>2</priority>
+    <priority>5</priority>
   </rule>
   <rule ref="rulesets/naming.xml/LongVariable">
     <priority>2</priority>
@@ -396,7 +396,7 @@
     </properties>
   </rule>
   <rule ref="rulesets/naming.xml/ShortMethodName">
-    <priority>2</priority>
+    <priority>5</priority>
   </rule>
   <rule ref="rulesets/naming.xml/MethodWithSameNameAsEnclosingClass">
     <priority>2</priority>

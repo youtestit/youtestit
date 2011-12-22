@@ -14,7 +14,7 @@
     *************************************************************************-->
     </ui:remove>
     <ui:define name="title">
-       #{messages['label.subscrib.title']}
+       #{messages['label.subscribe.title']}
     </ui:define>
 
 
@@ -28,7 +28,7 @@
 			<h:form id="form">
 			
 				
-				<p:panel  id="subscribFormPanel" header="#{messages['label.subscrib.panel.title']}" >
+				<p:panel  id="subscribFormPanel" header="#{messages['label.subscribe.panel.title']}" >
 				
 					<h:panelGrid    id="loginFormPanelGrid"
 			                        columns="3"
@@ -36,39 +36,39 @@
 			                        columnClasses="name,value,error">
 			              
 			                     
-			            <h:outputLabel id="login_label" for="login" value="#{messages['label.subscrib.form.login']}"/>
-			            <h:inputText id="login" value="#{subscribAction.user.login}">
+			            <h:outputLabel id="login_label" for="login" value="#{messages['label.subscribe.form.login']}"/>
+			            <h:inputText id="login" value="#{subscribeAction.user.login}">
 			            	<rich:validator />
 			            </h:inputText>
 			            <rich:message for="login" id="login_error" />
 			            
 			            
-			            <h:outputLabel id="firstName_label" for="firstName" value="#{messages['label.subscrib.form.firstName']}"/>
-			            <h:inputText id="firstName" value="#{subscribAction.user.firstname}">
+			            <h:outputLabel id="firstName_label" for="firstName" value="#{messages['label.subscribe.form.firstName']}"/>
+			            <h:inputText id="firstName" value="#{subscribeAction.user.firstname}">
 			            	<rich:validator />
 			            </h:inputText>
 			            <rich:message for="firstName" id="firstName_error"/>
 			            
 			            
-			            <h:outputLabel id="lastName_label" for="lastName" value="#{messages['label.subscrib.form.lastName']}"/>
-			            <h:inputText id="lastName" value="#{subscribAction.user.lastname}">
+			            <h:outputLabel id="lastName_label" for="lastName" value="#{messages['label.subscribe.form.lastName']}"/>
+			            <h:inputText id="lastName" value="#{subscribeAction.user.lastname}">
 			            	<rich:validator />
 			            </h:inputText>
 			            <rich:message for="lastName" id="lastName_error"/>
 			            
 			            
-			            <h:outputLabel id="email_label" for="email" value="#{messages['label.subscrib.form.email']}"/>
-			            <h:inputText id="email" value="#{subscribAction.user.email}" >
+			            <h:outputLabel id="email_label" for="email" value="#{messages['label.subscribe.form.email']}"/>
+			            <h:inputText id="email" value="#{subscribeAction.user.email}" >
 			            	<rich:validator />
 			            </h:inputText>
 			            <rich:message for="email" id="email_error"/>
 			            
 			            
 			            
-			            <h:outputLabel id="password_label" for="password" value="#{messages['label.subscrib.form.password']}"/>
+			            <h:outputLabel id="password_label" for="password" value="#{messages['label.subscribe.form.password']}"/>
 			            <p:password id="password"
-                              value="#{subscribAction.user.password}"
-                              promptLabel="#{messages['label.subscrib.form.password.prompt']}"
+                              value="#{subscribeAction.user.password}"
+                              promptLabel="#{messages['label.subscribe.form.password.prompt']}"
                               weakLabel="Weak"
                               goodLabel="Good"
                               strongLabel="Strong">
@@ -77,10 +77,10 @@
                         <rich:message for="password" id="password_error"/>
                               
                         
-                        <h:outputLabel id="password_confirm_label" for="password_confirm" value="#{messages['label.subscrib.form.password.confirm']}"/>
+                        <h:outputLabel id="password_confirm_label" for="password_confirm" value="#{messages['label.subscribe.form.password.confirm']}"/>
 			            <p:password id="password_confirm"
-                              value="#{subscribAction.passwordConfirm}"
-                              promptLabel="#{messages['label.subscrib.form.password.prompt']}"
+                              value="#{subscribeAction.passwordConfirm}"
+                              promptLabel="#{messages['label.subscribe.form.password.prompt']}"
                               weakLabel="Weak"
                               goodLabel="Good"
                               strongLabel="Strong" />
@@ -91,8 +91,8 @@
 			        </h:panelGrid>
 				               
 		            <div class="buttons-actions">
-        		        <h:commandButton value="#{messages['label.subscrib.action.submit']}"
-                          		         action="#{subscribAction.subscrib()}"/>
+        		        <h:commandButton value="#{messages['label.subscribe.action.submit']}"
+                          		         action="#{subscribeAction.subscrib()}"/>
          			</div>
 				                    
 				</p:panel>

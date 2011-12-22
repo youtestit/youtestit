@@ -137,17 +137,17 @@
             <artifactId>jsf-impl</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>javax.servlet</groupId> -->
+<!--             <artifactId>servlet-api</artifactId> -->
+<!--             <scope>provided</scope> -->
+<!--         </dependency> -->
 
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>javax.servlet.jsp</groupId> -->
+<!--             <artifactId>jsp-api</artifactId> -->
+<!--             <scope>provided</scope> -->
+<!--         </dependency> -->
 
         <dependency>
             <groupId>javax.el</groupId>
@@ -175,7 +175,7 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
-
+    
     </dependencies>
 
 

@@ -11,6 +11,19 @@
     =========================================================================-->
 
 
-
+	<target name="deploy" depends="install-quick">
+		<delete>
+			<fileset dir="${deploy.dir}/">
+				<include name="*.failed"/>
+				<include name="*.dodeploy"/>
+				<include name="youtestit*.war"/>
+			</fileset>
+		</delete>
+		
+		<echo> deploy ${basedir}/youtestit-features/youtestit-war/target/youtestit.war</echo>
+		<copyfile	forceoverwrite="true"
+					dest="${deploy.dir}/youtestit.war"
+					src="${basedir}/youtestit-features/youtestit-war/target/youtestit.war"/>
+	</target>
 
 </project>
