@@ -266,7 +266,7 @@ footer hr{
 
 
 
-.login{
+.logout{
 	background: url(#{resource['stylesheet/default/imgs/icons/log-in.png']}) no-repeat;
 	float: left;
 	display: block;
@@ -274,7 +274,7 @@ footer hr{
 	width: 16px;
 	margin-right: 5px;
 }
-.login span{
+.logout span{
 	display: none;
 }
 

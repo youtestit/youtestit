@@ -24,9 +24,7 @@
 package org.youtestit.actions.user.controllers.subscrib;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 
-import javax.enterprise.inject.Instance;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -83,8 +81,8 @@ public class SubscribeAction implements Serializable {
      * 
      * @throws ClientException
      */
-    public String subscrib() throws ClientException {
-        log.info("subscrib");
+    public String subscribe() throws ClientException {
+        log.info("subscribe");
 
         if (!StringUtils.isEmpty(user.getPassword()) && !StringUtils.isEmpty(passwordConfirm)
                 && user.getPassword().equals(passwordConfirm)) {
