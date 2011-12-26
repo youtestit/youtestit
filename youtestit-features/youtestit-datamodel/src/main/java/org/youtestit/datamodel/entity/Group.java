@@ -30,7 +30,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -130,7 +129,7 @@ public class Group {
 
         if (obj != null && getClass() == obj.getClass()) {
             final Group other = (Group) obj;
-            if (uid == other.uid) {
+            if (uid == other.uid || name.equals(other.getName())) {
                 result = true;
             }
         }

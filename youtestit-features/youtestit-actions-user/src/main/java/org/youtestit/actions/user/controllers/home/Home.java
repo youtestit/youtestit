@@ -3,11 +3,13 @@ package org.youtestit.actions.user.controllers.home;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.logging.Logger;
 import org.jboss.seam.security.Identity;
+
 
 @SessionScoped
 @Named
@@ -20,7 +22,7 @@ public class Home implements Serializable {
     private Logger log;
 
     
-    
+
     
     
     @Inject
