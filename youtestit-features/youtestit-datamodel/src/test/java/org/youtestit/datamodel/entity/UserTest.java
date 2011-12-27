@@ -142,10 +142,10 @@ public class UserTest extends AbstractEntityTest {
         assertEquals(user.getPhoneNumber(), userResult.getPhoneNumber());
     }
 
-    
+
     /**
      * Allow to tests User NamedQuery
-     *
+     * 
      * @throws ClientException the client exception
      */
     @Test
@@ -158,29 +158,29 @@ public class UserTest extends AbstractEntityTest {
         commitTransaction();
         final Profile profileSaved = entityManager.createQuery("from Profile", Profile.class).getSingleResult();
 
-        
+
         final User user = new User("joe", "joe@youtestit.org", "123", "Joe", "Smith", profileSaved);
-        final List<User> users  = new ArrayList<User>();
+        final List<User> users = new ArrayList<User>();
         users.add(user);
         users.add(new User("foo", "foo@youtestit.org", "1234", "Foo", "Bar", profileSaved));
         users.add(new User("glomli", "joe@youtestit.org", "12345", "Glomli", "Roifur", profileSaved));
         users.add(new User("lulin", "joe@youtestit.org", "123456", "lulin", "Ushissham", profileSaved));
-        
+
         beginTransaction();
-        for(User userItem : users){
-            entityManager.persist(userItem);    
+        for (User userItem : users) {
+            entityManager.persist(userItem);
         }
         commitTransaction();
 
 
         List<User> allUser = entityManager.createNamedQuery(User.ALL_USERS, User.class).getResultList();
         assertNotNull(allUser);
-        assertSame(allUser.size(),users.size());
+        assertSame(allUser.size(), users.size());
 
         User userByLogin = entityManager.createNamedQuery(User.USER_BY_LOGIN, User.class).setParameter(
                 User.USER_BY_LOGIN_PARAM_LOGIN, "joe").getSingleResult();
         assertNotNull(userByLogin);
-        assertEquals(user,userByLogin);
+        assertEquals(user, userByLogin);
         closeEntityManager();
     }
 

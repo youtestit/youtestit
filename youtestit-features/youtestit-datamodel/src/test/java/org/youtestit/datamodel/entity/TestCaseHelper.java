@@ -72,7 +72,7 @@ public class TestCaseHelper {
     private static final Properties PROPERTIES   = loadProperties();
 
     /** The Constant CLASSES. */
-    private static final Class<?>[] CLASSES      = { User.class,Profile.class, Group.class};
+    private static final Class<?>[] CLASSES      = { User.class, Profile.class, Group.class };
 
     /** The Constant TARGET_FILES. */
     private static final File[]     TARGET_FILES = { new File("target/classes"), new File("target/test-classes") };
@@ -115,7 +115,7 @@ public class TestCaseHelper {
         }
         cfg.addProperties(PROPERTIES);
 
-        EntityManagerFactory emFactory = cfg.buildEntityManagerFactory();
+        emFactory = cfg.buildEntityManagerFactory();
         entityManager = emFactory.createEntityManager();
         return entityManager;
     }
@@ -128,8 +128,8 @@ public class TestCaseHelper {
     public void closeEntityManager() throws ClientException {
         LOGGER.debug("closeEntityManager");
         entityManager.close();
-        if(emFactory!=null){
-            emFactory.close();    
+        if (emFactory != null) {
+            emFactory.close();
         }
         try {
             connection.close();

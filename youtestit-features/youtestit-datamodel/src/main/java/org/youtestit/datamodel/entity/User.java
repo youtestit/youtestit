@@ -25,6 +25,7 @@ package org.youtestit.datamodel.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -45,11 +46,8 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @since Dec 8, 2011
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = User.ALL_USERS, query = "FROM User"),
-    @NamedQuery(name = User.USER_BY_LOGIN, query = "FROM User WHERE login=:"+User.USER_BY_LOGIN_PARAM_LOGIN)
-})
-
+@NamedQueries({ @NamedQuery(name = User.ALL_USERS, query = "FROM User"),
+        @NamedQuery(name = User.USER_BY_LOGIN, query = "FROM User WHERE login=:" + User.USER_BY_LOGIN_PARAM_LOGIN) })
 @Table(name = "yti_user")
 public class User {
     // =========================================================================
@@ -98,11 +96,13 @@ public class User {
     /** The description. */
     private String             description;
 
+    private boolean            enable = false;
+
 
     /**
      * The level.
      */
-    @ManyToOne(optional=true)
+    @ManyToOne(optional = true)
     private Profile            profile;
 
 
@@ -217,6 +217,10 @@ public class User {
 
         result.append("description=");
         result.append(description);
+        result.append(sep);
+        
+        result.append("enable=");
+        result.append(enable);
         result.append(sep);
 
         result.append("profile=");
@@ -447,6 +451,24 @@ public class User {
      */
     public void setGroups(List<Group> groups) {
         this.groups = groups;
+    }
+
+    /**
+     * Checks if is enable.
+     *
+     * @return true, if is enable
+     */
+    public boolean isEnable() {
+        return enable;
+    }
+
+    /**
+     * Sets the enable.
+     *
+     * @param enable the new enable
+     */
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 
 

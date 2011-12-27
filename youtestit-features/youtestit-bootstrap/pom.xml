@@ -19,6 +19,8 @@
     <name>youtestit - Bootstrap</name>
 
 
+
+
   <!--
     ============================================================================
     = DEPENDENCY
@@ -28,6 +30,12 @@
         <dependency>
             <groupId>org.youtestit</groupId>
             <artifactId>youtestit-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.youtestit</groupId>
+            <artifactId>youtestit-commons-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -71,6 +79,13 @@
     ============================================================================
   -->
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

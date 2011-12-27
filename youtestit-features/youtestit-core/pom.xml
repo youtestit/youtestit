@@ -38,6 +38,11 @@
             <artifactId>youtestit-security</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.youtestit</groupId>
+            <artifactId>youtestit-commons-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.jboss.seam.catch</groupId>
             <artifactId>seam-catch</artifactId>
             <scope>provided</scope>

@@ -32,19 +32,41 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 
 /**
  * User Profile.
- *
+ * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
  * @since Dec 8, 2011
  */
+
 @Entity
+@NamedQueries({ @NamedQuery(name = Group.ALL_GROUPS, query = "FROM Group"),
+        @NamedQuery(name = Group.GROUP_BY_NAME, query = "FROM Group WHERE name=:" + Group.GROUP_BY_NAME_PARAM_NAME) })
 @Table(name = "yti_group")
 public class Group {
+    // =========================================================================
+    // TRANSIENT
+    // =========================================================================
+    /** NamedQuery ALL_GROUPS. */
+    @Transient
+    public static final String ALL_GROUPS               = "allGroups";
+
+    /** NamedQuery GROUP_BY_NAME. */
+    @Transient
+    public static final String GROUP_BY_NAME            = "groupByName";
+
+    /** NamedQuery parameter name for GROUP_BY_NAME. */
+    @Transient
+    public static final String GROUP_BY_NAME_PARAM_NAME = "name";
+
+
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
@@ -53,16 +75,16 @@ public class Group {
     @Id
     @NotNull
     @GeneratedValue
-    private int uid; 
-    
+    private int                uid;
+
     /** The login. */
     @NotNull
-    private String  name;
+    private String             name;
 
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity=User.class,cascade=CascadeType.ALL)
-    @JoinTable(name="users_goups")
-    private List<User> users;
-
+    /** The users. */
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = User.class, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_goups")
+    private List<User>         users;
 
 
     // =========================================================================
@@ -77,7 +99,7 @@ public class Group {
 
     /**
      * Instantiates a new group in unit test.
-     *
+     * 
      * @param uid the uid
      * @param name the name
      */
@@ -86,10 +108,10 @@ public class Group {
         this.uid = uid;
         this.name = name;
     }
-    
+
     /**
      * Instantiates a new group.
-     *
+     * 
      * @param name the name
      * @param users the users
      */
@@ -100,8 +122,6 @@ public class Group {
     }
 
 
-
-   
     // =========================================================================
     // OVERRIDES
     // =========================================================================
@@ -112,7 +132,7 @@ public class Group {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result +uid;
+        result = prime * result + uid;
         return result;
     }
 
@@ -152,21 +172,19 @@ public class Group {
 
         result.append("users=");
         result.append(users);
-        
+
         result.append("]");
 
         return result.toString();
     }
 
 
-    
-
     // =========================================================================
     // GETTERS & SETTERS
     // =========================================================================
     /**
      * Gets the uid.
-     *
+     * 
      * @return the uid
      */
     public int getUid() {
@@ -176,7 +194,7 @@ public class Group {
 
     /**
      * Sets the uid.
-     *
+     * 
      * @param uid the new uid
      */
     public void setUid(int uid) {
@@ -186,7 +204,7 @@ public class Group {
 
     /**
      * Gets the name.
-     *
+     * 
      * @return the name
      */
     public String getName() {
@@ -196,7 +214,7 @@ public class Group {
 
     /**
      * Sets the name.
-     *
+     * 
      * @param name the new name
      */
     public void setName(String name) {
@@ -205,7 +223,7 @@ public class Group {
 
     /**
      * Gets the users.
-     *
+     * 
      * @return the users
      */
     public List<User> getUsers() {
@@ -214,13 +232,12 @@ public class Group {
 
     /**
      * Sets the users.
-     *
+     * 
      * @param users the new users
      */
     public void setUsers(List<User> users) {
         this.users = users;
     }
-    
-    
+
 
 }

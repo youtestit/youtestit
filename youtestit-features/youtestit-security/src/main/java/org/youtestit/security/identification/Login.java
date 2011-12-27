@@ -30,7 +30,7 @@ public class Login extends BaseAuthenticator implements Authenticator {
     private UserDAO     userDAO;
 
     @Inject
-    private Messages          messages;
+    private Messages    messages;
 
     @Inject
     private Credentials credentials;
@@ -54,7 +54,7 @@ public class Login extends BaseAuthenticator implements Authenticator {
         }
     }
 
-    
+
     /**
      * Authenticate jpa.
      * 
@@ -64,40 +64,57 @@ public class Login extends BaseAuthenticator implements Authenticator {
         User user = userDAO.getUserByLogin(credentials.getUsername());
         boolean hasNoError = true;
         
-        if(user == null){
-            messages.error(new YoutestitMSG("error.login.user.not.exists"));
-            hasNoError = false;
-        }
-        
-        
+        hasNoError = authorizeUser(user);
+
         String password = null;
-        if(hasNoError){
-            if(credentials != null && credentials.getCredential() instanceof PasswordCredential ){
-                password =  ((PasswordCredential) credentials.getCredential()).getValue();
-            }    
-            if(password==null){
+        if (hasNoError) {
+            if (credentials != null && credentials.getCredential() instanceof PasswordCredential) {
+                password = ((PasswordCredential) credentials.getCredential()).getValue();
+            }
+            if (password == null) {
                 messages.error(new YoutestitMSG("error.login.password.require"));
                 hasNoError = false;
-            }    
+            }
         }
-        
-        if(hasNoError){
+
+        if (hasNoError) {
             final String cryptedPassword = Sha1Encryption.getInstance().encryptToSha1(password);
-            
-            if(user.getPassword().equals(cryptedPassword)){
+
+            if (user.getPassword().equals(cryptedPassword)) {
                 loginEventSrc.fire(user);
                 setUser(new SimpleUser(user.getLogin()));
-                identity.getUser();    
-            }else{
+                identity.getUser();
+            } else {
                 messages.error(new YoutestitMSG("error.login.password.wrong"));
                 hasNoError = false;
             }
         }
-        
-        if(hasNoError){
+
+        if (hasNoError) {
             setStatus(AuthenticationStatus.SUCCESS);
-        }else{
-            setStatus(AuthenticationStatus.FAILURE);   
+        } else {
+            setStatus(AuthenticationStatus.FAILURE);
         }
+    }
+
+    /**
+     * Check if user is authorized.
+     * 
+     * @param user the user to check
+     * @return true, if successful
+     */
+    protected boolean authorizeUser(User user) {
+        boolean authorize = true;
+        if (user == null) {
+            messages.error(new YoutestitMSG("error.login.user.not.exists"));
+            authorize = false;
+        } else if (!user.isEnable()) {
+            messages.error(new YoutestitMSG("error.login.user.not.enable"));
+            authorize = false;
+        } else if (user.getProfile() != null && !user.getProfile().isEnable()) {
+            messages.error(new YoutestitMSG("error.login.profile.not.enable"));
+            authorize = false;
+        }
+        return authorize;
     }
 }

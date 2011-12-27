@@ -1,54 +1,67 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
   <!--
     ============================================================================
     = MAIN PROJECT INFORMATIONS
     ============================================================================
   -->
-	<parent>
-		<groupId>org.jboss.seam</groupId>
-		<artifactId>seam-parent</artifactId>
-		<version>15</version>
-	</parent>
+    <parent>
+        <groupId>org.jboss.seam</groupId>
+        <artifactId>seam-parent</artifactId>
+        <version>15</version>
+    </parent>
 
-  <groupId>org.youtestit</groupId>
-  <artifactId>youtestit</artifactId>
-  <version>0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>youtestit</name>
-  <description>You Test it : Selenium Management Application</description>
+    <groupId>org.youtestit</groupId>
+    <artifactId>youtestit</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>youtestit</name>
+    <description>You Test it : Selenium Management Application</description>
+
 
   <!--
     ============================================================================
     = MAIN PROJECT PROPERTIES
     ============================================================================
   -->
-  <properties>
-    <project.version>0.1-SNAPSHOT</project.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-  </properties>
+    <properties>
+        <project.version>0.1-SNAPSHOT</project.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <pom.organization.name>YouTestit</pom.organization.name>
+    </properties>
 
   <!--
     ============================================================================
     = MAIN PROJECT MODULES
     ============================================================================
   -->
-  <modules>
-    <module>youtestit-features</module>
-  </modules>
+    <modules>
+        <module>youtestit-features</module>
+    </modules>
 
   <!--
     ============================================================================
     = ORGANIZATION INFORMATIONS
     ============================================================================
   -->
-  <developers>
-    <!-- ADD here all developpers -->
-  </developers>
+    <organization>
+        <name>YouTestit</name>
+        <url>https://github.com/youtestit</url>
+    </organization>
+    <developers>
+        <developer>
+            <id>pagui</id>
+            <name>Patrick Guillerm</name>
+            <email>patrickguillerm@gmail.com</email>
+        </developer>
+    </developers>
 
+    <scm>
+        <connection>https://github.com/youtestit/youtestit</connection>
+    </scm>
+    
 </project>

@@ -189,6 +189,19 @@ footer article{
 footer hr{
 	width: 60%;
 }
+
+#youtestit-info{
+	margin-top: -3px;	
+}
+#youtestit-info ul{
+	display : inline;
+	width: 300px;
+}
+#youtestit-info li{
+	list-style: none;
+	display : inline;
+	margin-right: 5px;
+}
 /*******************************************************************************
 * ICONS
 *******************************************************************************/

@@ -19,6 +19,11 @@
     <name>youtestit - Commons</name>
 
 
+    <properties>
+        <maven.build.timestamp.format>yyyy/MM/dd HH:mm</maven.build.timestamp.format>
+        <buildDate>${maven.build.timestamp}</buildDate>
+    </properties>
+
   <!--
     ============================================================================
     = DEPENDENCY
@@ -26,9 +31,21 @@
   -->
     <dependencies>
         <dependency>
+            <groupId>org.youtestit</groupId>
+            <artifactId>youtestit-commons-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.jboss.seam.solder</groupId>
             <artifactId>seam-solder</artifactId>
@@ -80,7 +97,26 @@
     ============================================================================
   -->
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -90,11 +126,5 @@
                 </configuration>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
     </build>
 </project>

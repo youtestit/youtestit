@@ -25,6 +25,9 @@ package org.youtestit.datamodel.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 
@@ -35,7 +38,27 @@ import javax.validation.constraints.NotNull;
  * @since Dec 8, 2011
  */
 @Entity
+@NamedQueries({ @NamedQuery(name = Profile.ALL_PROFILES, query = "FROM Profile"),
+    @NamedQuery(name = Profile.PROFILE_BY_NAME, query = "FROM Profile WHERE name=:" + Profile.PROFILE_BY_NAME_PARAM_NAME) })
 public class Profile {
+    
+    // =========================================================================
+    // TRANSIENT
+    // =========================================================================
+    /** NamedQuery ALL_PROFILES. */
+    @Transient
+    public static final String ALL_PROFILES               = "allProfiles";
+
+    /** NamedQuery PROFILE_BY_NAME. */
+    @Transient
+    public static final String PROFILE_BY_NAME            = "profileByName";
+
+    /** NamedQuery parameter name for PROFILE_BY_NAME. */
+    @Transient
+    public static final String PROFILE_BY_NAME_PARAM_NAME = "name";
+
+
+    
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================

@@ -185,12 +185,6 @@
     ============================================================================
   -->
     <build>
-        <resources>
-           <resource>
-                <directory>${basedir}/src/main/META-INF</directory>
-                <targetPath>${project.build.directory}/youtestit-war-${project.version}/META-INF</targetPath>
-           </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

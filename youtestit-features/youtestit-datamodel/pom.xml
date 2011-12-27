@@ -31,8 +31,11 @@
             <artifactId>youtestit-commons</artifactId>
             <type>jar</type>
         </dependency>
-
-
+        <dependency>
+            <groupId>org.youtestit</groupId>
+            <artifactId>youtestit-commons-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.jboss.seam.faces</groupId>
             <artifactId>seam-faces</artifactId>
@@ -75,7 +78,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        
+
         <dependency>
             <groupId>org.jboss.seam.solder</groupId>
             <artifactId>seam-solder</artifactId>

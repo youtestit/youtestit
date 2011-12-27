@@ -10,7 +10,10 @@
     =                              TARGETS
     =========================================================================-->
 
-
+    <target name="deployProperties" depends="install">
+        <copy file="${basedir}/target/classes/youtestit.properties"
+              tofile="${user.home}/.youtestit/config/youtestit.properties" />
+    </target>
 
 
 </project>

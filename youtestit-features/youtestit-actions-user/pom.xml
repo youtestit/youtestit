@@ -30,6 +30,11 @@
             <artifactId>youtestit-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.youtestit</groupId>
+            <artifactId>youtestit-commons-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
