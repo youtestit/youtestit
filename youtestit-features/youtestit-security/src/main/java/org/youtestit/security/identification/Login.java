@@ -1,3 +1,26 @@
+/*
+ *   YouTestit source code:
+ *   ======================
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements.  See the NOTICE file distributed with
+ *   this work for additional information regarding copyright ownership.
+ *   The ASF licenses this file to You under the Apache License, Version 2.0
+ *   (the "License"); you may not use this file except in compliance with
+ *   the License.  You may obtain a copy of the License at
+ *  
+        http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ *
+ *   Links:
+ *   ======
+ *   Homepage : http://www.youtestit.org
+ *   Git      : https://github.com/youtestit
+ */
 package org.youtestit.security.identification;
 
 import javax.ejb.Stateful;
@@ -19,29 +42,50 @@ import org.youtestit.commons.utils.sha1.Sha1Encryption;
 import org.youtestit.datamodel.dao.UserDAO;
 import org.youtestit.datamodel.entity.User;
 
+/**
+ * The Class Login.
+ */
 @Stateful
 @Named
 public class Login extends BaseAuthenticator implements Authenticator {
 
+    // =========================================================================
+    // ATTRIBUTES
+    // =========================================================================
+
+    /** The log. */
     @Inject
     private Logger      log;
 
+    /** The user dao. */
     @Inject
     private UserDAO     userDAO;
 
+    /** The messages. */
     @Inject
     private Messages    messages;
 
+    /** The credentials. */
     @Inject
     private Credentials credentials;
 
+    /** The identity. */
     @Inject
     Identity            identity;
 
+    /** The login event src. */
     @Inject
     @Authenticated
     private Event<User> loginEventSrc;
 
+
+    // =========================================================================
+    // METHODS
+    // =========================================================================
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void authenticate() {
         log.info("SeamAuthenticator.authenticate()");
@@ -63,7 +107,7 @@ public class Login extends BaseAuthenticator implements Authenticator {
     protected void authenticateJPA() throws ClientException {
         User user = userDAO.getUserByLogin(credentials.getUsername());
         boolean hasNoError = true;
-        
+
         hasNoError = authorizeUser(user);
 
         String password = null;

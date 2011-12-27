@@ -22,6 +22,13 @@
 		<pattern value="/home"></pattern>
 		<view-id>/home.xhtml</view-id>
 	</url-mapping>
+    
+    <url-mapping id="dashboardAdmin">
+        <pattern value="/dashboardAdmin"></pattern>
+        <view-id>/dashboardAdmin.xhtml</view-id>
+    </url-mapping>
+
+
 
 
 	<url-mapping id="links">

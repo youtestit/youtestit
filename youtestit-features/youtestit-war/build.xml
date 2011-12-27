@@ -13,11 +13,19 @@
 
 	<target name="deploy">
 		<echo> deploy ${basedir}/target/youtestit.war</echo>
-		<copyfile	forceoverwrite="true"
-					dest="${deploy.dir}/youtestit.war"
-					src="${basedir}/target/youtestit.war"/>
+		<delete dir="${deploy.dir}/youtestit.war" verbose="true"/>
+				
+		<unzip	src="${basedir}/target/youtestit.war"
+				dest="${deploy.dir}/youtestit.war"
+				overwrite="true"/>
 	</target>
 
+	<target name="web">
+		<copy todir="${deploy.dir}/youtestit.war/" >
+			<fileset dir="${basedir}/src/main/webapp" />
+		</copy>
+	</target>
+	
 	<target name="install_and_deploy" depends="install-quick,deploy"/>
 			
 

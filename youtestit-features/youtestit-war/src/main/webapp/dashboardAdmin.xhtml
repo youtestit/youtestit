@@ -1,0 +1,102 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    xmlns:a4j="http://richfaces.org/a4j"
+    template="layout/template-dashboard.xhtml">
+
+
+<ui:remove>
+<!--****************************************************************************
+*
+*   YouTestit source code:
+*   ======================
+*   Licensed to the Apache Software Foundation (ASF) under one or more
+*   contributor license agreements.  See the NOTICE file distributed with
+*   this work for additional information regarding copyright ownership.
+*   The ASF licenses this file to You under the Apache License, Version 2.0
+*   (the "License"); you may not use this file except in compliance with
+*   the License.  You may obtain a copy of the License at
+*  
+*       http://www.apache.org/licenses/LICENSE-2.0
+* 
+*   Unless required by applicable law or agreed to in writing, software
+*   distributed under the License is distributed on an "AS IS" BASIS,
+*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*   See the License for the specific language governing permissions and
+*   limitations under the License.
+*
+*   Links:
+*   ======
+*   Homepage : http://www.youtestit.org
+*   Git      : https://github.com/youtestit
+*	Author   : pguillerm
+*
+*****************************************************************************-->
+</ui:remove>
+
+
+    <ui:remove><!--=============================================================
+    =    dashboardLeft
+    =========================================================================-->
+    </ui:remove>
+  	<ui:define name="dashboardLeft">
+  		AAA
+	</ui:define>
+
+    <ui:remove><!--=============================================================
+    =    dashboardCenter
+    =========================================================================-->  	
+  	</ui:remove>
+  	
+  	<ui:define name="dashboardCenter">
+		BBB  	
+  	</ui:define>
+  	
+ 	<ui:remove><!--=============================================================
+    =    dashboardRight
+    =========================================================================-->
+    </ui:remove>
+    
+  	<ui:define name="dashboardRight">
+
+        <rich:dataScroller for="listUsersToEnable" maxPages="5" />
+        <rich:dataTable value="#{dashboardAdmin.userAccountToEnable}" var="user" id="listUsersToEnable" rows="10">
+        	<rich:column>
+                <f:facet name="header">
+                    <h:outputText value="Login" />
+                </f:facet>
+                <h:outputText value="#{user.login}" />
+            </rich:column>
+            
+            <rich:column>
+                <f:facet name="header">
+                    <h:outputText value="Name" />
+                </f:facet>
+                <h:outputText value="#{user.firstname}" />
+                <h:outputText value="#{user.lastname}" />
+            </rich:column>
+        
+            <rich:column>
+                <f:facet name="header">
+                    <h:outputText value="Actions" />
+                </f:facet>
+                <h:form>
+                	<h:commandButton value="active" action="#{dashboardAdmin.activeUser(user)}" />
+                </h:form>
+            </rich:column>
+        </rich:dataTable>
+	  	
+		
+		  		
+		
+
+  	</ui:define>
+  	
+  		
+
+</ui:composition>

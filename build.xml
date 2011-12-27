@@ -21,9 +21,11 @@
 		</delete>
 		
 		<echo> deploy ${basedir}/youtestit-features/youtestit-war/target/youtestit.war</echo>
-		<copyfile	forceoverwrite="true"
-					dest="${deploy.dir}/youtestit.war"
-					src="${basedir}/youtestit-features/youtestit-war/target/youtestit.war"/>
+		<delete dir="${deploy.dir}/youtestit.war" verbose="true"/>
+		
+		<unzip	src="${basedir}/youtestit-features/youtestit-war/target/youtestit.war"
+				dest="${deploy.dir}/youtestit.war"
+				overwrite="true"/>
 	</target>
 
 </project>

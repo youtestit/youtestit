@@ -27,6 +27,11 @@ public interface Pages {
         @Owner
         HOME,
         
+        @ViewPattern("/dashboardAdmin.xhtml")
+        @RestrictAtPhase(PhaseIdType.RENDER_RESPONSE)
+        @LoginView("/login")
+        @Admin
+        DASHBOARD_ADMIN,
         
         @ViewPattern("/app/admin/*")
         @RestrictAtPhase(PhaseIdType.RENDER_RESPONSE)

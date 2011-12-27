@@ -175,6 +175,18 @@ public class UserDAO implements Serializable {
     }
 
 
+    /**
+     * Gets all users account who waitting to be enable.
+     * 
+     * @return users accounts
+     * @throws ClientException if an error has occur.
+     */
+    public List<User> getUsersAccountWaittingEnable() throws ClientException {
+        final String jpql = "SELECT u FROM User u WHERE u.enable=false";
+        return entityManager.createQuery(jpql, User.class)
+                            .getResultList();
+    }
+
     // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     // DELETE
     // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

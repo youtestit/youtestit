@@ -564,3 +564,25 @@ input.rf-insp-inp[type="text"]{
 	color: #316D8C;
 	background: url("#{resource['stylesheet/default/imgs/icons/info.png']}") no-repeat 0px 0px;
 }
+
+/*******************************************************************************
+* DASHBOARD
+*******************************************************************************/
+.dashboard_left{
+	border : 1px solid red;
+    float: left;
+    margin-right: 5px;
+    width: 250px;
+}
+
+.dashboard_center{
+	border : 1px solid blue;
+	overflow: hidden;
+}
+
+.dashboard_right{
+	border : 1px solid green;
+    float: right;
+    margin-left: 5px;
+    width: 250px;
+}

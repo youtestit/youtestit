@@ -1,15 +1,18 @@
-<project name="youtestit-datamodel" default="install" basedir=".">
+<project name="youtestit-datamodel" default="deploy" basedir=".">
 
 	<!--========================================================================
     =                              PROPERTIES
     =========================================================================-->
-	<property name="build.properties" value="build.properties" />
+	<property name="build.properties" value="../../build.properties" />
 	<import file="../../antmacros.common.xml" />
 
 	<!--========================================================================
     =                              TARGETS
     =========================================================================-->
-
+	<target name="deploy" depends="install">
+		<copy todir="${deploy.dir}/youtestit.war/WEB-INF/lib"
+			file="${basedir}/target/${ant.project.name}-${artifact.version}.jar" />
+	</target>
 
 
 

@@ -21,81 +21,71 @@
  *   Homepage : http://www.youtestit.org
  *   Git      : https://github.com/youtestit
  */
-package org.youtestit.security.roles;
+package org.youtestit.actions.admin.controllers.dashboard;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
-import org.jboss.seam.security.Identity;
-import org.jboss.seam.security.annotations.Secures;
+import org.jboss.logging.Logger;
 import org.youtestit.commons.utils.exceptions.ClientException;
+import org.youtestit.datamodel.dao.UserDAO;
+import org.youtestit.datamodel.entity.User;
+
 
 /**
- * The Class RolesSecurity.
+ * AdminDashboard
+ * 
+ * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
+ * @since Dec 27, 2011
  */
+@ViewScoped
 @Named
-public class RolesSecurity implements Serializable {
-
+public class DashboardAdmin implements Serializable {
 
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -5023681736363699508L;
+    private static final long serialVersionUID = 631638260318322100L;
 
-    /** The roles validator. */
     @Inject
-    private RolesValidator    rolesValidator;
+    private Logger            log;
+    
+    @Inject
+    private UserDAO       userDAO;
+    
+    @PersistenceContext
+    private EntityManager     entityManager;
+
+    // =========================================================================
+    // CONSTRUCTORS
+    // =========================================================================
 
 
     // =========================================================================
     // METHODS
     // =========================================================================
 
-    /**
-     * Owner checker.
-     * 
-     * @param identity the identity
-     * @return true, if successful
-     */
-    public @Secures
-    @Owner
-    boolean ownerChecker(Identity identity) {
-        return !(identity == null || identity.getUser() == null);
+    public List<User> getUserAccountToEnable() throws ClientException {
+        log.debug("userAccountToEnable");
+        return userDAO.getUsersAccountWaittingEnable();
     }
-
-
-    /**
-     * Not logged in checker.
-     * 
-     * @param identity the identity
-     * @return true, if successful
-     */
-    public @Secures
-    @NotLoggedIn
-    boolean notLoggedInChecker(Identity identity) {
-        return identity == null || identity.getUser() == null;
-    }
-
-
-    /**
-     * Admin checker.
-     * 
-     * @param identity the identity
-     * @return true, if successful
-     * @throws ClientException the client exception
-     */
-    public @Secures
-    @Admin
-    boolean adminChecker(Identity identity) throws ClientException {
-        boolean result = false;
-        if (identity != null) {
-            result = rolesValidator.isAdmin(identity.getAuthenticatorName());
+    
+    public void activeUser(User user) throws ClientException {
+        if(user!=null){
+            user.setEnable(true);
+            entityManager.merge(user);
         }
-        return result;
     }
 
 
+    // =========================================================================
+    // GETTERS & SETTERS
+    // =========================================================================
 }
