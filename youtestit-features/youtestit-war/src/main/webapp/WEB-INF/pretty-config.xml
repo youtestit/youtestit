@@ -5,6 +5,7 @@
         http://ocpsoft.com/prettyfaces/2.0.4
         http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-2.0.4.xsd">
 
+    <rewrite match="^/([\w\d/-]+)([.]{1}xhtml)$" substitute="/$1" redirect="301" />
 
 	<url-mapping id="login">
 		<pattern value="/login"></pattern>
