@@ -23,6 +23,7 @@
  */
 package org.youtestit.datamodel.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -50,9 +51,13 @@ import org.hibernate.validator.constraints.NotEmpty;
         @NamedQuery(name = User.USER_BY_LOGIN, query = "FROM User WHERE login=:" + User.USER_BY_LOGIN_PARAM_LOGIN) })
 @Table(name = "yti_user")
 public class User {
+    
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = -4060996747953916843L;
+    
     public static final String ALL_USERS                 = "allUser";
 
     public static final String USER_BY_LOGIN             = "userByLogin";

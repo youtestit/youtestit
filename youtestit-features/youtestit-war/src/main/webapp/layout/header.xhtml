@@ -1,6 +1,7 @@
 <f:subview xmlns:ui="http://java.sun.com/jsf/facelets"
 	       xmlns:h="http://java.sun.com/jsf/html"
     	   xmlns:f="http://java.sun.com/jsf/core"
+    	   xmlns:ytiButton="http://java.sun.com/jsf/composite/youtestit/button"
     	   id="header">
 
 <ui:remove>
@@ -65,34 +66,51 @@
 	
 	<menu id="headerActionsMenu">
 	  <ul>
-	  	<li>
-		  <a href="#" class="menuIcon iconHome">Home</a>
-		</li>
-		
-		<li>
-		  <a href="#" class="menuIcon iconCreateProject">Create project</a>
-		</li>
+		<ytiButton:buttonMenu id="buttonHome"
+							  href="/home"
+							  styleClass="iconHome"
+							  show="#{actionsButtonsVisibility.showHome}"
+							  label="button.create.project.label"
+							  title="button.create.project.title"/>
+
+		<ytiButton:buttonMenu id="buttonCreateProject"
+							  href="/createProject"
+							  styleClass="iconCreateProject"
+							  show="#{actionsButtonsVisibility.showCreateProject}"
+							  label="button.create.project.label"
+							  title="button.create.project.title"/>
 	
 		<li class="menuSeparator"></li>
-		<li>
-		  <a href="#" class="menuIcon iconCreateTest">Create Test</a>
-		</li>
+
+		<ytiButton:buttonMenu id="buttonCreateTest"
+							  href="/createTest"
+							  styleClass="iconCreateTest"
+							  show="#{actionsButtonsVisibility.showCreateTest}"
+							  label="button.create.test.label"
+							  title="button.create.test.title"/>
 		
-		<li>
-		  <a href="#" class="menuIcon iconConfigure">Configure</a>
-		</li>
-	
-		<li>
-		  <a href="#"  class="menuIcon iconRun">Run</a>
-		</li>
-	
-		<li>
-		  <a href="#" class="menuIcon iconDelete">Delete</a>
-		</li>
-	
-		<li class="menuRightIcon">
-		  <a href="#"  class="menuIcon iconAdminConfig">Config</a>
-		</li>
+		<ytiButton:buttonMenu id="buttonConfig"
+							  href="/config"
+							  styleClass="iconConfigure"
+							  show="#{actionsButtonsVisibility.showConfig}"
+							  label="button.config.label"
+							  title="button.config.title"/>
+		
+		<ytiButton:buttonMenu id="buttonRun"
+							  href="/run"
+							  styleClass="iconRun"
+							  show="#{actionsButtonsVisibility.showRun}"
+							  label="button.run.label"
+							  title="button.run.title"/>
+
+		<ytiButton:buttonMenu id="buttonAdminConfig"
+							  href="/app/admin/"
+							  styleClass="iconAdminConfig"
+							  show="#{actionsButtonsVisibility.showAdminConfig}"
+							  label="button.admin.config.label"
+							  title="button.admin.config.title"
+							  listStyle="menuRightIcon"/>
+		
 	  </ul>
 	  <div class="clear"></div>
 	</menu>

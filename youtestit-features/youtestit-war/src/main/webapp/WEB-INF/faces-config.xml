@@ -10,19 +10,11 @@
 		<navigation-case>
 			<from-action>#{currentUserManager.onLogout}</from-action>
 			<if>#{true}</if>
-			<to-view-id>/login.xhtml</to-view-id>
+			<to-view-id>/home.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
-
-
 	</navigation-rule>
-
-
-
-
-
-
-
+    
 
 	<application>
 		<resource-bundle>

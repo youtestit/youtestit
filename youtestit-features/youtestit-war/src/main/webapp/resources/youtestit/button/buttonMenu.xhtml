@@ -1,0 +1,40 @@
+<!-- XHTML DOCTYPE Declaration -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+      
+	<cc:interface  name="buttonMenu"
+				   displayName="button for global action"
+				   preferred="true"
+				   expert="false"
+				   shortDescription="button for global action">
+		
+		<cc:attribute name="id" required="true"/>
+		<cc:attribute name="href"/>
+		<cc:attribute name="styleClass"/>
+		<cc:attribute name="title"/>
+		<cc:attribute name="label"/>
+		<cc:attribute name="listStyle"/>
+        <cc:attribute name="show" required="true"/>
+        
+        
+	</cc:interface>
+
+     
+	<cc:implementation>
+		<f:subview id="#{cc.attrs.id}_View" rendered="#{cc.attrs.show}">
+			<li id="#{cc.attrs.id}_list" class="#{cc.attrs.listStyle}">
+				<span id="#{cc.attrs.id}">
+					<a	id="#{cc.attrs.id}_link"
+						href="#{cc.attrs.href}"
+						class="menuIcon #{cc.attrs.styleClass}"
+						title="#{messages[cc.attrs.title]}">#{messages[cc.attrs.label]}</a>
+				</span>
+			</li>
+		</f:subview>
+	</cc:implementation>
+
+</html>

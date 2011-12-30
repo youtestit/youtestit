@@ -20,16 +20,9 @@
 
 	<url-mapping id="home">
 		<pattern value="/home"></pattern>
-		<view-id>/home.xhtml</view-id>
+		<view-id>#{redirect.getHome}</view-id>
 	</url-mapping>
     
-    <url-mapping id="dashboardAdmin">
-        <pattern value="/dashboardAdmin"></pattern>
-        <view-id>/dashboardAdmin.xhtml</view-id>
-    </url-mapping>
-
-
-
 
 	<url-mapping id="links">
 		<pattern value="/links"></pattern>
@@ -38,7 +31,7 @@
 
 	<url-mapping id="logout">
 		<pattern value="/logout"></pattern>
-		<view-id>/login.xhtml</view-id>
+		<view-id>/home.xhtml</view-id>
 		<action>#{identity.logout}</action>
 	</url-mapping>
 

@@ -28,10 +28,12 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
+import org.jboss.logging.Logger;
 import org.jboss.seam.security.events.PostLoggedOutEvent;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.datamodel.entity.User;
@@ -50,12 +52,19 @@ public class CurrentUserManager implements Serializable {
     /** The Constant serialVersionUID. */
     private static final long  serialVersionUID = 3282524862213807171L;
 
+    /** The log. */
+    @Inject
+    private Logger      log;
+    
     /** The current user. */
     private User               currentUser;
 
     /** The http request. */
     @Inject
     private HttpServletRequest httpRequest;
+    
+    @Inject
+    FacesContext facesContext;
 
     /** The roles validator. */
     @Inject
@@ -90,6 +99,7 @@ public class CurrentUserManager implements Serializable {
     @Produces
     @Named("administrator")
     public boolean isAdmin() throws ClientException {
+        log.debug("isAdmin");
         if (isAdmin == null) {
             isAdmin = rolesValidator.isAdmin(currentUser.getLogin());
         }
@@ -103,15 +113,19 @@ public class CurrentUserManager implements Serializable {
      *
      * @param user the user
      * @param request the request
+     * @throws ClientException 
      */
     public void onLogin(@Observes
     @Authenticated
-    User user, HttpServletRequest request) {
+    User user, HttpServletRequest request) throws ClientException {
+        log.debug("onLogin");
         currentUser = user;
         request.getSession().setMaxInactiveInterval(3600);
     }
 
 
+  
+    //
     /**
      * On logout.
      *
@@ -119,6 +133,7 @@ public class CurrentUserManager implements Serializable {
      */
     public void onLogout(@Observes
     final PostLoggedOutEvent event) {
+        log.debug("onLogout");
         httpRequest.getSession().invalidate();
     }
 

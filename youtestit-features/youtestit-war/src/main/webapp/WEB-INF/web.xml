@@ -32,6 +32,11 @@
 		<param-name>javax.faces.SKIP_COMMENTS</param-name>
 		<param-value>true</param-value>
 	</context-param>
+    
+<!--     <context-param> -->
+<!--         <param-name>com.sun.faces.enableMissingResourceLibraryDetection</param-name> -->
+<!--         <param-value>true</param-value> -->
+<!--     </context-param> -->
 
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>

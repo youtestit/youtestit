@@ -21,80 +21,65 @@
  *   Homepage : http://www.youtestit.org
  *   Git      : https://github.com/youtestit
  */
-package org.youtestit.security.roles;
+package org.youtestit.security.redirect;
 
 import java.io.Serializable;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.jboss.seam.security.Identity;
-import org.jboss.seam.security.annotations.Secures;
+import org.jboss.logging.Logger;
 import org.youtestit.commons.utils.exceptions.ClientException;
-import org.youtestit.datamodel.entity.User;
 import org.youtestit.security.identification.CurrentUserManager;
 
+
 /**
- * The Class RolesSecurity.
+ * RedirectHome
+ * 
+ * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
+ * @since Dec 30, 2011
  */
 @Named
-public class RolesSecurity implements Serializable {
+@RequestScoped
+public class Redirect implements Serializable {
 
 
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -5023681736363699508L;
+    private static final long  serialVersionUID = -8966639370051990933L;
 
-    /** The roles validator. */
-    @Inject
-    private RolesValidator    rolesValidator;
-    
     @Inject
     private CurrentUserManager currentUserManager;
 
+    @Inject
+    private Logger      log;
     // =========================================================================
     // METHODS
     // =========================================================================
-
-    /**
-     * Owner checker.
-     * 
-     * @param identity the identity
-     * @return true, if successful
-     */
-    public @Secures  @Owner boolean ownerChecker(Identity identity) {
-        return !(identity == null || identity.getUser() == null);
+  
+    public void cleanUrl() throws ClientException{
+        log.info("clean url");
     }
-
-
+    
     /**
-     * Not logged in checker.
+     * Allow to gets the home page. If user is an administrator the home page is
+     * the dashboardAdmin.xhtml. For other it's will be home.xhtml
      * 
-     * @param identity the identity
-     * @return true, if successful
-     */
-    public @Secures @NotLoggedIn boolean notLoggedInChecker(Identity identity) {
-        return identity == null || identity.getUser() == null;
-    }
-
-
-    /**
-     * Admin checker.
-     * 
-     * @param identity the identity
-     * @return true, if successful
+     * @return the home URL
      * @throws ClientException the client exception
      */
-    public @Secures  @Admin boolean adminChecker(Identity identity) throws ClientException {
-        boolean result = false;
-        if (identity.getAuthenticatorName() != null) {
-            result = rolesValidator.isAdmin(identity.getAuthenticatorName());
-        }else if(currentUserManager.getCurrentAccount()!=null){
-            result = currentUserManager.isAdmin();
+    public String getHome() throws ClientException {
+        String homePage = "/home.xhtml";
+
+        if (currentUserManager.getCurrentAccount() != null && currentUserManager.isAdmin()) {
+            homePage = "/dashboardAdmin.xhtml";
         }
-        return result;
+
+        return homePage;
+
     }
 
 
