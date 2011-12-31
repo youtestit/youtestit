@@ -16,7 +16,7 @@
     <artifactId>youtestit-features</artifactId>
     <packaging>pom</packaging>
     <name>youtestit features</name>
-    <url>http://www.youtestit.org</url>
+    <url>https://github.com/youtestit/youtestit/tree/master/youtestit-features</url>
     <prerequisites>
         <maven>3.0</maven>
     </prerequisites>
