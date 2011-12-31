@@ -19,6 +19,7 @@
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>youtestit</name>
+    <url>http://www.youtestit.org</url>
     <description>You Test it : Selenium Management Application</description>
 
 
@@ -95,7 +96,10 @@
 
     <scm>
         <connection>https://github.com/youtestit/youtestit</connection>
+        <url>https://github.com/youtestit/youtestit</url>
     </scm>
-    
-    
+
+    <ciManagement>
+        <url>http://www.youtestit.org/jenkins</url>
+    </ciManagement>
 </project>
