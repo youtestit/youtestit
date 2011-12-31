@@ -38,7 +38,7 @@ import org.youtestit.commons.utils.exceptions.ErrorsMSG;
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
  * @since Dec 10, 2011
  */
-public class Sha1Encryption {
+public final class Sha1Encryption {
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================

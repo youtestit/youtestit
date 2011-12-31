@@ -28,7 +28,6 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
@@ -63,8 +62,6 @@ public class CurrentUserManager implements Serializable {
     @Inject
     private HttpServletRequest httpRequest;
     
-    @Inject
-    FacesContext facesContext;
 
     /** The roles validator. */
     @Inject
@@ -125,7 +122,6 @@ public class CurrentUserManager implements Serializable {
 
 
   
-    //
     /**
      * On logout.
      *

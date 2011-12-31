@@ -47,7 +47,7 @@ import org.youtestit.commons.utils.sha1.Sha1Encryption;
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
  * @since Dec 26, 2011
  */
-public class Constants {
+public final class Constants {
     // =========================================================================
     // CONSTANTS
     // =========================================================================
@@ -230,7 +230,7 @@ public class Constants {
         try {
             out.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ClientException(e);
         }
     }
 

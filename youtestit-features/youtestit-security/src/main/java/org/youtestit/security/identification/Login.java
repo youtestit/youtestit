@@ -71,7 +71,7 @@ public class Login extends BaseAuthenticator implements Authenticator {
 
     /** The identity. */
     @Inject
-    Identity            identity;
+    private Identity            identity;
 
     /** The login event src. */
     @Inject

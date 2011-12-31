@@ -15,6 +15,7 @@ import org.youtestit.security.roles.Owner;
 
 @ViewConfig
 public interface Pages {
+    String LOGIN_PAGE="/login";
 
     static enum Pages2 {
         @ViewPattern("/subscrib")
@@ -26,7 +27,7 @@ public interface Pages {
         @FacesRedirect
         @ViewPattern("/home*")
         @RestrictAtPhase(PhaseIdType.RENDER_RESPONSE)
-        @LoginView("/login")
+        @LoginView(LOGIN_PAGE)
         @Owner
         HOME,
         
@@ -44,9 +45,9 @@ public interface Pages {
         @Admin
         ADMIN,
         
-        @ViewPattern("/app/*")
+        @ViewPattern("/app-project*")
         @RestrictAtPhase(PhaseIdType.RENDER_RESPONSE)
-        @LoginView("/login")
+        @LoginView(LOGIN_PAGE)
         @Owner
         ALL;
 

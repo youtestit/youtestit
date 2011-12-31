@@ -3,12 +3,10 @@ package org.youtestit.actions.user.controllers.home;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
-import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.logging.Logger;
-import org.jboss.seam.security.Identity;
 
 
 @SessionScoped
@@ -21,12 +19,6 @@ public class Home implements Serializable {
     @Inject
     private Logger log;
 
-    
-
-    
-    
-    @Inject
-    Identity identity;
 
     public void select(final String test) {
         log.info(">>>> test :");
