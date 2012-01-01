@@ -68,7 +68,7 @@ public class InitializeUsers {
     private EntityManager   entityManager;
 
     @Inject
-    UserDAO                 userDAO;
+    private UserDAO         userDAO;
 
     @Inject
     private UserTransaction utx;
@@ -109,35 +109,32 @@ public class InitializeUsers {
         User admin = userDAO.getUserByLogin(properties.getUserAdmin());
 
         if (admin == null) {
-            Profile profile =initializeProfile();
+            Profile profile = initializeProfile();
             Group group = initializeGroup();
-            
-            User user = new User(properties.getUserAdmin(),
-                                 properties.getUserAdminEmail(),
-                                 properties.getUserAdminPassword(),
-                                 properties.getUserAdmin(),
-                                 properties.getUserAdmin(), profile);
+
+            User user = new User(properties.getUserAdmin(), properties.getUserAdminEmail(),
+                    properties.getUserAdminPassword(), properties.getUserAdmin(), properties.getUserAdmin(), profile);
             user.setEnable(true);
 
             begin();
             entityManager.persist(user);
             commit();
-      
-            
+
+
             List<Group> groups = new ArrayList<Group>();
             groups.add(group);
             user.setGroups(groups);
-            
-            if(group.getUsers()==null){
+
+            if (group.getUsers() == null) {
                 group.setUsers(new ArrayList<User>());
             }
             group.getUsers().add(user);
-            
+
             begin();
             entityManager.merge(group);
             entityManager.merge(user);
             commit();
-            
+
         }
     }
 
@@ -163,20 +160,18 @@ public class InitializeUsers {
 
 
         if (profile == null) {
-            profile = new Profile(properties.getProfileAdministrator(),true,true);
+            profile = new Profile(properties.getProfileAdministrator(), true, true);
             begin();
             entityManager.persist(profile);
             commit();
-        }else{
+        } else {
             profile.setAdministrator(true);
             profile.setEnable(true);
             begin();
             entityManager.merge(profile);
             commit();
         }
-        
 
-        
 
         return profile;
     }
