@@ -7,6 +7,8 @@
             xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
 
   <description>youtestit PMD</description>
+  
+  
 
   <!-- 5 : info         => 5    -->
   <!-- 4 : warning      => 10   -->
@@ -122,8 +124,11 @@
   <rule ref="rulesets/codesize.xml/ExcessivePublicCount">
     <priority>2</priority>
   </rule>
-  <rule ref="rulesets/codesize.xml/TooManyFields">
-    <priority>2</priority>
+  <rule ref="rulesets/codesize.xml/TooManyFields" >
+    <priority>3</priority>
+    <properties>
+        <property name="maxfields">22</property>
+    </properties>
   </rule>
   <rule ref="rulesets/codesize.xml/NcssMethodCount">
     <priority>2</priority>

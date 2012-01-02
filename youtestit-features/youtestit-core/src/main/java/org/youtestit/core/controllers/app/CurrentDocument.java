@@ -21,71 +21,92 @@
  *   Homepage : http://www.youtestit.org
  *   Git      : https://github.com/youtestit
  */
-package org.youtestit.security.redirect;
+package org.youtestit.core.controllers.app;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
-
-import org.jboss.logging.Logger;
-import org.youtestit.commons.utils.exceptions.ClientException;
-import org.youtestit.security.identification.CurrentUserManager;
 
 
 /**
- * RedirectHome
+ * CurrentSection is managed bean who control different generic action on
+ * project and test element. It's use for get the current project or test.
  * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
  * @since Dec 30, 2011
  */
 @Named
-@RequestScoped
-public class Redirect implements Serializable {
+@ViewScoped
+public class CurrentDocument implements Serializable {
 
 
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
     /** The Constant serialVersionUID. */
-    private static final long  serialVersionUID = -8966639370051990933L;
+    private static final long serialVersionUID = -4683368922352737218L;
 
-    @Inject
-    private CurrentUserManager currentUserManager;
-
-    @Inject
-    private Logger             log;
+    /** The test. */
+    private Boolean test = null;
+    
+    /** The project. */
+    private Boolean project = null;
+    
+    private String path = "";
 
     // =========================================================================
     // METHODS
     // =========================================================================
+    
+
+
+
+    // =========================================================================
+    // GETTERS & SETTERS
+    // =========================================================================
+    /**
+     * Gets the checks if is test.
+     *
+     * @return the checks if is test
+     */
+    public boolean getIsTest(){
+        if(test==null){
+            test = false;
+        }
+        return test;
+    }
+    
+    /**
+     * Gets the checks if is project.
+     *
+     * @return the checks if is project
+     */
+    public boolean getIsProject(){
+        if(project==null){
+            project = false;
+        }
+        return project;
+    }
+
+    
+    /**
+     * get url path to section
+     *
+     * @return the path
+     */
+    public String getPath() {
+        return path;
+    }
 
     /**
-     * Allow to gets the home page. If user is an administrator the home page is
-     * the dashboardAdmin.xhtml. For other it's will be home.xhtml
-     * 
-     * @return the home URL
-     * @throws ClientException the client exception
+     * Sets url path to section
+     *
+     * @param path the new path
      */
-    public String getHome() throws ClientException {
-        String homePage = "/home.xhtml";
-
-        if (currentUserManager.getCurrentAccount() != null && currentUserManager.isAdmin()) {
-            homePage = "/dashboardAdmin.xhtml";
-        }
-
-        return homePage;
-
+    public void setPath(String path) {
+        this.path = "/"+path;
     }
-
-    public void redirectToHome() throws ClientException {
-        log.info("redirectToHome");
-//        if(currentUserManager.getCurrentAccount()!=null){
-//            
-//        }
-    }
-
-
+    
+    
 }

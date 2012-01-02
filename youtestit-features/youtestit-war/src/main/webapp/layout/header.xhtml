@@ -67,44 +67,44 @@
 	<menu id="headerActionsMenu">
 	  <ul>
 		<ytiButton:buttonMenu id="buttonHome"
-							  href="/home"
+							  href="/youtestit/home"
 							  styleClass="iconHome"
-							  show="#{actionsButtonsVisibility.showHome}"
+							  show="#{true}"
 							  label="button.create.project.label"
 							  title="button.create.project.title"/>
 
 		<ytiButton:buttonMenu id="buttonCreateProject"
-							  href="/createProject"
+							  href="/youtestit/createProject#{currentDocument.path}"
 							  styleClass="iconCreateProject"
-							  show="#{actionsButtonsVisibility.showCreateProject}"
+							  show="#{true}"
 							  label="button.create.project.label"
 							  title="button.create.project.title"/>
 	
 		<li class="menuSeparator"></li>
 
 		<ytiButton:buttonMenu id="buttonCreateTest"
-							  href="/createTest"
+							  href="/youtestit/createTest#{currentDocument.path}"
 							  styleClass="iconCreateTest"
-							  show="#{actionsButtonsVisibility.showCreateTest}"
+							  show="#{actionsButtonsVisibility.showInnerSection}"
 							  label="button.create.test.label"
 							  title="button.create.test.title"/>
 		
 		<ytiButton:buttonMenu id="buttonConfig"
-							  href="/config"
+							  href="/youtestit/config#{currentDocument.path}"
 							  styleClass="iconConfigure"
-							  show="#{actionsButtonsVisibility.showConfig}"
+							  show="#{actionsButtonsVisibility.showInnerSection}"
 							  label="button.config.label"
 							  title="button.config.title"/>
 		
 		<ytiButton:buttonMenu id="buttonRun"
-							  href="/run"
+							  href="/youtestit/run#{currentDocument.path}"
 							  styleClass="iconRun"
-							  show="#{actionsButtonsVisibility.showRun}"
+							  show="#{actionsButtonsVisibility.showInnerSection}"
 							  label="button.run.label"
 							  title="button.run.title"/>
 
 		<ytiButton:buttonMenu id="buttonAdminConfig"
-							  href="/app/admin/"
+							  href="/youtestit/admin/config"
 							  styleClass="iconAdminConfig"
 							  show="#{actionsButtonsVisibility.showAdminConfig}"
 							  label="button.admin.config.label"

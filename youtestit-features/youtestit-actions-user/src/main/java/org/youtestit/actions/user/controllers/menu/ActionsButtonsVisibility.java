@@ -25,10 +25,15 @@ package org.youtestit.actions.user.controllers.menu;
 
 import java.io.Serializable;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.youtestit.commons.utils.exceptions.ClientException;
+import org.youtestit.core.controllers.app.CurrentDocument;
+import org.youtestit.security.identification.CurrentUserManager;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * ActionsButtonsVisibility.
  *
@@ -36,6 +41,7 @@ import javax.inject.Named;
  * @since Dec 29, 2011
  */
 @Named
+@RequestScoped
 public class ActionsButtonsVisibility implements Serializable {
 
 
@@ -45,64 +51,49 @@ public class ActionsButtonsVisibility implements Serializable {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -5294887694338548648L;
 
+    @Inject
+    private CurrentUserManager currentUserManager;
+    
+    @Inject 
+    private CurrentDocument currentDocument;
+    
+    private Boolean showInnerSection = null;
     // =========================================================================
     // METHODS
     // =========================================================================
 
-
-    /**
-     * Gets the show home.
-     *
-     * @return the show home
-     */
-    public Boolean getShowHome(){
-        return true;
-    }
-
-
-    /**
-     * Gets the show create project.
-     *
-     * @return the show create project
-     */
-    public Boolean getShowCreateProject(){
-        return true;
-    }
-
+    
     /**
      * Gets the show create test.
      *
      * @return the show create test
      */
-    public Boolean getShowCreateTest(){
-        return true;
+    public Boolean getShowInnerSection(){
+        if(showInnerSection==null){
+            showInnerSection = false;
+            
+            if(currentDocument!=null){
+                showInnerSection = currentDocument.getIsTest() || currentDocument.getIsProject(); 
+            }    
+        }
+        
+        return showInnerSection;
     }
 
+    
     /**
-     * Gets the show config.
+     * Only administrator can't see and use the global configuration panel. 
+     * This method allow to check it.
      *
-     * @return the show config
+     * @return true if current user is an administrator.
+     * @throws ClientException 
      */
-    public Boolean getShowConfig() {
-        return true;
-    }
-
-    /**
-     * Gets the show run.
-     *
-     * @return the show run
-     */
-    public Boolean getShowRun() {
-        return true;
-    }
-
-    /**
-     * Gets the show admin config.
-     *
-     * @return the show admin config
-     */
-    public Boolean getShowAdminConfig() {
-        return true;
+    public Boolean getShowAdminConfig() throws ClientException {
+        boolean result = false;
+        if(currentUserManager.getCurrentAccount()!=null){
+            result = currentUserManager.isAdmin();
+        }
+        return result;
     }
 
 }

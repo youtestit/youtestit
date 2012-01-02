@@ -2,12 +2,11 @@
 <PROCESS model-entity="JSFProcess">
  <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT
-    ID=":#{currentUserManager.onLogout}:#login.xhtml" NAME="output"
-    PATH="/login.xhtml" TARGET="rules:#login.xhtml"
-    TITLE="#{currentUserManager.onLogout}:[any]" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="success:#{identity.logout}:#home.xhtml"
+    NAME="output" PATH="/home.xhtml" TARGET="rules:#home.xhtml"
+    TITLE="#{identity.logout}:success" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#login.xhtml" PATH="/login.xhtml"
+ <PROCESS-ITEM NAME="rules:#home.xhtml" PATH="/home.xhtml"
   SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

@@ -8,8 +8,8 @@
 		<from-view-id>*</from-view-id>
 
 		<navigation-case>
-			<from-action>#{currentUserManager.onLogout}</from-action>
-			<if>#{true}</if>
+			<from-action>#{identity.logout}</from-action>
+			<from-outcome>success</from-outcome>
 			<to-view-id>/home.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>

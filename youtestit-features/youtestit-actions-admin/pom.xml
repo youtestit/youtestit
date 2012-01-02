@@ -17,6 +17,7 @@
     <artifactId>youtestit-actions-admin</artifactId>
     <packaging>jar</packaging>
     <name>youtestit - Administrator actions</name>
+    
 
 
   <!--

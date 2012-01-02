@@ -1,8 +1,13 @@
-<?xml version='1.0' encoding='UTF-8' ?>  
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-			     xmlns:ui="http://java.sun.com/jsf/facelets"
-			     template="template.xhtml">
+    xmlns:s="http://jboss.org/seam/faces"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    template="layout/template-dashboard.xhtml">
 <ui:remove>
 <!--****************************************************************************
 *
@@ -27,25 +32,47 @@
 *   ======
 *   Homepage : http://www.youtestit.org
 *   Git      : https://github.com/youtestit
-*	Author   : "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
 *
 *****************************************************************************-->
 </ui:remove>
 
 
+
     <ui:remove><!--*************************************************************
-    *    BODY
+    *    TITLE
     *************************************************************************-->
     </ui:remove>
-    <ui:define name="body">
-	
-		<div id="title" class="formTitle">
-			<h1 id="titleLabel"><ui:insert name="formTitle" /></h1>			
-		</div>
-		
-		<div id="formContent">
-			<ui:insert name="formContent" />			
-		</div>
-
+    <ui:define name="title">
+        Page Title
     </ui:define>
+
+
+
+	<ui:remove><!--=============================================================
+    =    dashboardLeft
+    =========================================================================-->
+    </ui:remove>
+  	<ui:define name="dashboardLeft">
+  		AAA
+	</ui:define>
+
+    <ui:remove><!--=============================================================
+    =    dashboardCenter
+    =========================================================================-->  	
+  	</ui:remove>
+  	
+  	<ui:define name="dashboardCenter">
+		BBB  	
+  	</ui:define>
+  	
+ 	<ui:remove><!--=============================================================
+    =    dashboardRight
+    =========================================================================-->
+    </ui:remove>
+    
+  	<ui:define name="dashboardRight">
+	  	
+		
+		
+  	</ui:define>
 </ui:composition>
