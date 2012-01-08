@@ -26,14 +26,15 @@ package org.youtestit.datamodel.entity;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
+import org.youtestit.datamodel.enums.BrowserType;
 
 
 /**
- * Operating System.
+ * Browser entity.
  *
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
  * @since Jan 2, 2012
@@ -46,11 +47,18 @@ public class Browser implements Serializable {
     // =========================================================================
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -2476222938649994016L;
-    
+
     /** The name. */
-    @NotEmpty
     @Id
-    private String            name;
+    @GeneratedValue
+    private int               uid;
+
+    /** The name. */
+    @NotNull
+    private BrowserType       type;
+
+    /** The version. */
+    private String            version;
 
 
     // =========================================================================
@@ -66,12 +74,24 @@ public class Browser implements Serializable {
 
     /**
      * Instantiates a new os.
-     * 
-     * @param name the name
+     *
+     * @param type the type
      */
-    public Browser(final String name) {
+    public Browser(final BrowserType type) {
         super();
-        this.name = name;
+        this.type = type;
+    }
+
+    /**
+     * Instantiates a new browser.
+     * 
+     * @param type the browser type
+     * @param version the version
+     */
+    public Browser(final BrowserType type, final String version) {
+        super();
+        this.type = type;
+        this.version = version;
     }
 
 
@@ -85,11 +105,21 @@ public class Browser implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        if (name == null) {
-            result = prime * result;
-        } else {
-            result = prime * result + name.hashCode();
+
+        int nameHash = 0;
+        int versionHash = 0;
+
+        if (type != null) {
+            nameHash = type.hashCode();
         }
+        if (version != null) {
+            versionHash = version.hashCode();
+        }
+
+
+        result = prime * result + uid;
+        result = prime * result + nameHash;
+        result = prime * result + versionHash;
         return result;
     }
 
@@ -106,32 +136,109 @@ public class Browser implements Serializable {
 
         if (obj != null && obj != null && getClass() == obj.getClass()) {
             final Browser other = (Browser) obj;
-            result = name.equals(other.name);
+            final boolean sameName = type.equals(other.type);
+            final boolean sameVersion = sameVersion(other.version);
+
+            result = sameName && sameVersion;
         }
 
         return result;
     }
 
+    /**
+     * Allow to check if a version is same than current brower version.
+     * 
+     * @param otherVersion the other version
+     * @return true, if successful
+     */
+    protected boolean sameVersion(final String otherVersion) {
+        boolean result = false;
+
+        if (version == null) {
+            if (otherVersion == null) {
+                result = true;
+            }
+        } else {
+            result = version.equals(otherVersion);
+        }
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        final StringBuilder result = new StringBuilder("Browser [");
+        result.append("uid=" + uid);
+        result.append(", type=" + type);
+        result.append(", version=" + version);
+        result.append("]");
+
+        return result.toString();
+    }
+
+
     // =========================================================================
     // GETTERS & SETTERS
     // =========================================================================
+   
+    
     /**
-     * Gets the name.
+     * Gets the uid.
      *
-     * @return the name
+     * @return the uid
      */
-    public String getName() {
-        return name;
+    public int getUid() {
+        return uid;
     }
 
 
     /**
-     * Sets the name.
+     * Sets the uid.
      *
-     * @param name the new name
+     * @param uid the new uid
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
+
+    /**
+     * Gets the type.
+     *
+     * @return the type
+     */
+    public BrowserType getType() {
+        return type;
+    }
+
+
+    /**
+     * Sets the type.
+     *
+     * @param type the new type
+     */
+    public void setType(BrowserType type) {
+        this.type = type;
+    }
+
+    /**
+     * Gets the version.
+     * 
+     * @return the version
+     */
+    public String getVersion() {
+        return version;
+    }
+
+    /**
+     * Sets the version.
+     * 
+     * @param version the new version
+     */
+    public void setVersion(String version) {
+        this.version = version;
     }
 
 }

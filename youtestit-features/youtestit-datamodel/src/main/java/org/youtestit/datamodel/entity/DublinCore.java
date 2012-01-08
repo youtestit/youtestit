@@ -24,8 +24,11 @@
 package org.youtestit.datamodel.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,66 +36,97 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.youtestit.datamodel.enums.DocumentType;
 
 
 /**
- * Dublin core, generic meta-data on documents conform to Dublin core standard 
- * ISO 15836:2003
+ * Dublin core, generic meta-data on documents conform to Dublin core standard
+ * ISO 15836:2003.
  * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
  * @since Dec 30, 2011
  */
 @Entity
+@Table(name = "document")
 public class DublinCore implements Serializable {
+    // =========================================================================
+    // STATICS ATTRIBUTES
+    // =========================================================================
+    /** The Constant serialVersionUID. */
+    private static final long   serialVersionUID    = 6251772001497647256L;
+
+    /** The Constant NULL_OBJ. */
+    private static final String NULL_OBJ            = "null";
+
+    /** The Constant SEP. */
+    private static final String SEP                 = ",";
+
+    /** The Constant ITEM_OPEN. */
+    private static final String ITEM_OPEN           = "{";
+
+    /** The Constant ITEM_CLOSE. */
+    private static final String ITEM_CLOSE          = "}";
+
+    /** The Constant MAX_LENGTH_TITLE : 128 chars */
+    private static final int    MAX_LENGTH_TITLE    = 128;
+
+    /** The Constant MAX_LENGTH_SUBJECT : 512 chars */
+    private static final int    MAX_LENGTH_SUBJECT  = 512;
+
+    /** The Constant MAX_LENGTH_LANGUAGE : 32 chars */
+    private static final int    MAX_LENGTH_LANGUAGE = 32;
+
+    /** The Constant MAX_LENGTH_COVERAGE : 256 chars */
+    private static final int    MAX_LENGTH_COVERAGE = 256;
 
 
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 6251772001497647256L;
 
     /** The name. */
-    @NotEmpty
-    @Size(max = 64)
-    @Column(length = 64, nullable = false)
     @Id
-    private String            name;
+    @GeneratedValue
+    private long                uid;
 
-    /** The title*/
-    @Size(max = 128)
-    @Column(length = 128)
-    private String            title;
+    /** The title. */
+    @Size(max = MAX_LENGTH_TITLE)
+    @Column(length = MAX_LENGTH_TITLE)
+    private String              title;
 
-    /** The type*/
+    /** The type. */
     @Enumerated(EnumType.STRING)
-    private DocumentType      type;
+    private DocumentType        type;
 
-    /** The path to document */
+    /** The path to document. */
     @Pattern(regexp = "^([/\\w\\d_-]+)([\\w\\d]+)$")
     @NotEmpty
-    private String            path;
+    private String              path;
 
     /** The subject. */
-    @Size(max = 512)
-    @Column(length = 512)
-    private String            subject;
+    @Size(max = MAX_LENGTH_SUBJECT)
+    @Column(length = MAX_LENGTH_SUBJECT)
+    private String              subject;
 
     /** The description. */
-    private String            description;
+    private String              description;
 
     /** The children. */
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.REMOVE)
-    private List<DublinCore>  children;
+    private List<DublinCore>    children;
 
     /**
      * The creator.
@@ -100,32 +134,37 @@ public class DublinCore implements Serializable {
      * @see org.youtestit.datamodel.entity.User
      */
     @ManyToOne(optional = true, cascade = CascadeType.REMOVE)
-    private User              creator;
+    private User                creator;
 
     /** The date creation. */
     @Temporal(TemporalType.TIMESTAMP)
-    private Calendar          dateCreation;
+    private Calendar            dateCreation;
 
     /** The date last modify. */
     @Temporal(TemporalType.TIMESTAMP)
-    private Calendar          dateLastModify;
+    private Calendar            dateLastModify;
 
     /** The date publish. */
     @Temporal(TemporalType.TIMESTAMP)
-    private Calendar          datePublish;
+    private Calendar            datePublish;
 
     /** The language. */
-    @Size(max = 32)
-    @Column(length = 32)
-    private String            language;
+    @Size(max = MAX_LENGTH_LANGUAGE)
+    @Column(length = MAX_LENGTH_LANGUAGE)
+    private String              language;
 
     /** The rights. */
-    private String            rights;
+    private String              rights;
 
     /** The coverage. */
-    @Size(max = 256)
-    @Column(length = 256)
-    private String            coverage;
+    @Size(max = MAX_LENGTH_COVERAGE)
+    @Column(length = MAX_LENGTH_COVERAGE)
+    private String              coverage;
+
+    /** The tags. */
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Tag.class, cascade = CascadeType.ALL)
+    @JoinTable(name = "tags_documents")
+    private List<Tag>           tags;
 
 
     // =========================================================================
@@ -140,39 +179,81 @@ public class DublinCore implements Serializable {
     }
 
     /**
-     * Instantiates a new dublin core with require values.
+     * Instantiates a new dublin core for unit test.
      * 
-     * @param name the document name
-     * @param path the document path
+     * @param uid the uid
+     * @param title the title
+     * @param path the path
      */
-    public DublinCore(final String name, final String path) {
+    protected DublinCore(final long uid, final String title, final String path) {
         super();
-        this.name = name;
+        this.uid = uid;
+        this.title = title;
+        this.path = path;
+    }
+
+
+    /**
+     * Instantiates a new dublin core.
+     * 
+     * @param title the title
+     * @param path the path
+     */
+    public DublinCore(final String title, final String path) {
+        super();
+        this.title = title;
         this.path = path;
     }
 
     /**
      * Instantiates a new dublin core.
      * 
-     * @param name the document name
      * @param title the document title
      * @param path the document path (like /foo/bar )
      * @param subject the document subject, it's document short description
      * @param creator the document creator
      * @param dateCreation the document name
-     * 
      * @see org.youtestit.datamodel.entity.User
      */
-    public DublinCore(final String name, final String title, final String path, final String subject,
-            final User creator, final Calendar dateCreation) {
+    public DublinCore(final String title, final String path, final String subject, final User creator,
+            final Calendar dateCreation) {
         super();
-        this.name = name;
         this.title = title;
         this.path = path;
         this.subject = subject;
         this.creator = creator;
         this.dateCreation = dateCreation;
     }
+
+    // =========================================================================
+    // METHODS
+    // =========================================================================
+    /**
+     * Allow to adds a child.
+     * 
+     * @param child the child to add
+     */
+    public void addChild(final DublinCore child) {
+        if (child != null) {
+            if (children == null) {
+                children = new ArrayList<DublinCore>();
+            }
+            children.add(child);
+        }
+    }
+
+
+    /**
+     * Allow to removes a child.
+     * 
+     * @param child the child to remove
+     */
+    public void removeChild(final DublinCore child) {
+        if (children != null && child != null && children.contains(child)) {
+            children.remove(child);
+        }
+    }
+
 
     // =========================================================================
     // OVERRIDES
@@ -185,10 +266,7 @@ public class DublinCore implements Serializable {
         final int prime = 31;
         int result = 1;
 
-        int nameHash = 0;
-        if (name != null) {
-            nameHash = name.hashCode();
-        }
+        final int nameHash = String.valueOf(uid).hashCode();
 
         int pathHash = 0;
         if (path != null) {
@@ -215,7 +293,7 @@ public class DublinCore implements Serializable {
             result = false;
         } else {
             final DublinCore other = (DublinCore) obj;
-            result = same(name, other.name) && same(path, other.path);
+            result = (uid == other.uid) && same(path, other.path);
         }
 
         return result;
@@ -223,7 +301,7 @@ public class DublinCore implements Serializable {
 
     /**
      * Allox to check if two object is equals.
-     *
+     * 
      * @param objA first simple object referer
      * @param objb second object to test
      * @return true, if equals
@@ -238,110 +316,151 @@ public class DublinCore implements Serializable {
         return result;
     }
 
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder(this.getName());
+        final StringBuilder result = new StringBuilder(getClass().getName());
         result.append("[");
         result.append(toStringContent());
         result.append("]");
-        
+
         return result.toString();
     }
-    
+
     /**
      * allow to contribute parent toString content.
-     *
+     * 
      * @return the string
      */
-    protected String toStringContent(){
-        StringBuilder result = new StringBuilder();
-        final String nullObj = "null";
-        
-        result.append("name=");
-        result.append("name");
-        
-        result.append(", title=");
-        result.append(title);
-        
-        result.append(", type=");
-        result.append(type);
-        
-        result.append(", path=");
-        result.append(path);
-        
-        result.append(", subject=");
-        result.append(subject);
-        
-        result.append(", description=");
-        result.append(description);
-        
-        result.append(", children=");
-        if(children==null){
-            result.append(nullObj);
-        }else{
-            result.append("{");
-            for(DublinCore item: children){
-                result.append(item);
-                result.append(",");
-            }
-            result.append("}");
+    protected String toStringContent() {
+        final StringBuilder result = new StringBuilder();
+
+        result.append("uid=" + uid);
+        result.append(", title=" + title);
+        result.append(", type=" + type);
+        result.append(", path=" + path);
+        result.append(", subject=" + subject);
+        result.append(", description=" + description);
+
+        result.append(creatorToString());
+        result.append(childrenToString());
+
+        result.append(", dateCreation=" + dateFormat(dateCreation));
+        result.append(", dateLastModify=" + dateFormat(dateLastModify));
+        result.append(", datePublish=" + dateFormat(datePublish));
+
+        result.append(", language=" + language);
+        result.append(", rights=" + rights);
+        result.append(", coverage=" + coverage);
+
+        result.append(tagsToString());
+
+        return result.toString();
+    }
+
+
+    /**
+     * Allow to format Calendar.
+     * 
+     * @param calendar the calendar to format
+     * @return calendar string representation
+     */
+    protected String dateFormat(Calendar calendar) {
+        String result = null;
+        if (calendar == null) {
+            result = NULL_OBJ;
+        } else {
+            final SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
+            result = formater.format(calendar.getTime());
         }
-        
-        
+        return result;
+    }
+
+    /**
+     * allow to format creator to string.
+     * 
+     * @return the string
+     */
+    private String creatorToString() {
+        final StringBuilder result = new StringBuilder();
         result.append(", creator=");
-        if(creator==null){
-            result.append(nullObj);
-        }else{
-            result.append(creator.getLogin());    
+        if (creator == null) {
+            result.append(NULL_OBJ);
+        } else {
+            result.append(creator.getLogin());
         }
-        
-        
-        result.append(", dateCreation=");
-        result.append(dateCreation);
-        
-        result.append(", dateLastModify=");
-        result.append(dateLastModify);
-        
-        result.append(", datePublish=");
-        result.append(datePublish);
-        
-        
-        result.append(", language=");
-        result.append(language);
-        
-        result.append(", rights=");
-        result.append(rights);
-        
-        result.append(", coverage=");
-        result.append(coverage);
-        
+        return result.toString();
+    }
+
+
+    /**
+     * allow to format children to string.
+     * 
+     * @return the string
+     */
+    private String childrenToString() {
+        final StringBuilder result = new StringBuilder();
+        result.append(", children=");
+        if (children == null) {
+            result.append(NULL_OBJ);
+        } else {
+            result.append(ITEM_OPEN);
+            for (DublinCore item : children) {
+                result.append(item.getUid());
+                result.append("@");
+                result.append(item.getTitle());
+                result.append(SEP);
+            }
+            result.append(ITEM_CLOSE);
+        }
+        return result.toString();
+    }
+
+    /**
+     * allow to format tags to string.
+     * 
+     * @return the string
+     */
+    private String tagsToString() {
+        final StringBuilder result = new StringBuilder();
+        result.append(", tags=");
+        if (tags == null) {
+            result.append(NULL_OBJ);
+        } else {
+            result.append(ITEM_OPEN);
+            for (Tag item : tags) {
+                result.append(item.getName());
+                result.append(SEP);
+            }
+            result.append(ITEM_CLOSE);
+        }
         return result.toString();
     }
 
     // =========================================================================
     // GETTERS & SETTERS
     // =========================================================================
+
     /**
-     * Gets the name.
+     * Gets the uid.
      * 
-     * @return the name
+     * @return the uid
      */
-    public String getName() {
-        return name;
+    public long getUid() {
+        return uid;
     }
 
 
     /**
-     * Sets the name.
+     * Sets the uid.
      * 
-     * @param name the new name
+     * @param uid the new uid
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setUid(long uid) {
+        this.uid = uid;
     }
 
     /**

@@ -26,15 +26,18 @@ package org.youtestit.datamodel.entity;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.NotEmpty;
-
+import org.youtestit.datamodel.enums.OsArchi;
+import org.youtestit.datamodel.enums.OsType;
 
 
 /**
  * Operating System.
- *
+ * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
  * @since Jan 2, 2012
  */
@@ -53,6 +56,14 @@ public class Os implements Serializable {
     @Id
     private String            name;
 
+    /** The type. */
+    @Enumerated(EnumType.STRING)
+    private OsType            type;
+
+    /** The architecture. */
+    @Enumerated(EnumType.STRING)
+    private OsArchi           architecture;
+
 
     // =========================================================================
     // CONSTRUCTORS
@@ -70,9 +81,11 @@ public class Os implements Serializable {
      * 
      * @param name the name
      */
-    public Os(final String name) {
+    public Os(final String name, final OsType type, final OsArchi architecture) {
         super();
         this.name = name;
+        this.type = type;
+        this.architecture = architecture;
     }
 
 
@@ -86,11 +99,25 @@ public class Os implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        if (name == null) {
-            result = prime * result;
-        } else {
-            result = prime * result + name.hashCode();
+
+        int nameHash = 0;
+        int typeHash = 0;
+        int archiHash = 0;
+
+        if (name != null) {
+            nameHash = name.hashCode();
         }
+
+        if (type != null) {
+            typeHash = type.hashCode();
+        }
+
+        if (architecture != null) {
+            archiHash = architecture.hashCode();
+        }
+        result = prime * result + nameHash;
+        result = prime * result + typeHash;
+        result = prime * result + archiHash;
         return result;
     }
 
@@ -107,18 +134,51 @@ public class Os implements Serializable {
 
         if (obj != null && obj != null && getClass() == obj.getClass()) {
             final Os other = (Os) obj;
-            result = name.equals(other.name);
+            final boolean sameName = name.equals(other.name);
+            final boolean sametype = same(type, other.type);
+            final boolean sameArchi = same(architecture, other.architecture);
+            result = sameName && sametype && sameArchi;
         }
 
         return result;
     }
+
+    /**
+     * Allow to check if two object are same.
+     * 
+     * @param objRef reference object
+     * @param objToTest object to check
+     * @return true if they are equals.
+     */
+    protected boolean same(final Object objRef, final Object objToTest) {
+        boolean result = false;
+        if (objRef == null) {
+            if (objToTest == null) {
+                result = true;
+            }
+        } else {
+            result = objRef.equals(objToTest);
+        }
+
+        return result;
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return "Os [name=" + name + ", type=" + type + ", architecture=" + architecture + "]";
+    }
+
 
     // =========================================================================
     // GETTERS & SETTERS
     // =========================================================================
     /**
      * Gets the name.
-     *
+     * 
      * @return the name
      */
     public String getName() {
@@ -128,11 +188,52 @@ public class Os implements Serializable {
 
     /**
      * Sets the name.
-     *
+     * 
      * @param name the new name
      */
     public void setName(String name) {
         this.name = name;
     }
+
+
+    /**
+     * Gets the type.
+     * 
+     * @return the type
+     */
+    public OsType getType() {
+        return type;
+    }
+
+
+    /**
+     * Sets the type.
+     * 
+     * @param type the new type
+     */
+    public void setType(OsType type) {
+        this.type = type;
+    }
+
+
+    /**
+     * Gets the architecture.
+     * 
+     * @return the architecture
+     */
+    public OsArchi getArchitecture() {
+        return architecture;
+    }
+
+
+    /**
+     * Sets the architecture.
+     * 
+     * @param architecture the new architecture
+     */
+    public void setArchitecture(OsArchi architecture) {
+        this.architecture = architecture;
+    }
+
 
 }

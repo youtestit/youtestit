@@ -57,7 +57,7 @@ public class Document extends DublinCore implements Serializable {
     private Integer           complexity;
 
     /** The portability. */
-    @ManyToOne(targetEntity=Portability.class,cascade=CascadeType.REMOVE)
+    @ManyToOne(targetEntity = Portability.class, cascade = CascadeType.REMOVE)
     private List<Portability> portabilities;
 
     /** The url wiki. */
@@ -83,7 +83,6 @@ public class Document extends DublinCore implements Serializable {
     /**
      * Instantiates a new document.
      * 
-     * @param name the document name
      * @param title the document title
      * @param path the document path (like /foo/bar )
      * @param subject the document subject, it's document short description
@@ -92,9 +91,9 @@ public class Document extends DublinCore implements Serializable {
      * 
      * @see org.youtestit.datamodel.entity.User
      */
-    public Document(final String name, final String title, final String path, final String subject, final User creator,
+    public Document(final String title, final String path, final String subject, final User creator,
             final Calendar dateCreation) {
-        super(name, title, path, subject, creator, dateCreation);
+        super(title, path, subject, creator, dateCreation);
     }
 
     /**
@@ -203,7 +202,7 @@ public class Document extends DublinCore implements Serializable {
     /**
      * Sets the portability.
      * 
-     * @param portability the new portability
+     * @param portabilities the new portabilities
      */
     public void setPortabilities(final List<Portability> portabilities) {
         this.portabilities = portabilities;

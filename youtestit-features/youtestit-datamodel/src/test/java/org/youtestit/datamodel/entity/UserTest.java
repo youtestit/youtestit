@@ -39,23 +39,57 @@ import org.youtestit.commons.utils.exceptions.ClientException;
 
 
 /**
- * Test unit for User entity
- * 
+ * Test unit for User entity.
+ *
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
  * @since Dec 9, 2011
  * @see org.youtestit.datamodel.entity.User
  */
 public class UserTest extends AbstractEntityTest {
 
+
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
     /** The Constant LOGGER. */
-    private static final Logger LOGGER   = LoggerFactory.getLogger(UserTest.class);
+    private static final Logger LOGGER        = LoggerFactory.getLogger(UserTest.class);
 
     /** The Constant KEY_GEST. */
-    private static final String KEY_GEST = "Gest";
+    private static final String KEY_GEST      = "Gest";
 
+    /** The Constant QUERY_PROFILE. */
+    private static final String QUERY_PROFILE = "from Profile";
+
+
+    /** The Constant FOO_EMAIL. */
+    private static final String FOO_EMAIL     = "foo@youtestit.org";
+    
+    /** The Constant LOGIN_FOO. */
+    private static final String FOO_LOGIN     = "Foo";
+    
+    /** The Constant BAR_NAME. */
+    private static final String FOO_NAME      = "Bar";
+
+    
+    /** The Constant JOE_EMAIL. */
+    private static final String JOE_EMAIL     = "joe@youtestit.org";
+
+    /** The Constant LOGIN_JOE. */
+    private static final String JOE_LOGIN     = "Joe";
+    
+    /** The Constant NAME_JOE. */
+    private static final String JOE_NAME      = "joe";
+
+
+    /** The Constant LULIN_NAME. */
+    private static final String LULIN_NAME    = "lulin";
+
+    
+    /** The Constant SMITH_NAME. */
+    private static final String SMITH_NAME    = "Smith";
+
+
+    
     // =========================================================================
     // METHODS
     // =========================================================================
@@ -71,12 +105,12 @@ public class UserTest extends AbstractEntityTest {
     public void equalsHashCodeTest() throws ClientException {
         LOGGER.info("verify equals and hash code of User entity");
         final String password = "kqz@15#$W";
-        final User user = new User("joe", "joe@youtestit.org", password, "Joe", "Smith", new Profile(KEY_GEST));
-        final User userB = new User("foo", "foo@youtestit.org", password, "Foo", "Bar", new Profile(KEY_GEST));
+        final User user = new User(JOE_NAME, JOE_EMAIL, password, JOE_LOGIN, SMITH_NAME, new Profile(KEY_GEST));
+        final User userB = new User(FOO_LOGIN, FOO_EMAIL, password, FOO_LOGIN, FOO_NAME, new Profile(KEY_GEST));
 
         assertFalse(user.equals(userB));
 
-        final User userC = new User("joe", "foo@youtestit.org", password, "Foo", "Bar", new Profile(KEY_GEST));
+        final User userC = new User(JOE_NAME, FOO_EMAIL, password, FOO_LOGIN, FOO_NAME, new Profile(KEY_GEST));
         assertTrue(user.equals(userC));
         userC.setLogin("joe2");
 
@@ -100,7 +134,7 @@ public class UserTest extends AbstractEntityTest {
     public void persistenceTest() throws ClientException {
         assertNotNull(entityManager);
 
-        String query = String.format("from %s", User.class.getSimpleName());
+        final String query = String.format("from %s", User.class.getSimpleName());
 
         final List<User> resultA = entityManager.createQuery(query, User.class).getResultList();
         assertNotNull(resultA);
@@ -112,12 +146,12 @@ public class UserTest extends AbstractEntityTest {
         entityManager.persist(profile);
         commitTransaction();
 
-        final Profile profileSaved = entityManager.createQuery("from Profile", Profile.class).getSingleResult();
+        final Profile profileSaved = entityManager.createQuery(QUERY_PROFILE, Profile.class).getSingleResult();
 
 
         // persiste user
         beginTransaction();
-        final User user = new User("joe", "joe@youtestit.org", "kqz@15#$W", "Joe", "Smith", profileSaved);
+        final User user = new User(JOE_NAME, JOE_EMAIL, "kqz@@15#$W", JOE_LOGIN, SMITH_NAME, profileSaved);
 
         entityManager.persist(user);
         commitTransaction();
@@ -144,8 +178,8 @@ public class UserTest extends AbstractEntityTest {
 
 
     /**
-     * Allow to tests User NamedQuery
-     * 
+     * Allow to tests User NamedQuery.
+     *
      * @throws ClientException the client exception
      */
     @Test
@@ -156,15 +190,15 @@ public class UserTest extends AbstractEntityTest {
         final Profile profile = new Profile(KEY_GEST);
         entityManager.persist(profile);
         commitTransaction();
-        final Profile profileSaved = entityManager.createQuery("from Profile", Profile.class).getSingleResult();
+        final Profile profileSaved = entityManager.createQuery(QUERY_PROFILE, Profile.class).getSingleResult();
 
 
-        final User user = new User("joe", "joe@youtestit.org", "123", "Joe", "Smith", profileSaved);
+        final User user = new User(JOE_NAME, JOE_EMAIL, "123", JOE_LOGIN, SMITH_NAME, profileSaved);
         final List<User> users = new ArrayList<User>();
         users.add(user);
-        users.add(new User("foo", "foo@youtestit.org", "1234", "Foo", "Bar", profileSaved));
-        users.add(new User("glomli", "joe@youtestit.org", "12345", "Glomli", "Roifur", profileSaved));
-        users.add(new User("lulin", "joe@youtestit.org", "123456", "lulin", "Ushissham", profileSaved));
+        users.add(new User("foo", FOO_EMAIL, "1234", FOO_LOGIN, FOO_NAME, profileSaved));
+        users.add(new User("glomli", JOE_EMAIL, "12345", "Glomli", "Roifur", profileSaved));
+        users.add(new User(LULIN_NAME, JOE_EMAIL, "123456", LULIN_NAME, "Ushissham", profileSaved));
 
         beginTransaction();
         for (User userItem : users) {
@@ -173,12 +207,12 @@ public class UserTest extends AbstractEntityTest {
         commitTransaction();
 
 
-        List<User> allUser = entityManager.createNamedQuery(User.ALL_USERS, User.class).getResultList();
+        final List<User> allUser = entityManager.createNamedQuery(User.ALL_USERS, User.class).getResultList();
         assertNotNull(allUser);
         assertSame(allUser.size(), users.size());
 
-        User userByLogin = entityManager.createNamedQuery(User.USER_BY_LOGIN, User.class).setParameter(
-                User.USER_BY_LOGIN_PARAM_LOGIN, "joe").getSingleResult();
+        final User userByLogin = entityManager.createNamedQuery(User.USER_BY_LOGIN, User.class).setParameter(
+                User.USER_BY_LOGIN_PARAM_LOGIN, JOE_NAME).getSingleResult();
         assertNotNull(userByLogin);
         assertEquals(user, userByLogin);
         closeEntityManager();

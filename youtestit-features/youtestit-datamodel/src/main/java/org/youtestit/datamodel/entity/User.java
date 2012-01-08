@@ -26,7 +26,6 @@ package org.youtestit.datamodel.entity;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -50,20 +49,27 @@ import org.hibernate.validator.constraints.NotEmpty;
 @NamedQueries({ @NamedQuery(name = User.ALL_USERS, query = "FROM User"),
         @NamedQuery(name = User.USER_BY_LOGIN, query = "FROM User WHERE login=:" + User.USER_BY_LOGIN_PARAM_LOGIN) })
 @Table(name = "yti_user")
-public class User {
-    
+public class User implements Serializable {
+
+    // =========================================================================
+    // STATICS ATTRIBUTES
+    // =========================================================================
+    /** The Constant ALL_USERS. */
+    public static final String ALL_USERS                 = "allUser";
+
+    /** The Constant USER_BY_LOGIN. */
+    public static final String USER_BY_LOGIN             = "userByLogin";
+
+    /** The Constant USER_BY_LOGIN_PARAM_LOGIN. */
+    public static final String USER_BY_LOGIN_PARAM_LOGIN = "login";
+
+    /** The Constant serialVersionUID. */
+    private static final long  serialVersionUID          = -4060996747953916843L;
+
+
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -4060996747953916843L;
-    
-    public static final String ALL_USERS                 = "allUser";
-
-    public static final String USER_BY_LOGIN             = "userByLogin";
-
-    public static final String USER_BY_LOGIN_PARAM_LOGIN = "login";
-
     /** The login. */
     @Id
     @NotNull
@@ -101,7 +107,8 @@ public class User {
     /** The description. */
     private String             description;
 
-    private boolean            enable = false;
+    /** The enable. */
+    private boolean            enable                    = false;
 
 
     /**
@@ -133,6 +140,7 @@ public class User {
      * @param password the password
      * @param firstname the firstname
      * @param lastname the lastname
+     * @param profile the profile
      */
     public User(final String login, final String email, final String password, final String firstname,
             final String lastname, final Profile profile) {
@@ -223,7 +231,7 @@ public class User {
         result.append("description=");
         result.append(description);
         result.append(sep);
-        
+
         result.append("enable=");
         result.append(enable);
         result.append(sep);
@@ -460,7 +468,7 @@ public class User {
 
     /**
      * Checks if is enable.
-     *
+     * 
      * @return true, if is enable
      */
     public boolean isEnable() {
@@ -469,7 +477,7 @@ public class User {
 
     /**
      * Sets the enable.
-     *
+     * 
      * @param enable the new enable
      */
     public void setEnable(boolean enable) {

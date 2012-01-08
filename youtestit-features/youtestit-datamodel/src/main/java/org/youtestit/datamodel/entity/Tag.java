@@ -23,68 +23,56 @@
  */
 package org.youtestit.datamodel.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 /**
- * Portability.
+ * Tag
  * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
- * @since Jan 2, 2012
+ * @since Jan 8, 2012
  */
 @Entity
-public class Portability {
+public class Tag {
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
-
-    /** The uid. */
     @Id
-    @GeneratedValue
-    private long     uid;
-
-    /** The operating system. */
     @NotNull
-    @ManyToOne(cascade=CascadeType.REMOVE)
-    private Os      operatingSystem;
+    @NotEmpty
+    private String           name;
 
-    /** The browsers. */
-    @NotNull
-    @ManyToOne(cascade=CascadeType.REMOVE)
-    private Browser browser;
-
-    /** The strict. */
-    private boolean strict;
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = DublinCore.class, mappedBy = "tags",cascade=CascadeType.REMOVE)
+    private List<DublinCore> documents;
 
 
     // =========================================================================
     // CONSTRUCTORS
     // =========================================================================
-    /**
-     * Instantiates a new portability.
-     */
-    public Portability() {
+    public Tag() {
         super();
     }
 
 
-    /**
-     * Instantiates a new portability.
-     *
-     * @param operatingSystem the operating system
-     * @param browser the browser
-     * @param strict the strict
-     */
-    public Portability(final Os operatingSystem, final Browser browser, final boolean strict) {
+    public Tag(String name) {
         super();
-        this.operatingSystem = operatingSystem;
-        this.browser = browser;
-        this.strict=strict;
+        this.name = name;
+    }
+
+
+    public Tag(final String name, final List<DublinCore> documents) {
+        super();
+        this.name = name;
+        this.documents = documents;
     }
 
 
@@ -98,8 +86,7 @@ public class Portability {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        String uidStr = String.valueOf(uid);
-        result = prime * result + uidStr.hashCode();
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
         return result;
     }
 
@@ -115,9 +102,9 @@ public class Portability {
             result = true;
         }
 
-        if (obj != null && getClass() == obj.getClass()) {
-            final Portability other = (Portability) obj;
-            result = uid == other.uid;
+        if (obj != null && obj != null && getClass() == obj.getClass()) {
+            final Tag other = (Tag) obj;
+            result = name.equals(other.name);
         }
 
         return result;
@@ -127,86 +114,25 @@ public class Portability {
     // =========================================================================
     // GETTERS & SETTERS
     // =========================================================================
-
-    /**
-     * Gets the uid.
-     * 
-     * @return the uid
-     */
-    public long getUid() {
-        return uid;
+    public String getName() {
+        return name;
     }
 
 
-    /**
-     * Sets the uid.
-     * 
-     * @param uid the new uid
-     */
-    public void setUid(final long uid) {
-        this.uid = uid;
+    public void setName(String name) {
+        this.name = name;
     }
 
 
-    /**
-     * Gets the operating system.
-     * 
-     * @return the operating system
-     */
-    public Os getOperatingSystem() {
-        return operatingSystem;
+    public List<DublinCore> getDocuments() {
+        return documents;
     }
 
 
-    /**
-     * Sets the operating system.
-     * 
-     * @param operatingSystem the new operating system
-     */
-    public void setOperatingSystem(Os operatingSystem) {
-        this.operatingSystem = operatingSystem;
-    }
-
-
-
-    /**
-     * Gets the browser.
-     *
-     * @return the browser
-     */
-    public Browser getBrowser() {
-        return browser;
-    }
-
-
-    /**
-     * Sets the browser.
-     *
-     * @param browser the new browser
-     */
-    public void setBrowser(Browser browser) {
-        this.browser = browser;
-    }
-
-
-    /**
-     * Checks if is strict.
-     *
-     * @return true, if is strict
-     */
-    public boolean isStrict() {
-        return strict;
-    }
-
-
-    /**
-     * Sets the strict.
-     *
-     * @param strict the new strict
-     */
-    public void setStrict(boolean strict) {
-        this.strict = strict;
+    public void setDocuments(List<DublinCore> documents) {
+        this.documents = documents;
     }
     
     
+
 }

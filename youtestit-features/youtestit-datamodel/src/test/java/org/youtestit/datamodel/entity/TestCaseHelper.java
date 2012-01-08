@@ -72,10 +72,21 @@ public class TestCaseHelper {
     private static final Properties PROPERTIES   = loadProperties();
 
     /** The Constant CLASSES. */
-    private static final Class<?>[] CLASSES      = { User.class, Profile.class, Group.class };
+    private static final Class<?>[] CLASSES      = {
+        User.class,
+        Profile.class,
+        Group.class,
+        Browser.class,
+        DublinCore.class,
+        Document.class,
+        Os.class,
+        Portability.class,
+        Tag.class};
 
     /** The Constant TARGET_FILES. */
-    private static final File[]     TARGET_FILES = { new File("target/classes"), new File("target/test-classes") };
+    private static final File[]     TARGET_FILES = {
+        new File("target/classes"),
+        new File("target/test-classes") };
 
     /** The em factory. */
     private EntityManagerFactory    emFactory;
@@ -93,6 +104,7 @@ public class TestCaseHelper {
     protected EntityManager         entityManager;
 
 
+    
     // =========================================================================
     // ENTITY MANAGER
     // =========================================================================

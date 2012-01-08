@@ -21,30 +21,32 @@
  *   Homepage : http://www.youtestit.org
  *   Git      : https://github.com/youtestit
 */
-package org.youtestit.datamodel.entity;
+package org.youtestit.datamodel.enums;
 
 
 
 /**
- * DocumentType.
+ * Browser type.
  *
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
- * @since Dec 31, 2011
+ * @since Jan 8, 2012
  */
-public enum DocumentType {
+public enum BrowserType {
     
-    /** The DUBLIN_CORE. */
-    DUBLIN_CORE,
+    /** Mozilla FIREFOX. */
+    FIREFOX,
     
-    /** The DOCUMENT. */
-    DOCUMENT,
+    /** Google CHROME. */
+    CHROME,
     
-    /** The PROJECT. */
-    PROJECT,
+    /** Opera Software OPERA. */
+    OPERA,
     
-    /** The TEST. */
-    TEST;
-
+    /** Apple SAFARI. */
+    SAFARI,
+    
+    /** Microsoft Internet Explorer. */
+    IE;
 }
 
 
