@@ -8,7 +8,6 @@ import org.jboss.seam.faces.security.RestrictAtPhase;
 import org.jboss.seam.faces.view.config.ViewConfig;
 import org.jboss.seam.faces.view.config.ViewPattern;
 import org.youtestit.security.roles.Admin;
-import org.youtestit.security.roles.NotLoggedIn;
 import org.youtestit.security.roles.Owner;
 
 

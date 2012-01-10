@@ -52,25 +52,25 @@ public final class Constants {
     // CONSTANTS
     // =========================================================================
     /** The Constant INSTANCE. */
-    private final static Constants INSTANCE                = new Constants();
+    private static final Constants INSTANCE                = new Constants();
 
     /** User home path. */
-    public final static String     USER_HOME               = (String) System.getProperties().get("user.home") + "/";
+    public static final String     USER_HOME               = (String) System.getProperties().get("user.home") + "/";
 
     /** Folder name for file system storage. */
-    public final static String     STORAGE_FOLDER_NAME     = ".youtestit";
+    public static final String     STORAGE_FOLDER_NAME     = ".youtestit";
 
     /** full path to file system storage. */
-    public final static String     STORAGE_FOLDER          = USER_HOME + STORAGE_FOLDER_NAME;
+    public static final String     STORAGE_FOLDER          = USER_HOME + STORAGE_FOLDER_NAME;
 
     /** full path to configuration storage. */
-    public final static String     STORAGE_FOLDER_CONFIG   = STORAGE_FOLDER + "/config";
+    public static final String     STORAGE_FOLDER_CONFIG   = STORAGE_FOLDER + "/config";
 
     /** full path to projects storage. */
-    public final static String     STORAGE_FOLDER_PROJECTS = STORAGE_FOLDER + "/projects";
+    public static final String     STORAGE_FOLDER_PROJECTS = STORAGE_FOLDER + "/projects";
 
     /** Global properties file (youtestit.properties). */
-    public final static String     PROPERTIES_FILE         = "youtestit.properties";
+    public static final String     PROPERTIES_FILE         = "youtestit.properties";
 
     // =========================================================================
     // ATTRIBUTS

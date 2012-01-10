@@ -23,14 +23,7 @@
  */
 package org.youtestit.bootstrap;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
@@ -38,7 +31,6 @@ import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.commons.lang.text.StrBuilder;
 import org.jboss.logging.Logger;
 import org.jboss.seam.servlet.WebApplication;
 import org.jboss.seam.servlet.event.Initialized;
@@ -46,7 +38,6 @@ import org.youtestit.bootstrap.events.InitializeUser;
 import org.youtestit.commons.utils.Constants;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.commons.utils.exceptions.FatalException;
-import org.youtestit.datamodel.entity.User;
 
 /**
  * InitializeFileSystem

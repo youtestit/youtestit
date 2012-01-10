@@ -31,7 +31,6 @@ import javax.inject.Named;
 import org.jboss.seam.security.Identity;
 import org.jboss.seam.security.annotations.Secures;
 import org.youtestit.commons.utils.exceptions.ClientException;
-import org.youtestit.datamodel.entity.User;
 import org.youtestit.security.identification.CurrentUserManager;
 
 /**

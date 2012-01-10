@@ -45,6 +45,8 @@ import org.youtestit.security.roles.RolesValidator;
 @SessionScoped
 public class CurrentUserManager implements Serializable {
 
+    
+
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
@@ -68,9 +70,12 @@ public class CurrentUserManager implements Serializable {
     private RolesValidator     rolesValidator;
 
     /** The is admin. */
-    private Boolean            isAdmin          = null;
+    private Boolean            admin          = null;
 
-
+    /** The Constant SESSION_TIMEOUT. */
+    //TODO: add in properties...
+    private static final int SESSION_TIMEOUT = 3600;
+    
     // =========================================================================
     // METHODS
     // =========================================================================
@@ -97,10 +102,10 @@ public class CurrentUserManager implements Serializable {
     @Named("administrator")
     public boolean isAdmin() throws ClientException {
         log.debug("isAdmin");
-        if (isAdmin == null) {
-            isAdmin = rolesValidator.isAdmin(currentUser.getLogin());
+        if (admin == null) {
+            admin = rolesValidator.isAdmin(currentUser.getLogin());
         }
-        return isAdmin;
+        return admin;
     }
 
     
@@ -117,7 +122,7 @@ public class CurrentUserManager implements Serializable {
     User user, HttpServletRequest request) throws ClientException {
         log.debug("onLogin");
         currentUser = user;
-        request.getSession().setMaxInactiveInterval(3600);
+        request.getSession().setMaxInactiveInterval(SESSION_TIMEOUT);
     }
 
 
