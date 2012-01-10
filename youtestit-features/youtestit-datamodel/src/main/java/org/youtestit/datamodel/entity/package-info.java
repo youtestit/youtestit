@@ -24,35 +24,75 @@
 /**
  * Entity package containts all JPA entities.
  * <pre>
-    .----------------------.
-    |        User          |
-    |----------------------|
-    |String login          |
-    |String email          |
-    |String password (SHA1)|
-    |String firstname      |
-    |String lastname       |
-    |String gravatar       |
-    |String phoneNumber    |
-    |String cellularNumber |
-    |String office         |
-    |String description    |
-    |boolean enable        |
-    '----------------------'        .---------------------.
-                |                   |       Profile       |
-                |   @ManyToOne      |---------------------|
-                '-------------------|String name          |
-                |                   |Boolean administrator|
-                |                   |Boolean enable       |
-                |                   '---------------------'
-                |
-                |                   .---------------------.
-                |                   |       Group         |
-                |   @ManyToMany     |---------------------|
-                '-------------------|int uid              |
-                                    |String name          |
-                                    |List<User> users     |
-                                    '---------------------'
+                                                                                                     .-------------------------------.
+                                                                                                     |          DublinCore           |
+                                                                                                     |-------------------------------|
+                                                                                                     |long             uid           |
+                                                                                                     |String           title         |
+                                                                                                     |DocumentType     type          |
+                                                                                                     |String           path          |
+                                                                                                     |String           subject       |
+                                                                                                     |String           description   |
+                                                                                                     |List<DublinCore> children      |
+                                                                                                     |User             creator       |----------------------------------------------------------.
+                                                                                                     |Calendar         dateCreation  |                                                          |
+                                                                                                     |Calendar         dateLastModify|                                                          |
+                                                                                                     |Calendar         datePublish   |                                                          |
+                                                                                                     |String           language      |                                                          |
+                                                                       .------------------.          |String           rights        |                                                          |
+                                                                       |        Tag       |          |String           coverage      |                                                          |
+                                                                       |------------------|----------|List<Tag>        tags          |                                                          |
+                                                                       |String    name    |          '-------------------------------'                                                          |
+                                                                       '------------------'                          ^                                                                          |
+                                                                                                                     |                                                                          |
+                                                                                                                     |                                                                          |
+                                                                                                   .-----------------------------------.                                                        |
+                                                                                                   |            Document               |                                                        |
+                                                                                                   |-------------------------------    |                                                        |
+                                                                                                   |int                  importance    |                                                        |
+                                                                                                   |int                  complexity    |                                                        |
+       .----------------------------. @OneToMany                                                   |String               urlWiki       |                                                        |
+       |             OS             |-------.                                                      |String               urlTracker    |                                                        |
+       |----------------------------|       |        .--------------------------.    @ManyToOne    |String               urlServer     |                                                        |
+       |String         name         |       |        |        Portability       |------------------|List<Portability>    portabilities |                                                        |
+       |Enum<OsType>   type         |       |        |--------------------------|                  '-----------------------------------'                                                        |
+       |Enum<OsArchi>  architecture |       |        |long       uid            |                                    ^                                                                          |
+       '----------------------------'       '--------|Os         operatingSystem|                                    |                                                                          |
+                                            .--------|Browser    browser        |                                    |                                                                          |
+                                            |        |boolean    strict         |                                    |                                                                          |
+                                            |        '--------------------------'               .--------------------'-------------------------.                                                |
+                                            |                                                   |                                              |                                                |
+              .----------------.            |                                                   |                                              |                                                |
+              |     Browser    |------------'                                                   |                                              |                                                |
+              |----------------| @OneToMany                                                     |                                              |                                                |
+              |String   name   |                                                 .-----------------------------.         .------------------------------------------.                           |
+              |String   version|                                                 |          Project            |         |            Test                          |                           |
+              '----------------'                                                 |-----------------------------|         |------------------------------------------|     @ManyToOne            |
+                                                                         .-------|Group        team            |         |User                fonctionnalReferer    |---------------------------.
+                                                                         |       |String       version         |         |User                tester                |---------------------------.
+                                                                         |       |List<Test>   tests           |         |User                developper            |---------------------------.
+                                                                         |       |float        sucess          |         |List<Dependancy>    dependancies          |-------.                   |
+                                                                         |       |boolean      lastBuildSucess |         |List<Instruction>   seleniumInstructions  |       |                   |
+                                                                         |       '-----------------------------'         '------------------------------------------'       |                   |
+                                                                         |                                                                     |                            |    .----------------------------.
+                                                                         |                                                                     |                            |    |            User            |
+                                                                         |                                                          @OneToOne  |                            |    |----------------------------|
+                                                                         |                                                                     |                            |    |String       login          |
+                                                                         |                                                          .---------------------. @OneToMany      |    |String       email          |
+                                                                         |                                                          |     Dependancy      ------------------'    |String       password (SHA1)|
+                                                                         |                                                          |---------------------|                      |String       firstname      |
+                                                                         |                                                          |boolean   waitting   |                      |String       lastname       |
+                                                                         |                                                          |Test test            |                      |String       gravatar       |
+                                                                         |                                                          '---------------------'                      |String       phoneNumber    |
+                                                                         |                                                                                                       |String       cellularNumber |
+                                                                         |                                                              .---------------------.                  |String       office         |
+                                                                         |                                                              |       Group         |                  |String       description    |                .---------------------.
+                                                                         |                                                              |---------------------|    @ManyToMany   |boolean      enable         |                |       Profile       |
+                                                                         '--------------------------------------------------------------|int uid              |------------------|List<Groups> groups         |                |---------------------|
+                                                                                                                                        |String name          |                  |Profile      profile        |----------------|String name          |
+                                                                                                                                        |List<User> users     |                  '----------------------------'  @ManyToOne    |Boolean administrator|
+                                                                                                                                        '---------------------'                                                                |Boolean enable       |
+                                                                                                                                                                                                                               '---------------------'
  * </pre>
  */
 package org.youtestit.datamodel.entity;
