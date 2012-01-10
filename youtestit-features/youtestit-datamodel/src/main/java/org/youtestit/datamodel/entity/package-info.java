@@ -52,7 +52,7 @@
                                                                                                |int                  importance    |                                                        |
                                                                                                |int                  complexity    |                                                        |
    .----------------------------.  OneToMany                                                   |String               urlWiki       |                                                        |
-   |             OS             |-------.                                                      |String               urlTracker    |                                                        |
+   |             Os             |-------.                                                      |String               urlTracker    |                                                        |
    |----------------------------|       |        .--------------------------.     ManyToOne    |String               urlServer     |                                                        |
    |String         name         |       |        |        Portability       |------------------|List<Portability>    portabilities |                                                        |
    |Enum<OsType>   type         |       |        |--------------------------|                  '-----------------------------------'                                                        |
@@ -79,7 +79,7 @@
                                                                      |                                                           OneToOne  |                            |    |----------------------------|
                                                                      |                                                                     |                            |    |String       login          |
                                                                      |                                                          .---------------------.  OneToMany      |    |String       email          |
-                                                                     |                                                          |     Dependancy      ------------------'    |String       password (SHA1)|
+                                                                     |                                                          |     Dependancy      |-----------------'    |String       password (SHA1)|
                                                                      |                                                          |---------------------|                      |String       firstname      |
                                                                      |                                                          |boolean   waitting   |                      |String       lastname       |
                                                                      |                                                          |Test test            |                      |String       gravatar       |

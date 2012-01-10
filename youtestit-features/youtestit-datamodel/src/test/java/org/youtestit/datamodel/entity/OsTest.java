@@ -47,7 +47,7 @@ import org.youtestit.datamodel.enums.OsType;
  * @see org.youtestit.datamodel.entity.User
  */
 public class OsTest extends AbstractEntityTest {
-    private static final String OS_UBUNTU = "ubuntu";
+    
 
     // =========================================================================
     // ATTRIBUTES
@@ -55,7 +55,8 @@ public class OsTest extends AbstractEntityTest {
     /** The Constant LOGGER. */
     private static final Logger LOGGER    = LoggerFactory.getLogger(OsTest.class);
 
-    /** The Constant KEY_ADMIN. */
+    /** The Constant OS_UBUNTU. */
+    private static final String OS_UBUNTU = "ubuntu";
 
     // =========================================================================
     // METHODS
@@ -70,7 +71,7 @@ public class OsTest extends AbstractEntityTest {
      */
     @Test
     public void equalsHashCodeTest() throws ClientException {
-        LOGGER.info("verify equals and hash code of group entity");
+        LOGGER.info("equalsHashCodeTest");
 
         final Os osA = new Os(OS_UBUNTU, OsType.LINUX, OsArchi.PC_64_BITS);
         final Os osB = new Os("windows Xp", OsType.WINDOWS, OsArchi.PC_32_BITS);
@@ -98,6 +99,7 @@ public class OsTest extends AbstractEntityTest {
      */
     @Override
     public void persistenceTest() throws ClientException {
+        LOGGER.info("persistenceTest");
         assertNotNull(entityManager);
 
         final String query = "from  Os";

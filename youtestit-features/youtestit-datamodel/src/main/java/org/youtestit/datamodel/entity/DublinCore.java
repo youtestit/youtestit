@@ -697,4 +697,51 @@ public class DublinCore implements Serializable {
         this.coverage = coverage;
     }
 
+    /**
+     * Gets the tags.
+     * 
+     * @return the tags
+     */
+    public List<Tag> getTags() {
+        if (this.tags == null) {
+            this.tags = new ArrayList<Tag>();
+        }
+        return tags;
+    }
+
+    /**
+     * Sets the tags.
+     * 
+     * @param tags the new tags
+     */
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    /**
+     * Adds a tag.
+     * 
+     * @param tag the tag to add
+     */
+    public void addTag(final Tag tag) {
+        if (tag != null) {
+            if (tags == null) {
+                tags = new ArrayList<Tag>();
+            }
+            tags.add(tag);
+        }
+    }
+
+    /**
+     * Allow to delete a tag.
+     * 
+     * @param tag the tag to delete
+     */
+    public void removeTag(final Tag tag) {
+        if (tag != null && tags != null && tags.contains(tag)) {
+            tags.remove(tag);
+        }
+    }
+
+
 }

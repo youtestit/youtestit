@@ -27,6 +27,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
@@ -43,19 +44,21 @@ public class Portability {
     // ATTRIBUTES
     // =========================================================================
 
-    /** The uid. */
+    /** The name. */
     @Id
     @GeneratedValue
-    private long     uid;
+    private long    uid;
 
     /** The operating system. */
     @NotNull
-    @ManyToOne(cascade=CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "os_id", nullable = false, updatable = false)
     private Os      operatingSystem;
 
     /** The browsers. */
     @NotNull
-    @ManyToOne(cascade=CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "browser_id", nullable = false, updatable = false)
     private Browser browser;
 
     /** The strict. */
@@ -74,8 +77,23 @@ public class Portability {
 
 
     /**
+     * Instantiates a new portability. By default the protability isn't strict.
+     * If you running a test, Youtestit will try to get the most similar render
+     * node.
+     * 
+     * @param operatingSystem the operating system
+     * @param browser the browser
+     */
+    public Portability(final Os operatingSystem, final Browser browser) {
+        super();
+        this.operatingSystem = operatingSystem;
+        this.browser = browser;
+        this.strict = false;
+    }
+
+    /**
      * Instantiates a new portability.
-     *
+     * 
      * @param operatingSystem the operating system
      * @param browser the browser
      * @param strict the strict
@@ -84,9 +102,24 @@ public class Portability {
         super();
         this.operatingSystem = operatingSystem;
         this.browser = browser;
-        this.strict=strict;
+        this.strict = strict;
     }
 
+
+    /**
+     * Instantiates a new portability for unit test.
+     * 
+     * @param operatingSystem the operating system
+     * @param browser the browser
+     * @param strict the strict
+     */
+    protected Portability(final long uid, final Os operatingSystem, final Browser browser, final boolean strict) {
+        super();
+        this.uid = uid;
+        this.operatingSystem = operatingSystem;
+        this.browser = browser;
+        this.strict = strict;
+    }
 
     // =========================================================================
     // OVERRIDES
@@ -98,8 +131,8 @@ public class Portability {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        String uidStr = String.valueOf(uid);
-        result = prime * result + uidStr.hashCode();
+        final int nameHash = String.valueOf(uid).hashCode();
+        result = prime * result + nameHash;
         return result;
     }
 
@@ -123,10 +156,25 @@ public class Portability {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        final StringBuilder result = new StringBuilder("Portability [");
+
+        result.append("uid=" + uid);
+        result.append(", operatingSystem=" + operatingSystem);
+        result.append(", browser=" + browser);
+        result.append(", strict=" + strict);
+
+        return result.toString();
+    }
 
     // =========================================================================
     // GETTERS & SETTERS
     // =========================================================================
+
 
     /**
      * Gets the uid.
@@ -143,7 +191,7 @@ public class Portability {
      * 
      * @param uid the new uid
      */
-    public void setUid(final long uid) {
+    public void setUid(final int uid) {
         this.uid = uid;
     }
 
@@ -168,10 +216,9 @@ public class Portability {
     }
 
 
-
     /**
      * Gets the browser.
-     *
+     * 
      * @return the browser
      */
     public Browser getBrowser() {
@@ -181,7 +228,7 @@ public class Portability {
 
     /**
      * Sets the browser.
-     *
+     * 
      * @param browser the new browser
      */
     public void setBrowser(Browser browser) {
@@ -191,7 +238,7 @@ public class Portability {
 
     /**
      * Checks if is strict.
-     *
+     * 
      * @return true, if is strict
      */
     public boolean isStrict() {
@@ -201,12 +248,12 @@ public class Portability {
 
     /**
      * Sets the strict.
-     *
+     * 
      * @param strict the new strict
      */
     public void setStrict(boolean strict) {
         this.strict = strict;
     }
-    
-    
+
+
 }

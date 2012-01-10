@@ -42,7 +42,7 @@ import org.youtestit.commons.utils.exceptions.ClientException;
 
 /**
  * Test unit for Group entity.
- *
+ * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
  * @since Dec 11, 2011
  * @see org.youtestit.datamodel.entity.User
@@ -52,10 +52,17 @@ public class DublinCoreTest extends AbstractEntityTest {
     // ATTRIBUTES
     // =========================================================================
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(DublinCoreTest.class);
+    private static final Logger LOGGER      = LoggerFactory.getLogger(DublinCoreTest.class);
 
     /** The Constant QUERY. */
-    private static final String QUERY  = "from DublinCore";
+    private static final String QUERY       = "from DublinCore";
+
+    /** Fake text for subject */
+    private static final String SUBJECT     = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+
+    /** Fake text for description */
+    private static final String DESCRIPTION = "Lorem ipsum dolor sit amet, consectetur "
+                                                    + "adipiscing elit. Nunc leo est, pulvinar " + "vitae tincidunt a";
 
     /** The doc. */
     private DublinCore          doc;
@@ -63,14 +70,16 @@ public class DublinCoreTest extends AbstractEntityTest {
     /** The doc child. */
     private DublinCore          docChild;
 
+
     // =========================================================================
     // METHODS
     // =========================================================================
 
     /**
-     * All group are identify by their uid. Two Group object are equals if they
-     * have the same uid. It's database table ID. This test allow to check it
-     * and verify if basic java usage work well with User entity
+     * All dublin core entities are identify by their uid and their path. Two
+     * Dublin core object are equals if they have the same uid or if have the
+     * same path. The Uid's database table ID. This test allow to check it and
+     * verify if basic java usage work well.
      * 
      * @throws ClientException if test fail
      */
@@ -105,14 +114,13 @@ public class DublinCoreTest extends AbstractEntityTest {
     public void persistenceTest() throws ClientException {
         assertNotNull(entityManager);
 
-
         List<DublinCore> dublincores = entityManager.createQuery(QUERY, DublinCore.class).getResultList();
         assertNotNull(dublincores);
         assertTrue(dublincores.isEmpty());
 
         doc = new DublinCore("document", "/document");
-        doc.setSubject("Lorem ipsum dolor sit amet, consectetur adipiscing elit");
-        doc.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc leo est, pulvinar vitae tincidunt a");
+        doc.setSubject(SUBJECT);
+        doc.setDescription(DESCRIPTION);
 
         final Calendar calendar = new GregorianCalendar();
         calendar.setTime(new Date());
@@ -126,6 +134,32 @@ public class DublinCoreTest extends AbstractEntityTest {
         assertNotNull(dublincores);
         assertEquals(dublincores.size(), 1);
 
+        addCreator(doc);
+    }
+
+    /**
+     * Allow to test appending creator.
+     * 
+     * @param document the document to test
+     * @throws ClientException the client exception
+     */
+    protected void addCreator(final DublinCore document) throws ClientException {
+        // update doc ..........................................................
+        final User user = createUser();
+        document.setCreator(user);
+        beginTransaction();
+        entityManager.merge(document);
+        commitTransaction();
+        LOGGER.info(document.toString());
+    }
+
+    /**
+     * Allow to create a user.
+     * 
+     * @return created user
+     * @throws ClientException the client exception
+     */
+    protected User createUser() throws ClientException {
         // create user .........................................................
         LOGGER.info("create creator....");
         beginTransaction();
@@ -138,15 +172,8 @@ public class DublinCoreTest extends AbstractEntityTest {
         entityManager.persist(user);
         commitTransaction();
 
-        // update doc ..........................................................
-        doc.setCreator(user);
-        beginTransaction();
-        entityManager.merge(doc);
-        commitTransaction();
-        LOGGER.info(doc.toString());
-
+        return user;
     }
-
 
     /**
      * Test add child.
@@ -162,7 +189,7 @@ public class DublinCoreTest extends AbstractEntityTest {
 
     /**
      * Adds the child.
-     *
+     * 
      * @throws ClientException the client exception
      */
     protected void addChild() throws ClientException {
@@ -190,7 +217,7 @@ public class DublinCoreTest extends AbstractEntityTest {
 
     /**
      * Test remove child.
-     *
+     * 
      * @throws ClientException the client exception
      */
     @Test
@@ -211,4 +238,28 @@ public class DublinCoreTest extends AbstractEntityTest {
         closeEntityManager();
     }
 
+
+    // =========================================================================
+    // GETTERS & SETTERS
+    // =========================================================================
+
+
+    /**
+     * Gets the subject.
+     * 
+     * @return the subject
+     */
+    public static String getSubject() {
+        return SUBJECT;
+    }
+
+
+    /**
+     * Gets the description.
+     * 
+     * @return the description
+     */
+    public static String getDescription() {
+        return DESCRIPTION;
+    }
 }

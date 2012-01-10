@@ -23,16 +23,25 @@
  */
 package org.youtestit.datamodel.entity;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.youtestit.commons.utils.exceptions.ClientException;
+import org.youtestit.datamodel.enums.BrowserType;
+import org.youtestit.datamodel.enums.OsArchi;
+import org.youtestit.datamodel.enums.OsType;
 
 
 /**
- * Test unit for Group entity
+ * Test unit for Group entity.
  * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
  * @since Dec 11, 2011
@@ -43,23 +52,53 @@ public class PortabilityTest extends AbstractEntityTest {
     // ATTRIBUTES
     // =========================================================================
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PortabilityTest.class);
+    private static final Logger LOGGER  = LoggerFactory.getLogger(PortabilityTest.class);
 
-    /** The Constant KEY_ADMIN. */
+    /** The Constant QUERY. */
+    private static final String QUERY   = "from Portability";
+
+    /** windows OS */
+    private final Os            windows = new Os("windows", OsType.WINDOWS, OsArchi.PC_32_BITS);
+
+    /** Ubuntu OS */
+    private final Os            ubuntu  = new Os("ubuntu", OsType.LINUX, OsArchi.PC_64_BITS);
+
+    /** firefox browser */
+    private final Browser       firefox = new Browser(BrowserType.FIREFOX, "8.0");
+
+    /** Internet Explorer 9 */
+    private final Browser       ie9     = new Browser(BrowserType.IE, "9.0");
+
 
     // =========================================================================
     // METHODS
     // =========================================================================
 
     /**
-     * Equals hash code test.
+     * All portability entities are identify by their uid . Two Document object
+     * are equals if they have the same uid. The Uid's database table ID. This
+     * test allow to check it and verify if basic java usage work well.
      * 
-     * @throws ClientException the client exception
+     * @throws ClientException if test fail
      */
     @Test
     public void equalsHashCodeTest() throws ClientException {
         LOGGER.info("equalsHashCodeTest");
-        // TODO
+
+        final Portability ubuntuFF = new Portability(1, ubuntu, firefox, true);
+        final Portability windowsIE = new Portability(2, windows, ie9, true);
+
+        assertFalse(ubuntuFF.equals(windowsIE));
+
+        final Portability debian = new Portability(1, ubuntu, firefox, true);
+        assertTrue(ubuntuFF.equals(debian));
+
+        final List<Portability> dublinCores = new ArrayList<Portability>();
+        dublinCores.add(ubuntuFF);
+        dublinCores.add(windowsIE);
+
+        assertTrue(dublinCores.contains(ubuntuFF));
+        assertTrue(dublinCores.contains(windowsIE));
     }
 
 
@@ -70,6 +109,29 @@ public class PortabilityTest extends AbstractEntityTest {
     public void persistenceTest() throws ClientException {
         LOGGER.info("persistenceTest");
         assertNotNull(entityManager);
-        // TODO
+
+        // write references datas
+        beginTransaction();
+        entityManager.persist(ubuntu);
+        entityManager.persist(windows);
+
+        entityManager.persist(firefox);
+        entityManager.persist(ie9);
+        commitTransaction();
+
+        // test portability
+        List<Portability> portabilities = entityManager.createQuery(QUERY, Portability.class).getResultList();
+        assertNotNull(portabilities);
+        assertTrue(portabilities.isEmpty());
+
+        final Portability portability = new Portability(ubuntu, firefox);
+        beginTransaction();
+        entityManager.persist(portability);
+        commitTransaction();
+
+        portabilities = entityManager.createQuery(QUERY, Portability.class).getResultList();
+        assertNotNull(portabilities);
+        assertFalse(portabilities.isEmpty());
+        assertEquals(portabilities.size(), 1);
     }
 }

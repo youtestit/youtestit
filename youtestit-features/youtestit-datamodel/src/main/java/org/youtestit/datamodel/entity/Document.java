@@ -30,8 +30,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -57,7 +56,7 @@ public class Document extends DublinCore implements Serializable {
     private Integer           complexity;
 
     /** The portability. */
-    @ManyToOne(targetEntity = Portability.class, cascade = CascadeType.REMOVE)
+    @OneToMany(cascade=CascadeType.REMOVE,targetEntity=Portability.class,orphanRemoval=true)
     private List<Portability> portabilities;
 
     /** The url wiki. */
@@ -194,7 +193,7 @@ public class Document extends DublinCore implements Serializable {
      * 
      * @return the portability
      */
-    @ManyToOne(targetEntity = Portability.class, cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, optional = true)
+//    @ManyToOne(targetEntity = Portability.class, cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, optional = true)
     public List<Portability> getPortabilities() {
         return portabilities;
     }
