@@ -49,7 +49,7 @@ import org.youtestit.commons.utils.exceptions.ClientException;
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
  * @since Dec 9, 2011
  */
-public class TestCaseHelper {
+public class TestCaseHelper extends TestCommons {
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
@@ -85,12 +85,10 @@ public class TestCaseHelper {
         Dependency.class,
         Project.class,
         TestCase.class,
-        Tag.class};
+        Tag.class };
 
     /** The Constant TARGET_FILES. */
-    private static final File[]     TARGET_FILES = {
-        new File("target/classes"),
-        new File("target/test-classes") };
+    private static final File[]     TARGET_FILES = { new File("target/classes"), new File("target/test-classes") };
 
     /** The em factory. */
     private EntityManagerFactory    emFactory;
@@ -108,7 +106,7 @@ public class TestCaseHelper {
     protected EntityManager         entityManager;
 
 
-    
+
     // =========================================================================
     // ENTITY MANAGER
     // =========================================================================
@@ -277,5 +275,6 @@ public class TestCaseHelper {
             ejbContainer.close();
         }
     }
+
 
 }

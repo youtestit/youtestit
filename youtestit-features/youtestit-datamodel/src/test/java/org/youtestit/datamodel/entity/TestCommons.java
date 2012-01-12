@@ -23,56 +23,72 @@
  */
 package org.youtestit.datamodel.entity;
 
-import java.sql.SQLException;
-
-import org.junit.Test;
+import org.apache.commons.lang.text.StrBuilder;
+import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.youtestit.commons.utils.exceptions.ClientException;
 
 
 /**
- * AbstractEntityTest.
+ * TestCommons
  * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
- * @since Dec 9, 2011
+ * @since Jan 12, 2012
  */
-public abstract class AbstractEntityTest extends TestCaseHelper{
+public class TestCommons {
+
     // =========================================================================
-    // ATTRIBUTES
+    // ATTRIBUTS
     // =========================================================================
     /** The Constant LOGGER. */
-    private static final Logger  LOGGER = LoggerFactory.getLogger(AbstractEntityTest.class);
- 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TestCommons.class);
 
+    /** The hello name. */
+    private String              helloName;
 
     // =========================================================================
     // METHODS
     // =========================================================================
     /**
-     * Generic method for check entity persistence. It's open and close  
-     * entity manager around the test.
-     * 
-     * @throws ClientException the client exception
-     * @throws SQLException 
-     * @throws ClassNotFoundException 
+     * Allow to Initialize unit test. It log a hello message too.
      */
-    @Test
-    public void checkPersistenceTest() throws ClientException, ClassNotFoundException, SQLException {
-        logInfoMSG("persistenceTest : check entity mapping");
-        LOGGER.info("run checkPresistance...");
-        loadEntityManager();
-        persistenceTest();
-        closeEntityManager();
+    @Before
+    public void initialize() {
+        final String slide;
+        slide = "=============================================================";
+        if (helloName == null) {
+            helloName = this.getClass().getSimpleName();
+        }
+
+        final StrBuilder helloMSG = new StrBuilder();
+        helloMSG.appendln("");
+        helloMSG.appendln(slide);
+        helloMSG.appendln("- " + helloName);
+        helloMSG.appendln(slide);
+
+        LOGGER.info(helloMSG.toString());
     }
 
+
     /**
-     * Method who realize the unit test for entity. It must be implemented in
-     * all entity unit tests. EntityManager is load before running this method and
-     * close after.
-     * 
-     * @throws ClientException the client exception
+     * Log info message with text decorated.
+     *
+     * @param msg the message to display
      */
-    protected abstract void persistenceTest() throws ClientException;
+    protected void logInfoMSG(final String msg) {
+        final String slide;
+        slide = "-------------------------------------------------------------";
+        if (helloName == null) {
+            helloName = this.getClass().getSimpleName();
+        }
+
+        final StrBuilder helloMSG = new StrBuilder();
+        helloMSG.appendln("");
+        helloMSG.appendln(slide);
+        helloMSG.appendln("- " + helloName + " : " + msg);
+        helloMSG.appendln(slide);
+
+        LOGGER.info(helloMSG.toString());
+    }
 
 }

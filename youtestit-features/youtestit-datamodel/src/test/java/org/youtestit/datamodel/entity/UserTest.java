@@ -23,24 +23,22 @@
  */
 package org.youtestit.datamodel.entity;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.youtestit.commons.utils.exceptions.ClientException;
 
 
 /**
  * Test unit for User entity.
- *
+ * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
  * @since Dec 9, 2011
  * @see org.youtestit.datamodel.entity.User
@@ -51,48 +49,142 @@ public class UserTest extends AbstractEntityTest {
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER        = LoggerFactory.getLogger(UserTest.class);
 
     /** The Constant KEY_GEST. */
-    private static final String KEY_GEST      = "Gest";
+    private static final String  KEY_GEST        = "Gest";
 
     /** The Constant QUERY_PROFILE. */
-    private static final String QUERY_PROFILE = "from Profile";
+    private static final String  QUERY_PROFILE   = "from Profile";
 
 
     /** The Constant FOO_EMAIL. */
-    private static final String FOO_EMAIL     = "foo@youtestit.org";
-    
-    /** The Constant LOGIN_FOO. */
-    private static final String FOO_LOGIN     = "Foo";
-    
-    /** The Constant BAR_NAME. */
-    private static final String FOO_NAME      = "Bar";
+    private static final String  FOO_EMAIL       = "foo@youtestit.org";
 
-    
+    /** The Constant LOGIN_FOO. */
+    private static final String  FOO_LOGIN       = "Foo";
+
+    /** The Constant BAR_NAME. */
+    private static final String  FOO_NAME        = "Bar";
+
+
     /** The Constant JOE_EMAIL. */
-    private static final String JOE_EMAIL     = "joe@youtestit.org";
+    private static final String  JOE_EMAIL       = "joe@youtestit.org";
 
     /** The Constant LOGIN_JOE. */
-    private static final String JOE_LOGIN     = "Joe";
-    
+    private static final String  JOE_LOGIN       = "joe";
+
     /** The Constant NAME_JOE. */
-    private static final String JOE_NAME      = "joe";
+    private static final String  JOE_NAME        = "Joe";
+
+    /** The Constant JOE_PASSWORD. */
+    private static final String  JOE_PASSWORD    = "password";
 
 
     /** The Constant LULIN_NAME. */
-    private static final String LULIN_NAME    = "lulin";
+    private static final String  LULIN_NAME      = "lulin";
 
-    
+
     /** The Constant SMITH_NAME. */
-    private static final String SMITH_NAME    = "Smith";
+    private static final String  SMITH_NAME      = "Smith";
+
+    /** The Constant JOE_DESCRIPTION. */
+    private static final String  JOE_DESCRIPTION = "Joe user";
+
+    /** The Constant JOE_CELLULAR. */
+    private static final String  JOE_CELLULAR    = "0202020202";
+
+    /** The Constant JOE_PHONE. */
+    private static final String  JOE_PHONE       = "0101010101";
+
+    /** The Constant JOE_GRAVATAR. */
+    private static final String  JOE_GRAVATAR    = "/joe/gravatar.png";
+
+    /** The Constant ADMIN. */
+    private static final Profile ADMIN           = new Profile("admin");
+
+    /** The Constant GROUP. */
+    private static final Group   GROUP           = new Group(99, "group");
 
 
-    
+
     // =========================================================================
     // METHODS
     // =========================================================================
+
+    /**
+     * Allow to test instantiate user.
+     * 
+     * @throws ClientException the client exception
+     */
+    @Test
+    public void testUser() throws ClientException {
+        logInfoMSG("testUser()");
+        final int userNbGroup = 1;
+        final User user = createSimpleUser();
+        assertNotNull(user);
+        assertEquals(user.getLogin(), JOE_LOGIN);
+        assertEquals(user.getEmail(), JOE_EMAIL);
+        assertEquals(user.getPassword(), JOE_PASSWORD);
+        assertEquals(user.getFirstname(), JOE_NAME);
+        assertEquals(user.getLastname(), SMITH_NAME);
+        assertEquals(user.getPhoneNumber(), JOE_PHONE);
+        assertEquals(user.getCellularNumber(), JOE_CELLULAR);
+        assertEquals(user.getDescription(), JOE_DESCRIPTION);
+        assertTrue(user.isEnable());
+        assertEquals(user.getProfile(), ADMIN);
+        assertEquals(user.getGroups().size(), userNbGroup);
+        assertEquals(user.getGroups().get(0), GROUP);
+        assertEquals(user.toString(), userToString());
+    }
+
+    /**
+     * Generate render that complete simple user must have
+     * 
+     * @return the render
+     */
+    protected String userToString() {
+        final StringBuilder user2Str = new StringBuilder("User [");
+        user2Str.append("login=joe,");
+        user2Str.append("email=joe@youtestit.org,");
+        user2Str.append("password=password,");
+        user2Str.append("firstname=Joe,");
+        user2Str.append("lastname=Smith,");
+        user2Str.append("gravatar=/joe/gravatar.png,");
+        user2Str.append("phoneNumber=0101010101,");
+        user2Str.append("cellularNumber=0202020202,");
+        user2Str.append("description=Joe user,");
+        user2Str.append("enable=true,");
+        user2Str.append("profile=Profile [name=admin,administrator=false,enable=true],");
+        user2Str.append("groups=[Profile [name=group,users=null]]");
+        user2Str.append("]");
+        return user2Str.toString();
+    }
+
+    /**
+     * Allow to creates a simple user with all parameters set.
+     * 
+     * @return the complete user
+     * @throws ClientException if creation fail
+     */
+    protected User createSimpleUser() throws ClientException {
+        final List<Group> groups = new ArrayList<Group>();
+        groups.add(GROUP);
+
+        final User user = new User();
+        user.setLogin(JOE_LOGIN);
+        user.setEmail(JOE_EMAIL);
+        user.setPassword(JOE_PASSWORD);
+        user.setFirstname(JOE_NAME);
+        user.setLastname(SMITH_NAME);
+        user.setGravatar(JOE_GRAVATAR);
+        user.setPhoneNumber(JOE_PHONE);
+        user.setCellularNumber(JOE_CELLULAR);
+        user.setDescription(JOE_DESCRIPTION);
+        user.setEnable(true);
+        user.setProfile(ADMIN);
+        user.setGroups(groups);
+        return user;
+    }
 
     /**
      * All user are identify by their login. Two User object ars equals if they
@@ -103,7 +195,7 @@ public class UserTest extends AbstractEntityTest {
      */
     @Test
     public void equalsHashCodeTest() throws ClientException {
-        LOGGER.info("verify equals and hash code of User entity");
+        logInfoMSG("equalsHashCodeTest : verify equals and hash code of User entity");
         final String password = "kqz@15#$W";
         final User user = new User(JOE_NAME, JOE_EMAIL, password, JOE_LOGIN, SMITH_NAME, new Profile(KEY_GEST));
         final User userB = new User(FOO_LOGIN, FOO_EMAIL, password, FOO_LOGIN, FOO_NAME, new Profile(KEY_GEST));
@@ -179,7 +271,7 @@ public class UserTest extends AbstractEntityTest {
 
     /**
      * Allow to tests User NamedQuery.
-     *
+     * 
      * @throws ClientException the client exception
      */
     @Test

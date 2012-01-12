@@ -23,6 +23,7 @@
  */
 package org.youtestit.datamodel.entity;
 
+import static org.youtestit.commons.utils.Constants.SEP;
 import java.io.Serializable;
 import java.util.List;
 
@@ -193,52 +194,51 @@ public class User implements Serializable {
      */
     @Override
     public String toString() {
-        final String sep = ",";
         StringBuilder result = new StringBuilder("User [");
 
         result.append("login=");
         result.append(login);
-        result.append(sep);
+        result.append(SEP);
 
         result.append("email=");
         result.append(email);
-        result.append(sep);
+        result.append(SEP);
 
         result.append("password=");
         result.append(password);
-        result.append(sep);
+        result.append(SEP);
 
         result.append("firstname=");
         result.append(firstname);
-        result.append(sep);
+        result.append(SEP);
 
         result.append("lastname=");
         result.append(lastname);
-        result.append(sep);
+        result.append(SEP);
 
         result.append("gravatar=");
         result.append(gravatar);
-        result.append(sep);
+        result.append(SEP);
 
         result.append("phoneNumber=");
         result.append(phoneNumber);
-        result.append(sep);
+        result.append(SEP);
 
         result.append("cellularNumber=");
         result.append(cellularNumber);
-        result.append(sep);
+        result.append(SEP);
 
         result.append("description=");
         result.append(description);
-        result.append(sep);
+        result.append(SEP);
 
         result.append("enable=");
         result.append(enable);
-        result.append(sep);
+        result.append(SEP);
 
         result.append("profile=");
         result.append(profile);
-        result.append(sep);
+        result.append(SEP);
 
         result.append("groups=");
         result.append(groups);

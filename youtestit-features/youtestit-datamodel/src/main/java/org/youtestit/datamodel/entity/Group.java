@@ -98,6 +98,17 @@ public class Group {
     }
 
     /**
+     * Instantiates a new group.
+     *
+     * @param name the name
+     */
+    public Group(final String name) {
+        super();
+        this.name = name;
+    }
+
+    
+    /**
      * Instantiates a new group in unit test.
      * 
      * @param uid the uid
@@ -115,7 +126,7 @@ public class Group {
      * @param name the name
      * @param users the users
      */
-    protected Group(final String name, final List<User> users) {
+    public Group(final String name, final List<User> users) {
         super();
         this.name = name;
         this.users = users;
