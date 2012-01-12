@@ -72,13 +72,28 @@ public final class Constants {
     /** Global properties file (youtestit.properties). */
     public static final String     PROPERTIES_FILE         = "youtestit.properties";
 
+
+    /** The Constant NULL_OBJ. */
+    public static final String     NULL_OBJ                = "null";
+
+    /** The Constant SEP. */
+    public static final String     SEP                     = ",";
+
+    /** The Constant ITEM_OPEN. */
+    public static final String     ITEM_OPEN               = "{";
+
+    /** The Constant ITEM_CLOSE. */
+    public static final String     ITEM_CLOSE              = "}";
+
+    public static final String     DOCUMENT_PART           = "@";
+
     // =========================================================================
     // ATTRIBUTS
     // =========================================================================
     /** The properties. */
     private Properties             properties;
 
-    private ConstantsProperties    constantsProperties = new ConstantsProperties();
+    private ConstantsProperties    constantsProperties     = new ConstantsProperties();
 
     // =========================================================================
     // CONSTRUCTORS
@@ -109,7 +124,7 @@ public final class Constants {
      */
     protected void loadAllProperties() throws ClientException {
         Sha1Encryption sha1 = Sha1Encryption.getInstance();
-        
+
         constantsProperties.setApplicationVersion(getProperty("application.version", ""));
         constantsProperties.setApplicationCommit(getProperty("application.commit", ""));
         constantsProperties.setApplicationBuildDate(getProperty("application.build.date", ""));
@@ -174,7 +189,7 @@ public final class Constants {
                 closeOutPutStream(out);
             }
         }
-        
+
         reloadProperties();
     }
 
@@ -201,7 +216,7 @@ public final class Constants {
         } finally {
             closeInputStream(propertiesFile);
         }
-        
+
         loadAllProperties();
     }
 
@@ -271,11 +286,11 @@ public final class Constants {
 
     /**
      * Gets the constants properties.
-     *
+     * 
      * @return the constants properties
      */
     public ConstantsProperties getConstantsProperties() {
         return constantsProperties;
     }
-    
+
 }

@@ -81,6 +81,10 @@ public class TestCaseHelper {
         Document.class,
         Os.class,
         Portability.class,
+        Instruction.class,
+        Dependency.class,
+        Project.class,
+        TestCase.class,
         Tag.class};
 
     /** The Constant TARGET_FILES. */

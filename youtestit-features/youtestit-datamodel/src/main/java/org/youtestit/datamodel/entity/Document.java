@@ -56,7 +56,7 @@ public class Document extends DublinCore implements Serializable {
     private Integer           complexity;
 
     /** The portability. */
-    @OneToMany(cascade=CascadeType.REMOVE,targetEntity=Portability.class,orphanRemoval=true)
+    @OneToMany(cascade = CascadeType.REMOVE, targetEntity = Portability.class, orphanRemoval = true)
     private List<Portability> portabilities;
 
     /** The url wiki. */
@@ -67,6 +67,15 @@ public class Document extends DublinCore implements Serializable {
 
     /** The url server. */
     private String            urlServer;
+
+    /** The sucess. */
+    private Double            sucess;
+
+    /** The last build sucess. */
+    private boolean           lastBuildSucess;
+
+    /** running duration, in milliseconds . */
+    private long              duration;
 
 
     // =========================================================================
@@ -144,6 +153,10 @@ public class Document extends DublinCore implements Serializable {
         result.append(", urlServer=");
         result.append(urlServer);
 
+        result.append(", sucess=" + sucess);
+        result.append(", lastBuildSucess=" + lastBuildSucess);
+        result.append(", duration=" + duration);
+
         return result.toString();
     }
 
@@ -193,7 +206,6 @@ public class Document extends DublinCore implements Serializable {
      * 
      * @return the portability
      */
-//    @ManyToOne(targetEntity = Portability.class, cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, optional = true)
     public List<Portability> getPortabilities() {
         return portabilities;
     }
@@ -285,4 +297,60 @@ public class Document extends DublinCore implements Serializable {
     public void setUrlServer(String urlServer) {
         this.urlServer = urlServer;
     }
+
+    /**
+     * Gets the sucess.
+     * 
+     * @return the sucess
+     */
+    public Double getSucess() {
+        return sucess;
+    }
+
+    /**
+     * Sets the sucess.
+     * 
+     * @param sucess the new sucess
+     */
+    public void setSucess(final Double sucess) {
+        this.sucess = sucess;
+    }
+
+    /**
+     * Checks if is last build sucess.
+     * 
+     * @return true, if is last build sucess
+     */
+    public boolean isLastBuildSucess() {
+        return lastBuildSucess;
+    }
+
+    /**
+     * Sets the last build sucess.
+     * 
+     * @param lastBuildSucess the new last build sucess
+     */
+    public void setLastBuildSucess(final boolean lastBuildSucess) {
+        this.lastBuildSucess = lastBuildSucess;
+    }
+
+    /**
+     * Gets the duration.
+     *
+     * @return the duration
+     */
+    public long getDuration() {
+        return duration;
+    }
+
+    /**
+     * Sets the duration.
+     *
+     * @param duration the new duration
+     */
+    public void setDuration(long duration) {
+        this.duration = duration;
+    }
+    
+    
 }

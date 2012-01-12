@@ -130,9 +130,9 @@ public class Portability {
     @Override
     public int hashCode() {
         final int prime = 31;
+        final int nbBytes = 32;
         int result = 1;
-        final int nameHash = String.valueOf(uid).hashCode();
-        result = prime * result + nameHash;
+        result = prime * result + (int) (uid ^ (uid >>> nbBytes));
         return result;
     }
 

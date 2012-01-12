@@ -201,11 +201,14 @@ public class DublinCoreTest extends AbstractEntityTest {
         // create child document ...............................................
         LOGGER.info("create child document....");
         docChild = new DublinCore("document child", "/document/document_child");
-
-        doc.addChild(docChild);
-
         beginTransaction();
         entityManager.persist(docChild);
+        commitTransaction();
+        
+        doc.addChild(docChild);
+
+        
+        beginTransaction();
         entityManager.merge(doc);
         commitTransaction();
 

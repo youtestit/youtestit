@@ -23,6 +23,10 @@
  */
 package org.youtestit.datamodel.entity;
 
+import static org.youtestit.commons.utils.Constants.NULL_OBJ;
+import static org.youtestit.commons.utils.Constants.ITEM_OPEN;
+import static org.youtestit.commons.utils.Constants.ITEM_CLOSE;
+import static org.youtestit.commons.utils.Constants.SEP;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,28 +72,18 @@ public class DublinCore implements Serializable {
     /** The Constant serialVersionUID. */
     private static final long   serialVersionUID    = 6251772001497647256L;
 
-    /** The Constant NULL_OBJ. */
-    private static final String NULL_OBJ            = "null";
 
-    /** The Constant SEP. */
-    private static final String SEP                 = ",";
 
-    /** The Constant ITEM_OPEN. */
-    private static final String ITEM_OPEN           = "{";
-
-    /** The Constant ITEM_CLOSE. */
-    private static final String ITEM_CLOSE          = "}";
-
-    /** The Constant MAX_LENGTH_TITLE : 128 chars */
+    /** The Constant MAX_LENGTH_TITLE : 128 chars. */
     private static final int    MAX_LENGTH_TITLE    = 128;
 
-    /** The Constant MAX_LENGTH_SUBJECT : 512 chars */
+    /** The Constant MAX_LENGTH_SUBJECT : 512 chars. */
     private static final int    MAX_LENGTH_SUBJECT  = 512;
 
-    /** The Constant MAX_LENGTH_LANGUAGE : 32 chars */
+    /** The Constant MAX_LENGTH_LANGUAGE : 32 chars. */
     private static final int    MAX_LENGTH_LANGUAGE = 32;
 
-    /** The Constant MAX_LENGTH_COVERAGE : 256 chars */
+    /** The Constant MAX_LENGTH_COVERAGE : 256 chars. */
     private static final int    MAX_LENGTH_COVERAGE = 256;
 
 
@@ -743,5 +737,40 @@ public class DublinCore implements Serializable {
         }
     }
 
+    /**
+     * Gets the null obj.
+     *
+     * @return the null obj
+     */
+    protected static String getNullObj() {
+        return NULL_OBJ;
+    }
+
+    /**
+     * Gets the sep.
+     *
+     * @return the sep
+     */
+    protected static String getSep() {
+        return SEP;
+    }
+
+    /**
+     * Gets the item open.
+     *
+     * @return the item open
+     */
+    protected static String getItemOpen() {
+        return ITEM_OPEN;
+    }
+
+    /**
+     * Gets the item close.
+     *
+     * @return the item close
+     */
+    protected static String getItemClose() {
+        return ITEM_CLOSE;
+    }
 
 }
