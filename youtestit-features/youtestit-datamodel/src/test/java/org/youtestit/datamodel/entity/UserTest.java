@@ -105,6 +105,8 @@ public class UserTest extends AbstractEntityTest {
     /** The Constant GROUP. */
     private static final Group   GROUP           = new Group(99, "group");
 
+    /** The Constant JOE_OFFICE. */
+    private static final String  JOE_OFFICE      = "w4a15";
 
 
     // =========================================================================
@@ -130,6 +132,7 @@ public class UserTest extends AbstractEntityTest {
         assertEquals(user.getPhoneNumber(), JOE_PHONE);
         assertEquals(user.getCellularNumber(), JOE_CELLULAR);
         assertEquals(user.getDescription(), JOE_DESCRIPTION);
+        assertEquals(user.getOffice(), JOE_OFFICE);
         assertTrue(user.isEnable());
         assertEquals(user.getProfile(), ADMIN);
         assertEquals(user.getGroups().size(), userNbGroup);
@@ -153,6 +156,7 @@ public class UserTest extends AbstractEntityTest {
         user2Str.append("phoneNumber=0101010101,");
         user2Str.append("cellularNumber=0202020202,");
         user2Str.append("description=Joe user,");
+        user2Str.append("office=w4a15,");
         user2Str.append("enable=true,");
         user2Str.append("profile=Profile [name=admin,administrator=false,enable=true],");
         user2Str.append("groups=[Profile [name=group,users=null]]");
@@ -180,6 +184,7 @@ public class UserTest extends AbstractEntityTest {
         user.setPhoneNumber(JOE_PHONE);
         user.setCellularNumber(JOE_CELLULAR);
         user.setDescription(JOE_DESCRIPTION);
+        user.setOffice(JOE_OFFICE);
         user.setEnable(true);
         user.setProfile(ADMIN);
         user.setGroups(groups);

@@ -231,6 +231,10 @@ public class User implements Serializable {
         result.append("description=");
         result.append(description);
         result.append(SEP);
+        
+        result.append("office=");
+        result.append(office);
+        result.append(SEP);
 
         result.append("enable=");
         result.append(enable);
