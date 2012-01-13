@@ -34,8 +34,11 @@ import org.youtestit.bootstrap.events.InitializeOsAndBrowserEvent;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.commons.utils.exceptions.EntityExistsException;
 import org.youtestit.commons.utils.exceptions.FatalException;
+import org.youtestit.datamodel.dao.BrowserDAO;
 import org.youtestit.datamodel.dao.OsDAO;
+import org.youtestit.datamodel.entity.Browser;
 import org.youtestit.datamodel.entity.Os;
+import org.youtestit.datamodel.enums.BrowserType;
 import org.youtestit.datamodel.enums.OsArchi;
 import org.youtestit.datamodel.enums.OsType;
 
@@ -51,10 +54,13 @@ public class InitializeOsAndBrowser extends InitializeHelper {
     // ATTRIBUTES
     // =========================================================================
     @Inject
-    private Logger log;
+    private Logger     log;
 
     @Inject
-    private OsDAO  osDAO;
+    private OsDAO      osDAO;
+
+    @Inject
+    private BrowserDAO browserDAO;
 
 
     // =========================================================================
@@ -69,9 +75,10 @@ public class InitializeOsAndBrowser extends InitializeHelper {
     @InitializeOsAndBrowserEvent
     String value) {
         log.info("initialize os and browser for YouTestit");
-        
+
         try {
             initialiseOS();
+            initialiseBrowsers();
         } catch (ClientException e) {
             throw new FatalException(e);
         }
@@ -82,28 +89,72 @@ public class InitializeOsAndBrowser extends InitializeHelper {
     // =========================================================================
 
     /**
-     * Initialise admin user.
+     * Allow to initialise all default OS.
      * 
-     * @throws ClientException the client exception
+     * @throws ClientException if an error has occur.
      */
     protected void initialiseOS() throws ClientException {
         List<Os> operatingSystems = new ArrayList<Os>();
-        operatingSystems.add(new Os("ubuntu", OsType.LINUX, OsArchi.PC_32_BITS));
-        operatingSystems.add(new Os("windows_Xp", OsType.WINDOWS, OsArchi.PC_32_BITS));
+        operatingSystems.add(new Os("Ubuntu", OsType.LINUX, OsArchi.PC_32_BITS));
+        operatingSystems.add(new Os("Windows Xp", OsType.WINDOWS, OsArchi.PC_32_BITS));
+        operatingSystems.add(new Os("Mac Os X", OsType.MAC, OsArchi.PC_32_BITS));
 
-        begin();
+
         for (Os item : operatingSystems) {
             try {
+                begin();
                 osDAO.create(item);
+                commit();
             } catch (EntityExistsException except) {
                 log.info(String.format("os %s already initializing.", item.getName()));
             } catch (ClientException except) {
                 log.error(except);
-                rollback();
                 throw except;
+            }finally{
+                rollback();   
             }
         }
-        commit();
+
+    }
+
+
+    /**
+     * Allow to initialise all default Browsers.
+     * 
+     * @throws ClientException if an error has occur.
+     */
+    protected void initialiseBrowsers() throws ClientException {
+        List<Browser> browsers = new ArrayList<Browser>();
+
+        browsers.add(new Browser(BrowserType.FIREFOX, "8.0"));
+        browsers.add(new Browser(BrowserType.FIREFOX, "9.0.1"));
+        browsers.add(new Browser(BrowserType.IE, "7"));
+        browsers.add(new Browser(BrowserType.IE, "8"));
+        browsers.add(new Browser(BrowserType.SAFARI, "5.1.2"));
+        browsers.add(new Browser(BrowserType.OPERA, "9"));
+        browsers.add(new Browser(BrowserType.OPERA, "11.60"));
+
+
+        for (Browser item : browsers) {
+            try {
+                begin();
+                browserDAO.create(item);
+                commit();
+            } catch (ClientException except) {
+                if (except instanceof EntityExistsException) {
+                    log.info(String.format("browser %s-%s already initializing.", item.getType().name(),
+                            item.getVersion()));
+                    
+                } else {
+                    log.error(except);
+                    throw except;
+                }
+            }finally{
+                rollback();
+            }
+        }
+
+
     }
 
 }

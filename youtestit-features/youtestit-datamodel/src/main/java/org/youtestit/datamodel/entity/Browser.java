@@ -25,9 +25,16 @@ package org.youtestit.datamodel.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import org.youtestit.datamodel.enums.BrowserType;
@@ -35,30 +42,74 @@ import org.youtestit.datamodel.enums.BrowserType;
 
 /**
  * Browser entity.
- *
+ * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
  * @since Jan 2, 2012
  */
 @Entity
+@NamedQueries({
+        @NamedQuery(name = Browser.QUERY_ALL_BROWSER,
+                    query = "FROM Browser"),
+        
+        @NamedQuery(name = Browser.QUERY_BROWSER_BY_ID,
+                    query = "FROM Browser WHERE name=:" + Browser.PARAM_ID),
+        
+        @NamedQuery(name = Browser.QUERY_BROWSER_BY_TYPE,
+                    query = "FROM Browser WHERE type=:" + Browser.PARAM_TYPE),
+
+        @NamedQuery(name = Browser.QUERY_BROWSER_BY_TYPE_AND_VERSION,
+                    query = "FROM Browser WHERE type=:" + Browser.PARAM_TYPE + " AND version=:" + Browser.PARAM_VERSION) })
 public class Browser implements Serializable {
+    // =========================================================================
+    // STATICS ATTRIBUTES
+    // =========================================================================
+    /** Named Query for select all browsers. */
+    public static final String QUERY_ALL_BROWSER                 = "allBrowser";
+
+    /** Named Query for select browsers by id. */
+    public static final String QUERY_BROWSER_BY_ID               = "browserById";
+
+
+    /** Named Query for select browsers by type. */
+    public static final String QUERY_BROWSER_BY_TYPE             = "browserByType";
+
+
+    public static final String QUERY_BROWSER_BY_TYPE_AND_VERSION = "browserByTypeAndVersion";
+
+
+    /** Parameter for Named query, it's browser uid. */
+    public static final String PARAM_ID                          = "uid";
+
+    /** Parameter for Named query, it's browser type. */
+    public static final String PARAM_TYPE                        = "type";
+
+    /** Parameter for Named query, it's browser version. */
+    public static final String PARAM_VERSION                     = "version";
+
+    /** The Constant serialVersionUID. */
+    private static final long  serialVersionUID                  = -2476222938649994016L;
+
 
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -2476222938649994016L;
 
     /** The name. */
     @Id
     @GeneratedValue
-    private int               uid;
+    private int                uid;
 
     /** The name. */
-    @NotNull
-    private BrowserType       type;
+    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
+    private BrowserType        type;
 
     /** The version. */
-    private String            version;
+    @Column(name = "version")
+    private String             version;
+
+    /** The selenium command. */
+    private String             seleniumCommand;
 
 
     // =========================================================================
@@ -74,7 +125,7 @@ public class Browser implements Serializable {
 
     /**
      * Instantiates a new os.
-     *
+     * 
      * @param type the type
      */
     public Browser(final BrowserType type) {
@@ -92,6 +143,21 @@ public class Browser implements Serializable {
         super();
         this.type = type;
         this.version = version;
+    }
+
+
+    /**
+     * Instantiates a new browser.
+     * 
+     * @param type the browser type
+     * @param version the version
+     * @param seleniumCommand the selenium command
+     */
+    public Browser(final BrowserType type, final String version, final String seleniumCommand) {
+        super();
+        this.type = type;
+        this.version = version;
+        this.seleniumCommand = seleniumCommand;
     }
 
 
@@ -139,7 +205,7 @@ public class Browser implements Serializable {
             final boolean sameName = type.equals(other.type);
             final boolean sameVersion = sameVersion(other.version);
 
-            result = sameName && sameVersion;
+            result = (uid == other.uid) || (sameName && sameVersion);
         }
 
         return result;
@@ -173,6 +239,7 @@ public class Browser implements Serializable {
         result.append("uid=" + uid);
         result.append(", type=" + type);
         result.append(", version=" + version);
+        result.append(", seleniumCommand=" + seleniumCommand);
         result.append("]");
 
         return result.toString();
@@ -182,11 +249,11 @@ public class Browser implements Serializable {
     // =========================================================================
     // GETTERS & SETTERS
     // =========================================================================
-   
-    
+
+
     /**
      * Gets the uid.
-     *
+     * 
      * @return the uid
      */
     public int getUid() {
@@ -196,7 +263,7 @@ public class Browser implements Serializable {
 
     /**
      * Sets the uid.
-     *
+     * 
      * @param uid the new uid
      */
     public void setUid(int uid) {
@@ -206,7 +273,7 @@ public class Browser implements Serializable {
 
     /**
      * Gets the type.
-     *
+     * 
      * @return the type
      */
     public BrowserType getType() {
@@ -216,7 +283,7 @@ public class Browser implements Serializable {
 
     /**
      * Sets the type.
-     *
+     * 
      * @param type the new type
      */
     public void setType(BrowserType type) {
@@ -240,5 +307,26 @@ public class Browser implements Serializable {
     public void setVersion(String version) {
         this.version = version;
     }
+
+
+    /**
+     * Gets the selenium command.
+     * 
+     * @return the selenium command
+     */
+    public String getSeleniumCommand() {
+        return seleniumCommand;
+    }
+
+
+    /**
+     * Sets the selenium command.
+     * 
+     * @param seleniumCommand the new selenium command
+     */
+    public void setSeleniumCommand(String seleniumCommand) {
+        this.seleniumCommand = seleniumCommand;
+    }
+
 
 }

@@ -31,6 +31,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.youtestit.datamodel.enums.OsArchi;
@@ -44,29 +46,49 @@ import org.youtestit.datamodel.enums.OsType;
  * @since Jan 2, 2012
  */
 @Entity
+@NamedQueries({ @NamedQuery(name = Os.QUERY_ALL_OS, query = "FROM Os"),
+        @NamedQuery(name = Os.QUERY_OS_BY_NAME, query = "FROM Os WHERE name=:" + Os.PARAM_OS_BY_NAME),
+        @NamedQuery(name = Os.QUERY_OS_BY_TYPE, query = "FROM Os WHERE type=:" + Os.PARAM_OS_BY_TYPE) })
 public class Os implements Serializable {
+    // =========================================================================
+    // STATICS ATTRIBUTES
+    // =========================================================================
+    /** Named Query for select ALL_OS. */
+    public static final String QUERY_ALL_OS     = "allOs";
+
+    /** Named Query for select an OS by name */
+    public static final String QUERY_OS_BY_NAME = "osByName";
+
+    /** Parameter for Named query OS_BY_NAME, it's name value */
+    public static final String PARAM_OS_BY_NAME = "name";
+
+    /** Named Query for select an OS list by type */
+    public static final String QUERY_OS_BY_TYPE = "osByType";
+
+    /** Parameter for Named query OS_BY_TYPE, it's type value */
+    public static final String PARAM_OS_BY_TYPE = "type";
+
+    /** The Constant serialVersionUID. */
+    private static final long  serialVersionUID = 8315547300525419958L;
 
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 8315547300525419958L;
-
 
     /** The name. */
     @NotEmpty
     @Id
-    private String            name;
+    private String             name;
 
     /** The type. */
     @Enumerated(EnumType.STRING)
-    @Basic(fetch=FetchType.LAZY)
-    private OsType            type;
+    @Basic(fetch = FetchType.LAZY)
+    private OsType             type;
 
     /** The architecture. */
     @Enumerated(EnumType.STRING)
-    @Basic(fetch=FetchType.LAZY)
-    private OsArchi           architecture;
+    @Basic(fetch = FetchType.LAZY)
+    private OsArchi            architecture;
 
 
     // =========================================================================

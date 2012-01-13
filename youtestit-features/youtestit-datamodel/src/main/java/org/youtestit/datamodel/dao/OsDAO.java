@@ -23,9 +23,12 @@
  */
 package org.youtestit.datamodel.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -38,22 +41,30 @@ import org.youtestit.datamodel.entity.Os;
 import org.youtestit.datamodel.enums.OsType;
 
 
+
 /**
- * OsDOA
+ * OsDOA, allow to manage Os CRUD
  * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
  * @since Jan 13, 2012
  */
-public class OsDAO {
+@Singleton
+@Named
+public class OsDAO implements Serializable {
+
+
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 3096832461481018940L;
+
     /** The entity manager. */
     @PersistenceContext
-    private EntityManager entityManager;
+    private EntityManager     entityManager;
 
     @Inject
-    private Logger        log;
+    private Logger            log;
 
     // =========================================================================
     // CONSTRUCTORS
@@ -66,7 +77,7 @@ public class OsDAO {
     }
 
     /**
-     * Constructor for Unit test.
+     * Instantiates a new OsDAO for Unit test.
      * 
      * @param entityManager the entity manager
      * @param log the log
@@ -89,12 +100,12 @@ public class OsDAO {
      * @param operatingSystem the operating system to create
      * @throws ClientException if an error has occur.
      */
-    public void create(Os operatingSystem) throws ClientException {
+    public void create(final Os operatingSystem) throws ClientException {
         log.debug("createOs");
         if (operatingSystem == null) {
             throw new ClientException(ErrorsMSG.VALUE_NOT_NULL);
         }
-        
+
         final Os existingOs = readByName(operatingSystem.getName());
         if (existingOs == null) {
             entityManager.persist(operatingSystem);
@@ -103,8 +114,8 @@ public class OsDAO {
         }
 
     }
-    
-    
+
+
     /**
      * Allow to creates a list of Os if they doesn't already exists.
      * 
@@ -126,13 +137,13 @@ public class OsDAO {
     // UPDATE
     // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     /**
-     * Allow to save os modification.
+     * Allow to update os modification.
      * 
      * @param operatingSystem the operating system to save.
      * @throws ClientException if an error has occur.
      */
-    public void update(Os operatingSystem) throws ClientException {
-        log.debug("saveOs");
+    public void update(final Os operatingSystem) throws ClientException {
+        log.debug("update Os");
         if (operatingSystem == null) {
             throw new ClientException(ErrorsMSG.VALUE_NOT_NULL);
         }
@@ -140,14 +151,42 @@ public class OsDAO {
 
     }
 
+    /**
+     * Allow to update os list modification.
+     * 
+     * @param operatingSystems the operating systems list
+     * @throws ClientException if an error has occur.
+     */
+    public void update(final List<Os> operatingSystems) throws ClientException {
+        log.debug("update list Os");
+        if (operatingSystems == null) {
+            throw new ClientException(ErrorsMSG.VALUE_NOT_NULL);
+        }
+        for (Os item : operatingSystems) {
+            update(item);
+        }
+    }
+
 
     // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     // READ
     // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
+    
+    /**
+     * Allow to grab all Os.
+     *
+     * @return the Os list saved
+     * @throws ClientException if an error has occur.
+     */
+    public List<Os> read() throws ClientException {
+        log.debug("read - get all OS");
+        return entityManager.createNamedQuery(Os.QUERY_ALL_OS, Os.class)
+                            .getResultList();
+    }
+    
     /**
      * Allow to read an Os its name.
-     *
+     * 
      * @param name the Os name
      * @return the os finded
      * @throws ClientException if an error has occur.
@@ -159,24 +198,21 @@ public class OsDAO {
         }
 
         Os result = null;
-        final String paramName = "name";
-        final String query = "SELECT o FROM Os o WHERE o.name =:" + paramName;
-        
         try {
-            result = entityManager.createQuery(query, Os.class)
-                                  .setParameter(paramName, name)
+            result = entityManager.createNamedQuery(Os.QUERY_OS_BY_NAME, Os.class)
+                                  .setParameter(Os.PARAM_OS_BY_NAME, name)
                                   .getSingleResult();
 
         } catch (NoResultException e) {
-            // user can not exist. it musn't thow exception for this.
+            // user can not exist. it musn't throw exception for this.
             log.debug("search os", e);
         }
         return result;
     }
-    
+
     /**
      * Allow to read an Os its type.
-     *
+     * 
      * @param type the operating system type
      * @return the list of operating system
      * @throws ClientException if an error has occur.
@@ -186,12 +222,8 @@ public class OsDAO {
         if (type == null) {
             throw new ClientException(ErrorsMSG.VALUE_NOT_NULL);
         }
-
-        final String paramType = "type";
-        final String query = "SELECT o FROM Os o WHERE o.type =:" + paramType;
-
-        return entityManager.createQuery(query, Os.class)
-                            .setParameter(paramType, type.name())
+        return entityManager.createNamedQuery(Os.QUERY_OS_BY_TYPE, Os.class)
+                            .setParameter(Os.PARAM_OS_BY_TYPE, type.name())
                             .getResultList();
     }
 
