@@ -40,10 +40,10 @@ public final class RegEx {
     // ATTRIBUTES
     // =========================================================================
     /** The INSTANCE. */
-    private final static RegEx INSTANCE = new RegEx();
+    private static final RegEx INSTANCE = new RegEx();
     
     /** The PATH regex : ^([/]{1}[\\w\\d_-]*)([/\\w\\d_-]*)([\\w\\d]*)$ */
-    public final static Pattern PATH = regex("^([/]{1}[\\w\\d_-]*)([/\\w\\d_-]*)([\\w\\d]*)$");
+    public static final Pattern PATH = regex("^([/]{1}[\\w\\d_-]*)([/\\w\\d_-]*)([\\w\\d]*)$");
 
     // =========================================================================
     // CONSTRUCTORS

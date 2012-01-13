@@ -63,7 +63,7 @@ public class RolesSecurity implements Serializable {
      * @param identity the identity
      * @return true, if successful
      */
-    public @Secures  @Owner boolean ownerChecker(Identity identity) {
+    public @Owner @Secures boolean ownerChecker(Identity identity) {
         return !(identity == null || identity.getUser() == null);
     }
 
@@ -74,7 +74,7 @@ public class RolesSecurity implements Serializable {
      * @param identity the identity
      * @return true, if successful
      */
-    public @Secures @NotLoggedIn boolean notLoggedInChecker(Identity identity) {
+    public @NotLoggedIn @Secures boolean notLoggedInChecker(Identity identity) {
         return identity == null || identity.getUser() == null;
     }
 
@@ -86,7 +86,7 @@ public class RolesSecurity implements Serializable {
      * @return true, if successful
      * @throws ClientException the client exception
      */
-    public @Secures  @Admin boolean adminChecker(Identity identity) throws ClientException {
+    public @Admin @Secures boolean adminChecker(Identity identity) throws ClientException {
         boolean result = false;
         if (identity.getAuthenticatorName() != null) {
             result = rolesValidator.isAdmin(identity.getAuthenticatorName());

@@ -58,7 +58,7 @@ import org.youtestit.datamodel.entity.User;
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
  * @since Dec 26, 2011
  */
-public class InitializeUsers {
+public class InitializeUsers extends InitializeHelper{
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
@@ -71,8 +71,6 @@ public class InitializeUsers {
     @Inject
     private UserDAO         userDAO;
 
-    @Inject
-    private UserTransaction utx;
     
     @Inject
     @InitializeOsAndBrowserEvent
@@ -214,55 +212,5 @@ public class InitializeUsers {
         return group;
     }
 
-    // =========================================================================
-    // OVERRIDES
-    // =========================================================================
 
-    protected void begin() throws ClientException {
-        try {
-            utx.begin();
-        } catch (NotSupportedException e) {
-            throw new ClientException(e);
-        } catch (SystemException e) {
-            throw new ClientException(e);
-        }
-    }
-
-    protected void commit() throws ClientException {
-        try {
-            utx.commit();
-        } catch (SecurityException e) {
-            rollback();
-            throw new ClientException(e);
-        } catch (IllegalStateException e) {
-            rollback();
-            throw new ClientException(e);
-        } catch (RollbackException e) {
-            throw new ClientException(e);
-        } catch (HeuristicMixedException e) {
-            rollback();
-            throw new ClientException(e);
-        } catch (HeuristicRollbackException e) {
-            throw new ClientException(e);
-        } catch (SystemException e) {
-            rollback();
-            throw new ClientException(e);
-        }
-    }
-
-    protected void rollback() throws ClientException {
-        try {
-            utx.rollback();
-        } catch (IllegalStateException e) {
-            throw new ClientException(e);
-        } catch (SecurityException e) {
-            throw new ClientException(e);
-        } catch (SystemException e) {
-            throw new ClientException(e);
-        }
-    }
-
-    // =========================================================================
-    // GETTERS & SETTERS
-    // =========================================================================
 }
