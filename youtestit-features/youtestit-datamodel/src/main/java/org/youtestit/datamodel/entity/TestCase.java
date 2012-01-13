@@ -23,6 +23,7 @@
  */
 package org.youtestit.datamodel.entity;
 
+import static javax.persistence.FetchType.LAZY;
 import static org.youtestit.commons.utils.Constants.SEP;
 import java.util.Calendar;
 import java.util.List;
@@ -50,23 +51,23 @@ public class TestCase extends Document {
     private static final long serialVersionUID = -1317496408018574593L;
 
     /** The fonctionnal referer. */
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.REMOVE, fetch = LAZY)
     private User              fonctionnalReferer;
 
     /** The tester. */
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.REMOVE, fetch = LAZY)
     private User              tester;
 
     /** The developper. */
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.REMOVE, fetch = LAZY)
     private User              developper;
 
     /** The dependancies. */
-    @OneToMany(cascade = CascadeType.REMOVE, targetEntity = Dependency.class, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.REMOVE, targetEntity = Dependency.class, orphanRemoval = true, fetch = LAZY)
     private List<Dependency>  dependencies;
 
     /** The selenium instructions. */
-    @OneToMany(cascade = CascadeType.REMOVE, targetEntity = Instruction.class, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.REMOVE, targetEntity = Instruction.class, orphanRemoval = true, fetch = LAZY)
     private List<Instruction> seleniumInstructions;
 
 

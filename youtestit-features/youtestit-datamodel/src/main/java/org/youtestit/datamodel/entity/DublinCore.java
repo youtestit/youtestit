@@ -23,10 +23,12 @@
  */
 package org.youtestit.datamodel.entity;
 
-import static org.youtestit.commons.utils.Constants.NULL_OBJ;
-import static org.youtestit.commons.utils.Constants.ITEM_OPEN;
+import static javax.persistence.FetchType.LAZY;
 import static org.youtestit.commons.utils.Constants.ITEM_CLOSE;
+import static org.youtestit.commons.utils.Constants.ITEM_OPEN;
+import static org.youtestit.commons.utils.Constants.NULL_OBJ;
 import static org.youtestit.commons.utils.Constants.SEP;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,10 +52,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.youtestit.commons.utils.validations.annotations.Path;
 import org.youtestit.datamodel.enums.DocumentType;
 
 
@@ -106,16 +109,18 @@ public class DublinCore implements Serializable {
     private DocumentType        type;
 
     /** The path to document. */
-    @Pattern(regexp = "^([/\\w\\d_-]+)([\\w\\d]+)$")
+    @Path
     @NotEmpty
     private String              path;
 
     /** The subject. */
     @Size(max = MAX_LENGTH_SUBJECT)
     @Column(length = MAX_LENGTH_SUBJECT)
+    @Basic(fetch = LAZY)
     private String              subject;
 
     /** The description. */
+    @Basic(fetch = LAZY)
     private String              description;
 
     /** The children. */
@@ -132,19 +137,23 @@ public class DublinCore implements Serializable {
 
     /** The date creation. */
     @Temporal(TemporalType.TIMESTAMP)
+    @Basic(fetch = LAZY)
     private Calendar            dateCreation;
 
     /** The date last modify. */
     @Temporal(TemporalType.TIMESTAMP)
+    @Basic(fetch = LAZY)
     private Calendar            dateLastModify;
 
     /** The date publish. */
     @Temporal(TemporalType.TIMESTAMP)
+    @Basic(fetch = LAZY)
     private Calendar            datePublish;
 
     /** The language. */
     @Size(max = MAX_LENGTH_LANGUAGE)
     @Column(length = MAX_LENGTH_LANGUAGE)
+    @Basic(fetch = LAZY)
     private String              language;
 
     /** The rights. */
@@ -153,6 +162,7 @@ public class DublinCore implements Serializable {
     /** The coverage. */
     @Size(max = MAX_LENGTH_COVERAGE)
     @Column(length = MAX_LENGTH_COVERAGE)
+    @Basic(fetch = LAZY)
     private String              coverage;
 
     /** The tags. */

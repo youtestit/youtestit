@@ -23,9 +23,15 @@
  */
 package org.youtestit.datamodel.entity;
 
+import static javax.persistence.FetchType.LAZY;
+import static org.youtestit.commons.utils.Constants.NULL_OBJ;
+import static org.youtestit.commons.utils.Constants.ITEM_OPEN;
+import static org.youtestit.commons.utils.Constants.ITEM_CLOSE;
+import static org.youtestit.commons.utils.Constants.SEP;
 import java.util.Calendar;
 import java.util.Map;
 
+import javax.persistence.Basic;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -60,6 +66,7 @@ public class Project extends Document {
     private Map<Profile, Group> team;
 
     /** The version. */
+    @Basic(fetch = LAZY)
     private String              version;
 
     /** The server type. */
@@ -113,11 +120,26 @@ public class Project extends Document {
     protected String toStringContent() {
         final StringBuilder result = new StringBuilder(super.toStringContent());
 
-        // result.append(", team=" + team);
+
         result.append(", version=" + version);
         result.append(", tests=");
         result.append(", serverType=" + serverType);
 
+        result.append(", team=");
+        if (team == null) {
+            result.append(NULL_OBJ);
+        } else {
+            result.append(ITEM_OPEN);
+            for (Profile key : team.keySet()) {
+                result.append(key.getName());
+                result.append("=");
+                result.append(ITEM_OPEN);
+                result.append(team.get(key));
+                result.append(ITEM_CLOSE);
+                result.append(SEP);
+            }
+            result.append(ITEM_CLOSE);
+        }
 
         return result.toString();
     }

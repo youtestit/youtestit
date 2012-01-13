@@ -26,6 +26,7 @@ package org.youtestit.bootstrap;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -39,6 +40,7 @@ import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 import org.jboss.logging.Logger;
+import org.youtestit.bootstrap.events.InitializeOsAndBrowserEvent;
 import org.youtestit.bootstrap.events.InitializeUser;
 import org.youtestit.commons.utils.Constants;
 import org.youtestit.commons.utils.ConstantsProperties;
@@ -71,6 +73,10 @@ public class InitializeUsers {
 
     @Inject
     private UserTransaction utx;
+    
+    @Inject
+    @InitializeOsAndBrowserEvent
+    private Event<String> initializeOsAndBrowserEvent;
 
 
     // =========================================================================
@@ -91,6 +97,8 @@ public class InitializeUsers {
         } catch (ClientException e) {
             throw new FatalException(e);
         }
+        
+        initializeOsAndBrowserEvent.fire("initializeOsAndBrowserEvent");
     }
 
     // =========================================================================

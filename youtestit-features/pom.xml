@@ -34,7 +34,7 @@
         <seam.version>3.0.1-SNAPSHOT</seam.version>
         <seam.security.version>3.0.0.Final</seam.security.version>
         <seam.persistence.version>3.0.0.Final</seam.persistence.version>
-        <richfaces.version>4.0.0.Final</richfaces.version>
+        <richfaces.version>4.1.0.Final</richfaces.version>
         <freemarker.version>2.3.16</freemarker.version>
         <primefaces.version>3.0.M1</primefaces.version>
         <primefaces.themes.bluesky.version>1.0.1</primefaces.themes.bluesky.version>

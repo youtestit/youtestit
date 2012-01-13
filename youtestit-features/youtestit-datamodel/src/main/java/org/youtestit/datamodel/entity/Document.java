@@ -1,5 +1,5 @@
 /*
- *   YouTestit source code:
+ *   YouTestit source code: The must waitting. 
  *   ======================
  *   Licensed to the Apache Software Foundation (ASF) under one or more
  *   contributor license agreements.  See the NOTICE file distributed with
@@ -23,11 +23,14 @@
  */
 package org.youtestit.datamodel.entity;
 
+import static javax.persistence.FetchType.LAZY;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -50,9 +53,11 @@ public class Document extends DublinCore implements Serializable {
     private static final long serialVersionUID = 6251772001497647256L;
 
     /** The importance. */
+    @Basic(fetch = LAZY)
     private Integer           importance;
 
     /** The complexity. */
+    @Basic(fetch = LAZY)
     private Integer           complexity;
 
     /** The portability. */
@@ -60,21 +65,27 @@ public class Document extends DublinCore implements Serializable {
     private List<Portability> portabilities;
 
     /** The url wiki. */
+    @Basic(fetch = LAZY)
     private String            urlWiki;
 
     /** The url tracker. */
+    @Basic(fetch = LAZY)
     private String            urlTracker;
 
     /** The url server. */
+    @Basic(fetch = LAZY)
     private String            urlServer;
 
     /** The sucess. */
+    @Basic(fetch = LAZY)
     private Double            sucess;
 
     /** The last build sucess. */
+    @Basic(fetch = LAZY)
     private boolean           lastBuildSucess;
 
     /** running duration, in milliseconds . */
+    @Basic(fetch = LAZY)
     private long              duration;
 
 

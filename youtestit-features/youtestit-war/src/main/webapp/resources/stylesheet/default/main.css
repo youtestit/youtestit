@@ -353,6 +353,32 @@ input, select, textarea, button, keygen, isindex, legend, a{
 .rf-dt-shdr-c{
 	background-image: none;
 }
+
+.cke_skin_richfaces .cke_wrapper{
+	background-color: #EDEDED !important;
+}
+
+.cke_skin_richfaces .cke_button a.cke_on{
+	background-color: #DADEE5 !important;
+	border: 1px solid #00567A !important;
+}
+
+.cke_skin_richfaces .cke_rcombo a, .cke_skin_richfaces .cke_rcombo a:active, .cke_skin_richfaces .cke_rcombo a:hover{
+	background-image:none !important;
+}
+
+.cke_skin_richfaces .cke_rcombo .cke_openbutton{
+	 background-image:url("#{resource['stylesheet/default/imgs/autocompleteButtonGradient.png']}") !important;
+}
+
+*.cke_skin_richfaces *.cke_rcombo *.cke_off a:hover *.cke_openbutton, *.cke_skin_richfaces *.cke_rcombo *.cke_off a:focus *.cke_openbutton, *.cke_skin_richfaces *.cke_rcombo *.cke_off a:active *.cke_openbutton, *.cke_skin_richfaces *.cke_rcombo *.cke_on *.cke_openbutton {
+	background-color:  #DADEE5 !important;
+}
+
+#bannerplace{
+	display: none !important;
+}
+	
 /*******************************************************************************
 * PRIMEFACES
 *******************************************************************************/
@@ -473,6 +499,12 @@ input, select, textarea, button, keygen, isindex, legend, a{
 	border: none;
 }
 
+.rf-sel-cntr{
+	border: none !important;	
+}
+.rf-sel-btn{
+	margin-left: -4px !important;
+}
 /*******************************************************************************
 * STYLES
 *******************************************************************************/
@@ -590,3 +622,24 @@ input.rf-insp-inp[type="text"]{
     margin-left: 5px;
     width: 265px;
 }
+
+
+/*******************************************************************************
+* FROMS
+*******************************************************************************/
+.name{
+	color: #313131;
+	font-family: Arial,Verdana,sans-serif;
+	font-weight: bold;
+}
+
+div.prop{
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+.value{
+	padding-bottom:5px;
+}
+
+

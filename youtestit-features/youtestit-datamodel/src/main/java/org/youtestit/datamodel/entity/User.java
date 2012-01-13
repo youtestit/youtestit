@@ -23,12 +23,14 @@
  */
 package org.youtestit.datamodel.entity;
 
+import static javax.persistence.FetchType.LAZY;
 import static org.youtestit.commons.utils.Constants.SEP;
+
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -83,29 +85,37 @@ public class User implements Serializable {
 
     /** The password. */
     @NotEmpty
+    @Basic(fetch = LAZY)
     private String             password;
 
     /** The firstname. */
     @NotEmpty
+    @Basic(fetch = LAZY)
     private String             firstname;
 
     /** The lastname. */
     @NotEmpty
+    @Basic(fetch = LAZY)
     private String             lastname;
 
     /** The gravatar. */
+    @Basic(fetch = LAZY)
     private String             gravatar;
 
     /** The phone number. */
+    @Basic(fetch = LAZY)
     private String             phoneNumber;
 
     /** The cellular number. */
+    @Basic(fetch = LAZY)
     private String             cellularNumber;
 
     /** The office. */
+    @Basic(fetch = LAZY)
     private String             office;
 
     /** The description. */
+    @Basic(fetch = LAZY)
     private String             description;
 
     /** The enable. */
@@ -115,12 +125,12 @@ public class User implements Serializable {
     /**
      * The level.
      */
-    @ManyToOne(optional = true)
+    @ManyToOne(optional = true, fetch = LAZY)
     private Profile            profile;
 
 
     /** The administrator. */
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Group.class, mappedBy = "users")
+    @ManyToMany(fetch = LAZY, targetEntity = Group.class, mappedBy = "users")
     private List<Group>        groups;
 
     // =========================================================================
@@ -231,7 +241,7 @@ public class User implements Serializable {
         result.append("description=");
         result.append(description);
         result.append(SEP);
-        
+
         result.append("office=");
         result.append(office);
         result.append(SEP);

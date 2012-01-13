@@ -21,67 +21,63 @@
  *   Homepage : http://www.youtestit.org
  *   Git      : https://github.com/youtestit
  */
-package org.youtestit.security.redirect;
+package org.youtestit.core.references.datas;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Singleton;
 
-import org.jboss.logging.Logger;
-import org.youtestit.commons.utils.exceptions.ClientException;
-import org.youtestit.security.identification.CurrentUserManager;
+import org.jboss.seam.international.status.MessageFactory;
+import org.youtestit.commons.utils.exceptions.YoutestitMSG;
+import org.youtestit.datamodel.enums.ServerType;
 
 
 /**
- * RedirectHome
+ * ProjectsRefDatas
  * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
- * @since Dec 30, 2011
+ * @since Jan 12, 2012
  */
+@Singleton
 @Named
-@RequestScoped
-public class Redirect implements Serializable {
+public class ProjectsRefDatas implements Serializable {
 
 
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
     /** The Constant serialVersionUID. */
-    private static final long  serialVersionUID = -8966639370051990933L;
+    private static final long serialVersionUID = -6748716189529729711L;
 
     @Inject
-    private CurrentUserManager currentUserManager;
+    private MessageFactory factory;
 
-    @Inject
-    private Logger             log;
-
+    
+    
     // =========================================================================
     // METHODS
     // =========================================================================
-
     /**
-     * Allow to gets the home page. If user is an administrator the home page is
-     * the dashboardAdmin.xhtml. For other it's will be home.xhtml
+     * Allow to grab server type.
      * 
-     * @return the home URL
-     * @throws ClientException the client exception
+     * @return the list of servers type.
      */
-    public String getHome() throws ClientException {
-        String homePage = "/home.xhtml";
+    public List<SelectItem> grabSeverType() {
+        List<SelectItem> result = new ArrayList<SelectItem>();
 
-        if (currentUserManager.getCurrentAccount() != null && currentUserManager.isAdmin()) {
-            homePage = "/dashboardAdmin.xhtml";
+        for (ServerType item : ServerType.values()) {
+            final YoutestitMSG msgbundle = new YoutestitMSG("data.ref.project.server.type."+item.name());
+            final String msg = factory.info(msgbundle).build().getText();
+            result.add(new SelectItem(item,msg));
         }
 
-        return homePage;
-
+        return result;
     }
-
-    public void redirectToHome() throws ClientException {
-        log.info("redirectToHome");
-    }
-
-
+    
+    
 }

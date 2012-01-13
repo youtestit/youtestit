@@ -25,9 +25,11 @@ package org.youtestit.datamodel.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -58,10 +60,12 @@ public class Os implements Serializable {
 
     /** The type. */
     @Enumerated(EnumType.STRING)
+    @Basic(fetch=FetchType.LAZY)
     private OsType            type;
 
     /** The architecture. */
     @Enumerated(EnumType.STRING)
+    @Basic(fetch=FetchType.LAZY)
     private OsArchi           architecture;
 
 

@@ -23,6 +23,7 @@
  */
 package org.youtestit.datamodel.entity;
 
+import static javax.persistence.FetchType.LAZY;
 import static org.youtestit.commons.utils.Constants.DOCUMENT_PART;
 import static org.youtestit.commons.utils.Constants.ITEM_CLOSE;
 import static org.youtestit.commons.utils.Constants.ITEM_OPEN;
@@ -32,6 +33,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -101,7 +103,10 @@ public class Dependency implements Serializable {
     @JoinColumn(name = "children_uid", nullable = true)
     private List<Dependency>  children         = new ArrayList<Dependency>();
 
-    private boolean mustWaitting;
+    /** attribut to force waitting parent dependancies done*/
+    @Basic(fetch = LAZY)
+    private boolean           mustWaitting;
+
     // =========================================================================
     // CONSTRUCTORS
     // =========================================================================
@@ -430,7 +435,7 @@ public class Dependency implements Serializable {
 
     /**
      * Checks if is must waitting.
-     *
+     * 
      * @return true, if is must waitting
      */
     public boolean isMustWaitting() {
@@ -440,12 +445,12 @@ public class Dependency implements Serializable {
 
     /**
      * Sets the must waitting.
-     *
+     * 
      * @param mustWaitting the new must waitting
      */
     public void setMustWaitting(boolean mustWaitting) {
         this.mustWaitting = mustWaitting;
     }
-    
-    
+
+
 }

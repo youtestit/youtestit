@@ -23,8 +23,11 @@
  */
 package org.youtestit.datamodel.entity;
 
+import static javax.persistence.FetchType.LAZY;
+
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -57,15 +60,19 @@ public class Instruction implements Serializable {
 
     /** The type. */
     @Enumerated(EnumType.STRING)
+    @Basic(fetch = LAZY)
     private SeleniumActionType type;
 
     /** The target. */
+    @Basic(fetch = LAZY)
     private String             target;
 
     /** The value. */
+    @Basic(fetch = LAZY)
     private String             value;
 
     /** The error message. */
+    @Basic(fetch = LAZY)
     private String             errorMessage;
 
 
