@@ -205,7 +205,7 @@ public class Browser implements Serializable {
             final boolean sameName = type.equals(other.type);
             final boolean sameVersion = sameVersion(other.version);
 
-            result = (uid == other.uid) || (sameName && sameVersion);
+            result = sameName && sameVersion;
         }
 
         return result;
