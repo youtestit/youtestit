@@ -150,7 +150,7 @@ public class Portability {
 
         if (obj != null && getClass() == obj.getClass()) {
             final Portability other = (Portability) obj;
-            result = uid == other.uid;
+            result = operatingSystem.equals(other.operatingSystem) && browser.equals(other.browser);
         }
 
         return result;
@@ -191,7 +191,7 @@ public class Portability {
      * 
      * @param uid the new uid
      */
-    public void setUid(final int uid) {
+    public void setUid(final long uid) {
         this.uid = uid;
     }
 

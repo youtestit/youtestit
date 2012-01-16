@@ -57,6 +57,7 @@
         <module>youtestit-commons</module>
         <module>youtestit-security</module>
         <module>youtestit-core</module>
+        <module>youtestit-components</module>
         <module>youtestit-datamodel</module>
         <module>youtestit-actions-admin</module>
         <module>youtestit-actions-user</module>
@@ -162,6 +163,12 @@
             <dependency>
                 <groupId>org.youtestit</groupId>
                 <artifactId>youtestit-security</artifactId>
+                <version>0.1-SNAPSHOT</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.youtestit</groupId>
+                <artifactId>youtestit-components</artifactId>
                 <version>0.1-SNAPSHOT</version>
                 <type>jar</type>
             </dependency>

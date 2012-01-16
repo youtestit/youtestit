@@ -643,3 +643,119 @@ div.prop{
 }
 
 
+
+
+/*******************************************************************************
+* COMPONENTS
+*******************************************************************************/
+.yti_portabilities table{
+         background-image: url("#{resource['stylesheet/default/imgs/component_background.png']}");
+         border:1px solid ;
+}
+
+.yti_portabilities table{
+    border-collapse: collapse;
+}
+
+
+
+.yti_portabilities_browser_version{
+ text-align: center;
+ display: block;
+ font-size: 12px;
+ font-weight: normal;
+}
+
+
+
+
+.protabilities_title_browser_cell,
+.protabilities_content_select_cell{
+    border-left: 1px solid;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 4px;
+}
+
+
+.protabilities_content_select_cell,
+.protabilities_content_os_title{
+    border-top: 1px solid;
+}
+
+.yti_portabilities table,
+.protabilities_title_browser_cell,
+.protabilities_content_select_cell,
+.protabilities_content_select_cell,
+.protabilities_content_os_title{
+    border-color:#727272;
+}
+
+.protabilities_content_os_title{
+    padding-bottom: 4px;
+    padding-left: 4px;
+    padding-top: 4px;
+}
+.protabilities_os_name{
+    display: block;
+    float: left;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 7px;
+}
+
+.yti_icon_browser{
+    height: 24px;
+    width: 24px;
+    display: block;
+    margin: auto;
+}
+
+.yti_icon_browser span{
+    display:none;
+}
+
+.yti_icon_browser_FIREFOX{
+     background-image: url("#{resource['stylesheet/default/imgs/icons/browser/firefox.png']}");
+}
+
+.yti_icon_browser_IE{
+     background-image: url("#{resource['stylesheet/default/imgs/icons/browser/ie.png']}");
+}
+
+.yti_icon_browser_CHROME{
+     background-image: url("#{resource['stylesheet/default/imgs/icons/browser/chrome.png']}");
+}
+
+.yti_icon_browser_OPERA{
+     background-image:url("#{resource['stylesheet/default/imgs/icons/browser/opera.png']}");
+}
+
+.yti_icon_browser_SAFARI{
+     background-image: url("#{resource['stylesheet/default/imgs/icons/browser/safari.png']}");
+}
+
+
+.yti_icon_os span{
+    display:none;
+}
+
+.yti_icon_os{
+    height: 32px;
+    width: 32px;
+    display: block;
+    margin: auto;
+    float:left;
+}
+
+.yti_icon_os_LINUX{
+     background-image: url("#{resource['stylesheet/default/imgs/icons/os/linux.png']}");
+}
+.yti_icon_os_WINDOWS{
+     background-image: url("#{resource['stylesheet/default/imgs/icons/os/windows.png']}");
+}
+
+.yti_icon_os_MAC{
+     background-image: url("#{resource['stylesheet/default/imgs/icons/os/mac.png']}");
+}
+

@@ -30,6 +30,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -74,10 +75,12 @@ public class Os implements Serializable {
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
-
+    @Id
+    @GeneratedValue
+    private int                uid;
+    
     /** The name. */
     @NotEmpty
-    @Id
     private String             name;
 
     /** The type. */
@@ -106,9 +109,28 @@ public class Os implements Serializable {
      * Instantiates a new os.
      * 
      * @param name the name
+     * @param type the type
+     * @param architecture the architecture
      */
     public Os(final String name, final OsType type, final OsArchi architecture) {
         super();
+        this.name = name;
+        this.type = type;
+        this.architecture = architecture;
+    }
+
+
+    /**
+     * Instantiates a new os in unit test.
+     * 
+     * @param uid the uid
+     * @param name the name
+     * @param type the type
+     * @param architecture the architecture
+     */
+    protected Os(int uid, String name, OsType type, OsArchi architecture) {
+        super();
+        this.uid = uid;
         this.name = name;
         this.type = type;
         this.architecture = architecture;
@@ -141,6 +163,7 @@ public class Os implements Serializable {
         if (architecture != null) {
             archiHash = architecture.hashCode();
         }
+        result = prime * result + uid;
         result = prime * result + nameHash;
         result = prime * result + typeHash;
         result = prime * result + archiHash;
@@ -195,13 +218,32 @@ public class Os implements Serializable {
      */
     @Override
     public String toString() {
-        return "Os [name=" + name + ", type=" + type + ", architecture=" + architecture + "]";
+        return "Os [uid=" + uid + "name=" + name + ", type=" + type + ", architecture=" + architecture + "]";
     }
 
 
     // =========================================================================
     // GETTERS & SETTERS
     // =========================================================================
+    /**
+     * Gets the uid.
+     * 
+     * @return the uid
+     */
+    public int getUid() {
+        return uid;
+    }
+
+
+    /**
+     * Sets the uid.
+     * 
+     * @param uid the new uid
+     */
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
     /**
      * Gets the name.
      * 

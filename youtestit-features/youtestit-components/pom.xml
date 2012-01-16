@@ -5,7 +5,7 @@
 
   <!--
     ============================================================================
-    = COMMONS PROJECT INFORMATIONS
+    = CORE PROJECT INFORMATIONS
     ============================================================================
   -->
     <parent>
@@ -14,10 +14,9 @@
         <version>0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>youtestit-actions-admin</artifactId>
+    <artifactId>youtestit-components</artifactId>
     <packaging>jar</packaging>
-    <name>youtestit - Administrator actions</name>
-    
+    <name>youtestit-components</name>
 
 
   <!--
@@ -30,11 +29,6 @@
             <groupId>org.youtestit</groupId>
             <artifactId>youtestit-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.youtestit</groupId>
-            <artifactId>youtestit-components</artifactId>
-        </dependency>
-        
         <dependency>
             <groupId>org.youtestit</groupId>
             <artifactId>youtestit-commons-test</artifactId>
@@ -56,24 +50,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-
-  <!--
-    ============================================================================
-    = BUILD
-    ============================================================================
-  -->
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-        </plugins>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>

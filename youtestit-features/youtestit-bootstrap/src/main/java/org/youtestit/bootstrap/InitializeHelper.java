@@ -28,6 +28,7 @@ import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.NotSupportedException;
 import javax.transaction.RollbackException;
+import javax.transaction.Status;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
@@ -58,7 +59,10 @@ public class InitializeHelper {
     // =========================================================================
     protected void begin() throws ClientException {
         try {
-            utx.begin();
+            if(!hasTransaction()){
+                utx.begin();    
+            }
+            
         } catch (NotSupportedException e) {
             throw new ClientException(e);
         } catch (SystemException e) {
@@ -68,7 +72,10 @@ public class InitializeHelper {
 
     protected void commit() throws ClientException {
         try {
-            utx.commit();
+            if(hasTransaction()){
+                utx.commit();    
+            }
+            
         } catch (SecurityException e) {
             rollback();
             throw new ClientException(e);
@@ -90,7 +97,10 @@ public class InitializeHelper {
 
     protected void rollback() throws ClientException {
         try {
-            utx.rollback();
+            if(hasTransaction()){
+                utx.rollback();    
+            }
+            
         } catch (IllegalStateException e) {
             throw new ClientException(e);
         } catch (SecurityException e) {
@@ -98,6 +108,25 @@ public class InitializeHelper {
         } catch (SystemException e) {
             throw new ClientException(e);
         }
+    }
+    
+    /**
+     * Checks if transaction is active.
+     *
+     * @return true, if successful
+     * @throws ClientException if exception is occur.
+     */
+    protected boolean hasTransaction() throws ClientException {
+        boolean result = true;
+        
+        try {
+            result = utx.getStatus()==Status.STATUS_ACTIVE;
+        } catch (SystemException e) {
+           throw new ClientException(e);
+        }
+        
+        
+        return result;
     }
 
 }

@@ -140,17 +140,13 @@ public class InitializeOsAndBrowser extends InitializeHelper {
                 begin();
                 browserDAO.create(item);
                 commit();
+            }catch (EntityExistsException except) {
+                log.info(String.format("browser %s %s already initializing.", item.getType().name(),item.getVersion()));
             } catch (ClientException except) {
-                if (except instanceof EntityExistsException) {
-                    log.info(String.format("browser %s-%s already initializing.", item.getType().name(),
-                            item.getVersion()));
-                    
-                } else {
-                    log.error(except);
-                    throw except;
-                }
+                log.error(except);
+                throw except;
             }finally{
-                rollback();
+                rollback();   
             }
         }
 

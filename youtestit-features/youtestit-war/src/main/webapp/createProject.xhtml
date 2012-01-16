@@ -5,6 +5,7 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
     xmlns:rich="http://richfaces.org/rich"
     xmlns:a4j="http://richfaces.org/a4j"
     xmlns:p="http://primefaces.prime.com.tr/ui"
@@ -82,7 +83,7 @@
 				            <!--+++++++++[ subject ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 				            </ui:remove>        
 							<h:outputLabel id="subject_label" for="subject" value="#{messages['label.create.project.form.subject']}"/>
-				            <h:inputTextarea id="subject" value="#{projectAction.project.subject}" cols="42">
+				            <h:inputTextarea id="subject" value="#{projectAction.project.subject}" cols="58">
 				            	<rich:validator />
 				            </h:inputTextarea>
 				            <rich:message for="subject" id="subject_error" />
@@ -155,10 +156,65 @@
 				    <ui:remove>
 		            <!--+++++++++[ portability ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 		            </ui:remove>
-		            <div id="portability_field" class="prop">
 		            
+		            <div id="protabilities_field" class="prop">
+
+		            		<div class="name">
+		            			<h:outputLabel id="protabilities_label"  value="#{messages['label.create.project.form.portabilities']}"/>
+		            		</div>
+			            	<div class="value">
+			            		<div id="protabilities_component" class="yti_portabilities">
+			            			<a4j:outputPanel id="protabilities_component_Ajax" >
+				            		<table>
+				            			<thead id="protabilities_title_browser">
+				            				<tr id="protabilities_title_browser_raw">
+				            					<th class="protabilities_title_browser_empty">&nbsp;</th>
+				            					<ui:repeat value="#{portabilities.browsers}" var="browser" varStatus="index">
+							            			<th id="protabilities_title_browser_#{index.index}" class="protabilities_title_browser_cell" align="center">
+									            		<div id="protabilities_title_#{browser.type}_#{browser.version}">
+									            			<span class="yti_icon_browser yti_icon_browser_#{browser.type}">
+									            				<span>#{browser.type}</span>
+									            			</span>
+									            			<span class="yti_portabilities_browser_version">#{browser.version}</span>
+								            			</div>
+								            		</th>
+						            			</ui:repeat>
+				            				</tr>
+				            			</thead>
+				            			
+				            			
+					            			<tbody id="protabilities_content" class="yti_portabilities_content">
+					            				<ui:repeat value="#{portabilities.operatingSystem}" var="os" varStatus="indexOs">
+						            			
+						            			<tr id="protabilities_content_raw_#{indexOs.index}" class="protabilities_content_raw">
+						            				<td class="protabilities_content_os_title">
+						            					<span class="yti_icon_os yti_icon_os_#{os.type}">
+						            						<span>#{os.type}</span>
+						            					</span>
+						            					<span class="protabilities_os_name">#{os.name}</span>
+						            				</td>
+						            				
+					            					<ui:repeat value="#{portabilities.browsers}" var="browser" varStatus="browserIndex">
+						            					<td id="protabilities_content_select_#{indexOs.index}@#{browserIndex.index}" class="protabilities_content_select_cell" align="center">
+							            						<a4j:commandLink value="[]"
+							            										 render="protabilities_component_Ajax"
+							            										 execute="#{portabilities.addPortability(projectAction.project.portabilities,indexOs.index,browserIndex.index)}"
+							            										 rendered="#{!portabilities.getContains(indexOs.index,browserIndex.index,projectAction.project.portabilities)}"/>
+
+							            						<a4j:commandLink value="[X]"
+							            										 render="protabilities_component_Ajax"
+							            										 execute="#{portabilities.removePortability(projectAction.project.portabilities,indexOs.index,browserIndex.index)}"
+							            										 rendered="#{portabilities.getContains(indexOs.index,browserIndex.index,projectAction.project.portabilities)}"/>
+						            					</td>
+					            					</ui:repeat>
+						            			</tr>
+						            		</ui:repeat>
+					            			</tbody>
+				            		</table>
+				            		</a4j:outputPanel>
+			            	</div>
+		            	</div>
 		            	
-		            
 		            </div>        
 				                    
 					
