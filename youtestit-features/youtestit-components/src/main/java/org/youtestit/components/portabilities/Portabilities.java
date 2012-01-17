@@ -24,12 +24,9 @@
 package org.youtestit.components.portabilities;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.faces.bean.ViewScoped;
-import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -74,8 +71,6 @@ public class Portabilities implements Serializable {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 7444077164051724293L;
     
-    /** The Constant PORTABILITY_KEY_PATTER. */
-    private static final String PORTABILITY_KEY_PATTER = "%s@%s";
 
     /** The logger. */
     @Inject
