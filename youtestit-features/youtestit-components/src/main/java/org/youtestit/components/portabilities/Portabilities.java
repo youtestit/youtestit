@@ -84,8 +84,10 @@ public class Portabilities implements Serializable {
     @Inject
     private OsDAO             osDAO;
 
+    /** The operating system. */
     private List<Os>          operatingSystem;
 
+    /** The browsers. */
     private List<Browser>     browsers;
 
     /** The number of browser. */
@@ -102,14 +104,17 @@ public class Portabilities implements Serializable {
     // CONSTRUCTORS
     // =========================================================================
 
+    /**
+     * Instantiates a new portabilities.
+     */
     public Portabilities() {
         super();
     }
 
 
     /**
-     * Instantiates a new portabilities in unit test
-     * 
+     * Instantiates some new portabilities in unit test.
+     *
      * @param log the logger
      * @param browserDAO the browser dao instance
      * @param osDAO the os dao instance
@@ -185,7 +190,7 @@ public class Portabilities implements Serializable {
     /**
      * Removes the portability.
      *
-     * @param portabilities the portabilities
+     * @param portabilities the portability list
      * @param osIndex the os index
      * @param browserIndex the browser index
      */
@@ -199,12 +204,12 @@ public class Portabilities implements Serializable {
     }
     
     /**
-     * Check if a portability is contains in protabilities list.
+     * Check if a portability is in a portability list.
      *
-     * @param portabilities the portabilities
      * @param osIndex the os index
      * @param browserIndex the browser index
-     * @return the contains
+     * @param portabilities the portability  list
+     * @return true if contains
      */
     public boolean getContains(int osIndex, int browserIndex,List<Portability> portabilities){
         boolean result = false;

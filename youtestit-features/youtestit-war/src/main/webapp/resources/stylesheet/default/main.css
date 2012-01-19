@@ -759,3 +759,32 @@ div.prop{
      background-image: url("#{resource['stylesheet/default/imgs/icons/os/mac.png']}");
 }
 
+.portabilities_content_os_title{
+	padding-left: 8px;
+    padding-right: 12px;
+}
+.portabilities_os_name{
+	padding-top: 5px;	
+}
+
+.portabilities_title_browser_cell{
+	padding-left: 4px;
+    padding-right: 4px;
+}
+
+.portabilities_select_on,
+.portabilities_select_off{
+	height: 16px;
+    width: 16px;
+    display: block;
+}
+.portabilities_select_on{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/select-on.png']}");
+}
+
+.portabilities_select_off{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/select-off.png']}");
+}
+
+
+
