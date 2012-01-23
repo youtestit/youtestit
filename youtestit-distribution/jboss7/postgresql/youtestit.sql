@@ -1,0 +1,2 @@
+CREATE ROLE youtestit WITH PASSWORD 'password' LOGIN;
+CREATE DATABASE youtestit ENCODING 'UTF8' OWNER youtestit;
