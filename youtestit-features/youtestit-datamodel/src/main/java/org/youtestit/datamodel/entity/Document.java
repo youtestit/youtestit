@@ -33,7 +33,9 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 /**
@@ -43,12 +45,17 @@ import javax.persistence.OneToMany;
  * @since Dec 30, 2011
  */
 @Entity
+@Table(name = "document")
+@NamedQuery(name = Document.QUERY_DOC_BY_PATH, query = "FROM Document WHERE path=:"+DublinCore.PARAM_PATH)
 public class Document extends DublinCore implements Serializable {
 
 
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
+    /** The Constant QUERY_DOC_BY_PATH. */
+    public static final String QUERY_DOC_BY_PATH = "getDocByPath";
+    
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 6251772001497647256L;
 

@@ -63,7 +63,7 @@
 				            <!--+++++++++[ title ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 				            </ui:remove>        
 							<h:outputLabel id="title_label" for="title" value="#{messages['label.create.project.form.title']}"/>
-				            <h:inputText id="title" value="#{projectAction.project.title}" size="50">
+				            <h:inputText id="title" value="#{createProjectAction.project.title}" size="50">
 				            	<rich:validator />
 				            </h:inputText>
 				            <rich:message for="title" id="title_error" />
@@ -73,7 +73,7 @@
 				            <!--+++++++++[ parentPath ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 				            </ui:remove>        
 							<h:outputLabel id="parentPath_label" for="parentPath" value="#{messages['label.create.project.form.parent.path']}"/>
-				            <h:inputText id="parentPath" value="#{projectAction.parentPath}" size="60">
+				            <h:inputText id="parentPath" value="#{createProjectAction.parentPath}" size="60">
 				            	<rich:validator />
 				            </h:inputText>
 				            <rich:message for="parentPath" id="parentPath_error" />
@@ -83,7 +83,7 @@
 				            <!--+++++++++[ subject ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 				            </ui:remove>        
 							<h:outputLabel id="subject_label" for="subject" value="#{messages['label.create.project.form.subject']}"/>
-				            <h:inputTextarea id="subject" value="#{projectAction.project.subject}" cols="58">
+				            <h:inputTextarea id="subject" value="#{createProjectAction.project.subject}" cols="58">
 				            	<rich:validator />
 				            </h:inputTextarea>
 				            <rich:message for="subject" id="subject_error" />
@@ -93,8 +93,8 @@
 				            <!--+++++++++[ subject ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 				            </ui:remove>        
 							<h:outputLabel id="serverType_label" for="subject" value="#{messages['label.create.project.form.serverType']}"/>
-				            <rich:select id="serverType" value="#{projectAction.project.serverType}">
-				            	<f:selectItems value="#{projectAction.severType}" />
+				            <rich:select id="serverType" value="#{createProjectAction.project.serverType}">
+				            	<f:selectItems value="#{createProjectAction.severType}" />
 				            </rich:select>
 				            <rich:message for="serverType" id="serverType_error" />
 
@@ -106,7 +106,7 @@
 				            <!--+++++++++[ urlServer ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 				            </ui:remove>        
 							<h:outputLabel id="urlServer_label" for="urlServer" value="#{messages['label.create.project.form.urlServer']}"/>
-				            <h:inputText id="urlServer" value="#{projectAction.project.urlServer}" size="60">
+				            <h:inputText id="urlServer" value="#{createProjectAction.project.urlServer}" size="60">
 				            	<rich:validator />
 				            </h:inputText>
 				            <rich:message for="urlServer" id="urlServer_error" />
@@ -116,7 +116,7 @@
 				            <!--+++++++++[ urlWiki ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 				            </ui:remove>        
 							<h:outputLabel id="urlWiki_label" for="urlWiki" value="#{messages['label.create.project.form.urlWiki']}"/>
-				            <h:inputText id="urlWiki" value="#{projectAction.project.urlWiki}" size="60">
+				            <h:inputText id="urlWiki" value="#{createProjectAction.project.urlWiki}" size="60">
 				            	<rich:validator />
 				            </h:inputText>
 				            <rich:message for="urlWiki" id="urlWiki_error" />
@@ -126,7 +126,7 @@
 				            <!--+++++++++[ urlTracker ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 				            </ui:remove>        
 							<h:outputLabel id="urlTracker_label" for="urlTracker" value="#{messages['label.create.project.form.urlTracker']}"/>
-				            <h:inputText id="urlTracker" value="#{projectAction.project.urlTracker}" size="60">
+				            <h:inputText id="urlTracker" value="#{createProjectAction.project.urlTracker}" size="60">
 				            	<rich:validator />
 				            </h:inputText>
 				            <rich:message for="urlTracker" id="urlTracker_error" />
@@ -144,7 +144,7 @@
 		            	</div>
 			            
 			            <div class="value">
-			            	<rich:editor id="description" toolbar="CustomToolbar" value="#{projectAction.project.description}">
+			            	<rich:editor id="description" toolbar="CustomToolbar" value="#{createProjectAction.project.description}">
 				            	<f:facet name="config">
 					            	<ytiEditor:richTextConfig/>
 						        </f:facet>
@@ -162,7 +162,7 @@
 		            			<h:outputLabel id="portabilities_label"  value="#{messages['label.create.project.form.portabilities']}"/>
 		            		</div>
 			            	<div class="value">
-			            		<yti:portabilities id="projectPortabilities" portabilities="#{projectAction.project.portabilities}" />
+			            		<yti:portabilities id="projectPortabilities" portabilities="#{createProjectAction.project.portabilities}" />
 			            	</div>
 		            </div>        
 				                    
@@ -171,13 +171,20 @@
 		            </ui:remove>
 		            
 		            <div id="team_field" class="prop">
-		            		
+		            	<div class="name">
+	            			<h:outputLabel id="team_label"  value="#{messages['label.create.project.form.team']}"/>
+	            		</div>
+		            	<div class="value">
+		            		<div>
+		            			TODO
+		            		</div>
+		            	</div>		
 		            </div>        
 					
 					
 					<div class="buttons-actions">
 	        		        <h:commandButton value="#{messages['label.create.project.panel.action.submit']}"
-	                          		         action="#{projectAction.create()}"
+	                          		         action="#{createProjectAction.create()}"
 	                          		         id="create"/>
 	         		</div>
  				</p:panel>

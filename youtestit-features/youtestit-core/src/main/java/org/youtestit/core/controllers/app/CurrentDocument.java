@@ -26,7 +26,16 @@ package org.youtestit.core.controllers.app;
 import java.io.Serializable;
 
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+
+import org.jboss.logging.Logger;
+import org.youtestit.datamodel.entity.Document;
+import org.youtestit.datamodel.entity.Project;
+import org.youtestit.datamodel.entity.TestCase;
 
 
 /**
@@ -54,12 +63,32 @@ public class CurrentDocument implements Serializable {
     private Boolean project = null;
     
     private String path = "";
+    
+    private Document document;
 
+    @PersistenceContext
+    private EntityManager     entityManager;
+
+    @Inject
+    private Logger            log;
+    
     // =========================================================================
     // METHODS
     // =========================================================================
     
-
+    /**
+     * Load document.
+     */
+    protected void loadDocument(){
+        try{
+            document= entityManager.createNamedQuery(Document.QUERY_DOC_BY_PATH,Document.class)
+                    .setParameter(Document.PARAM_PATH, path)
+                    .getSingleResult();    
+        } catch (NoResultException e) {
+            // can don't exist. it musn't throw exception for this.
+            log.debug(e);
+        }
+    }
 
 
     // =========================================================================
@@ -72,7 +101,16 @@ public class CurrentDocument implements Serializable {
      */
     public boolean getIsTest(){
         if(test==null){
-            test = false;
+            if(document==null){
+                loadDocument();
+            }
+            
+            if(document==null){
+                test = false;    
+            }else{
+                test = document instanceof TestCase;
+            }
+            
         }
         return test;
     }
@@ -84,7 +122,16 @@ public class CurrentDocument implements Serializable {
      */
     public boolean getIsProject(){
         if(project==null){
-            project = false;
+            if(document==null){
+                loadDocument();
+            }
+            
+            if(document==null){
+                project = false;    
+            }else{
+                project = document instanceof Project;
+            }
+            
         }
         return project;
     }
@@ -106,7 +153,33 @@ public class CurrentDocument implements Serializable {
      */
     public void setPath(String path) {
         this.path = "/"+path;
+        
     }
+
+
+    /**
+     * Gets the document.
+     *
+     * @return the document
+     */
+    public Document getDocument() {
+        if(document==null){
+            loadDocument();
+        }
+        return document;
+    }
+
+
+    /**
+     * Sets the document.
+     *
+     * @param document the new document
+     */
+    public void setDocument(Document document) {
+        this.document = document;
+    }
+    
+    
     
     
 }

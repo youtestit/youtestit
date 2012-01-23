@@ -62,7 +62,50 @@
   	</ui:remove>
   	
   	<ui:define name="dashboardCenter">
-		BBB  	
+		<p:tabView>
+			<p:tab title="Detail">
+				<div id="infoBlocTop">
+					
+					<!-- Gloable stats and export -->
+					<div>
+						<div>90%</div>
+						<div>export</div>
+					</div>
+					
+					
+					<!-- info on URLs -->
+					<div>
+						<div>
+							<a href="#{currentDocument.document.urlServer}">Server</a>
+						</div>
+						<div>
+							<a href="#{currentDocument.document.urlWiki}">Wiki</a>
+						</div>
+						<div>
+							<a href="#{currentDocument.document.urlTracker}">Tracker</a>
+						</div>
+					</div>
+					
+					<!-- Subject: -->
+					<div>
+						<div>Subject:</div>
+						<div>
+							<h:outputText value="#{currentDocument.document.subject}"  escape="false"/>
+						</div>
+					</div>
+					
+					<!-- Description: -->
+					<div>
+						<div>
+							<h:outputText value="#{currentDocument.document.description}"  escape="false"/>
+						</div>
+					</div>
+					
+				</div>
+			
+			</p:tab> 
+		</p:tabView>
+		
   	</ui:define>
   	
  	<ui:remove><!--=============================================================

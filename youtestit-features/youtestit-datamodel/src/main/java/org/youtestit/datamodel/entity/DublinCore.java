@@ -46,8 +46,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -58,7 +60,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.youtestit.commons.utils.validations.annotations.Path;
 import org.youtestit.datamodel.enums.DocumentType;
 
-
 /**
  * Dublin core, generic meta-data on documents conform to Dublin core standard
  * ISO 15836:2003.
@@ -68,27 +69,30 @@ import org.youtestit.datamodel.enums.DocumentType;
  */
 @Entity
 @Table(name = "document")
+@NamedQuery(name = DublinCore.QUERY_BY_PATH, query = "FROM DublinCore WHERE path=:"+DublinCore.PARAM_PATH)
 public class DublinCore implements Serializable {
     // =========================================================================
     // STATICS ATTRIBUTES
     // =========================================================================
+    /** The Constant QUERY_BY_PATH. */
+    public static final String QUERY_BY_PATH = "dublinCoreByPath";
+    
+    public static final String PARAM_PATH = "path";
+    
     /** The Constant serialVersionUID. */
-    private static final long   serialVersionUID    = 6251772001497647256L;
-
-
+    private static final long serialVersionUID = 6251772001497647256L;
 
     /** The Constant MAX_LENGTH_TITLE : 128 chars. */
-    private static final int    MAX_LENGTH_TITLE    = 128;
+    private static final int MAX_LENGTH_TITLE = 128;
 
     /** The Constant MAX_LENGTH_SUBJECT : 512 chars. */
-    private static final int    MAX_LENGTH_SUBJECT  = 512;
+    private static final int MAX_LENGTH_SUBJECT = 512;
 
     /** The Constant MAX_LENGTH_LANGUAGE : 32 chars. */
-    private static final int    MAX_LENGTH_LANGUAGE = 32;
+    private static final int MAX_LENGTH_LANGUAGE = 32;
 
     /** The Constant MAX_LENGTH_COVERAGE : 256 chars. */
-    private static final int    MAX_LENGTH_COVERAGE = 256;
-
+    private static final int MAX_LENGTH_COVERAGE = 256;
 
     // =========================================================================
     // ATTRIBUTES
@@ -97,35 +101,36 @@ public class DublinCore implements Serializable {
     /** The name. */
     @Id
     @GeneratedValue
-    private long                uid;
+    private long uid;
 
     /** The title. */
     @Size(max = MAX_LENGTH_TITLE)
     @Column(length = MAX_LENGTH_TITLE)
-    private String              title;
+    private String title;
 
     /** The type. */
     @Enumerated(EnumType.STRING)
-    private DocumentType        type;
+    private DocumentType type;
 
     /** The path to document. */
     @Path
     @NotEmpty
-    private String              path;
+    private String path;
 
     /** The subject. */
     @Size(max = MAX_LENGTH_SUBJECT)
     @Column(length = MAX_LENGTH_SUBJECT)
     @Basic(fetch = LAZY)
-    private String              subject;
+    private String subject;
 
     /** The description. */
     @Basic(fetch = LAZY)
-    private String              description;
+    @Lob
+    private String description;
 
     /** The children. */
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.REMOVE)
-    private List<DublinCore>    children;
+    private List<DublinCore> children;
 
     /**
      * The creator.
@@ -133,43 +138,42 @@ public class DublinCore implements Serializable {
      * @see org.youtestit.datamodel.entity.User
      */
     @ManyToOne(optional = true, cascade = CascadeType.REMOVE)
-    private User                creator;
+    private User creator;
 
     /** The date creation. */
     @Temporal(TemporalType.TIMESTAMP)
     @Basic(fetch = LAZY)
-    private Calendar            dateCreation;
+    private Calendar dateCreation;
 
     /** The date last modify. */
     @Temporal(TemporalType.TIMESTAMP)
     @Basic(fetch = LAZY)
-    private Calendar            dateLastModify;
+    private Calendar dateLastModify;
 
     /** The date publish. */
     @Temporal(TemporalType.TIMESTAMP)
     @Basic(fetch = LAZY)
-    private Calendar            datePublish;
+    private Calendar datePublish;
 
     /** The language. */
     @Size(max = MAX_LENGTH_LANGUAGE)
     @Column(length = MAX_LENGTH_LANGUAGE)
     @Basic(fetch = LAZY)
-    private String              language;
+    private String language;
 
     /** The rights. */
-    private String              rights;
+    private String rights;
 
     /** The coverage. */
     @Size(max = MAX_LENGTH_COVERAGE)
     @Column(length = MAX_LENGTH_COVERAGE)
     @Basic(fetch = LAZY)
-    private String              coverage;
+    private String coverage;
 
     /** The tags. */
     @ManyToMany(fetch = FetchType.LAZY, targetEntity = Tag.class, cascade = CascadeType.ALL)
     @JoinTable(name = "tags_documents")
-    private List<Tag>           tags;
-
+    private List<Tag> tags;
 
     // =========================================================================
     // CONSTRUCTORS
@@ -196,7 +200,6 @@ public class DublinCore implements Serializable {
         this.path = path;
     }
 
-
     /**
      * Instantiates a new dublin core.
      * 
@@ -219,7 +222,8 @@ public class DublinCore implements Serializable {
      * @param dateCreation the document name
      * @see org.youtestit.datamodel.entity.User
      */
-    public DublinCore(final String title, final String path, final String subject, final User creator,
+    public DublinCore(final String title, final String path,
+            final String subject, final User creator,
             final Calendar dateCreation) {
         super();
         this.title = title;
@@ -246,7 +250,6 @@ public class DublinCore implements Serializable {
         }
     }
 
-
     /**
      * Allow to removes a child.
      * 
@@ -257,7 +260,6 @@ public class DublinCore implements Serializable {
             children.remove(child);
         }
     }
-
 
     // =========================================================================
     // OVERRIDES
@@ -320,7 +322,6 @@ public class DublinCore implements Serializable {
         return result;
     }
 
-
     /**
      * {@inheritDoc}
      */
@@ -365,7 +366,6 @@ public class DublinCore implements Serializable {
         return result.toString();
     }
 
-
     /**
      * Allow to format Calendar.
      * 
@@ -377,7 +377,8 @@ public class DublinCore implements Serializable {
         if (calendar == null) {
             result = NULL_OBJ;
         } else {
-            final SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
+            final SimpleDateFormat formater = new SimpleDateFormat(
+                    "yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
             result = formater.format(calendar.getTime());
         }
         return result;
@@ -398,7 +399,6 @@ public class DublinCore implements Serializable {
         }
         return result.toString();
     }
-
 
     /**
      * allow to format children to string.
@@ -456,7 +456,6 @@ public class DublinCore implements Serializable {
     public long getUid() {
         return uid;
     }
-
 
     /**
      * Sets the uid.
@@ -536,7 +535,11 @@ public class DublinCore implements Serializable {
      * @param subject the new subject
      */
     public void setSubject(String subject) {
-        this.subject = subject;
+        if (subject == null) {
+            this.subject = subject;
+        } else {
+            this.subject = subject.replaceAll("'", "\"");
+        }
     }
 
     /**
@@ -554,7 +557,11 @@ public class DublinCore implements Serializable {
      * @param description the new description
      */
     public void setDescription(String description) {
-        this.description = description;
+        if (description == null) {
+            this.description = description;
+        } else {
+            this.description = description.replaceAll("'", "\"");
+        }
     }
 
     /**
@@ -749,7 +756,7 @@ public class DublinCore implements Serializable {
 
     /**
      * Gets the null obj.
-     *
+     * 
      * @return the null obj
      */
     protected static String getNullObj() {
@@ -758,7 +765,7 @@ public class DublinCore implements Serializable {
 
     /**
      * Gets the sep.
-     *
+     * 
      * @return the sep
      */
     protected static String getSep() {
@@ -767,7 +774,7 @@ public class DublinCore implements Serializable {
 
     /**
      * Gets the item open.
-     *
+     * 
      * @return the item open
      */
     protected static String getItemOpen() {
@@ -776,7 +783,7 @@ public class DublinCore implements Serializable {
 
     /**
      * Gets the item close.
-     *
+     * 
      * @return the item close
      */
     protected static String getItemClose() {

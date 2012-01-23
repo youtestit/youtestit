@@ -86,6 +86,9 @@ public final class Constants {
     public static final String     ITEM_CLOSE              = "}";
 
     public static final String     DOCUMENT_PART           = "@";
+    
+    /** The Constant PATH_SPLIT. */
+    public static final String     PATH_SPLIT           = "/";
 
     // =========================================================================
     // ATTRIBUTS

@@ -23,10 +23,10 @@
  */
 package org.youtestit.datamodel.entity;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,11 +34,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.apache.commons.lang.text.StrBuilder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.youtestit.commons.utils.exceptions.ClientException;
-
 
 /**
  * Test unit for Group entity.
@@ -52,24 +52,32 @@ public class DublinCoreTest extends AbstractEntityTest {
     // ATTRIBUTES
     // =========================================================================
     /** The Constant LOGGER. */
-    private static final Logger LOGGER      = LoggerFactory.getLogger(DublinCoreTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DublinCoreTest.class);
 
     /** The Constant QUERY. */
-    private static final String QUERY       = "from DublinCore";
+    private static final String QUERY = "from DublinCore";
 
     /** Fake text for subject */
-    private static final String SUBJECT     = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+    private static final String SUBJECT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
 
     /** Fake text for description */
-    private static final String DESCRIPTION = "Lorem ipsum dolor sit amet, consectetur "
-                                                    + "adipiscing elit. Nunc leo est, pulvinar " + "vitae tincidunt a";
+    private static final String DESCRIPTION = initDescription();
 
     /** The doc. */
-    private DublinCore          doc;
+    private DublinCore doc;
 
     /** The doc child. */
-    private DublinCore          docChild;
+    private DublinCore docChild;
 
+    protected static String initDescription() {
+        StrBuilder result = new StrBuilder();
+
+        result.append("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
+        result.append(" Sed mollis varius neque, sed pulvinar quam commodo nec.");
+        result.appendln("Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mu.");
+
+        return result.toString();
+    }
 
     // =========================================================================
     // METHODS
@@ -90,13 +98,13 @@ public class DublinCoreTest extends AbstractEntityTest {
         final String path = "/projectA";
 
         final DublinCore dublinCoreA = new DublinCore(1, title, path);
-        final DublinCore dublinCoreB = new DublinCore(2, "projectB", "/projectB");
+        final DublinCore dublinCoreB = new DublinCore(2, "projectB",
+                "/projectB");
 
         assertFalse(dublinCoreA.equals(dublinCoreB));
 
         final DublinCore dublinCoreC = new DublinCore(1, title, path);
         assertTrue(dublinCoreA.equals(dublinCoreC));
-
 
         final List<DublinCore> dublinCores = new ArrayList<DublinCore>();
         dublinCores.add(dublinCoreA);
@@ -106,7 +114,6 @@ public class DublinCoreTest extends AbstractEntityTest {
         assertTrue(dublinCores.contains(dublinCoreB));
     }
 
-
     /**
      * {@inheritDoc}
      */
@@ -114,7 +121,8 @@ public class DublinCoreTest extends AbstractEntityTest {
     public void persistenceTest() throws ClientException {
         assertNotNull(entityManager);
 
-        List<DublinCore> dublincores = entityManager.createQuery(QUERY, DublinCore.class).getResultList();
+        List<DublinCore> dublincores = entityManager.createQuery(QUERY,
+                DublinCore.class).getResultList();
         assertNotNull(dublincores);
         assertTrue(dublincores.isEmpty());
 
@@ -168,7 +176,8 @@ public class DublinCoreTest extends AbstractEntityTest {
         commitTransaction();
 
         beginTransaction();
-        final User user = new User("joe", "joe@youtestit.org", "kqz@15#$W", "Joe", "Smith", profile);
+        final User user = new User("joe", "joe@youtestit.org", "kqz@15#$W",
+                "Joe", "Smith", profile);
         entityManager.persist(user);
         commitTransaction();
 
@@ -204,19 +213,18 @@ public class DublinCoreTest extends AbstractEntityTest {
         beginTransaction();
         entityManager.persist(docChild);
         commitTransaction();
-        
+
         doc.addChild(docChild);
 
-        
         beginTransaction();
         entityManager.merge(doc);
         commitTransaction();
 
-        final List<DublinCore> dublincores = entityManager.createQuery(QUERY, DublinCore.class).getResultList();
+        final List<DublinCore> dublincores = entityManager.createQuery(QUERY,
+                DublinCore.class).getResultList();
         assertNotNull(dublincores);
         assertEquals(dublincores.size(), 2);
     }
-
 
     /**
      * Test remove child.
@@ -235,17 +243,16 @@ public class DublinCoreTest extends AbstractEntityTest {
         entityManager.remove(docChild);
         commitTransaction();
 
-        List<DublinCore> dublincores = entityManager.createQuery(QUERY, DublinCore.class).getResultList();
+        List<DublinCore> dublincores = entityManager.createQuery(QUERY,
+                DublinCore.class).getResultList();
         assertNotNull(dublincores);
         assertEquals(dublincores.size(), 1);
         closeEntityManager();
     }
 
-
     // =========================================================================
     // GETTERS & SETTERS
     // =========================================================================
-
 
     /**
      * Gets the subject.
@@ -255,7 +262,6 @@ public class DublinCoreTest extends AbstractEntityTest {
     public static String getSubject() {
         return SUBJECT;
     }
-
 
     /**
      * Gets the description.
