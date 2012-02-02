@@ -7,6 +7,7 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:rich="http://richfaces.org/rich"
     xmlns:p="http://primefaces.prime.com.tr/ui"
+    xmlns:yti="http://java.sun.com/jsf/composite/youtestit"
     template="layout/template-dashboard.xhtml">
 <ui:remove>
 <!--****************************************************************************
@@ -62,15 +63,39 @@
   	</ui:remove>
   	
   	<ui:define name="dashboardCenter">
-		<p:tabView>
-			<p:tab title="Detail">
+		 <rich:tabPanel switchType="client">
+			<rich:tab header="Detail">
 				<div id="infoBlocTop">
 					
-					<!-- Gloable stats and export -->
-					<div>
-						<div>90%</div>
-						<div>export</div>
+					
+					<div id="projectSuccessStat">
+						<yti:globleStat id="projectE" percentage="15.5"/>
+						<yti:globleStat id="projectD" percentage="37.5"/>
+						<yti:globleStat id="projectC" percentage="57.5"/>
+						<yti:globleStat id="projectB" percentage="77.5"/>
+						<yti:globleStat id="projectA" percentage="87.5"/>
 					</div>
+					
+					<div id="projectExportBlock">
+						<ul id="projectExportList" class="projectExportList">
+							<li>
+								<yti:export id="exportCSV" path="#{currentDocument.path}" type="CSV" />
+							</li>
+							<li>
+								<yti:export id="exportPDF" path="#{currentDocument.path}" type="PDF" />
+							</li>
+							<li>
+								<yti:export id="exportHTML" path="#{currentDocument.path}" type="HTML" />
+							</li>
+							<li>
+								<yti:export id="exportLaTeX" path="#{currentDocument.path}" type="LATEX" />
+							</li>
+							<li>
+								<yti:export id="exportRSS" path="#{currentDocument.path}" type="RSS" />
+							</li>
+						</ul>
+					</div>
+					
 					
 					
 					<!-- info on URLs -->
@@ -103,8 +128,17 @@
 					
 				</div>
 			
-			</p:tab> 
-		</p:tabView>
+			</rich:tab> 
+			
+			<rich:tab header="Stats">
+			</rich:tab>
+			
+			<rich:tab header="Dependancies">
+				@@@@
+			</rich:tab>
+			
+			
+		</rich:tabPanel>
 		
   	</ui:define>
   	

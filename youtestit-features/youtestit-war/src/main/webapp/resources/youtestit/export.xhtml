@@ -1,0 +1,78 @@
+<!--****************************************************************************
+*
+*   YouTestit source code:
+*   ======================
+*   Licensed to the Apache Software Foundation (ASF) under one or more
+*   contributor license agreements.  See the NOTICE file distributed with
+*   this work for additional information regarding copyright ownership.
+*   The ASF licenses this file to You under the Apache License, Version 2.0
+*   (the "License"); you may not use this file except in compliance with
+*   the License.  You may obtain a copy of the License at
+*  
+*       http://www.apache.org/licenses/LICENSE-2.0
+* 
+*   Unless required by applicable law or agreed to in writing, software
+*   distributed under the License is distributed on an "AS IS" BASIS,
+*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*   See the License for the specific language governing permissions and
+*   limitations under the License.
+*
+*   Links:
+*   ======
+*   Homepage : http://www.youtestit.org
+*   Git      : https://github.com/youtestit
+*
+*****************************************************************************-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+
+<ui:remove>
+<!--============================================================================
+= INTERFACE
+=============================================================================-->
+</ui:remove>      
+	<cc:interface  name="export"
+				   displayName="YouTestit Export projects or tests"
+				   preferred="true"
+				   expert="false"
+				   shortDescription="YouTestit Export projects or tests">
+		
+		<cc:attribute name="id" required="true"/>
+		<cc:attribute name="type" required="true"/>
+		<cc:attribute name="path" required="true"/>
+		<cc:attribute name="show" default="#{true}"/>
+        
+        
+	</cc:interface>
+
+<ui:remove>
+<!--============================================================================
+= IMPLEMENTATION
+=============================================================================-->
+</ui:remove>
+	<cc:implementation>
+		<f:subview id="#{cc.attrs.id}_View" rendered="#{cc.attrs.show}">
+			<span class="yti_exportTypeBlock">
+				<a	href="/youtestit/export/#{cc.attrs.type}#{cc.attrs.path}"
+					title="Export to #{cc.attrs.type}"
+					target="_blank">
+					
+					<span	id="#{cc.attrs.id}_exportBloc"
+							class="yti_exportType yti_exportType_#{cc.attrs.type}">
+							
+						<span id="#{cc.attrs.id}_exportLabel" class="yti_exportLabel">
+							<h:outputText id="#{cc.attrs.id}_exportLabelTxt" value="#{cc.attrs.type}" />
+						</span>	
+						
+					</span>
+					
+				</a>
+			</span>
+		</f:subview>
+	</cc:implementation>
+</html>

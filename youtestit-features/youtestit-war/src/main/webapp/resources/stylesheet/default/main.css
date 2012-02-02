@@ -378,6 +378,11 @@ input, select, textarea, button, keygen, isindex, legend, a{
 #bannerplace{
 	display: none !important;
 }
+
+.rf-tab-hdr-tabline-vis.rf-tab-hdr-tabline-top{
+	background:none;
+	border:none;
+}
 	
 /*******************************************************************************
 * PRIMEFACES
@@ -786,5 +791,73 @@ div.prop{
 	background-image: url("#{resource['stylesheet/default/imgs/icons/select-off.png']}");
 }
 
+
+/*****************************************************************************
+* globaleStat component
+*****************************************************************************/
+.yti_success span{
+	display: none;
+}
+
+.yti_successPercentage{
+	float: left;
+	font-size: 130%;
+    font-weight: bold;
+    color: #313131;
+    padding-top: 5px;
+}
+
+.yti_success{
+	float: left;
+    height: 32px;
+    width: 33px;
+}
+
+.yti_success_A{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/globaleStatA.png']}");
+}
+.yti_success_B{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/globaleStatB.png']}");
+}
+.yti_success_C{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/globaleStatC.png']}");
+}
+.yti_success_D{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/globaleStatD.png']}");
+}
+.yti_success_E{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/globaleStatE.png']}");
+}
+
+
+/*****************************************************************************
+* globaleStat component
+*****************************************************************************/
+.projectExportBlock{
+	
+}
+
+.projectExportList{
+	
+}
+
+.yti_exportType{
+	
+}
+.yti_exportType_CSV{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/csv.png']}");
+}
+.yti_exportType_PDF{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/pdf.png']}");
+}
+.yti_exportType_HTML{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/html.png']}");
+}
+.yti_exportType_LATEX{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/latex.png']}");
+}
+.yti_exportType_RSS{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/rss.png']}");
+}
 
 
