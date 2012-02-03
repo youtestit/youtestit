@@ -36,16 +36,20 @@
 = INTERFACE
 =============================================================================-->
 </ui:remove>      
-	<cc:interface  name="export"
-				   displayName="YouTestit Export projects or tests"
+	<cc:interface  name="projectLink"
+				   displayName="YouTestit project link"
 				   preferred="true"
 				   expert="false"
-				   shortDescription="YouTestit Export projects or tests">
+				   shortDescription="YouTestit project link">
 		
 		<cc:attribute name="id" required="true"/>
-		<cc:attribute name="type" required="true"/>
-		<cc:attribute name="path" required="true"/>
-		<cc:attribute name="show" default="#{true}"/>
+		<cc:attribute name="href" required="true"/>
+		<cc:attribute name="label" required="true"/>
+		<cc:attribute name="title" default=""/>
+		<cc:attribute name="target" default="_blank"/>
+		<cc:attribute name="styleClass" default=""/>
+		<cc:attribute name="show" required="true"/>
+		
         
         
 	</cc:interface>
@@ -57,15 +61,15 @@
 </ui:remove>
 	<cc:implementation>
 		<f:subview id="#{cc.attrs.id}_View" rendered="#{cc.attrs.show}">
+			<li id="#{cc.attrs.id}_block" class="#{cc.attrs.styleClass}">
 			
-				<a	href="/youtestit/export/#{cc.attrs.type}#{cc.attrs.path}"
-					title="Export to #{cc.attrs.type}"
-					target="_blank">
-					<span class="yti_exportType yti_exportType_#{cc.attrs.type}">
-							<h:outputText id="#{cc.attrs.id}_exportLabelTxt" value="#{cc.attrs.type}" />
-					</span>
+				<h:outputLabel value="Tracker" id="#{cc.attrs.id}_label" for="#{cc.attrs.id}"/>
+				
+				<a id="#{cc.attrs.id}" href="#{cc.attrs.href}" >
+					<h:outputText id="trackerLinktxt" value="#{currentDocument.document.urlTracker}" />
 				</a>
-			
+				
+			</li>			
 		</f:subview>
 	</cc:implementation>
 </html>

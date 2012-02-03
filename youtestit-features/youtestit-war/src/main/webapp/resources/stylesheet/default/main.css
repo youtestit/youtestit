@@ -105,6 +105,10 @@ a:HOVER{text-decoration: underline;}
 	padding: 12px;	
 }
 
+.simpleList{
+	list-style: none;
+	padding: 0;
+}
 /*******************************************************************************
 * HEADER 
 *******************************************************************************/
@@ -510,6 +514,10 @@ input, select, textarea, button, keygen, isindex, legend, a{
 .rf-sel-btn{
 	margin-left: -4px !important;
 }
+
+.rf-tab{
+	
+}
 /*******************************************************************************
 * STYLES
 *******************************************************************************/
@@ -648,6 +656,21 @@ div.prop{
 }
 
 
+/*******************************************************************************
+* PROJECT HOME
+*******************************************************************************/
+#infoBlocTop label{
+	font-weight: bold;
+	margin-top: 4px;
+}
+
+#projectLinks label{
+	display: inline-block;
+}
+
+#projectLinks a{
+	font-weight: normal;
+}
 
 
 /*******************************************************************************
@@ -795,6 +818,10 @@ div.prop{
 /*****************************************************************************
 * globaleStat component
 *****************************************************************************/
+#projectSuccessStat{
+	float: left;	
+}
+
 .yti_success span{
 	display: none;
 }
@@ -804,46 +831,63 @@ div.prop{
 	font-size: 130%;
     font-weight: bold;
     color: #313131;
-    padding-top: 5px;
+    padding-top: 13px;
+    padding-left: 4px;
 }
 
 .yti_success{
 	float: left;
-    height: 32px;
-    width: 33px;
+    height: 48px;
+    width: 48px;
 }
 
 .yti_success_A{
-	background-image: url("#{resource['stylesheet/default/imgs/icons/globaleStatA.png']}");
+	background-image: url("#{resource['stylesheet/default/imgs/icons/weather/48/health-A.png']}");
 }
 .yti_success_B{
-	background-image: url("#{resource['stylesheet/default/imgs/icons/globaleStatB.png']}");
+	background-image: url("#{resource['stylesheet/default/imgs/icons/weather/48/health-B.png']}");
 }
 .yti_success_C{
-	background-image: url("#{resource['stylesheet/default/imgs/icons/globaleStatC.png']}");
+	background-image: url("#{resource['stylesheet/default/imgs/icons/weather/48/health-C.png']}");
 }
 .yti_success_D{
-	background-image: url("#{resource['stylesheet/default/imgs/icons/globaleStatD.png']}");
+	background-image: url("#{resource['stylesheet/default/imgs/icons/weather/48/health-D.png']}");
 }
 .yti_success_E{
-	background-image: url("#{resource['stylesheet/default/imgs/icons/globaleStatE.png']}");
+	background-image: url("#{resource['stylesheet/default/imgs/icons/weather/48/health-E.png']}");
 }
 
 
 /*****************************************************************************
-* globaleStat component
+* export component
 *****************************************************************************/
-.projectExportBlock{
-	
+#projectExportBlock{
+	float: right;
 }
 
 .projectExportList{
-	
+	list-style: none outside none;
 }
 
-.yti_exportType{
-	
+.projectExportList li{
+	display: inline;
 }
+
+.yti_exportType {
+    display: block;
+    float: left;
+    height: 24px;
+    margin-right: 9px;
+    background-position: center top;
+    background-repeat: no-repeat;
+    text-align: center;
+    padding-top: 25px;
+}
+.yti_exportLabel span{
+	display: block;
+    padding-top: 24px;
+}
+
 .yti_exportType_CSV{
 	background-image: url("#{resource['stylesheet/default/imgs/icons/csv.png']}");
 }

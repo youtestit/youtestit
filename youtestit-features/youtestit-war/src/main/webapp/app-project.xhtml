@@ -63,24 +63,18 @@
   	</ui:remove>
   	
   	<ui:define name="dashboardCenter">
-		 <rich:tabPanel switchType="client">
-			<rich:tab header="Detail">
+		 <rich:tabPanel id="homeProject" switchType="client">
+			<rich:tab id="detail" header="Detail">
 				<div id="infoBlocTop">
 					
 					
 					<div id="projectSuccessStat">
-						<yti:globleStat id="projectE" percentage="15.5"/>
-						<yti:globleStat id="projectD" percentage="37.5"/>
-						<yti:globleStat id="projectC" percentage="57.5"/>
 						<yti:globleStat id="projectB" percentage="77.5"/>
-						<yti:globleStat id="projectA" percentage="87.5"/>
 					</div>
+					
 					
 					<div id="projectExportBlock">
 						<ul id="projectExportList" class="projectExportList">
-							<li>
-								<yti:export id="exportCSV" path="#{currentDocument.path}" type="CSV" />
-							</li>
 							<li>
 								<yti:export id="exportPDF" path="#{currentDocument.path}" type="PDF" />
 							</li>
@@ -94,38 +88,53 @@
 								<yti:export id="exportRSS" path="#{currentDocument.path}" type="RSS" />
 							</li>
 						</ul>
+						<div class="clear"></div>
 					</div>
+					<div class="clear"></div>
 					
 					
 					
 					<!-- info on URLs -->
-					<div>
-						<div>
-							<a href="#{currentDocument.document.urlServer}">Server</a>
-						</div>
-						<div>
-							<a href="#{currentDocument.document.urlWiki}">Wiki</a>
-						</div>
-						<div>
-							<a href="#{currentDocument.document.urlTracker}">Tracker</a>
-						</div>
+					<div id="projectLinks">
+						<ul class="simpleList">
+							<li id="projectLinkServer">
+								<h:outputLabel value="Server" id="serverLinkLabel" for="serverLink"/>
+								<a id="serverLink" href="#{currentDocument.document.urlServer}">
+									<h:outputText id="serverLinktxt" value="#{currentDocument.document.urlServer}" />
+								</a>
+							</li>
+							
+							<li id="projectLinkWiki">
+								<h:outputLabel value="Wiki" id="wikiLinkLabel" for="wikiLink"/>
+								<a id="wikiLink" href="#{currentDocument.document.urlServer}" >
+									<h:outputText id="wikiLinktxt" value="#{currentDocument.document.urlWiki}" />
+								</a>
+							</li>
+							
+							<li id="projectLinkTracker">
+								<h:outputLabel value="Tracker" id="trackerLinkLabel" for="trackerLink"/>
+								<a id="trackerLink" href="#{currentDocument.document.urlServer}">
+									<h:outputText id="trackerLinktxt" value="#{currentDocument.document.urlTracker}" />
+								</a>
+							</li>
+						</ul>
 					</div>
 					
 					<!-- Subject: -->
-					<div>
-						<div>Subject:</div>
-						<div>
-							<h:outputText value="#{currentDocument.document.subject}"  escape="false"/>
+					<div id="projectSubject">
+						<h:outputLabel value="Subject :" id="subjectLabel"/>
+						<div class="textAeraDisplay">
+							<h:outputText value="#{currentDocument.document.subject}"  escape="false"  id="subjectTxt"/>
 						</div>
 					</div>
+
 					
 					<!-- Description: -->
-					<div>
-						<div>
+					<div  id="projectDescription">
+						<div class="textRichDisplay">
 							<h:outputText value="#{currentDocument.document.description}"  escape="false"/>
 						</div>
 					</div>
-					
 				</div>
 			
 			</rich:tab> 
