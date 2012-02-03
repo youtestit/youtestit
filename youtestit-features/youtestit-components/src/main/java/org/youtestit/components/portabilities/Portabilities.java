@@ -180,10 +180,11 @@ public class Portabilities implements Serializable {
      */
     public void addPortability(List<Portability> portabilities, int osIndex, int browserIndex){
         log.info("addPortability");
-        
-        final Portability protability = new Portability(operatingSystem.get(osIndex), browsers.get(browserIndex));
-        if(!portabilities.contains(protability)){
-            portabilities.add(protability);
+        if(portabilities!=null){
+            final Portability protability = new Portability(operatingSystem.get(osIndex), browsers.get(browserIndex));
+            if(!portabilities.contains(protability)){
+                portabilities.add(protability);
+            }    
         }
     }
     
