@@ -1,4 +1,4 @@
-<project name="youtestit" default="install" basedir=".">
+<project name="youtestit" default="deploy" basedir=".">
 
 	<!--========================================================================
     =                              PROPERTIES

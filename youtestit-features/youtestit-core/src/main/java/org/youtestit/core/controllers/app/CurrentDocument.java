@@ -24,6 +24,8 @@
 package org.youtestit.core.controllers.app;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
@@ -36,6 +38,7 @@ import org.jboss.logging.Logger;
 import org.youtestit.datamodel.entity.Document;
 import org.youtestit.datamodel.entity.Project;
 import org.youtestit.datamodel.entity.TestCase;
+import org.youtestit.datamodel.pojo.BreadCrumb;
 
 
 /**
@@ -65,6 +68,8 @@ public class CurrentDocument implements Serializable {
     private String path = "";
     
     private Document document;
+    
+    private List<BreadCrumb> breadCrumbs = new ArrayList<BreadCrumb>(0);
 
     @PersistenceContext
     private EntityManager     entityManager;
@@ -83,13 +88,24 @@ public class CurrentDocument implements Serializable {
         try{
             document= entityManager.createNamedQuery(Document.QUERY_DOC_BY_PATH,Document.class)
                     .setParameter(Document.PARAM_PATH, path)
-                    .getSingleResult();    
+                    .getSingleResult();
+            
+            initializeBreadCrumbs();
         } catch (NoResultException e) {
             // can don't exist. it musn't throw exception for this.
             log.debug(e);
         }
     }
 
+    /**
+     * Initialize bread crumbs.
+     */
+    protected void initializeBreadCrumbs(){
+        if(document!=null){
+            String[] paths =  document.getPath().split("/");
+            
+        }
+    }
 
     // =========================================================================
     // GETTERS & SETTERS
@@ -177,6 +193,24 @@ public class CurrentDocument implements Serializable {
      */
     public void setDocument(Document document) {
         this.document = document;
+    }
+
+    /**
+     * Gets the bread crumbs.
+     *
+     * @return the bread crumbs
+     */
+    public List<BreadCrumb> getBreadCrumbs() {
+        return breadCrumbs;
+    }
+
+    /**
+     * Sets the bread crumbs.
+     *
+     * @param breadCrumbs the new bread crumbs
+     */
+    public void setBreadCrumbs(List<BreadCrumb> breadCrumbs) {
+        this.breadCrumbs = breadCrumbs;
     }
     
     

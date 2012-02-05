@@ -477,6 +477,7 @@ input, select, textarea, button, keygen, isindex, legend, a{
 .rf-tab-cnt{
 	border-color:#003448;
 	border-radius: 0px 0px 6px 6px;
+	box-shadow: 0 0 2px #000000;
 }
 
 .checkablesupport 	.ui-widget-header{
@@ -624,10 +625,12 @@ input.rf-insp-inp[type="text"]{
     float: left;
     margin-right: 5px;
     width: 265px;
+    padding: 4px;
 }
 
 .dashboard_center{
 	overflow: hidden;
+	padding: 4px;
 }
 
 .dashboard_right{
@@ -672,7 +675,16 @@ div.prop{
 	font-weight: normal;
 }
 
+.rf-tab-hdr-inact.rf-tab-hdr-top{
+	background-image:none;
+	box-shadow: 0 0 3px #000000;
+	padding-top: 5px;
+}
 
+.rf-tab-hdr-act.rf-tab-hdr-top{
+	box-shadow: 0 0 2px #000000;
+	padding-top: 5px;
+}
 /*******************************************************************************
 * COMPONENTS
 *******************************************************************************/
@@ -861,7 +873,7 @@ div.prop{
 /*****************************************************************************
 * export component
 *****************************************************************************/
-#projectExportBlock{
+.projectExportBlock{
 	float: right;
 }
 

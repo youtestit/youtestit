@@ -3,7 +3,9 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 			     xmlns:ui="http://java.sun.com/jsf/facelets"
 			     xmlns:f="http://java.sun.com/jsf/core"
-			     template="template.xhtml">
+			     xmlns:h="http://java.sun.com/jsf/html"
+			     xmlns:rich="http://richfaces.org/rich"
+			     template="template-dashboard.xhtml">
 <ui:remove>
 <!--****************************************************************************
 *
@@ -34,38 +36,22 @@
 </ui:remove>
 
 
-    <ui:remove><!--*************************************************************
-    *    BODY
-    *************************************************************************-->
-    </ui:remove>
-    <ui:define name="body">
 		
-		<div id="dashboard">
-			<div id="dashboard_top" class="dashboard_top">
-				<f:subview id="dashboard_top_view">
-					<ui:insert name="dashboardTop" />
-				</f:subview>
-			</div>
-			<div class="clean"></div>
-			
-			<div id="dashboard_left" class="dashboard_left">
-				<f:subview id="dashboard_left_view">
-					<ui:insert name="dashboardLeft" />
-				</f:subview>
-			</div>
-			
-			<div id="dashboard_right" class="dashboard_right">
-				<f:subview id="dashboard_right_view">
-					<ui:insert name="dashboardRight" />
-				</f:subview>
-			</div>
-			
-			<div id="dashboard_center" class="dashboard_center">
-				<f:subview id="dashboard_center_view">
-					<ui:insert name="dashboardCenter" />
-				</f:subview>
-			</div>
-		</div>
+	<ui:remove><!--=============================================================
+    =    dashboardLeft
+    =========================================================================-->
+    </ui:remove>
+  	<ui:define name="dashboardLeft">
+  		<h:form id="ProjectMenuForm">
+			<rich:tabPanel id="ProjectMenu" header="aaa">
+	  			<rich:tab id="tree" header="Tree">
+	  				aaa
+	  			</rich:tab>
+	  			<rich:tab id="properties" header="Properties">
+	  				bbb
+	  			</rich:tab>
+	  		</rich:tabPanel>
+  		</h:form>
+	</ui:define>
 
-    </ui:define>
 </ui:composition>

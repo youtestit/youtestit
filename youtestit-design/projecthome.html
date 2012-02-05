@@ -18,103 +18,283 @@
 <body>
 
 
-<header>
-	<section>
-		<div>
-			<a href="#">
-				<span id="logo">
-				  <span>Logo</span>
-				</span>
-			</a>
-		</div>
-		
-		<div id="identity">
-		  <a href="#" class="login">
-			<span>login</span>
-		  </a>
-	
-		  <span>
-			<span>User name</span>
-			<span class="profileSeparator">/</span>
-			<span>Profile</span>
-		  </span>
-		</div>
-	
-		<div id="search">
-		  <input type="text" />
-		  <a href="#" class="searchButton"><span>Ok</span></a>
-		</div>
-		
-		<div class="clear"></div>
-	</section>
+<header id="headerContent">
 
-	<menu>
-	  <ul>
-	  	<li>
-		  <a href="#" class="menuIcon iconHome">Home</a>
-		</li>
-		
-		<li>
-		  <a href="#" class="menuIcon iconCreateProject">Create project</a>
-		</li>
-	
-		<li class="menuSeparator"></li>
-		<li>
-		  <a href="#" class="menuIcon iconCreateTest">Create Test</a>
-		</li>
-		
-		<li>
-		  <a href="#" class="menuIcon iconConfigure">Configure</a>
-		</li>
-	
-		<li>
-		  <a href="#"  class="menuIcon iconRun">Run</a>
-		</li>
-	
-		<li>
-		  <a href="#" class="menuIcon iconDelete">Delete</a>
-		</li>
-	
-		<li class="menuRightIcon">
-		  <a href="#"  class="menuIcon iconAdminConfig">Config</a>
-		</li>
-	  </ul>
-	  <div class="clear"></div>
-	</menu>
+    <section id="headerSection">
+        <div id="headerLogo">
+            <a href="#">
+
+                <span id="logo">
+                  <span>Logo</span>
+                </span>
+            </a>
+        </div>
+
+        <div id="identity">
+          <a href="logout" class="logout">
+            <span>logout</span>
+
+          </a>
+
+          <span id="headerUserNameProfile">
+            <span id="headerUserName">admin admin</span>
+            <span class="profileSeparator">/</span>
+            <span id="headerProfile">Profile</span>
+          </span>
+        </div>
+
+
+        <div id="search">
+          <input type="text" />
+          <a href="#" class="searchButton"><span>Ok</span></a>
+        </div>
+
+        <div class="clear"></div>
+    </section>
+
+    <menu id="headerActionsMenu">
+      <ul>
+
+            <li id="buttonHome_list">
+                <span id="buttonHome">
+                    <a id="buttonHome_link" href="/youtestit/home" class="menuIcon iconHome" title="Retour à la page d'accueil">Accueil</a>
+                </span>
+            </li>
+            <li id="buttonCreateProject_list">
+                <span id="buttonCreateProject">
+                    <a id="buttonCreateProject_link" href="/youtestit/createProject/foobar" class="menuIcon iconCreateProject" title="Création d'un nouveau projet">Créer un projet</a>
+
+                </span>
+            </li>
+
+        <li class="menuSeparator"></li>
+            <li id="buttonCreateTest_list">
+                <span id="buttonCreateTest">
+                    <a id="buttonCreateTest_link" href="/youtestit/createTest/foobar" class="menuIcon iconCreateTest" title="Création d'un nouveau test">Créer un test</a>
+                </span>
+            </li>
+
+            <li id="buttonConfig_list">
+                <span id="buttonConfig">
+                    <a id="buttonConfig_link" href="/youtestit/config/foobar" class="menuIcon iconConfigure" title="Configurer le projet ou le test courant">Configurer</a>
+                </span>
+            </li>
+            <li id="buttonRun_list">
+                <span id="buttonRun">
+                    <a id="buttonRun_link" href="/youtestit/run/foobar" class="menuIcon iconRun" title="Lancer le projet ou test courant">Lancer</a>
+
+                </span>
+            </li>
+            <li id="buttonAdminConfig_list" class="menuRightIcon">
+                <span id="buttonAdminConfig">
+                    <a id="buttonAdminConfig_link" href="/youtestit/admin/config" class="menuIcon iconAdminConfig" title="Configuration global de l'application">Config</a>
+                </span>
+            </li>
+
+      </ul>
+
+      <div class="clear"></div>
+    </menu>
+
 </header>
 
-
-
-<section>
-
-  <menu class="breadCrumb">
-	<a href="#">Home</a>
-	<span>/</span>
-	<a href="#">Project A</a>
-  </menu>
+    <section id="mainSection">
+        <menu class="breadCrumb" id="breadCrumb">
+        </menu>
 
 
 
-</section>
+        <div id="page">
+            <div id="errorsMessages">
+            </div>
 
 
-	<!--
-	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	+ footer
-	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
-	-->
-	<footer>
-			<hr/>
-			<article>
-				You Test It! , Licensed under the
-				<a href="http://www.apache.org/licenses/LICENSE-2.0.txt">
-					Apache licence, Version 2.0
-				</a>.
-			<article>
-	</footer>
+            <div id="pageContent">
+
+        <div id="dashboard">
+            <div id="dashboard_left" class="dashboard_left">
+<form id="dashboard_left_view:ProjectMenuForm" name="dashboard_left_view:ProjectMenuForm" method="post" action="/youtestit/app//foobar" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="dashboard_left_view:ProjectMenuForm" value="dashboard_left_view:ProjectMenuForm" />
+<div id="dashboard_left_view:ProjectMenuForm:ProjectMenu" class="rf-tbp"><input id="dashboard_left_view:ProjectMenuForm:ProjectMenu-value" name="dashboard_left_view:ProjectMenuForm:ProjectMenu-value" type="hidden" value="tree" /><script type="text/javascript">new RichFaces.ui.TabPanel("dashboard_left_view:ProjectMenuForm:ProjectMenu",{"ajax":{"incId":"1"} ,"activeItem":"tree","isKeepHeight":false,"cycledSwitching":false} )</script><div class="rf-tab-hdr-tabline-vis rf-tab-hdr-tabline-top"><table class="rf-tab-hdr-tabs" cellspacing="0"><tbody><tr><td style="padding-left: 5px;" class="rf-tab-hdr-spcr"><br /></td><td id="dashboard_left_view:ProjectMenuForm:tree:header:inactive" class="rf-tab-hdr rf-tab-hdr-inact rf-tab-hdr-top" style="display : none"><span class="rf-tab-lbl">Tree</span></td><td id="dashboard_left_view:ProjectMenuForm:tree:header:active" class="rf-tab-hdr rf-tab-hdr-act rf-tab-hdr-top" style=""><span class="rf-tab-lbl">Tree</span></td><td id="dashboard_left_view:ProjectMenuForm:tree:header:disabled" class="rf-tab-hdr rf-tab-hdr-dis rf-tab-hdr-top" style="display : none"><span class="rf-tab-lbl">Tree</span></td><td style="" class="rf-tab-hdr-spcr rf-tab-hortab-tabspcr-wdh"><br /></td><td style="padding-right: 5px; width: 100%;" class="rf-tab-hdr-spcr"><br /></td></tr></tbody></table><div class="rf-tab-hdr-scrl-lft rf-tab-hdn">«</div><div class="rf-tab-hdr-tablst rf-tab-hdn">↓</div><div class="rf-tab-hdr-scrl-rgh rf-tab-hdn">»</div></div><div class="rf-tab-hdr-brd"></div><div id="dashboard_left_view:ProjectMenuForm:tree" class="rf-tab"><div class="rf-tab-cnt" id="dashboard_left_view:ProjectMenuForm:tree:content">
+                    aaa
+                </div><script type="text/javascript">new RichFaces.ui.Tab("dashboard_left_view:ProjectMenuForm:tree",{"index":0,"leave":null,"togglePanelId":"dashboard_left_view:ProjectMenuForm:ProjectMenu","switchMode":"ajax","name":"tree","enter":null,"disabled":false} )</script></div><script type="text/javascript">new RichFaces.ui.Tab("dashboard_left_view:ProjectMenuForm:tree",{"index":0,"leave":null,"togglePanelId":"dashboard_left_view:ProjectMenuForm:ProjectMenu","switchMode":"ajax","name":"tree","enter":null,"disabled":false} )</script></div><input type="hidden" name="javax.faces.ViewState" id="javax.faces.ViewState" value="6169348290123909544:-2886570890248404637" autocomplete="off" />
+
+</form>
+            </div>
+
+            <div id="dashboard_right" class="dashboard_right">
+            </div>
+
+            <div id="dashboard_center" class="dashboard_center"><div id="dashboard_center_view:homeProject" class="rf-tbp"><input id="dashboard_center_view:homeProject-value" name="dashboard_center_view:homeProject-value" type="hidden" value="detail" /><script type="text/javascript">new RichFaces.ui.TabPanel("dashboard_center_view:homeProject",{"ajax":{"incId":"1"} ,"activeItem":"detail","isKeepHeight":false,"cycledSwitching":false} )</script><div class="rf-tab-hdr-tabline-vis rf-tab-hdr-tabline-top"><table class="rf-tab-hdr-tabs" cellspacing="0"><tbody><tr><td style="padding-left: 5px;" class="rf-tab-hdr-spcr"><br /></td><td id="dashboard_center_view:detail:header:inactive" class="rf-tab-hdr rf-tab-hdr-inact rf-tab-hdr-top" style="display : none"><span class="rf-tab-lbl">Detail</span></td><td id="dashboard_center_view:detail:header:active" class="rf-tab-hdr rf-tab-hdr-act rf-tab-hdr-top" style=""><span class="rf-tab-lbl">Detail</span></td><td id="dashboard_center_view:detail:header:disabled" class="rf-tab-hdr rf-tab-hdr-dis rf-tab-hdr-top" style="display : none"><span class="rf-tab-lbl">Detail</span></td><td style="" class="rf-tab-hdr-spcr rf-tab-hortab-tabspcr-wdh"><br /></td><td id="dashboard_center_view:j_idt45:header:inactive" class="rf-tab-hdr rf-tab-hdr-inact rf-tab-hdr-top" style=""><span class="rf-tab-lbl">Stats</span></td><td id="dashboard_center_view:j_idt45:header:active" class="rf-tab-hdr rf-tab-hdr-act rf-tab-hdr-top" style="display : none"><span class="rf-tab-lbl">Stats</span></td><td id="dashboard_center_view:j_idt45:header:disabled" class="rf-tab-hdr rf-tab-hdr-dis rf-tab-hdr-top" style="display : none"><span class="rf-tab-lbl">Stats</span></td><td style="" class="rf-tab-hdr-spcr rf-tab-hortab-tabspcr-wdh"><br /></td><td id="dashboard_center_view:j_idt48:header:inactive" class="rf-tab-hdr rf-tab-hdr-inact rf-tab-hdr-top" style=""><span class="rf-tab-lbl">Dependancies</span></td><td id="dashboard_center_view:j_idt48:header:active" class="rf-tab-hdr rf-tab-hdr-act rf-tab-hdr-top" style="display : none"><span class="rf-tab-lbl">Dependancies</span></td><td id="dashboard_center_view:j_idt48:header:disabled" class="rf-tab-hdr rf-tab-hdr-dis rf-tab-hdr-top" style="display : none"><span class="rf-tab-lbl">Dependancies</span></td><td style="" class="rf-tab-hdr-spcr rf-tab-hortab-tabspcr-wdh"><br /></td><td style="padding-right: 5px; width: 100%;" class="rf-tab-hdr-spcr"><br /></td></tr></tbody></table><div class="rf-tab-hdr-scrl-lft rf-tab-hdn">«</div><div class="rf-tab-hdr-tablst rf-tab-hdn">↓</div><div class="rf-tab-hdr-scrl-rgh rf-tab-hdn">»</div></div><div class="rf-tab-hdr-brd"></div><div id="dashboard_center_view:detail" class="rf-tab"><div class="rf-tab-cnt" id="dashboard_center_view:detail:content">
+
+                <div id="infoBlocTop">
 
 
-</body>
+                    <div id="projectSuccessStat">
+            <div id="projectB_successBloc" class="yti_successBloc">
+                    <div id="projectB_success_B_block" class="yti_success yti_success_B">
+                        <span id="projectB_success_B_text">B</span>
+                    </div>
 
 
+
+
+                <div id="projectB_successPercentage" class="yti_successPercentage"><span id="dashboard_center_view:projectB:projectB_View:projectB_successPercentageNumber" class="yti_successPercentageNumber">77.5</span>
+                    <span id="projectB_successPercentageNumberSymbole">%</span>
+
+                </div>
+            </div>
+            <div class="clear"></div>
+                    </div>
+
+
+                    <div id="projectExportBlock" class="projectExportBlock">
+                        <ul id="projectExportList" class="projectExportList">
+                            <li>
+
+                <a href="/youtestit/export/PDF/foobar" title="Export to PDF" target="_blank">
+                    <span class="yti_exportType yti_exportType_PDF"><span id="dashboard_center_view:exportPDF:exportPDF_View:exportPDF_exportLabelTxt">PDF</span>
+
+                    </span>
+                </a>
+                            </li>
+                            <li>
+
+                <a href="/youtestit/export/HTML/foobar" title="Export to HTML" target="_blank">
+                    <span class="yti_exportType yti_exportType_HTML"><span id="dashboard_center_view:exportHTML:exportHTML_View:exportHTML_exportLabelTxt">HTML</span>
+                    </span>
+                </a>
+
+                            </li>
+                            <li>
+
+                <a href="/youtestit/export/LATEX/foobar" title="Export to LATEX" target="_blank">
+                    <span class="yti_exportType yti_exportType_LATEX"><span id="dashboard_center_view:exportLaTeX:exportLaTeX_View:exportLaTeX_exportLabelTxt">LATEX</span>
+                    </span>
+                </a>
+                            </li>
+                        </ul>
+
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+
+
+
+                    <!-- info on URLs -->
+                    <div id="projectLinks">
+                        <ul class="simpleList">
+                            <li id="projectLinkServer"><label id="dashboard_center_view:serverLinkLabel" for="dashboard_center_view:serverLink">
+Server</label>
+                                <a id="serverLink" href="http://www.youtestit.org"><span id="dashboard_center_view:serverLinktxt">http://www.youtestit.org</span>
+
+                                </a>
+                            </li>
+
+                            <li id="projectLinkWiki"><label id="dashboard_center_view:wikiLinkLabel" for="dashboard_center_view:wikiLink">
+Wiki</label>
+                                <a id="wikiLink" href="http://www.youtestit.org"><span id="dashboard_center_view:wikiLinktxt">https://redmine-projets.smile.fr/projects/you-test-it</span>
+                                </a>
+                            </li>
+
+                            <li id="projectLinkTracker"><label id="dashboard_center_view:trackerLinkLabel" for="dashboard_center_view:trackerLink">
+
+Tracker</label>
+                                <a id="trackerLink" href="http://www.youtestit.org"><span id="dashboard_center_view:trackerLinktxt">http://www.youtestit.org/jenkins</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Subject: -->
+                    <div id="projectSubject"><label id="dashboard_center_view:subjectLabel">
+
+Subject :</label>
+                        <div class="textAeraDisplay"><span id="dashboard_center_view:subjectTxt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet libero sit amet quam sollicitudin pellentesque a quis nunc. In gravida tortor sit amet purus malesuada faucibus. Phasellus pretium quam et tortor bibendum viverra. Integer non rutrum massa</span>
+                        </div>
+                    </div>
+
+
+                    <!-- Description: -->
+                    <div id="projectDescription">
+                        <div class="textRichDisplay"><h1 class="wikiHeadline1" id="H-TheSeamFrameworkNextGenerationEnterpriseJavaDevelopment" style="font-size: 18px; color: rgb(0, 0, 0); font-family: "Lucida Grande", Geneva, Verdana, Arial, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); ">
+    <a href="http://seamframework.org/Home/JBossSeam#H-TheSeamFrameworkNextGenerationEnterpriseJavaDevelopment" style="color: rgb(87, 108, 116); text-decoration: none; ">The Seam Framework - Next generation enterprise Java development</a></h1>
+
+<div style="color: rgb(0, 0, 0); font-family: "Lucida Grande", Geneva, Verdana, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); float: right; margin-left: 10px; ">
+    <img height="160" src="http://seamframework.org/themes/sfwkorg/img/seam_icon_large.png" style="border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-style: initial; border-color: initial; " width="196" /></div>
+<p class="wikiPara" style="line-height: 1.5em; color: rgb(0, 0, 0); font-family: "Lucida Grande", Geneva, Verdana, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); ">
+    Seam is a powerful open source development platform for building rich Internet applications in Java. Seam integrates technologies such as Asynchronous JavaScript and XML (AJAX), JavaServer Faces (JSF), Java Persistence (JPA), Enterprise Java Beans (EJB 3.0) and Business Process Management (BPM) into a unified full-stack solution, complete with<span class="Apple-converted-space">&nbsp;</span><a class="regularLink" href="http://jboss.org/tools" style="color: rgb(87, 108, 116); text-decoration: underline; " target="">sophisticated tooling</a>.</p>
+<p class="wikiPara" style="line-height: 1.5em; color: rgb(0, 0, 0); font-family: "Lucida Grande", Geneva, Verdana, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); ">
+    Seam has been designed from the ground up to eliminate complexity at both architecture and API levels. It enables developers to assemble complex web applications using simple annotated Java classes, a rich set of UI components, and very little XML. Seam&#39;s unique support for conversations and declarative state management can introduce a more sophisticated user experience while at the same time eliminating common bugs found in traditional web applications.</p>
+<h2 class="wikiHeadline2" id="H-LearnMore" style="font-size: 16px; margin-top: 15px; color: rgb(0, 0, 0); font-family: "Lucida Grande", Geneva, Verdana, Arial, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); ">
+    <a href="http://seamframework.org/Home/JBossSeam#H-LearnMore" style="color: rgb(87, 108, 116); text-decoration: none; ">Learn more</a></h2>
+
+<p class="wikiPara" style="line-height: 1.5em; color: rgb(0, 0, 0); font-family: "Lucida Grande", Geneva, Verdana, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); ">
+    To find out more about Seam, read<span class="Apple-converted-space">&nbsp;</span><a class="regularLink" href="http://docs.jboss.com/seam/latest/reference/en-US/html/Book-Preface.html" style="color: rgb(87, 108, 116); text-decoration: underline; " target="">this introduction</a><span class="Apple-converted-space">&nbsp;</span>and check out some<span class="Apple-converted-space">&nbsp;</span><a class="regularLink" href="http://docs.jboss.com/seam/latest/reference/en-US/html/tutorial.html" style="color: rgb(87, 108, 116); text-decoration: underline; " target="">tutorial code examples</a>. If you&#39;re evaluating Seam, please see our<span class="Apple-converted-space">&nbsp;</span><a class="regularLink" href="http://www.seamframework.org/Documentation/FAQsOverview/Category/ProductEvaluation" style="color: rgb(87, 108, 116); text-decoration: underline; " target="">answers to frequently asked questions</a>.</p>
+<p class="wikiPara" style="line-height: 1.5em; color: rgb(0, 0, 0); font-family: "Lucida Grande", Geneva, Verdana, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); ">
+    If you are a new Seam user, follow<span class="Apple-converted-space">&nbsp;</span><a class="regularLink" href="http://seamframework.org/Seam2/GettingStartedWithSeam2" style="color: rgb(87, 108, 116); text-decoration: underline; " target="">this roadmap</a><span class="Apple-converted-space">&nbsp;</span>to get started quickly. If you want to contribute to Seam, register on this website and join the<span class="Apple-converted-space">&nbsp;</span><a class="regularLink" href="http://seamframework.org/Community/SeamCommunity" style="color: rgb(87, 108, 116); text-decoration: underline; " target="">Seam Community</a>. If you are interested in development of Seam, see the<span class="Apple-converted-space">&nbsp;</span><a class="regularLink" href="http://seamframework.org/Community/ContributingToSeam" style="color: rgb(87, 108, 116); text-decoration: underline; " target="">list of open issues and tasks by priority</a>.</p>
+
+<p class="wikiPara" style="line-height: 1.5em; color: rgb(0, 0, 0); font-family: "Lucida Grande", Geneva, Verdana, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); ">
+    Seam is licensed under the terms of the LGPL. Full commercial support is<span class="Apple-converted-space">&nbsp;</span><a class="regularLink" href="http://jboss.com/products/platforms/application" style="color: rgb(87, 108, 116); text-decoration: underline; " target="">available</a>. Eclipse-based tooling for Seam applications is provided by<span class="Apple-converted-space">&nbsp;</span><a class="regularLink" href="http://jboss.org/tools" style="color: rgb(87, 108, 116); text-decoration: underline; " target="">JBoss Tools</a>.</p>
+<h2 class="wikiHeadline2" id="H-ReinvestingInJavaEE" style="font-size: 16px; margin-top: 15px; color: rgb(0, 0, 0); font-family: "Lucida Grande", Geneva, Verdana, Arial, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); ">
+    <a href="http://seamframework.org/Home/JBossSeam#H-ReinvestingInJavaEE" style="color: rgb(87, 108, 116); text-decoration: none; ">Reinvesting in Java EE</a></h2>
+<p class="wikiPara" style="line-height: 1.5em; color: rgb(0, 0, 0); font-family: "Lucida Grande", Geneva, Verdana, Arial, sans-serif; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); ">
+    Seam is based on the Java EE platform. That&#39;s why reinvestment in Java EE standards is crucial to Seam&#39;s future. Many ideas which originated in the Seam ecosystem are being contributed back to the Java EE specification by Red Hat, being refined in the process. The most notable initiative is<span class="Apple-converted-space">&nbsp;</span><a class="regularLink" href="http://jcp.org/en/jsr/detail?id=299" style="color: rgb(87, 108, 116); text-decoration: underline; " target="">JSR-299: Java Context and Dependency Injection</a>. This website is home of the reference implementation,<span class="Apple-converted-space">&nbsp;</span><a class="regularLink" href="http://seamframework.org/Weld" style="color: rgb(87, 108, 116); text-decoration: underline; " target="">Weld</a>. Check out the<span class="Apple-converted-space">&nbsp;</span><a class="regularLink" href="http://seamframework.org/Weld/Development" style="color: rgb(87, 108, 116); text-decoration: underline; " target="">development</a><span class="Apple-converted-space">&nbsp;</span>page to get involved. The Seam community also has lots of ideas for<span class="Apple-converted-space">&nbsp;</span><a class="regularLink" href="http://seamframework.org/Documentation/JSF2" style="color: rgb(87, 108, 116); text-decoration: underline; " target="">JSF 2.0</a><span class="Apple-converted-space">&nbsp;</span>and<span class="Apple-converted-space">&nbsp;</span><a class="brokenLink" href="http://seamframework.org/Home/FileNotFound" style="color: rgb(255, 0, 0); text-decoration: line-through; " target="">JSF 2.1</a>, so check out those pages to keep up with the proposals.</p>
+
+                        </div>
+                    </div>
+                </div></div><script type="text/javascript">new RichFaces.ui.Tab("dashboard_center_view:detail",{"index":0,"leave":null,"togglePanelId":"dashboard_center_view:homeProject","switchMode":"client","name":"detail","enter":null,"disabled":false} )</script></div><div id="dashboard_center_view:j_idt45" class="rf-tab" style="display: none"><div class="rf-tab-cnt" id="dashboard_center_view:j_idt45:content">
+                <div id="projectExportBlock" class="projectExportBlock">
+                    <ul id="projectStatExportList" class="projectExportList">
+                        <li>
+
+                <a href="/youtestit/export/CSV/foobar" title="Export to CSV" target="_blank">
+                    <span class="yti_exportType yti_exportType_CSV"><span id="dashboard_center_view:exportCSV:exportCSV_View:exportCSV_exportLabelTxt">CSV</span>
+
+                    </span>
+                </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clear"></div></div><script type="text/javascript">new RichFaces.ui.Tab("dashboard_center_view:j_idt45",{"index":1,"leave":null,"togglePanelId":"dashboard_center_view:homeProject","switchMode":"client","name":"j_idt45","enter":null,"disabled":false} )</script></div><div id="dashboard_center_view:j_idt48" class="rf-tab" style="display: none"><div class="rf-tab-cnt" id="dashboard_center_view:j_idt48:content">
+                @@@@
+            </div><script type="text/javascript">new RichFaces.ui.Tab("dashboard_center_view:j_idt48",{"index":2,"leave":null,"togglePanelId":"dashboard_center_view:homeProject","switchMode":"client","name":"j_idt48","enter":null,"disabled":false} )</script></div><script type="text/javascript">new RichFaces.ui.Tab("dashboard_center_view:detail",{"index":0,"leave":null,"togglePanelId":"dashboard_center_view:homeProject","switchMode":"client","name":"detail","enter":null,"disabled":false} )</script><script type="text/javascript">new RichFaces.ui.Tab("dashboard_center_view:j_idt45",{"index":1,"leave":null,"togglePanelId":"dashboard_center_view:homeProject","switchMode":"client","name":"j_idt45","enter":null,"disabled":false} )</script><script type="text/javascript">new RichFaces.ui.Tab("dashboard_center_view:j_idt48",{"index":2,"leave":null,"togglePanelId":"dashboard_center_view:homeProject","switchMode":"client","name":"j_idt48","enter":null,"disabled":false} )</script></div>
+
+            </div>
+        </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </section>
+    <div class="clear"></div>
+
+<!--
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ footer
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-->
+    <footer id="footer">
+
+            <hr />
+            <article id="licensed">
+                <span>You Test It! , Licensed under the</span>
+                <a href="http://www.apache.org/licenses/LICENSE-2.0.txt" id="licensed_link">
+                <span id="licensed_version">Apache licence, Version 2.0</span>
+                </a>
+                <span>.</span>
+
+            </article>
+
+            <article id="youtestit-info">
+                <ul>
+                    <li id="applicationVersion">0.1-SNAPSHOT</li>
+                    <li id="applicationCommit">19b7ad6598e2a2c8bf2e013362ed2abb9b9006ab</li>
+                    <li id="applicationBuildDate">2011/12/26 22:26</li>
+                    <li class="clear"></li>
+
+                </ul>
+
+            </article>
+    </footer></body>
+</html>
 
