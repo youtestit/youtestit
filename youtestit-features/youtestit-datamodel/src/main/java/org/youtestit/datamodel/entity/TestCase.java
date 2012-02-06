@@ -63,11 +63,11 @@ public class TestCase extends Document {
     private User              developper;
 
     /** The dependancies. */
-    @OneToMany(cascade = CascadeType.REMOVE, targetEntity = Dependency.class, orphanRemoval = true, fetch = LAZY)
+    @OneToMany(cascade = {CascadeType.REMOVE,CascadeType.PERSIST}, targetEntity = Dependency.class, orphanRemoval = true, fetch = LAZY)
     private List<Dependency>  dependencies;
 
     /** The selenium instructions. */
-    @OneToMany(cascade = CascadeType.REMOVE, targetEntity = Instruction.class, orphanRemoval = true, fetch = LAZY)
+    @OneToMany(cascade = {CascadeType.REMOVE,CascadeType.PERSIST}, targetEntity = Instruction.class, orphanRemoval = true, fetch = LAZY)
     private List<Instruction> seleniumInstructions;
 
 

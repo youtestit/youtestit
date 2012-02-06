@@ -39,7 +39,6 @@ import org.apache.commons.lang.text.StrBuilder;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.commons.utils.sha1.Sha1Encryption;
 
-
 /**
  * Constants class is using for set all generic applicatin properties like
  * administrator login, groups, email, ...
@@ -52,51 +51,56 @@ public final class Constants {
     // CONSTANTS
     // =========================================================================
     /** The Constant INSTANCE. */
-    private static final Constants INSTANCE                = new Constants();
+    private static final Constants INSTANCE = new Constants();
 
     /** User home path. */
-    public static final String     USER_HOME               = (String) System.getProperties().get("user.home") + "/";
+    public static final String USER_HOME = (String) System.getProperties().get(
+            "user.home")
+            + "/";
 
     /** Folder name for file system storage. */
-    public static final String     STORAGE_FOLDER_NAME     = ".youtestit";
+    public static final String STORAGE_FOLDER_NAME = ".youtestit";
 
     /** full path to file system storage. */
-    public static final String     STORAGE_FOLDER          = USER_HOME + STORAGE_FOLDER_NAME;
+    public static final String STORAGE_FOLDER = USER_HOME + STORAGE_FOLDER_NAME;
 
     /** full path to configuration storage. */
-    public static final String     STORAGE_FOLDER_CONFIG   = STORAGE_FOLDER + "/config";
+    public static final String STORAGE_FOLDER_CONFIG = STORAGE_FOLDER
+            + "/config";
 
     /** full path to projects storage. */
-    public static final String     STORAGE_FOLDER_PROJECTS = STORAGE_FOLDER + "/projects";
+    public static final String STORAGE_FOLDER_PROJECTS = STORAGE_FOLDER
+            + "/projects";
 
     /** Global properties file (youtestit.properties). */
-    public static final String     PROPERTIES_FILE         = "youtestit.properties";
+    public static final String PROPERTIES_FILE = "youtestit.properties";
 
+    public static final String PATH_APPLICATION = "/app/";
 
     /** The Constant NULL_OBJ. */
-    public static final String     NULL_OBJ                = "null";
+    public static final String NULL_OBJ = "null";
 
     /** The Constant SEP. */
-    public static final String     SEP                     = ",";
+    public static final String SEP = ",";
 
     /** The Constant ITEM_OPEN. */
-    public static final String     ITEM_OPEN               = "{";
+    public static final String ITEM_OPEN = "{";
 
     /** The Constant ITEM_CLOSE. */
-    public static final String     ITEM_CLOSE              = "}";
+    public static final String ITEM_CLOSE = "}";
 
-    public static final String     DOCUMENT_PART           = "@";
-    
+    public static final String DOCUMENT_PART = "@";
+
     /** The Constant PATH_SPLIT. */
-    public static final String     PATH_SPLIT           = "/";
+    public static final String PATH_SPLIT = "/";
 
     // =========================================================================
     // ATTRIBUTS
     // =========================================================================
     /** The properties. */
-    private Properties             properties;
+    private Properties properties;
 
-    private ConstantsProperties    constantsProperties     = new ConstantsProperties();
+    private ConstantsProperties constantsProperties = new ConstantsProperties();
 
     // =========================================================================
     // CONSTRUCTORS
@@ -128,17 +132,23 @@ public final class Constants {
     protected void loadAllProperties() throws ClientException {
         Sha1Encryption sha1 = Sha1Encryption.getInstance();
 
-        constantsProperties.setApplicationVersion(getProperty("application.version", ""));
-        constantsProperties.setApplicationCommit(getProperty("application.commit", ""));
-        constantsProperties.setApplicationBuildDate(getProperty("application.build.date", ""));
+        constantsProperties.setApplicationVersion(getProperty(
+                "application.version", ""));
+        constantsProperties.setApplicationCommit(getProperty(
+                "application.commit", ""));
+        constantsProperties.setApplicationBuildDate(getProperty(
+                "application.build.date", ""));
         constantsProperties.setUserAdmin(getProperty("user.admin", "admin"));
-        constantsProperties.setUserAdminEmail(getProperty("user.admin.email", "administrator@youtestit.org"));
-        constantsProperties.setUserAdminPassword(sha1.encryptToSha1(getProperty("user.admin.password", "admin")));
-        constantsProperties.setGroupAdministrator(getProperty("group.administrator", "Administrator"));
-        constantsProperties.setProfileAdministrator(getProperty("profile.administrator", "Administrator"));
+        constantsProperties.setUserAdminEmail(getProperty("user.admin.email",
+                "administrator@youtestit.org"));
+        constantsProperties.setUserAdminPassword(sha1.encryptToSha1(getProperty(
+                "user.admin.password", "admin")));
+        constantsProperties.setGroupAdministrator(getProperty(
+                "group.administrator", "Administrator"));
+        constantsProperties.setProfileAdministrator(getProperty(
+                "profile.administrator", "Administrator"));
 
     }
-
 
     /**
      * Reset properties.
@@ -146,16 +156,18 @@ public final class Constants {
      * @throws ClientException the client exception
      */
     public void resetProperties() throws ClientException {
-        final String proptertiesPath = Constants.STORAGE_FOLDER_CONFIG + "/" + Constants.PROPERTIES_FILE;
+        final String proptertiesPath = Constants.STORAGE_FOLDER_CONFIG + "/"
+                + Constants.PROPERTIES_FILE;
         final File propertiesFile = new File(proptertiesPath);
-
 
         if (!propertiesFile.exists()) {
 
-            final InputStream input = getClass().getClassLoader().getResourceAsStream(Constants.PROPERTIES_FILE);
+            final InputStream input = getClass().getClassLoader().getResourceAsStream(
+                    Constants.PROPERTIES_FILE);
 
             final DataInputStream dataInput = new DataInputStream(input);
-            final BufferedReader bufferReader = new BufferedReader(new InputStreamReader(dataInput));
+            final BufferedReader bufferReader = new BufferedReader(
+                    new InputStreamReader(dataInput));
             final StrBuilder contentProperties = new StrBuilder();
 
             String strLine;
@@ -174,7 +186,6 @@ public final class Constants {
             } finally {
                 closeInputStream(input);
             }
-
 
             FileWriter fileWriter = null;
             try {
@@ -196,14 +207,14 @@ public final class Constants {
         reloadProperties();
     }
 
-
     /**
      * Reload properties.
      * 
      * @throws ClientException the client exception
      */
     public void reloadProperties() throws ClientException {
-        final String proptertiesPath = Constants.STORAGE_FOLDER_CONFIG + "/" + Constants.PROPERTIES_FILE;
+        final String proptertiesPath = Constants.STORAGE_FOLDER_CONFIG + "/"
+                + Constants.PROPERTIES_FILE;
         InputStream propertiesFile;
         try {
             propertiesFile = new FileInputStream(proptertiesPath);
@@ -223,14 +234,14 @@ public final class Constants {
         loadAllProperties();
     }
 
-
     /**
      * Allow to close input stream.
      * 
      * @param input the input stream
      * @throws ClientException the client exception
      */
-    private void closeInputStream(final InputStream input) throws ClientException {
+    private void closeInputStream(final InputStream input)
+            throws ClientException {
         try {
             input.close();
         } catch (IOException e) {
@@ -244,14 +255,14 @@ public final class Constants {
      * @param out the out
      * @throws ClientException the client exception
      */
-    private void closeOutPutStream(final BufferedWriter out) throws ClientException {
+    private void closeOutPutStream(final BufferedWriter out)
+            throws ClientException {
         try {
             out.close();
         } catch (IOException e) {
             throw new ClientException(e);
         }
     }
-
 
     /**
      * Gets the property.
@@ -261,7 +272,8 @@ public final class Constants {
      * @return the property
      * @throws ClientException the client exception
      */
-    protected String getProperty(final String key, final String defaultValue) throws ClientException {
+    protected String getProperty(final String key, final String defaultValue)
+            throws ClientException {
         String result = null;
         if (key != null && properties != null) {
             result = properties.getProperty(key);
@@ -273,7 +285,6 @@ public final class Constants {
             return result;
         }
     }
-
 
     // =========================================================================
     // GETTERS

@@ -112,7 +112,7 @@ public class CreateProjectAction implements Serializable {
     protected void initializeParentPath() {
         if (parentPath == null) {
             if (currentDocument == null || currentDocument.getPath() == null) {
-                parentPath = "/";
+                parentPath = PATH_SPLIT;
             } else {
                 parentPath = currentDocument.getPath();
             }
@@ -127,11 +127,16 @@ public class CreateProjectAction implements Serializable {
     public String create() {
         log.debug("ceate new project...");
         project.setPath(generatePath());
+        if(parentPath==null){
+            project.setParentPath(PATH_SPLIT);
+        }else{
+            project.setParentPath(parentPath);
+        }
         String pathResult = null;
         
         try {
             projectDAO.create(project);
-            pathResult = "app"+ project.getPath();
+            pathResult = "/app"+ project.getPath();
 
         } catch (ClientException e) {
             log.error(e);

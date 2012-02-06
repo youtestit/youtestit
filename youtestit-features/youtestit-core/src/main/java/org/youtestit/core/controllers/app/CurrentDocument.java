@@ -23,6 +23,7 @@
  */
 package org.youtestit.core.controllers.app;
 
+import static org.youtestit.commons.utils.Constants.PATH_SPLIT;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,6 @@ import org.youtestit.datamodel.entity.Project;
 import org.youtestit.datamodel.entity.TestCase;
 import org.youtestit.datamodel.pojo.BreadCrumb;
 
-
 /**
  * CurrentSection is managed bean who control different generic action on
  * project and test element. It's use for get the current project or test.
@@ -52,7 +52,6 @@ import org.youtestit.datamodel.pojo.BreadCrumb;
 @ViewScoped
 public class CurrentDocument implements Serializable {
 
-
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
@@ -61,35 +60,35 @@ public class CurrentDocument implements Serializable {
 
     /** The test. */
     private Boolean test = null;
-    
+
     /** The project. */
     private Boolean project = null;
-    
+
     private String path = "";
-    
+
     private Document document;
-    
+
     private List<BreadCrumb> breadCrumbs = new ArrayList<BreadCrumb>(0);
 
     @PersistenceContext
-    private EntityManager     entityManager;
+    private EntityManager entityManager;
 
     @Inject
-    private Logger            log;
-    
+    private Logger log;
+
     // =========================================================================
     // METHODS
     // =========================================================================
-    
+
     /**
      * Load document.
      */
-    protected void loadDocument(){
-        try{
-            document= entityManager.createNamedQuery(Document.QUERY_DOC_BY_PATH,Document.class)
-                    .setParameter(Document.PARAM_PATH, path)
-                    .getSingleResult();
-            
+    protected void loadDocument() {
+        try {
+            document = entityManager.createNamedQuery(
+                    Document.QUERY_DOC_BY_PATH, Document.class).setParameter(
+                    Document.PARAM_PATH, path).getSingleResult();
+
             initializeBreadCrumbs();
         } catch (NoResultException e) {
             // can don't exist. it musn't throw exception for this.
@@ -100,10 +99,20 @@ public class CurrentDocument implements Serializable {
     /**
      * Initialize bread crumbs.
      */
-    protected void initializeBreadCrumbs(){
-        if(document!=null){
-            String[] paths =  document.getPath().split("/");
-            
+    protected void initializeBreadCrumbs() {
+        if (path != null && breadCrumbs.isEmpty()) {
+            String[] paths = path.split(PATH_SPLIT);
+
+            // skip home path
+            if (paths.length > 1) {
+                StringBuilder fullPath = new StringBuilder();
+                for (int index = 1; index < paths.length; index++) {
+                    fullPath.append(paths[index]);
+                    breadCrumbs.add(new BreadCrumb(paths[index],
+                            fullPath.toString()));
+                    fullPath.append(PATH_SPLIT);
+                }
+            }
         }
     }
 
@@ -112,50 +121,49 @@ public class CurrentDocument implements Serializable {
     // =========================================================================
     /**
      * Gets the checks if is test.
-     *
+     * 
      * @return the checks if is test
      */
-    public boolean getIsTest(){
-        if(test==null){
-            if(document==null){
+    public boolean getIsTest() {
+        if (test == null) {
+            if (document == null) {
                 loadDocument();
             }
-            
-            if(document==null){
-                test = false;    
-            }else{
+
+            if (document == null) {
+                test = false;
+            } else {
                 test = document instanceof TestCase;
             }
-            
+
         }
         return test;
     }
-    
+
     /**
      * Gets the checks if is project.
-     *
+     * 
      * @return the checks if is project
      */
-    public boolean getIsProject(){
-        if(project==null){
-            if(document==null){
+    public boolean getIsProject() {
+        if (project == null) {
+            if (document == null) {
                 loadDocument();
             }
-            
-            if(document==null){
-                project = false;    
-            }else{
+
+            if (document == null) {
+                project = false;
+            } else {
                 project = document instanceof Project;
             }
-            
+
         }
         return project;
     }
 
-    
     /**
      * get url path to section
-     *
+     * 
      * @return the path
      */
     public String getPath() {
@@ -164,31 +172,29 @@ public class CurrentDocument implements Serializable {
 
     /**
      * Sets url path to section
-     *
+     * 
      * @param path the new path
      */
     public void setPath(String path) {
-        this.path = "/"+path;
-        
-    }
+        this.path = "/" + path;
 
+    }
 
     /**
      * Gets the document.
-     *
+     * 
      * @return the document
      */
     public Document getDocument() {
-        if(document==null){
+        if (document == null) {
             loadDocument();
         }
         return document;
     }
 
-
     /**
      * Sets the document.
-     *
+     * 
      * @param document the new document
      */
     public void setDocument(Document document) {
@@ -197,23 +203,21 @@ public class CurrentDocument implements Serializable {
 
     /**
      * Gets the bread crumbs.
-     *
+     * 
      * @return the bread crumbs
      */
     public List<BreadCrumb> getBreadCrumbs() {
+        initializeBreadCrumbs();
         return breadCrumbs;
     }
 
     /**
      * Sets the bread crumbs.
-     *
+     * 
      * @param breadCrumbs the new bread crumbs
      */
     public void setBreadCrumbs(List<BreadCrumb> breadCrumbs) {
         this.breadCrumbs = breadCrumbs;
     }
-    
-    
-    
-    
+
 }

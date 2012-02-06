@@ -94,12 +94,12 @@ public class Dependency implements Serializable {
     private Document          document;
 
     /** The parents. */
-    @OneToMany(cascade = CascadeType.REMOVE, targetEntity = Dependency.class, orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.REMOVE,CascadeType.PERSIST}, targetEntity = Dependency.class, orphanRemoval = true)
     @JoinColumn(name = "parents_uid", nullable = true)
     private List<Dependency>  parents          = new ArrayList<Dependency>();
 
     /** The children. */
-    @OneToMany(cascade = CascadeType.REMOVE, targetEntity = Dependency.class, orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.REMOVE,CascadeType.PERSIST}, targetEntity = Dependency.class, orphanRemoval = true)
     @JoinColumn(name = "children_uid", nullable = true)
     private List<Dependency>  children         = new ArrayList<Dependency>();
 

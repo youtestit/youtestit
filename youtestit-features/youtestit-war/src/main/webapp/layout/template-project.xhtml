@@ -5,6 +5,7 @@
 			     xmlns:f="http://java.sun.com/jsf/core"
 			     xmlns:h="http://java.sun.com/jsf/html"
 			     xmlns:rich="http://richfaces.org/rich"
+			     xmlns:p="http://primefaces.prime.com.tr/ui"
 			     template="template-dashboard.xhtml">
 <ui:remove>
 <!--****************************************************************************
@@ -35,18 +36,53 @@
 *****************************************************************************-->
 </ui:remove>
 
-
+	
+	<ui:remove><!--=============================================================
+    =    dashboardTop
+    =========================================================================-->
+    </ui:remove>
+	<ui:define name="dashboardTop">
+        <p:breadCrumb model="#{appActions.breadCrumbs}" id="breadCrumbApp" />
+    </ui:define>
+    
+    
 		
 	<ui:remove><!--=============================================================
     =    dashboardLeft
     =========================================================================-->
     </ui:remove>
   	<ui:define name="dashboardLeft">
+  		
   		<h:form id="ProjectMenuForm">
 			<rich:tabPanel id="ProjectMenu" header="aaa">
+				
 	  			<rich:tab id="tree" header="Tree">
-	  				aaa
+	  				<div class="treeBlock">
+			             <p:tree id="docTree" value="#{appActions.tree}" var="doc">  
+					        <p:treeNode icon="ui-icon">  
+					            <h:outputText value="#{doc.title}"/>  
+					        </p:treeNode>
+					        
+					        <p:treeNode type="root" icon="ui-icon ui-icon-root">
+								<h:outputText value="#{doc.title}"/>
+							</p:treeNode>
+							
+							<p:treeNode type="Project" collapsedIcon="ui-icon ui-icon-project-close"
+													   expandedIcon="ui-icon ui-icon-project">
+								<a href="/youtestit/app#{doc.path}" title="#{doc.subject}">
+									<h:outputText value="#{doc.title}"/>
+								</a>
+							</p:treeNode>
+							
+							<p:treeNode type="TestCase" icon="ui-icon ui-icon-test">
+								<a href="/youtestit/app#{doc.path}"><h:outputText value="#{doc.title}"/></a>
+							</p:treeNode>
+					        
+					     </p:tree>
+	  				</div>
 	  			</rich:tab>
+	  			
+	  			
 	  			<rich:tab id="properties" header="Properties">
 	  				bbb
 	  			</rich:tab>

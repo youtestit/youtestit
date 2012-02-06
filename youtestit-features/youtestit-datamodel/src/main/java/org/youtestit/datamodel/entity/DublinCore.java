@@ -116,6 +116,9 @@ public class DublinCore implements Serializable {
     @Path
     @NotEmpty
     private String path;
+    
+    @Path
+    private String parentPath;
 
     /** The subject. */
     @Size(max = MAX_LENGTH_SUBJECT)
@@ -129,7 +132,7 @@ public class DublinCore implements Serializable {
     private String description;
 
     /** The children. */
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
     private List<DublinCore> children;
 
     /**
@@ -789,5 +792,25 @@ public class DublinCore implements Serializable {
     protected static String getItemClose() {
         return ITEM_CLOSE;
     }
+
+    /**
+     * Gets the parent path.
+     *
+     * @return the parent path
+     */
+    public String getParentPath() {
+        return parentPath;
+    }
+
+    /**
+     * Sets the parent path.
+     *
+     * @param parentPath the new parent path
+     */
+    public void setParentPath(String parentPath) {
+        this.parentPath = parentPath;
+    }
+    
+    
 
 }

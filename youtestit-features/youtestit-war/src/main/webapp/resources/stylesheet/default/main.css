@@ -387,17 +387,26 @@ input, select, textarea, button, keygen, isindex, legend, a{
 	background:none;
 	border:none;
 }
-	
+
+.ui-tree{
+	width: auto;
+}
+
+.rf-tab-hortab-tabspcr-wdh{
+	padding-left: 4px;
+}
+
 /*******************************************************************************
 * PRIMEFACES
 *******************************************************************************/
 /** primefaces border color */
 .ui-widget-content, .ui-widget-header{
 	border-color: #003448 !important;
-}ll
-.ui-panel .ui-panel-titlebar {
+}
+
+ll .ui-panel .ui-panel-titlebar {
     padding: 0;
-      height: 20px;
+    height: 20px;
 }
 .ui-panel-titlebar .ui-widget-header .ui-corner-all{
 	padding: 2px;
@@ -685,6 +694,47 @@ div.prop{
 	box-shadow: 0 0 2px #000000;
 	padding-top: 5px;
 }
+
+.textRichDisplay{
+	padding: 5px;
+}
+
+
+.homeIcon{
+	background: url("#{resource['stylesheet/default/imgs/icons/homeIcon.png']}") no-repeat scroll 0 5px transparent;
+	padding-left: 13px;
+}
+
+
+.treeBlock .ui-widget-content,.treeBlock .ui-widget-header{
+	border: none;
+}
+
+
+.ui-icon-project{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/tree/folder-22.png']}") !important;
+}
+.ui-icon-project-close{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/tree/folder-22.png']}") !important;
+}
+
+.ui-icon-test{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/tree/test-green-22.png']}") !important;
+}
+.ui-icon-test-fail{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/tree/test-red-22.png']}") !important;
+}
+
+.ui-icon{
+	float: left;
+	display: block;
+}
+.ui-tree-node-label a{
+	font-weight: normal;
+}
+
+
+
 /*******************************************************************************
 * COMPONENTS
 *******************************************************************************/
@@ -875,6 +925,10 @@ div.prop{
 *****************************************************************************/
 .projectExportBlock{
 	float: right;
+}
+
+.projectExportBlock a{
+	font-size: 9px;	
 }
 
 .projectExportList{

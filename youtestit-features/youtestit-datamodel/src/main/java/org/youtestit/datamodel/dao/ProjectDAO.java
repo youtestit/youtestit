@@ -24,6 +24,7 @@
 package org.youtestit.datamodel.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -37,13 +38,13 @@ import org.jboss.logging.Logger;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.commons.utils.exceptions.EntityExistsException;
 import org.youtestit.commons.utils.exceptions.ErrorsMSG;
+import org.youtestit.datamodel.entity.Document;
 import org.youtestit.datamodel.entity.Portability;
 import org.youtestit.datamodel.entity.Project;
 
 @Singleton
 @Named
 public class ProjectDAO implements Serializable {
-    
 
     // =========================================================================
     // ATTRIBUTES
@@ -54,16 +55,14 @@ public class ProjectDAO implements Serializable {
     /** The logger. */
     @Inject
     private Logger log;
-    
+
     /** The entity manager. */
     @PersistenceContext
     private EntityManager entityManager;
-    
+
     /** The portabilities dao. */
     @Inject
     private PortabilityDAO portabilitiesDAO;
-
-    
 
     // =========================================================================
     // CONSTRUCTORS
@@ -76,28 +75,28 @@ public class ProjectDAO implements Serializable {
         super();
     }
 
-    
     /**
      * Instantiates a new project dao for unit test.
-     *
+     * 
      * @param entityManager the entity manager
      * @param log the log
      */
-    protected ProjectDAO(final EntityManager entityManager,final Logger log) {
+    protected ProjectDAO(final EntityManager entityManager, final Logger log) {
         super();
         this.entityManager = entityManager;
         this.log = log;
-        this.portabilitiesDAO = new PortabilityDAO(entityManager,log);
+        this.portabilitiesDAO = new PortabilityDAO(entityManager, log);
     }
-    
+
     /**
      * Instantiates a new project dao.
-     *
+     * 
      * @param entityManager the entity manager
      * @param log the log
      * @param portabilitiesDAO the portabilities dao
      */
-    protected ProjectDAO(EntityManager entityManager, Logger log,PortabilityDAO portabilitiesDAO) {
+    protected ProjectDAO(EntityManager entityManager, Logger log,
+            PortabilityDAO portabilitiesDAO) {
         super();
         this.entityManager = entityManager;
         this.log = log;
@@ -113,49 +112,113 @@ public class ProjectDAO implements Serializable {
     // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     /**
      * Allow to creates a new Project.
-     *
+     * 
      * @param project the project to create
      * @throws ClientException if exception is occure.
      */
-    public void create(final Project project) throws ClientException{
+    public void create(final Project project) throws ClientException {
         log.debug("create");
-        
-        if(project == null){
-            throw new ClientException(ErrorsMSG.VALUE_NOT_NULL); 
+
+        if (project == null) {
+            throw new ClientException(ErrorsMSG.VALUE_NOT_NULL);
         }
-        
-        final String param  = "path";
-        final String jpql = "SELECT p FROM Project p WHERE p.path=:"+param;
-        
+
+        final String param = "path";
+        final String jpql = "SELECT p FROM Project p WHERE p.path=:" + param;
+
         Project resultSet = null;
-        try{
-            resultSet = entityManager.createQuery(jpql, Project.class)
-                    .setParameter(param, project.getPath())
-                    .getSingleResult();    
-        }catch (NoResultException e) {
+        try {
+            resultSet = entityManager.createQuery(jpql, Project.class).setParameter(
+                    param, project.getPath()).getSingleResult();
+        } catch (NoResultException e) {
             // it can have no Entity in database. it isn't an error !
             log.debug(e);
         }
+
+        persistePortability(project);
+
         
-         
-         
-         if(resultSet==null){
-             persist(project);
-         }else{
-             throw new EntityExistsException();
-         }
+        if (resultSet == null) {
+            persist(project);
+        } else {
+            throw new EntityExistsException();
+        }
+        
+        List<Document> parents = readDocByPath(project.getParentPath());
+        if(parents!=null&& !parents.isEmpty()){
+            for(Document docsParent :parents ){
+                docsParent.addChild(project);
+                entityManager.merge(docsParent);
+            }
+        }
     }
-    
+
     /**
-     * Persist.
-     *
+     * Persiste portability.
+     * 
      * @param project the project
      * @throws ClientException the client exception
      */
-    protected void persist(final Project project) throws ClientException{
+    protected void persistePortability(final Project project)
+            throws ClientException {
+        if (project.getPortabilities() != null
+                && !project.getPortabilities().isEmpty()) {
+            List<Portability> result = new ArrayList<Portability>();
+
+            for (Portability item : project.getPortabilities()) {
+                result.add(portabilitiesDAO.create(item));
+            }
+            project.setPortabilities(result);
+        }
+    }
+
+    /**
+     * Persist.
+     * 
+     * @param project the project
+     * @throws ClientException the client exception
+     */
+    protected void persist(final Project project) throws ClientException {
         final List<Portability> portabilities = portabilitiesDAO.create(project.getPortabilities());
         project.setPortabilities(portabilities);
         entityManager.persist(project);
     }
 
+    // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    // READ
+    // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+    /**
+     * Read doc by path parent.
+     * 
+     * @param path the path
+     * @return the list
+     * @throws ClientException the client exception
+     */
+    public List<Document> readDocByPathParent(final String path)
+            throws ClientException {
+        final String param = "parentPath";
+        final String jpql = "SELECT d FROM Document d WHERE d.parentPath=:"
+                + param;
+
+        return entityManager.createQuery(jpql, Document.class).setParameter(
+                param, path).getResultList();
+    }
+    
+    /**
+     * Read doc by path.
+     *
+     * @param path the path
+     * @return the list
+     * @throws ClientException the client exception
+     */
+    public List<Document> readDocByPath(final String path)
+            throws ClientException {
+        final String param = "path";
+        final String jpql = "SELECT d FROM Document d WHERE d.path=:"
+                + param;
+
+        return entityManager.createQuery(jpql, Document.class).setParameter(
+                param, path).getResultList();
+    }
 }

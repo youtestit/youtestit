@@ -43,20 +43,9 @@
     *    TITLE
     *************************************************************************-->
     </ui:remove>
-    <ui:define name="dashboardTop">
-        <h1>#{currentDocument.path}</h1>
-        
-        <p:breadCrumb>
-			<p:menuitem value="Categories" url="#" styleClass="homeIcon" />
-			<p:menuitem value="Sports" url="#" />
-			<p:menuitem value="Football" url="#" />
-			<p:menuitem value="Countries" url="#" />
-			<p:menuitem value="Spain" url="#" />
-			<p:menuitem value="F.C. Barcelona" url="#" />
-			<p:menuitem value="Squad" url="#" />
-			<p:menuitem value="Lionel Messi" url="#" />
-		</p:breadCrumb>
-    </ui:define>
+    
+    
+    
 
 
 
@@ -136,6 +125,7 @@
 								<div class="textRichDisplay">
 									<h:outputText value="#{currentDocument.document.description}"  escape="false"/>
 								</div>
+								<div class="clear"></div>
 							</div>
 						</div>
 					
