@@ -36,6 +36,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.jboss.logging.Logger;
+import org.youtestit.commons.utils.exceptions.ClientException;
+import org.youtestit.datamodel.dao.ProjectDAO;
 import org.youtestit.datamodel.entity.Document;
 import org.youtestit.datamodel.entity.Project;
 import org.youtestit.datamodel.entity.TestCase;
@@ -72,6 +74,9 @@ public class CurrentDocument implements Serializable {
 
     @PersistenceContext
     private EntityManager entityManager;
+    
+    @Inject
+    private ProjectDAO projectDAO;
 
     @Inject
     private Logger log;
@@ -82,18 +87,11 @@ public class CurrentDocument implements Serializable {
 
     /**
      * Load document.
+     * @throws ClientException 
      */
-    protected void loadDocument() {
-        try {
-            document = entityManager.createNamedQuery(
-                    Document.QUERY_DOC_BY_PATH, Document.class).setParameter(
-                    Document.PARAM_PATH, path).getSingleResult();
-
-            initializeBreadCrumbs();
-        } catch (NoResultException e) {
-            // can don't exist. it musn't throw exception for this.
-            log.debug(e);
-        }
+    protected void loadDocument() throws ClientException {
+        log.debug("loadDocument()");
+        document =projectDAO.readDocByPath(path);
     }
 
     /**
@@ -123,8 +121,9 @@ public class CurrentDocument implements Serializable {
      * Gets the checks if is test.
      * 
      * @return the checks if is test
+     * @throws ClientException 
      */
-    public boolean getIsTest() {
+    public boolean getIsTest() throws ClientException {
         if (test == null) {
             if (document == null) {
                 loadDocument();
@@ -144,8 +143,9 @@ public class CurrentDocument implements Serializable {
      * Gets the checks if is project.
      * 
      * @return the checks if is project
+     * @throws ClientException 
      */
-    public boolean getIsProject() {
+    public boolean getIsProject() throws ClientException {
         if (project == null) {
             if (document == null) {
                 loadDocument();
@@ -184,8 +184,9 @@ public class CurrentDocument implements Serializable {
      * Gets the document.
      * 
      * @return the document
+     * @throws ClientException 
      */
-    public Document getDocument() {
+    public Document getDocument() throws ClientException {
         if (document == null) {
             loadDocument();
         }

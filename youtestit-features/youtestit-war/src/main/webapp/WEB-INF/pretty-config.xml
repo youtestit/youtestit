@@ -51,7 +51,7 @@
     =========================================================================-->
     <url-mapping id="app">
         <pattern value="/app/#{/.*/ path:currentDocument.path}"></pattern>
-        <view-id>/app-project.xhtml</view-id>
+        <view-id>#{redirect.getAppHome}</view-id>
     </url-mapping>
     
     

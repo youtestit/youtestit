@@ -137,19 +137,16 @@ public class ProjectDAO implements Serializable {
 
         persistePortability(project);
 
-        
         if (resultSet == null) {
             persist(project);
         } else {
             throw new EntityExistsException();
         }
-        
-        List<Document> parents = readDocByPath(project.getParentPath());
-        if(parents!=null&& !parents.isEmpty()){
-            for(Document docsParent :parents ){
-                docsParent.addChild(project);
-                entityManager.merge(docsParent);
-            }
+
+        Document parent = readDocByPath(project.getParentPath());
+        if (parent != null) {
+            parent.addChild(project);
+            entityManager.merge(parent);
         }
     }
 
@@ -204,21 +201,24 @@ public class ProjectDAO implements Serializable {
         return entityManager.createQuery(jpql, Document.class).setParameter(
                 param, path).getResultList();
     }
-    
+
     /**
      * Read doc by path.
-     *
+     * 
      * @param path the path
      * @return the list
      * @throws ClientException the client exception
      */
-    public List<Document> readDocByPath(final String path)
-            throws ClientException {
+    public Document readDocByPath(final String path) throws ClientException {
         final String param = "path";
-        final String jpql = "SELECT d FROM Document d WHERE d.path=:"
-                + param;
+        final String jpql = "SELECT d FROM Document d WHERE d.path=:" + param;
 
-        return entityManager.createQuery(jpql, Document.class).setParameter(
-                param, path).getResultList();
+        Document document = null;
+
+        document = entityManager.createQuery(jpql, Document.class).setParameter(
+                param, path).getSingleResult();
+
+        return document;
+
     }
 }

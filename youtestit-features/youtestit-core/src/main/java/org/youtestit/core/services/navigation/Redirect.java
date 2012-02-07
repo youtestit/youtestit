@@ -21,8 +21,8 @@
  *   Homepage : http://www.youtestit.org
  *   Git      : https://github.com/youtestit
  */
-package org.youtestit.security.redirect;
-
+package org.youtestit.core.services.navigation;
+import static org.youtestit.commons.utils.Constants.PATH_SPLIT;
 import java.io.Serializable;
 
 import javax.enterprise.context.RequestScoped;
@@ -31,6 +31,7 @@ import javax.inject.Named;
 
 import org.jboss.logging.Logger;
 import org.youtestit.commons.utils.exceptions.ClientException;
+import org.youtestit.core.controllers.app.CurrentDocument;
 import org.youtestit.security.identification.CurrentUserManager;
 
 
@@ -53,6 +54,9 @@ public class Redirect implements Serializable {
 
     @Inject
     private CurrentUserManager currentUserManager;
+    
+    @Inject
+    private CurrentDocument currentDocument;
 
     @Inject
     private Logger             log;
@@ -79,9 +83,34 @@ public class Redirect implements Serializable {
 
     }
 
+    /**
+     * Redirect to home.
+     *
+     * @throws ClientException the client exception
+     */
     public void redirectToHome() throws ClientException {
         log.info("redirectToHome");
     }
 
 
+    /**
+     * Gets the app home.
+     *
+     * @return the app home
+     * @throws ClientException the client exception
+     */
+    public String getAppHome() throws ClientException{
+        String result = "/app-unknown.xhtml";
+        
+        if(currentDocument!=null && currentDocument.getDocument()!=null){
+            StringBuilder url = new StringBuilder(PATH_SPLIT);
+            url.append("app-");
+            url.append(currentDocument.getDocument().getClass().getSimpleName());
+            url.append(".xhtml");
+            
+            result = url.toString();
+        }
+        return result;
+    }
+    
 }

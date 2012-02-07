@@ -67,8 +67,9 @@ public class ActionsButtonsVisibility implements Serializable {
      * Gets the show create test.
      *
      * @return the show create test
+     * @throws ClientException 
      */
-    public Boolean getShowInnerSection(){
+    public Boolean getShowInnerSection() throws ClientException{
         if(showInnerSection==null){
             showInnerSection = false;
             
