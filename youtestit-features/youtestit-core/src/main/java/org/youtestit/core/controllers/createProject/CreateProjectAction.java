@@ -110,6 +110,7 @@ public class CreateProjectAction implements Serializable {
      * Allow to initialize parent path.
      */
     protected void initializeParentPath() {
+        log.debug("initializeParentPath()");
         if (parentPath == null) {
             if (currentDocument == null || currentDocument.getPath() == null) {
                 parentPath = PATH_SPLIT;
@@ -212,6 +213,9 @@ public class CreateProjectAction implements Serializable {
      * @return the parent path
      */
     public String getParentPath() {
+        if(parentPath==null && currentDocument!=null){
+            initializeParentPath();
+        }
         return parentPath;
     }
 
