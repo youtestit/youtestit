@@ -1,0 +1,97 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.org/seam/faces"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    xmlns:ytiEditor="http://java.sun.com/jsf/composite/youtestit/editor"
+    xmlns:yti="http://java.sun.com/jsf/composite/youtestit"
+    template="layout/template-form.xhtml">
+<ui:remove>
+<!--****************************************************************************
+*
+*   YouTestit source code:
+*   ======================
+*   Licensed to the Apache Software Foundation (ASF) under one or more
+*   contributor license agreements.  See the NOTICE file distributed with
+*   this work for additional information regarding copyright ownership.
+*   The ASF licenses this file to You under the Apache License, Version 2.0
+*   (the "License"); you may not use this file except in compliance with
+*   the License.  You may obtain a copy of the License at
+*  
+*       http://www.apache.org/licenses/LICENSE-2.0
+* 
+*   Unless required by applicable law or agreed to in writing, software
+*   distributed under the License is distributed on an "AS IS" BASIS,
+*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*   See the License for the specific language governing permissions and
+*   limitations under the License.
+*
+*   Links:
+*   ======
+*   Homepage : http://www.youtestit.org
+*   Git      : https://github.com/youtestit
+*
+*****************************************************************************-->
+</ui:remove>
+
+
+	<ui:remove><!--=============================================================
+    =    dashboardLeft
+    =========================================================================-->
+    </ui:remove>
+  	<ui:define name="formTitle">#{messages['label.create.test.title']}</ui:define>
+
+
+	<ui:remove><!--=============================================================
+    =    dashboardLeft
+    =========================================================================-->
+    </ui:remove>
+  	<ui:define name="formContent">
+ 
+ 		<f:subview id="createTest">
+ 			<h:form id="form">
+ 				<p:panel  id="panel" header="#{messages['label.create.test.panel.title']}">
+					
+					<h:panelGrid    id="grid" columns="3" rowClasses="prop" columnClasses="name,value,error">
+				            <ui:remove>
+				            <!--+++++++++[ title ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+				            </ui:remove>        
+							<h:outputLabel id="title_label" for="title" value="#{messages['label.create.project.form.title']}"/>
+				            <h:inputText id="title" value="#{createDocAction.project.title}" size="50">
+				            	<rich:validator />
+				            </h:inputText>
+				            <rich:message for="title" id="title_error" />
+				            
+				            
+				            <ui:remove>
+				            <!--+++++++++[ parentPath ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+				            </ui:remove>        
+							<h:outputLabel id="parentPath_label" for="parentPath" value="#{messages['label.create.project.form.parent.path']}"/>
+				            <h:inputText id="parentPath" value="#{createDocAction.parentPath}" size="60">
+				            	<rich:validator />
+				            </h:inputText>
+				            <rich:message for="parentPath" id="parentPath_error" />
+				            
+
+					</h:panelGrid>
+					
+					
+
+					
+					<div class="buttons-actions">
+	        		        <h:commandButton value="#{messages['label.create.project.panel.action.submit']}"
+	                          		         action="#{createDocAction.create()}"
+	                          		         id="create"/>
+	         		</div>
+ 				</p:panel>
+ 			</h:form>
+ 		</f:subview>
+	</ui:define>
+
+		
+</ui:composition>

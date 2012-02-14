@@ -23,6 +23,7 @@
  */
 package org.youtestit.core.services.navigation;
 import static org.youtestit.commons.utils.Constants.PATH_SPLIT;
+
 import java.io.Serializable;
 
 import javax.enterprise.context.RequestScoped;
@@ -31,8 +32,12 @@ import javax.inject.Named;
 
 import org.jboss.logging.Logger;
 import org.youtestit.commons.utils.exceptions.ClientException;
-import org.youtestit.core.controllers.app.CurrentDocument;
+import org.youtestit.datamodel.dao.ProjectDAO;
+import org.youtestit.datamodel.entity.Document;
 import org.youtestit.security.identification.CurrentUserManager;
+
+import com.ocpsoft.pretty.PrettyContext;
+import com.ocpsoft.pretty.faces.url.URL;
 
 
 /**
@@ -56,8 +61,8 @@ public class Redirect implements Serializable {
     private CurrentUserManager currentUserManager;
     
     @Inject
-    private CurrentDocument currentDocument;
-
+    private ProjectDAO projectDAO;
+    
     @Inject
     private Logger             log;
 
@@ -100,12 +105,21 @@ public class Redirect implements Serializable {
      * @throws ClientException the client exception
      */
     public String getAppHome() throws ClientException{
+        //
+        URL currentPath = PrettyContext.getCurrentInstance().getRequestURL();
+        Document currentDocument = null;
+        
+        if(currentPath!=null && currentPath.toString().startsWith("/app/")){
+            final String requestUrl = currentPath.decode().toString().replace("/app", "");
+            currentDocument = projectDAO.readDocByPath(requestUrl);
+            
+        }
         String result = "/app-unknown.xhtml";
         
-        if(currentDocument!=null && currentDocument.getDocument()!=null){
+        if(currentDocument!=null){
             StringBuilder url = new StringBuilder(PATH_SPLIT);
             url.append("app-");
-            url.append(currentDocument.getDocument().getClass().getSimpleName());
+            url.append(currentDocument.getClass().getSimpleName());
             url.append(".xhtml");
             
             result = url.toString();

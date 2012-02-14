@@ -35,6 +35,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
+import org.apache.commons.lang.StringUtils;
 import org.jboss.logging.Logger;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.datamodel.dao.ProjectDAO;
@@ -91,7 +92,9 @@ public class CurrentDocument implements Serializable {
      */
     protected void loadDocument() throws ClientException {
         log.debug("loadDocument()");
-        document =projectDAO.readDocByPath(path);
+        if(!StringUtils.isEmpty(path)){
+            document =projectDAO.readDocByPath(path);    
+        }
     }
 
     /**

@@ -68,7 +68,11 @@ public class Document extends DublinCore implements Serializable {
     private Integer           complexity;
 
     /** The portability. */
-    @OneToMany(cascade = {CascadeType.REMOVE,CascadeType.PERSIST}, targetEntity = Portability.class, orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.REMOVE,CascadeType.PERSIST},
+               targetEntity = Portability.class,
+               orphanRemoval = true,
+               fetch=LAZY)
+    
     private List<Portability> portabilities = new ArrayList<Portability>();
 
     /** The url wiki. */

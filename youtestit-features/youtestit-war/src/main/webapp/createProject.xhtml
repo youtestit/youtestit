@@ -44,7 +44,7 @@
     =    dashboardLeft
     =========================================================================-->
     </ui:remove>
-  	<ui:define name="formTitle">Create Project</ui:define>
+  	<ui:define name="formTitle">#{messages['label.create.project.panel.title']}</ui:define>
 
 
 	<ui:remove><!--=============================================================
@@ -52,7 +52,6 @@
     =========================================================================-->
     </ui:remove>
   	<ui:define name="formContent">
-  		<h1>#{currentDocument.path}</h1>
  
  		<f:subview id="createProject">
  			<h:form id="form">

@@ -210,14 +210,20 @@ public class ProjectDAO implements Serializable {
      * @throws ClientException the client exception
      */
     public Document readDocByPath(final String path) throws ClientException {
+        if(path==null){
+            return null;
+        }
+        
         final String param = "path";
         final String jpql = "SELECT d FROM Document d WHERE d.path=:" + param;
 
         Document document = null;
-
-        document = entityManager.createQuery(jpql, Document.class).setParameter(
-                param, path).getSingleResult();
-
+        final List<Document> documents= entityManager.createQuery(jpql, Document.class).setParameter(
+                param, path).getResultList();
+        
+        if(documents!=null && !documents.isEmpty()){
+            document = documents.get(0);
+        }
         return document;
 
     }

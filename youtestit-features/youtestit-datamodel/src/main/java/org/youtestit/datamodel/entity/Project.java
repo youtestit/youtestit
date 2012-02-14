@@ -24,10 +24,11 @@
 package org.youtestit.datamodel.entity;
 
 import static javax.persistence.FetchType.LAZY;
-import static org.youtestit.commons.utils.Constants.NULL_OBJ;
-import static org.youtestit.commons.utils.Constants.ITEM_OPEN;
 import static org.youtestit.commons.utils.Constants.ITEM_CLOSE;
+import static org.youtestit.commons.utils.Constants.ITEM_OPEN;
+import static org.youtestit.commons.utils.Constants.NULL_OBJ;
 import static org.youtestit.commons.utils.Constants.SEP;
+
 import java.util.Calendar;
 import java.util.Map;
 
@@ -63,6 +64,7 @@ public class Project extends Document {
     @ElementCollection
     @CollectionTable(name = "teams", joinColumns = @JoinColumn(name = "group_fk"))
     @MapKeyColumn(name = "profile", nullable = true)
+    @Basic(fetch = LAZY)
     private Map<Profile, Group> team;
 
     /** The version. */

@@ -23,26 +23,16 @@
  */
 package org.youtestit.core.controllers.createProject;
 
-import static org.youtestit.commons.utils.Constants.PATH_SPLIT;
-
 import java.io.Serializable;
-import java.text.Normalizer;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
-import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.commons.lang.text.StrBuilder;
 import org.jboss.logging.Logger;
-import org.jboss.seam.international.status.Messages;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.commons.utils.exceptions.YoutestitMSG;
-import org.youtestit.commons.utils.validations.annotations.Path;
-import org.youtestit.core.controllers.app.CurrentDocument;
-import org.youtestit.core.references.datas.ProjectsRefDatas;
 import org.youtestit.datamodel.dao.ProjectDAO;
 import org.youtestit.datamodel.entity.Project;
 
@@ -54,31 +44,18 @@ import org.youtestit.datamodel.entity.Project;
  */
 @ViewScoped
 @Named
-public class CreateProjectAction implements Serializable {
+public class CreateProjectAction extends AbstractCreateDocument implements Serializable {
 
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 6418054593725481561L;
-    
-    /** The Constant toReplace. */
-    private static final String[] TO_REPLACE = { "\"", "'","!","/","\\","?","#","`" };
-
+   
     /** The log. */
     @Inject
     private Logger log;
 
-    /** The messages. */
-    @Inject
-    private Messages messages;
-
-    /** The current document. */
-    @Inject
-    private CurrentDocument currentDocument;
-
-    @Inject
-    private ProjectsRefDatas projectsRefDatas;
 
     @Inject
     private ProjectDAO projectDAO;
@@ -86,8 +63,6 @@ public class CreateProjectAction implements Serializable {
     /** The project. */
     private Project project;
 
-    @Path
-    private String parentPath;
 
     // =========================================================================
     // INITIALIZE
@@ -106,20 +81,6 @@ public class CreateProjectAction implements Serializable {
 
     }
 
-    /**
-     * Allow to initialize parent path.
-     */
-    protected void initializeParentPath() {
-        log.debug("initializeParentPath()");
-        if (parentPath == null) {
-            if (currentDocument == null || currentDocument.getPath() == null) {
-                parentPath = PATH_SPLIT;
-            } else {
-                parentPath = currentDocument.getPath();
-            }
-        }
-
-    }
 
     // =========================================================================
     // METHODS
@@ -127,63 +88,21 @@ public class CreateProjectAction implements Serializable {
 
     public String create() {
         log.debug("ceate new project...");
-        project.setPath(generatePath());
-        if(parentPath==null){
-            project.setParentPath(PATH_SPLIT);
-        }else{
-            project.setParentPath(parentPath);
-        }
-        String pathResult = null;
+        project = applyPath(project, Project.class);
+        
+        String pathResult = determineAppDocUrl(project);
         
         try {
             projectDAO.create(project);
-            pathResult = "/app"+ project.getPath();
-
         } catch (ClientException e) {
             log.error(e);
             messages.error(new YoutestitMSG("error.create.project"));
         }
+        
         return pathResult;
     }
 
-    /**
-     * Allow to generate path.
-     *
-     * @return path String representation
-     */
-    protected String generatePath() {
-        final StrBuilder result = new StrBuilder();
-        result.append(parentPath);
-        if (!parentPath.endsWith(PATH_SPLIT)) {
-            result.append(PATH_SPLIT);
-        }
 
-        final StrBuilder projectPath = new StrBuilder();
-        projectPath.append(Normalizer.normalize(project.getTitle(),
-                Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", ""));
-        projectPath.replaceAll(" ", "_");
-
-
-        for (String item : TO_REPLACE) {
-            projectPath.replaceAll(item, "-");
-        }
-        result.append(projectPath.toString());
-        
-        return result.toString().trim();
-
-    }
-
-    // =========================================================================
-    // GRAB DATAS
-    // =========================================================================
-    /**
-     * Allow to grab server type.
-     * 
-     * @return the list
-     */
-    public List<SelectItem> getSeverType() {
-        return projectsRefDatas.grabSeverType();
-    }
 
     // =========================================================================
     // GETTERS & SETTERS
@@ -205,27 +124,6 @@ public class CreateProjectAction implements Serializable {
      */
     public void setProject(Project project) {
         this.project = project;
-    }
-
-    /**
-     * Gets the parent path.
-     * 
-     * @return the parent path
-     */
-    public String getParentPath() {
-        if(parentPath==null && currentDocument!=null){
-            initializeParentPath();
-        }
-        return parentPath;
-    }
-
-    /**
-     * Sets the parent path.
-     * 
-     * @param parentPath the new parent path
-     */
-    public void setParentPath(String parentPath) {
-        this.parentPath = parentPath;
     }
 
 }

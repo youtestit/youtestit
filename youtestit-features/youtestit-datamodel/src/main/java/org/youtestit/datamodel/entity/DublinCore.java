@@ -128,7 +128,7 @@ public class DublinCore implements Serializable {
 
     /** The description. */
     @Basic(fetch = LAZY)
-    @Lob
+    @Column(columnDefinition="LONGTEXT")
     private String description;
 
     /** The children. */
@@ -140,7 +140,7 @@ public class DublinCore implements Serializable {
      * 
      * @see org.youtestit.datamodel.entity.User
      */
-    @ManyToOne(optional = true, cascade = CascadeType.REMOVE)
+    @ManyToOne(optional = true, cascade = CascadeType.REMOVE, fetch=LAZY)
     private User creator;
 
     /** The date creation. */
