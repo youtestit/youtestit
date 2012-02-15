@@ -31,19 +31,21 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 
 import org.jboss.logging.Logger;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.commons.utils.exceptions.ErrorsMSG;
 import org.youtestit.commons.utils.exceptions.entities.EntityExistsException;
+import org.youtestit.commons.utils.exceptions.entities.ParentNullException;
+import org.youtestit.commons.utils.exceptions.entities.ParentTypeException;
 import org.youtestit.datamodel.entity.Document;
 import org.youtestit.datamodel.entity.Portability;
 import org.youtestit.datamodel.entity.Project;
+import org.youtestit.datamodel.entity.TestCase;
 
 @Singleton
 @Named
-public class ProjectDAO extends DocumentDAO implements Serializable {
+public class TestCaseDAO extends DocumentDAO implements Serializable {
 
     // =========================================================================
     // ATTRIBUTES
@@ -55,7 +57,6 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
     @Inject
     private Logger log;
 
-    
     /** The portabilities dao. */
     @Inject
     private PortabilityDAO portabilitiesDAO;
@@ -67,7 +68,7 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
     /**
      * Instantiates a new project dao.
      */
-    public ProjectDAO() {
+    public TestCaseDAO() {
         super();
     }
 
@@ -77,7 +78,7 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
      * @param entityManager the entity manager
      * @param log the log
      */
-    protected ProjectDAO(final EntityManager entityManager, final Logger log) {
+    protected TestCaseDAO(final EntityManager entityManager, final Logger log) {
         super();
         this.entityManager = entityManager;
         this.log = log;
@@ -91,7 +92,7 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
      * @param log the log
      * @param portabilitiesDAO the portabilities dao
      */
-    protected ProjectDAO(EntityManager entityManager, Logger log,
+    protected TestCaseDAO(EntityManager entityManager, Logger log,
             PortabilityDAO portabilitiesDAO) {
         super();
         this.entityManager = entityManager;
@@ -109,41 +110,61 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
     /**
      * Allow to creates a new Project.
      * 
-     * @param project the project to create
+     * @param test the test case to create
+     * @throws ParentTypeException
+     * @throws ParentNullException
+     * @throws EntityExistsException
      * @throws ClientException if exception is occure.
      */
-    public void create(final Project project) throws ClientException {
+    public void create(final TestCase test) throws EntityExistsException,
+            ParentNullException, ParentTypeException, ClientException {
+        
         log.debug("create");
+        final Document parent = readDocByPath(test.getParentPath());
 
-        if (project == null) {
+        assertCreate(test, parent);
+
+        persistePortability(test);
+        persist(test);
+
+        parent.addChild(test);
+        entityManager.merge(parent);
+    }
+
+    /**
+     * Allow to check test case to create. It's throw an exception if :
+     * <ul>
+     * <li>test is null</li>
+     * <li>test path already exist</li>
+     * <li>parent isn't a project</li>
+     * </ul>
+     * 
+     * @param test the test to check
+     * @throws EntityExistsException
+     * @throws ParentNullException
+     * @throws ParentTypeException
+     * @throws ClientException if exception is occure.
+     */
+    public void assertCreate(TestCase test, Document parent)
+            throws EntityExistsException, ParentNullException,
+            ParentTypeException, ClientException {
+
+        if (test == null) {
             throw new ClientException(ErrorsMSG.VALUE_NOT_NULL);
         }
 
-        final String param = "path";
-        final String jpql = "SELECT p FROM Project p WHERE p.path=:" + param;
+        Document resultSet = readDocByPath(test.getPath());
 
-        Project resultSet = null;
-        try {
-            resultSet = entityManager.createQuery(jpql, Project.class).setParameter(
-                    param, project.getPath()).getSingleResult();
-        } catch (NoResultException e) {
-            // it can have no Entity in database. it isn't an error !
-            log.debug(e);
-        }
-
-        persistePortability(project);
-
-        if (resultSet == null) {
-            persist(project);
-        } else {
+        if (resultSet != null) {
             throw new EntityExistsException();
         }
 
-        Document parent = readDocByPath(project.getParentPath());
-        if (parent != null) {
-            parent.addChild(project);
-            entityManager.merge(parent);
+        if (parent == null) {
+            throw new ParentNullException();
+        } else if (!(parent instanceof Project)) {
+            throw new ParentTypeException();
         }
+
     }
 
     /**
@@ -152,30 +173,30 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
      * @param project the project
      * @throws ClientException the client exception
      */
-    protected void persistePortability(final Project project)
+    protected void persistePortability(final TestCase test)
             throws ClientException {
-        if (project.getPortabilities() != null
-                && !project.getPortabilities().isEmpty()) {
+
+        if (test.getPortabilities() != null
+                && !test.getPortabilities().isEmpty()) {
             List<Portability> result = new ArrayList<Portability>();
 
-            for (Portability item : project.getPortabilities()) {
+            for (Portability item : test.getPortabilities()) {
                 result.add(portabilitiesDAO.create(item));
             }
-            project.setPortabilities(result);
+            test.setPortabilities(result);
         }
     }
 
     /**
      * Persist.
      * 
-     * @param project the project
+     * @param test the test case to persist
      * @throws ClientException the client exception
      */
-    protected void persist(final Project project) throws ClientException {
-        final List<Portability> portabilities = portabilitiesDAO.create(project.getPortabilities());
-        project.setPortabilities(portabilities);
-        entityManager.persist(project);
+    protected void persist(final TestCase test) throws ClientException {
+        final List<Portability> portabilities = portabilitiesDAO.create(test.getPortabilities());
+        test.setPortabilities(portabilities);
+        entityManager.persist(test);
     }
-
 
 }

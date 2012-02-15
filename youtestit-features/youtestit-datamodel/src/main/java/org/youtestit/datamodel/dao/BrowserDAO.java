@@ -35,8 +35,8 @@ import javax.persistence.PersistenceContext;
 
 import org.jboss.logging.Logger;
 import org.youtestit.commons.utils.exceptions.ClientException;
-import org.youtestit.commons.utils.exceptions.EntityExistsException;
 import org.youtestit.commons.utils.exceptions.ErrorsMSG;
+import org.youtestit.commons.utils.exceptions.entities.EntityExistsException;
 import org.youtestit.datamodel.entity.Browser;
 import org.youtestit.datamodel.enums.BrowserType;
 

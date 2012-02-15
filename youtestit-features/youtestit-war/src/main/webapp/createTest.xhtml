@@ -62,7 +62,7 @@
 				            <!--+++++++++[ title ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 				            </ui:remove>        
 							<h:outputLabel id="title_label" for="title" value="#{messages['label.create.project.form.title']}"/>
-				            <h:inputText id="title" value="#{createDocAction.project.title}" size="50">
+				            <h:inputText id="title" value="#{createTestAction.test.title}" size="50">
 				            	<rich:validator />
 				            </h:inputText>
 				            <rich:message for="title" id="title_error" />
@@ -72,12 +72,23 @@
 				            <!--+++++++++[ parentPath ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 				            </ui:remove>        
 							<h:outputLabel id="parentPath_label" for="parentPath" value="#{messages['label.create.project.form.parent.path']}"/>
-				            <h:inputText id="parentPath" value="#{createDocAction.parentPath}" size="60">
+				            <h:inputText id="parentPath" value="#{createTestAction.parentPath}" size="60">
 				            	<rich:validator />
 				            </h:inputText>
 				            <rich:message for="parentPath" id="parentPath_error" />
 				            
 
+							<!--+++++++++[ user ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+							<h:outputLabel id="developper_label" for="developper" value="developper"/>
+							<h:inputText id="developper" value="#{capitalsBean.capital}">
+								<rich:autocomplete	id="developperAutoComplete"
+													value="#{createTestAction.test.developper}"
+													autocompleteMethod="#{usersRefDatas.findUsers}"
+													mode="cachedAjax"
+													minChars="3"/>
+							</h:inputText>loca
+							<rich:message for="developper" id="parentPath_error" />
+							
 					</h:panelGrid>
 					
 					
@@ -85,7 +96,7 @@
 					
 					<div class="buttons-actions">
 	        		        <h:commandButton value="#{messages['label.create.project.panel.action.submit']}"
-	                          		         action="#{createDocAction.create()}"
+	                          		         action="#{createTestAction.create()}"
 	                          		         id="create"/>
 	         		</div>
  				</p:panel>

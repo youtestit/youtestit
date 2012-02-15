@@ -21,21 +21,25 @@
  *   Homepage : http://www.youtestit.org
  *   Git      : https://github.com/youtestit
  */
-package org.youtestit.commons.utils.exceptions;
+package org.youtestit.commons.utils.exceptions.entities;
+
+import org.youtestit.commons.utils.exceptions.ClientException;
+import org.youtestit.commons.utils.exceptions.GenericErrorsMSG;
 
 /**
- * Entity YouTestit Exception, occur if an entity already exists
+ * Parent null  Exception, occur if document hasn't a parent.
+ * Example, you can't create a test in root path.
  * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
- * @since Dec 9, 2011
+ * @since Fev 15, 2012
  */
-public class EntityExistsException extends ClientException {
+public class ParentNullException extends ClientException {
 
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 7935484209927278910L;
+    private static final long serialVersionUID = 5268973943819397808L;
 
     // =========================================================================
     // CONSTRUCTORS
@@ -43,7 +47,7 @@ public class EntityExistsException extends ClientException {
     /**
      * Instantiates a new client exception.
      */
-    public EntityExistsException() {
+    public ParentNullException() {
         super();
     }
 
@@ -52,7 +56,7 @@ public class EntityExistsException extends ClientException {
      *
      * @param errorMsg a generic error message
      */
-    public EntityExistsException(GenericErrorsMSG errorMsg) {
+    public ParentNullException(GenericErrorsMSG errorMsg) {
         super(errorMsg.toString());
     }
     
@@ -62,7 +66,7 @@ public class EntityExistsException extends ClientException {
      * @param errorMsg a generic error message
      * @param cause the cause
      */
-    public EntityExistsException(GenericErrorsMSG errorMsg, Throwable cause) {
+    public ParentNullException(GenericErrorsMSG errorMsg, Throwable cause) {
         super(errorMsg.toString(),cause);
     }
     
@@ -73,7 +77,7 @@ public class EntityExistsException extends ClientException {
      * @param message the message
      * @param cause the cause
      */
-    public EntityExistsException(String message, Throwable cause) {
+    public ParentNullException(String message, Throwable cause) {
         super(message, cause);
     }
 
@@ -82,7 +86,7 @@ public class EntityExistsException extends ClientException {
      * 
      * @param message the message
      */
-    public EntityExistsException(String message) {
+    public ParentNullException(String message) {
         super(message);
     }
 
@@ -91,7 +95,7 @@ public class EntityExistsException extends ClientException {
      * 
      * @param cause the cause
      */
-    public EntityExistsException(Throwable cause) {
+    public ParentNullException(Throwable cause) {
         super(cause);
     }
 }

@@ -42,7 +42,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.youtestit.commons.utils.exceptions.DependencyAssociationException;
+import org.youtestit.commons.utils.exceptions.entities.DependencyAssociationException;
 
 
 /**

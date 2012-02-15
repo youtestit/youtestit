@@ -21,7 +21,10 @@
  *   Homepage : http://www.youtestit.org
  *   Git      : https://github.com/youtestit
  */
-package org.youtestit.commons.utils.exceptions;
+package org.youtestit.commons.utils.exceptions.entities;
+
+import org.youtestit.commons.utils.exceptions.ClientException;
+import org.youtestit.commons.utils.exceptions.GenericErrorsMSG;
 
 /**
  * Exception for projects and tests dependancies. For resolve the depandancies

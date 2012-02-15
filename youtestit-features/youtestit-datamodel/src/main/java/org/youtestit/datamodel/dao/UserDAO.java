@@ -24,6 +24,7 @@
 package org.youtestit.datamodel.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -35,8 +36,8 @@ import javax.persistence.PersistenceContext;
 
 import org.jboss.logging.Logger;
 import org.youtestit.commons.utils.exceptions.ClientException;
-import org.youtestit.commons.utils.exceptions.EntityExistsException;
 import org.youtestit.commons.utils.exceptions.ErrorsMSG;
+import org.youtestit.commons.utils.exceptions.entities.EntityExistsException;
 import org.youtestit.commons.utils.sha1.Sha1Encryption;
 import org.youtestit.datamodel.entity.User;
 
@@ -187,6 +188,39 @@ public class UserDAO implements Serializable {
                             .getResultList();
     }
 
+    
+    
+    /**
+     * Gets the users by name or login.
+     *
+     * @param value the value
+     * @return the users by name or login
+     * @throws ClientException the client exception
+     */
+    public List<User> getUsersByNameOrLogin(final String value) throws ClientException{
+        List<User> result = new ArrayList<User>(0);
+
+        if(value ==null){
+            return result;
+        }
+        
+        final StringBuilder jpql = new StringBuilder("SELECT u FROM User u WHERE ");
+        jpql.append(" u.login like :login");
+        jpql.append(" OR u.lastname like :lastname");
+        jpql.append(" OR u.firstname like :firstname");
+        jpql.append(" OR u.email like :email");
+        
+        final String valueLike = "%"+value+"%";
+        
+        result =  entityManager.createQuery(jpql.toString(), User.class)
+                .setParameter("login", valueLike)
+                .setParameter("lastname", valueLike)
+                .setParameter("firstname", valueLike)
+                .setParameter("email", valueLike)
+                .getResultList();
+        
+        return result;
+    }
     // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     // DELETE
     // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -220,3 +254,4 @@ public class UserDAO implements Serializable {
         }
     }
 }
+

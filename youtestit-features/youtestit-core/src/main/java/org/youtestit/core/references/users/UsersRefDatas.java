@@ -21,59 +21,63 @@
  *   Homepage : http://www.youtestit.org
  *   Git      : https://github.com/youtestit
  */
-package org.youtestit.commons.utils.exceptions;
+package org.youtestit.core.references.users;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+import org.jboss.logging.Logger;
+import org.youtestit.commons.utils.exceptions.ClientException;
+import org.youtestit.datamodel.dao.UserDAO;
+import org.youtestit.datamodel.entity.User;
 
 /**
- * Generic errors messages.
+ * UsersRefDatas
  * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
- * @since Dec 10, 2011
+ * @since 15 févr. 2012
  */
-public enum ErrorsMSG implements GenericErrorsMSG {
+@Singleton
+@Named
+public class UsersRefDatas implements Serializable {
 
     // =========================================================================
-    // ENUM
+    // ATTRIBUTES
+    // =========================================================================
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 7242495471888743370L;
+
+    /** The log. */
+    @Inject
+    private Logger log;
+    
+    @Inject
+    private UserDAO userDAO;
+    
+    // =========================================================================
+    // METHODS
     // =========================================================================
     
-    /** value musn't be null! */
-    VALUE_NOT_NULL("value musn't be null!"),
-
-    /** your entity parent is not a Project type ! */
-    PROJECT_IS_NOT_PROJECT("your entity parent is not a Project type !"),
-
-    /** your entity parent musn't be a Test case type ! */
-    PROJECT_IS_TEST("your entity parent musn't be a Test case type !");
-
-    // =========================================================================
-    // COMPOSITE ENUM
-    // =========================================================================
-    /** The message. */
-    private String message;
-
+    
     /**
-     * Instantiates a new errors msg.
-     * 
-     * @param msg the msg
+     * Find user on name or login.
+     *
+     * @param value the name or login
+     * @return list of user finded 
+     * @throws ClientException if an error is occur
      */
-    private ErrorsMSG(final String msg) {
-        this.message = msg;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        return String.format("[code-%s] >>> %s", this.ordinal(), message);
-    }
-
-    /**
-     * Gets the message.
-     * 
-     * @return the message
-     */
-    public String getMessage() {
-        return message;
+    public List<User> findUsers(String value) throws ClientException{
+        log.debug("findUsers");
+        if(value==null){
+            return new ArrayList<User>(0);
+        }
+        
+        return userDAO.getUsersByNameOrLogin(value);
     }
 
 }
