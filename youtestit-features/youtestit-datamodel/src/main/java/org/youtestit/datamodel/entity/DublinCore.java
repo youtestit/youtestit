@@ -46,7 +46,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
@@ -128,7 +127,7 @@ public class DublinCore implements Serializable {
 
     /** The description. */
     @Basic(fetch = LAZY)
-    @Column(columnDefinition="LONGTEXT")
+    @Column(columnDefinition="LONG VARCHAR")
     private String description;
 
     /** The children. */
