@@ -78,17 +78,29 @@
 				            <rich:message for="parentPath" id="parentPath_error" />
 				            
 
-							<!--+++++++++[ user ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-							<h:outputLabel id="developper_label" for="developper" value="developper"/>
-							<h:inputText id="developper" value="#{capitalsBean.capital}">
-								<rich:autocomplete	id="developperAutoComplete"
-													value="#{createTestAction.test.developper}"
-													autocompleteMethod="#{usersRefDatas.findUsers}"
-													mode="cachedAjax"
-													minChars="3"/>
-							</h:inputText>loca
-							<rich:message for="developper" id="parentPath_error" />
+							<ui:remove>
+							<!--+++++++++[ developper ]++++++++++++++++++++++++++++++++++++++++++++++++++-->
+							</ui:remove>
+							<h:outputLabel id="fonctionnalReferer_label" for="fonctionnalReferer" value="fonctionnalReferer"/>
+							<yti:userAutocomplete id="fonctionnalReferer" value="#{createTestAction.test.fonctionnalReferer}"/>
+							<rich:message for="fonctionnalReferer" id="fonctionnalReferer_error" />												
+
+
+							<ui:remove>
+							<!--+++++++++[ developper ]++++++++++++++++++++++++++++++++++++++++++++++++++-->
+							</ui:remove>
+							<h:outputLabel id="tester_label" for="tester" value="tester"/>
+							<yti:userAutocomplete id="tester" value="#{createTestAction.test.tester}"/>
+							<rich:message for="tester" id="tester_error" />								
 							
+							
+							<ui:remove>
+							<!--+++++++++[ developper ]++++++++++++++++++++++++++++++++++++++++++++++++++-->
+							</ui:remove>
+							<h:outputLabel id="developper_label" for="developper" value="developper"/>
+							<yti:userAutocomplete id="developper" value="#{createTestAction.test.developper}"/>
+							<rich:message for="developper" id="developper_error" />
+											
 					</h:panelGrid>
 					
 					

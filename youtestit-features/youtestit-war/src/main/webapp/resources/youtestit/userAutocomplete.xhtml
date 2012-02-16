@@ -1,0 +1,88 @@
+<!--****************************************************************************
+*
+*   YouTestit source code:
+*   ======================
+*   Licensed to the Apache Software Foundation (ASF) under one or more
+*   contributor license agreements.  See the NOTICE file distributed with
+*   this work for additional information regarding copyright ownership.
+*   The ASF licenses this file to You under the Apache License, Version 2.0
+*   (the "License"); you may not use this file except in compliance with
+*   the License.  You may obtain a copy of the License at
+*  
+*       http://www.apache.org/licenses/LICENSE-2.0
+* 
+*   Unless required by applicable law or agreed to in writing, software
+*   distributed under the License is distributed on an "AS IS" BASIS,
+*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*   See the License for the specific language governing permissions and
+*   limitations under the License.
+*
+*   Links:
+*   ======
+*   Homepage : http://www.youtestit.org
+*   Git      : https://github.com/youtestit
+*
+*****************************************************************************-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+
+<ui:remove>
+<!--============================================================================
+= INTERFACE
+=============================================================================-->
+</ui:remove>      
+	<cc:interface  name="export"
+				   displayName="YouTestit Export projects or tests"
+				   preferred="true"
+				   expert="false"
+				   shortDescription="YouTestit Export projects or tests">
+		
+		<cc:attribute name="id" required="true"/>
+		<cc:attribute name="value" required="true"/>
+		<cc:attribute name="mode" default="cachedAjax"/>
+		<cc:attribute name="minChars" default="3"/>
+		<cc:attribute name="show" default="#{true}"/>
+		
+	</cc:interface>
+
+<ui:remove>
+<!--============================================================================
+= IMPLEMENTATION
+=============================================================================-->
+</ui:remove>
+	<cc:implementation>
+		<f:subview id="#{cc.attrs.id}_View" rendered="#{cc.attrs.show}">
+			<rich:autocomplete	id="#{cc.attrs.id}"
+								value="#{cc.attrs.value}"
+								fetchValue="#{user.value.login}"
+								mode="#{cc.attrs.mode}"
+								attached="false"
+								tokens=", "
+								autofill="false"
+								minChars="#{cc.attrs.minChars}"
+							    layout="table"
+							    var="user"
+							    converter="userConverter"
+								autocompleteMethod="#{usersRefDatas.suggestUsers}">
+						
+						<h:column>
+							<span id="#{user.value.login}">
+								<h:outputText id="#{user.value.login}_firstName" 
+											  class="autocompleteFirstName"
+											  value="#{user.value.firstname}"/>
+											  
+								<h:outputText 	id="#{user.value.login}_lastName"
+												class="autocompleteLastName"
+												value="#{user.value.lastname}"/>
+							</span>
+						</h:column>		
+			</rich:autocomplete>
+		</f:subview>
+	</cc:implementation>
+</html>

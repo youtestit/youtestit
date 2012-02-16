@@ -249,13 +249,6 @@ public class User implements Serializable {
         result.append("enable=");
         result.append(enable);
         result.append(SEP);
-
-        result.append("profile=");
-        result.append(profile);
-        result.append(SEP);
-
-        result.append("groups=");
-        result.append(groups);
         result.append("]");
 
         return result.toString();

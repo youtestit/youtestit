@@ -23,14 +23,11 @@
  */
 package org.youtestit.core.references.users;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.faces.model.SelectItem;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
+import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 
 import org.apache.commons.lang.StringUtils;
 import org.jboss.logging.Logger;
@@ -39,61 +36,58 @@ import org.youtestit.datamodel.dao.UserDAO;
 import org.youtestit.datamodel.entity.User;
 
 /**
- * UsersRefDatas
+ * UserConverter
  * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
- * @since 15 févr. 2012
+ * @since 16 févr. 2012
  */
-@Singleton
-@Named
-public class UsersRefDatas implements Serializable {
+@FacesConverter("userConverter")
+public class UserConverter implements Converter {
 
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 7242495471888743370L;
-
-    /** The log. */
-    @Inject
-    private Logger log;
-    
     @Inject
     private UserDAO userDAO;
     
+    @Inject
+    private Logger log;
     
+
     // =========================================================================
-    // METHODS
+    // OVERRIDES
     // =========================================================================
-    
-    
-    /**
-     * Find user on name or login.
-     *
-     * @param value the name or login
-     * @return list of user finded 
-     * @throws ClientException if an error is occur
-     */
-    public List<SelectItem> suggestUsers(String query){
-        log.debug("findUsers");
-        List<SelectItem> result = new ArrayList<SelectItem>(0);
-        if(query==null ||  StringUtils.isEmpty(query.trim())){
-            return result;
-        }
+    @Override
+    public Object getAsObject(FacesContext facesContext, UIComponent component,
+            String submittedValue) {
+        User user = null;
         
-        try {
-            List<User> users = userDAO.getUsersByNameOrLogin(query);
-            for(User item:users){
-                result.add(new SelectItem(item,String.format("%s %s", item.getFirstname(),item.getLastname())));
+        if (submittedValue == null
+                || StringUtils.isEmpty(submittedValue.trim())) {
+            return user;
+        } else {
+            
+            try {
+                user = userDAO.getUserByLogin(submittedValue.trim());
+            } catch (ClientException e) {
+                log.error(e);
             }
-        } catch (ClientException e) {
-            log.error(e);
         }
         
-        return result;
+        return user;
     }
 
-    
-    
+    @Override
+    public String getAsString(FacesContext facesContext, UIComponent component,
+            Object value) {
+        boolean isUser = value instanceof User;
+        if (value == null || !isUser) {
+            return "";
+        } else {
+            User user = (User) value;
+            return user.getLogin();
+        }
+
+    }
 
 }

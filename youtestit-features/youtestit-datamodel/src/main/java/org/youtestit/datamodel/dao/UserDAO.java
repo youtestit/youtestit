@@ -206,17 +206,17 @@ public class UserDAO implements Serializable {
         
         final StringBuilder jpql = new StringBuilder("SELECT u FROM User u WHERE ");
         jpql.append(" u.login like :login");
-        jpql.append(" OR u.lastname like :lastname");
-        jpql.append(" OR u.firstname like :firstname");
-        jpql.append(" OR u.email like :email");
+//        jpql.append(" OR u.lastname like :lastname");
+//        jpql.append(" OR u.firstname like :firstname");
+//        jpql.append(" OR u.email like :email");
         
         final String valueLike = "%"+value+"%";
         
         result =  entityManager.createQuery(jpql.toString(), User.class)
                 .setParameter("login", valueLike)
-                .setParameter("lastname", valueLike)
-                .setParameter("firstname", valueLike)
-                .setParameter("email", valueLike)
+//                .setParameter("lastname", valueLike)
+//                .setParameter("firstname", valueLike)
+//                .setParameter("email", valueLike)
                 .getResultList();
         
         return result;

@@ -396,6 +396,11 @@ input, select, textarea, button, keygen, isindex, legend, a{
 	padding-left: 4px;
 }
 
+.rf-au {
+	border: none !important;
+	background-image:none  !important;
+}
+
 /*******************************************************************************
 * PRIMEFACES
 *******************************************************************************/
@@ -524,10 +529,14 @@ ll .ui-panel .ui-panel-titlebar {
 .rf-sel-btn{
 	margin-left: -4px !important;
 }
-
-.rf-tab{
-	
+.rf-au-tbl{
+	width: 100%;
 }
+
+.rf-au-itm-sel{
+	background-color: #AAAAAA;
+}
+
 /*******************************************************************************
 * STYLES
 *******************************************************************************/
@@ -667,7 +676,12 @@ div.prop{
 	padding-bottom:5px;
 }
 
-
+.autocompleteFirstName{
+	margin-left: 4px;
+}
+.autocompleteLastName{
+	margin-left: 8px;
+}
 /*******************************************************************************
 * PROJECT HOME
 *******************************************************************************/

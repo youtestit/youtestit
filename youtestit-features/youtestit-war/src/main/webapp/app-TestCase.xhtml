@@ -7,7 +7,8 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:rich="http://richfaces.org/rich"
     xmlns:p="http://primefaces.prime.com.tr/ui"
-    template="layout/template-dashboard.xhtml">
+    xmlns:yti="http://java.sun.com/jsf/composite/youtestit"
+    template="layout/template-project.xhtml">
 <ui:remove>
 <!--****************************************************************************
 *
@@ -37,42 +38,122 @@
 </ui:remove>
 
 
-
-    <ui:remove><!--*************************************************************
-    *    TITLE
-    *************************************************************************-->
-    </ui:remove>
-    <ui:define name="title">
-        Page Title
-    </ui:define>
-
-
-
-	<ui:remove><!--=============================================================
-    =    dashboardLeft
-    =========================================================================-->
-    </ui:remove>
-  	<ui:define name="dashboardLeft">
-  		AAA
-	</ui:define>
-
-    <ui:remove><!--=============================================================
-    =    dashboardCenter
+<ui:remove><!--=============================================================
+    =    CONTENT
     =========================================================================-->  	
   	</ui:remove>
-  	
   	<ui:define name="dashboardCenter">
-		BBB  	
+  		<h:form id="ProjectDetailForm">
+			<rich:tabPanel id="homeProject">
+				<rich:tab id="detail" header="Detail">
+						<div id="infoBlocTop">
+							
+							
+							<div id="projectSuccessStat">
+								<yti:globleStat id="projectB" percentage="77.5"/>
+							</div>
+							
+							
+							<div id="projectExportBlock" class="projectExportBlock">
+								<ul id="projectExportList" class="projectExportList">
+									<li>
+										<yti:export id="exportPDF" path="#{currentDocument.path}" type="PDF" />
+									</li>
+									<li>
+										<yti:export id="exportHTML" path="#{currentDocument.path}" type="HTML" />
+									</li>
+									<li>
+										<yti:export id="exportLaTeX" path="#{currentDocument.path}" type="LATEX" />
+									</li>
+								</ul>
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+							
+							
+							
+							<!-- info on URLs -->
+							<div id="projectLinks">
+								<ul class="simpleList">
+									<li id="projectLinkServer">
+										<h:outputLabel value="Server" id="serverLinkLabel" for="serverLink"/>
+										<a id="serverLink" href="#{currentDocument.document.urlServer}">
+											<h:outputText id="serverLinktxt" value="#{currentDocument.document.urlServer}" />
+										</a>
+									</li>
+									
+									<li id="projectLinkWiki">
+										<h:outputLabel value="Wiki" id="wikiLinkLabel" for="wikiLink"/>
+										<a id="wikiLink" href="#{currentDocument.document.urlServer}" >
+											<h:outputText id="wikiLinktxt" value="#{currentDocument.document.urlWiki}" />
+										</a>
+									</li>
+									
+									<li id="projectLinkTracker">
+										<h:outputLabel value="Tracker" id="trackerLinkLabel" for="trackerLink"/>
+										<a id="trackerLink" href="#{currentDocument.document.urlServer}">
+											<h:outputText id="trackerLinktxt" value="#{currentDocument.document.urlTracker}" />
+										</a>
+									</li>
+								</ul>
+							</div>
+							
+							
+							<div id="projectPortabilities">
+								
+							</div>
+							
+							<!-- Subject: -->
+							<div id="projectSubject">
+								<h:outputLabel value="Subject :" id="subjectLabel"/>
+								<div class="textAeraDisplay">
+									<h:outputText value="#{currentDocument.document.subject}"  escape="false"  id="subjectTxt"/>
+								</div>
+							</div>
+		
+							
+							<!-- Description: -->
+							<div  id="projectDescription">
+								<div class="textRichDisplay">
+									<h:outputText value="#{currentDocument.document.description}"  escape="false"/>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+					
+					</rich:tab> 
+					
+					
+					<ui:remove><!--*****************************************************
+				    *    PROJECT STATS
+				    *****************************************************************-->  	
+				  	</ui:remove>
+					<rich:tab header="Stats">
+						<div id="projectExportBlock" class="projectExportBlock">
+							<ul id="projectStatExportList" class="projectExportList">
+								<li>
+									<yti:export id="exportCSV" path="#{currentDocument.path}" type="CSV" />
+								</li>
+							</ul>
+						</div>
+						<div class="clear"></div>
+						
+					</rich:tab>
+		
+					<ui:remove><!--*****************************************************
+				    *    PROJECT DEPENDANCIES
+				    *****************************************************************-->  	
+				  	</ui:remove>			
+					<rich:tab header="Dependancies">
+						@@@@
+					</rich:tab>
+			</rich:tabPanel>
+  		</h:form>
   	</ui:define>
-  	
- 	<ui:remove><!--=============================================================
-    =    dashboardRight
-    =========================================================================-->
-    </ui:remove>
+
+
     
   	<ui:define name="dashboardRight">
-	  	
-		
 		
   	</ui:define>
 </ui:composition>
