@@ -53,7 +53,7 @@ public class DocumentDAO implements Serializable {
     
     /** The entity manager. */
     @PersistenceContext
-    protected EntityManager entityManager;
+    private EntityManager entityManager;
 
     // =========================================================================
     // CONSTRUCTORS
@@ -133,4 +133,27 @@ public class DocumentDAO implements Serializable {
         return document;
 
     }
+
+    
+    
+    /**
+     * Gets the entity manager.
+     *
+     * @return the entity manager
+     */
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    /**
+     * Sets the entity manager.
+     *
+     * @param entityManager the new entity manager
+     */
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+    
+    
+    
 }

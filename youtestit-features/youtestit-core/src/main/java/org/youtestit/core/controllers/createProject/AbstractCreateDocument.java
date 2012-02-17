@@ -62,14 +62,12 @@ public abstract class AbstractCreateDocument implements Serializable {
 
     /** The current document. */
     @Inject
-    protected CurrentDocument currentDocument;
+    private CurrentDocument currentDocument;
 
     @Path
-    protected String parentPath;
+    private String parentPath;
     
-    /** The messages. */
-    @Inject
-    protected Messages messages;
+
     
     /** The log. */
     @Inject
@@ -160,20 +158,18 @@ public abstract class AbstractCreateDocument implements Serializable {
         }else{
             doc.setParentPath(parentPath);
         }
-        T result = (T)doc;
-        return result;
+        return (T)doc;
     }
     
     
     
     public String determineAppDocUrl(Document doc){
-        String result = "/app";
+        StringBuilder result = new StringBuilder("/app");
         
         if(doc!=null && doc.getPath()!=null){
-            result  += doc.getPath();
+            result.append(doc.getPath());
         }
-        
-        return result;
+        return result.toString();
     }
 
     // =========================================================================
@@ -214,5 +210,19 @@ public abstract class AbstractCreateDocument implements Serializable {
     public void setParentPath(String parentPath) {
         this.parentPath = parentPath;
     }
+
+
+    public CurrentDocument getCurrentDocument() {
+        return currentDocument;
+    }
+
+
+    public void setCurrentDocument(CurrentDocument currentDocument) {
+        this.currentDocument = currentDocument;
+    }
+
+
+    
+    
 
 }

@@ -61,11 +61,11 @@ public class Document extends DublinCore implements Serializable {
 
     /** The importance. */
     @Basic(fetch = LAZY)
-    private Integer           importance;
+    private Double           importance;
 
     /** The complexity. */
     @Basic(fetch = LAZY)
-    private Integer           complexity;
+    private Double           complexity;
 
     /** The portability. */
     @OneToMany(cascade = {CascadeType.REMOVE,CascadeType.PERSIST},
@@ -191,7 +191,7 @@ public class Document extends DublinCore implements Serializable {
      * 
      * @return the importance
      */
-    public Integer getImportance() {
+    public Double getImportance() {
         return importance;
     }
 
@@ -201,7 +201,7 @@ public class Document extends DublinCore implements Serializable {
      * 
      * @param importance the new importance
      */
-    public void setImportance(Integer importance) {
+    public void setImportance(Double importance) {
         this.importance = importance;
     }
 
@@ -210,7 +210,7 @@ public class Document extends DublinCore implements Serializable {
      * 
      * @return the complexity
      */
-    public Integer getComplexity() {
+    public Double getComplexity() {
         return complexity;
     }
 
@@ -219,7 +219,7 @@ public class Document extends DublinCore implements Serializable {
      * 
      * @param complexity the new complexity
      */
-    public void setComplexity(Integer complexity) {
+    public void setComplexity(Double complexity) {
         this.complexity = complexity;
     }
 

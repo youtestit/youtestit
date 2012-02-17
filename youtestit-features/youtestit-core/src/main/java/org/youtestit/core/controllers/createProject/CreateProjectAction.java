@@ -31,6 +31,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.logging.Logger;
+import org.jboss.seam.international.status.Messages;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.commons.utils.exceptions.YoutestitMSG;
 import org.youtestit.datamodel.dao.ProjectDAO;
@@ -56,6 +57,9 @@ public class CreateProjectAction extends AbstractCreateDocument implements Seria
     @Inject
     private Logger log;
 
+    /** The messages. */
+    @Inject
+    private Messages messages;
 
     @Inject
     private ProjectDAO projectDAO;
@@ -73,8 +77,7 @@ public class CreateProjectAction extends AbstractCreateDocument implements Seria
      */
     @PostConstruct
     public void initialize() {
-        log.debug(currentDocument);
-        log.debug(messages);
+        log.debug("initialize");
         if (project == null) {
             project = new Project();
         }
@@ -86,6 +89,11 @@ public class CreateProjectAction extends AbstractCreateDocument implements Seria
     // METHODS
     // =========================================================================
 
+    /**
+     * Allow to create current project.
+     *
+     * @return the string
+     */
     public String create() {
         log.debug("ceate new project...");
         project = applyPath(project, Project.class);

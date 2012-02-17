@@ -24,6 +24,7 @@
 package org.youtestit.core.controllers.app;
 
 import static org.youtestit.commons.utils.Constants.PATH_SPLIT;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +32,6 @@ import java.util.List;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
 
 import org.apache.commons.lang.StringUtils;
 import org.jboss.logging.Logger;
@@ -61,6 +59,12 @@ public class CurrentDocument implements Serializable {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -4683368922352737218L;
 
+    @Inject
+    private ProjectDAO projectDAO;
+    
+    @Inject
+    private Logger log;
+    
     /** The test. */
     private Boolean test = null;
 
@@ -73,14 +77,8 @@ public class CurrentDocument implements Serializable {
 
     private List<BreadCrumb> breadCrumbs = new ArrayList<BreadCrumb>(0);
 
-    @PersistenceContext
-    private EntityManager entityManager;
     
-    @Inject
-    private ProjectDAO projectDAO;
-
-    @Inject
-    private Logger log;
+    
 
     // =========================================================================
     // METHODS

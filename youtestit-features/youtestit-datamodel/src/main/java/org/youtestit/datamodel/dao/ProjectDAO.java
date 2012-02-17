@@ -53,12 +53,12 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
 
     /** The logger. */
     @Inject
-    private Logger log;
+    private Logger            log;
 
-    
+
     /** The portabilities dao. */
     @Inject
-    private PortabilityDAO portabilitiesDAO;
+    private PortabilityDAO    portabilitiesDAO;
 
     // =========================================================================
     // CONSTRUCTORS
@@ -79,7 +79,7 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
      */
     protected ProjectDAO(final EntityManager entityManager, final Logger log) {
         super();
-        this.entityManager = entityManager;
+        this.setEntityManager(entityManager);
         this.log = log;
         this.portabilitiesDAO = new PortabilityDAO(entityManager, log);
     }
@@ -91,10 +91,9 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
      * @param log the log
      * @param portabilitiesDAO the portabilities dao
      */
-    protected ProjectDAO(EntityManager entityManager, Logger log,
-            PortabilityDAO portabilitiesDAO) {
+    protected ProjectDAO(EntityManager entityManager, Logger log, PortabilityDAO portabilitiesDAO) {
         super();
-        this.entityManager = entityManager;
+        this.setEntityManager(entityManager);
         this.log = log;
         this.portabilitiesDAO = portabilitiesDAO;
     }
@@ -124,8 +123,9 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
 
         Project resultSet = null;
         try {
-            resultSet = entityManager.createQuery(jpql, Project.class).setParameter(
-                    param, project.getPath()).getSingleResult();
+            resultSet = getEntityManager().createQuery(jpql, Project.class)
+                                          .setParameter(param, project.getPath())
+                                          .getSingleResult();
         } catch (NoResultException e) {
             // it can have no Entity in database. it isn't an error !
             log.debug(e);
@@ -139,10 +139,10 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
             throw new EntityExistsException();
         }
 
-        Document parent = readDocByPath(project.getParentPath());
+        final Document parent = readDocByPath(project.getParentPath());
         if (parent != null) {
             parent.addChild(project);
-            entityManager.merge(parent);
+            getEntityManager().merge(parent);
         }
     }
 
@@ -152,11 +152,9 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
      * @param project the project
      * @throws ClientException the client exception
      */
-    protected void persistePortability(final Project project)
-            throws ClientException {
-        if (project.getPortabilities() != null
-                && !project.getPortabilities().isEmpty()) {
-            List<Portability> result = new ArrayList<Portability>();
+    protected void persistePortability(final Project project) throws ClientException {
+        if (project.getPortabilities() != null && !project.getPortabilities().isEmpty()) {
+            final List<Portability> result = new ArrayList<Portability>();
 
             for (Portability item : project.getPortabilities()) {
                 result.add(portabilitiesDAO.create(item));
@@ -174,7 +172,7 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
     protected void persist(final Project project) throws ClientException {
         final List<Portability> portabilities = portabilitiesDAO.create(project.getPortabilities());
         project.setPortabilities(portabilities);
-        entityManager.persist(project);
+        getEntityManager().persist(project);
     }
 
 

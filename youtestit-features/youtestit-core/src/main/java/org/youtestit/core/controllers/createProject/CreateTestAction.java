@@ -31,6 +31,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.logging.Logger;
+import org.jboss.seam.international.status.Messages;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.commons.utils.exceptions.YoutestitMSG;
 import org.youtestit.commons.utils.exceptions.entities.EntityExistsException;
@@ -61,6 +62,10 @@ public class CreateTestAction extends AbstractCreateDocument implements
     @Inject
     private Logger log;
 
+    /** The messages. */
+    @Inject
+    private Messages messages;
+    
     @Inject
     private TestCaseDAO testCaseDAO;
 
@@ -76,8 +81,7 @@ public class CreateTestAction extends AbstractCreateDocument implements
      */
     @PostConstruct
     public void initialize() {
-        log.debug(currentDocument);
-        log.debug(messages);
+        log.debug("initialize");
         if (test == null) {
             test = new TestCase();
         }

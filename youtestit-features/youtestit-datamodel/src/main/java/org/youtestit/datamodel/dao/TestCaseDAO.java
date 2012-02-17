@@ -43,6 +43,9 @@ import org.youtestit.datamodel.entity.Portability;
 import org.youtestit.datamodel.entity.Project;
 import org.youtestit.datamodel.entity.TestCase;
 
+/**
+ * The Class TestCaseDAO.
+ */
 @Singleton
 @Named
 public class TestCaseDAO extends DocumentDAO implements Serializable {
@@ -55,11 +58,11 @@ public class TestCaseDAO extends DocumentDAO implements Serializable {
 
     /** The logger. */
     @Inject
-    private Logger log;
+    private Logger            log;
 
     /** The portabilities dao. */
     @Inject
-    private PortabilityDAO portabilitiesDAO;
+    private PortabilityDAO    portabilitiesDAO;
 
     // =========================================================================
     // CONSTRUCTORS
@@ -80,7 +83,7 @@ public class TestCaseDAO extends DocumentDAO implements Serializable {
      */
     protected TestCaseDAO(final EntityManager entityManager, final Logger log) {
         super();
-        this.entityManager = entityManager;
+        this.setEntityManager(entityManager);
         this.log = log;
         this.portabilitiesDAO = new PortabilityDAO(entityManager, log);
     }
@@ -92,10 +95,9 @@ public class TestCaseDAO extends DocumentDAO implements Serializable {
      * @param log the log
      * @param portabilitiesDAO the portabilities dao
      */
-    protected TestCaseDAO(EntityManager entityManager, Logger log,
-            PortabilityDAO portabilitiesDAO) {
+    protected TestCaseDAO(EntityManager entityManager, Logger log, PortabilityDAO portabilitiesDAO) {
         super();
-        this.entityManager = entityManager;
+        this.setEntityManager(entityManager);
         this.log = log;
         this.portabilitiesDAO = portabilitiesDAO;
     }
@@ -109,16 +111,16 @@ public class TestCaseDAO extends DocumentDAO implements Serializable {
     // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     /**
      * Allow to creates a new Project.
-     * 
+     *
      * @param test the test case to create
-     * @throws ParentTypeException
-     * @throws ParentNullException
-     * @throws EntityExistsException
+     * @throws EntityExistsException the entity exists exception
+     * @throws ParentNullException the parent null exception
+     * @throws ParentTypeException the parent type exception
      * @throws ClientException if exception is occure.
      */
-    public void create(final TestCase test) throws EntityExistsException,
-            ParentNullException, ParentTypeException, ClientException {
-        
+    public void create(final TestCase test) throws EntityExistsException, ParentNullException, ParentTypeException,
+            ClientException {
+
         log.debug("create");
         final Document parent = readDocByPath(test.getParentPath());
 
@@ -128,7 +130,7 @@ public class TestCaseDAO extends DocumentDAO implements Serializable {
         persist(test);
 
         parent.addChild(test);
-        entityManager.merge(parent);
+        getEntityManager().merge(parent);
     }
 
     /**
@@ -138,22 +140,22 @@ public class TestCaseDAO extends DocumentDAO implements Serializable {
      * <li>test path already exist</li>
      * <li>parent isn't a project</li>
      * </ul>
-     * 
+     *
      * @param test the test to check
-     * @throws EntityExistsException
-     * @throws ParentNullException
-     * @throws ParentTypeException
+     * @param parent the parent
+     * @throws EntityExistsException the entity exists exception
+     * @throws ParentNullException the parent null exception
+     * @throws ParentTypeException the parent type exception
      * @throws ClientException if exception is occure.
      */
-    public void assertCreate(TestCase test, Document parent)
-            throws EntityExistsException, ParentNullException,
+    public void assertCreate(TestCase test, Document parent) throws EntityExistsException, ParentNullException,
             ParentTypeException, ClientException {
 
         if (test == null) {
             throw new ClientException(ErrorsMSG.VALUE_NOT_NULL);
         }
 
-        Document resultSet = readDocByPath(test.getPath());
+        final Document resultSet = readDocByPath(test.getPath());
 
         if (resultSet != null) {
             throw new EntityExistsException();
@@ -169,16 +171,14 @@ public class TestCaseDAO extends DocumentDAO implements Serializable {
 
     /**
      * Persiste portability.
-     * 
-     * @param project the project
+     *
+     * @param test the test
      * @throws ClientException the client exception
      */
-    protected void persistePortability(final TestCase test)
-            throws ClientException {
+    protected void persistePortability(final TestCase test) throws ClientException {
 
-        if (test.getPortabilities() != null
-                && !test.getPortabilities().isEmpty()) {
-            List<Portability> result = new ArrayList<Portability>();
+        if (test.getPortabilities() != null && !test.getPortabilities().isEmpty()) {
+            final List<Portability> result = new ArrayList<Portability>();
 
             for (Portability item : test.getPortabilities()) {
                 result.add(portabilitiesDAO.create(item));
@@ -196,7 +196,7 @@ public class TestCaseDAO extends DocumentDAO implements Serializable {
     protected void persist(final TestCase test) throws ClientException {
         final List<Portability> portabilities = portabilitiesDAO.create(test.getPortabilities());
         test.setPortabilities(portabilities);
-        entityManager.persist(test);
+        getEntityManager().persist(test);
     }
 
 }
