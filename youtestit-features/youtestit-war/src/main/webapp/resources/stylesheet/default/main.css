@@ -749,9 +749,13 @@ div.prop{
 
 
 
-/*******************************************************************************
-* COMPONENTS
-*******************************************************************************/
+/**=============================================================================
+ ===============================================================================
+ =
+ = 								COMPONENTS
+ =
+ ===============================================================================
+==============================================================================*/
 .yti_portabilities table{
          background-image: url("#{resource['stylesheet/default/imgs/component_background.png']}");
          border:1px solid ;
@@ -982,6 +986,48 @@ div.prop{
 }
 .yti_exportType_RSS{
 	background-image: url("#{resource['stylesheet/default/imgs/icons/rss.png']}");
+}
+
+
+/*****************************************************************************
+* fibonacci component
+*****************************************************************************/
+
+.fibonacciList{
+	list-style-type: none;
+	margin: 0;
+    padding: 0;
+}
+
+.fibonacciItem{
+	display: inline;
+}
+
+.fibonacciItemEnable a,
+.fibonacciItemOver a,
+.fibonacciItem a:HOVER,
+.fibonacciItem a{
+	display: block;
+	float: left;
+	height: 22px;
+	width: 22px;
+	text-align: center;
+	padding-top: 5px;
+	background-repeat: no-repeat;
+	font-size: 9px;
+}
+
+.fibonacciItem a{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/star/star_default.png']}");
+}
+
+.fibonacciItemOver a,
+.fibonacciItem a:HOVER{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/star/star_over.png']}");
+}
+
+.fibonacciItemEnable a{
+	background-image: url("#{resource['stylesheet/default/imgs/icons/star/star_enable.png']}");
 }
 
 

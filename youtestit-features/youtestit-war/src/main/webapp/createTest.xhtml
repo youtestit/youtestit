@@ -61,7 +61,7 @@
 				            <ui:remove>
 				            <!--+++++++++[ title ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 				            </ui:remove>        
-							<h:outputLabel id="title_label" for="title" value="#{messages['label.create.project.form.title']}"/>
+							<h:outputLabel id="title_label" for="title" value="#{messages['label.create.test.form.title']}"/>
 				            <h:inputText id="title" value="#{createTestAction.test.title}" size="50">
 				            	<rich:validator />
 				            </h:inputText>
@@ -76,6 +76,32 @@
 				            	<rich:validator />
 				            </h:inputText>
 				            <rich:message for="parentPath" id="parentPath_error" />
+				            
+
+				            <ui:remove>
+				            <!--+++++++++[ subject ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+				            </ui:remove>
+							<h:outputLabel id="subject_label" for="subject" value="#{messages['label.create.project.form.subject']}"/>
+				            <h:inputTextarea id="subject" value="#{createTestAction.test.subject}" cols="58">
+				            	<rich:validator />
+				            </h:inputTextarea>
+				            <rich:message for="subject" id="subject_error" />
+				            
+				            
+							<ui:remove>
+				            <!--+++++++++[ importance ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+				            </ui:remove>
+							<h:outputLabel id="importance_label" for="importance" value="#{messages['label.create.test.form.importance']}"/>				            
+				            <yti:fibonacci id="importance" value="#{createTestAction.test.importance}"/>
+				            <rich:message for="importance" id="importance_error" />
+
+							
+							<ui:remove>
+				            <!--+++++++++[ complexity ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+				            </ui:remove>
+							<h:outputLabel id="complexity_label" for="complexity" value="#{messages['label.create.test.form.complexity']}"/>				            
+				            <yti:fibonacci id="complexity" value="#{createTestAction.test.complexity}" />
+				            <rich:message for="importance" id="complexity_error" />
 				            
 
 							<ui:remove>
