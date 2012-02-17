@@ -158,8 +158,6 @@ public class UserTest extends AbstractEntityTest {
         user2Str.append("description=Joe user,");
         user2Str.append("office=w4a15,");
         user2Str.append("enable=true,");
-        user2Str.append("profile=Profile [name=admin,administrator=false,enable=true],");
-        user2Str.append("groups=[Profile [name=group,users=null]]");
         user2Str.append("]");
         return user2Str.toString();
     }
