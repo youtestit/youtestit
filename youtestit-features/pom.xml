@@ -36,7 +36,7 @@
         <seam.persistence.version>3.0.0.Final</seam.persistence.version>
         <richfaces.version>4.2.0.CR1</richfaces.version>
         <freemarker.version>2.3.16</freemarker.version>
-         <primefaces.version>3.0.M1</primefaces.version>
+        <primefaces.version>3.1.1</primefaces.version>
         <primefaces.themes.bluesky.version>1.0.1</primefaces.themes.bluesky.version>
         <commons-lang.version>2.6</commons-lang.version>
         <commons-io.version>2.1</commons-io.version>
