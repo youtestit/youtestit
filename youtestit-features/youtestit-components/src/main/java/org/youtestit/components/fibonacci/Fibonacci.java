@@ -43,21 +43,28 @@ public class Fibonacci implements Serializable {
 
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 3444895693731952328L;
+    private static final long         serialVersionUID = 3444895693731952328L;
 
     /** The Constant SUITE. */
-    private List<Double>      suite            = null;
+    private static final List<Double> SUITE            = initializeSuite();
 
 
-    public Fibonacci() {
-        super();
-        suite = new ArrayList<Double>();
-        double[] simpleSuite = { 0, 0.5, 1, 2, 3, 5, 8, 13, 20, 40, 100};
+    /**
+     * allow to initialize Fibonacci suite.
+     *
+     * @return the Fibonacci suite
+     */
+    private static List<Double> initializeSuite() {
+        List<Double> result = new ArrayList<Double>();
+        final double[] simpleSuite = { 0, 0.5, 1, 2, 3, 5, 8, 13, 20, 40, 100 };
 
-        for(double item:simpleSuite){
-            suite.add(item);    
+        for (double item : simpleSuite) {
+            result.add(item);
         }
+        return result;
     }
+
+
 
 
     /**
@@ -66,7 +73,7 @@ public class Fibonacci implements Serializable {
      * @return the suite
      */
     public List<Double> getSuite() {
-        return suite;
+        return SUITE;
     }
 
 
