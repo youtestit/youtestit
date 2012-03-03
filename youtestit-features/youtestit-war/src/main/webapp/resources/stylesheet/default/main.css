@@ -724,6 +724,10 @@ div.prop{
 	border: none;
 }
 
+.ui-icon{
+	height: 20px;
+    width: 20px;
+}
 
 .ui-icon-project{
 	background-image: url("#{resource['stylesheet/default/imgs/icons/tree/folder-22.png']}") !important;
@@ -1014,7 +1018,8 @@ div.prop{
 	text-align: center;
 	padding-top: 5px;
 	background-repeat: no-repeat;
-	font-size: 9px;
+	font-size: 11px;
+	font-weight: bolder;
 }
 
 .fibonacciItem a{
@@ -1024,6 +1029,7 @@ div.prop{
 .fibonacciItemOver a,
 .fibonacciItem a:HOVER{
 	background-image: url("#{resource['stylesheet/default/imgs/icons/star/star_over.png']}");
+	text-decoration: none;
 }
 
 .fibonacciItemEnable a{
