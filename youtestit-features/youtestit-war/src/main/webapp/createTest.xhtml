@@ -72,7 +72,7 @@
 				            <!--+++++++++[ parentPath ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 				            </ui:remove>        
 							<h:outputLabel id="parentPath_label" for="parentPath" value="#{messages['label.create.project.form.parent.path']}"/>
-				            <h:inputText id="parentPath" value="#{createTestAction.parentPath}" size="60">
+				            <h:inputText id="parentPath" value="#{createTestAction.parentPath}" size="50">
 				            	<rich:validator />
 				            </h:inputText>
 				            <rich:message for="parentPath" id="parentPath_error" />
@@ -82,7 +82,7 @@
 				            <!--+++++++++[ subject ]+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 				            </ui:remove>
 							<h:outputLabel id="subject_label" for="subject" value="#{messages['label.create.project.form.subject']}"/>
-				            <h:inputTextarea id="subject" value="#{createTestAction.test.subject}" cols="58">
+				            <h:inputTextarea id="subject" value="#{createTestAction.test.subject}" cols="50">
 				            	<rich:validator />
 				            </h:inputTextarea>
 				            <rich:message for="subject" id="subject_error" />
