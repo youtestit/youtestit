@@ -48,12 +48,12 @@ public class DocumentDAO implements Serializable {
 
     /** The logger. */
     @Inject
-    private Logger log;
+    private Logger            log;
 
-    
+
     /** The entity manager. */
     @PersistenceContext
-    private EntityManager entityManager;
+    private EntityManager     entityManager;
 
     // =========================================================================
     // CONSTRUCTORS
@@ -82,7 +82,7 @@ public class DocumentDAO implements Serializable {
     // METHODS
     // =========================================================================
 
-  
+
     // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     // READ
     // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -94,16 +94,13 @@ public class DocumentDAO implements Serializable {
      * @return the list
      * @throws ClientException the client exception
      */
-    public List<Document> readDocByPathParent(final String path)
-            throws ClientException {
+    public List<Document> readDocByPathParent(final String path) throws ClientException {
         log.debug("readDocByPathParent");
-        
-        final String param = "parentPath";
-        final String jpql = "SELECT d FROM Document d WHERE d.parentPath=:"
-                + param;
 
-        return entityManager.createQuery(jpql, Document.class).setParameter(
-                param, path).getResultList();
+        final String param = "parentPath";
+        final String jpql = "SELECT d FROM Document d WHERE d.parentPath=:" + param;
+
+        return entityManager.createQuery(jpql, Document.class).setParameter(param, path).getResultList();
     }
 
     /**
@@ -115,30 +112,29 @@ public class DocumentDAO implements Serializable {
      */
     public Document readDocByPath(final String path) throws ClientException {
         log.debug("readDocByPath");
-        
-        if(path==null){
+
+        if (path == null) {
             return null;
         }
-        
+
+
         final String param = "path";
         final String jpql = "SELECT d FROM Document d WHERE d.path=:" + param;
-
         Document document = null;
-        final List<Document> documents= entityManager.createQuery(jpql, Document.class).setParameter(
-                param, path).getResultList();
-        
-        if(documents!=null && !documents.isEmpty()){
+
+        final List<Document> documents = entityManager.createQuery(jpql, Document.class).setParameter(param, path).getResultList();
+
+        if (documents != null && !documents.isEmpty()) {
             document = documents.get(0);
         }
         return document;
 
     }
 
-    
-    
+
     /**
      * Gets the entity manager.
-     *
+     * 
      * @return the entity manager
      */
     public EntityManager getEntityManager() {
@@ -147,13 +143,12 @@ public class DocumentDAO implements Serializable {
 
     /**
      * Sets the entity manager.
-     *
+     * 
      * @param entityManager the new entity manager
      */
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
-    
-    
-    
+
+
 }

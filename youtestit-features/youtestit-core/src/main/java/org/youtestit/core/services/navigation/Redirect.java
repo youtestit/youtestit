@@ -22,6 +22,7 @@
  *   Git      : https://github.com/youtestit
  */
 package org.youtestit.core.services.navigation;
+
 import static org.youtestit.commons.utils.Constants.PATH_SPLIT;
 
 import java.io.Serializable;
@@ -29,11 +30,19 @@ import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
 
 import org.jboss.logging.Logger;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.datamodel.dao.ProjectDAO;
 import org.youtestit.datamodel.entity.Document;
+import org.youtestit.datamodel.services.TxHelper;
 import org.youtestit.security.identification.CurrentUserManager;
 
 import com.ocpsoft.pretty.PrettyContext;
@@ -59,10 +68,17 @@ public class Redirect implements Serializable {
 
     @Inject
     private CurrentUserManager currentUserManager;
-    
+
     @Inject
-    private ProjectDAO projectDAO;
-    
+    private ProjectDAO         projectDAO;
+
+    @PersistenceContext
+    private EntityManager      entityManager;
+
+
+    @Inject
+    TxHelper txHelper;
+
     @Inject
     private Logger             log;
 
@@ -90,7 +106,7 @@ public class Redirect implements Serializable {
 
     /**
      * Redirect to home.
-     *
+     * 
      * @throws ClientException the client exception
      */
     public void redirectToHome() throws ClientException {
@@ -100,31 +116,41 @@ public class Redirect implements Serializable {
 
     /**
      * Gets the app home.
-     *
+     * 
      * @return the app home
      * @throws ClientException the client exception
+     * @throws SystemException
+     * @throws NotSupportedException
+     * @throws HeuristicRollbackException
+     * @throws HeuristicMixedException
+     * @throws RollbackException
+     * @throws IllegalStateException
+     * @throws SecurityException
      */
-    public String getAppHome() throws ClientException{
+    public String getAppHome() throws ClientException {
         //
         URL currentPath = PrettyContext.getCurrentInstance().getRequestURL();
         Document currentDocument = null;
-        
-        if(currentPath!=null && currentPath.toString().startsWith("/app/")){
+
+        if (currentPath != null && currentPath.toString().startsWith("/app/")) {
             final String requestUrl = currentPath.decode().toString().replace("/app", "");
-            currentDocument = projectDAO.readDocByPath(requestUrl);
             
+            txHelper.begin();
+            currentDocument = projectDAO.readDocByPath(requestUrl);
+            txHelper.commit();
+
         }
         String result = "/app-unknown.xhtml";
-        
-        if(currentDocument!=null){
+
+        if (currentDocument != null) {
             StringBuilder url = new StringBuilder(PATH_SPLIT);
             url.append("app-");
             url.append(currentDocument.getClass().getSimpleName());
             url.append(".xhtml");
-            
+
             result = url.toString();
         }
         return result;
     }
-    
+
 }
