@@ -33,8 +33,10 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -68,11 +70,8 @@ public class Document extends DublinCore implements Serializable {
     private Double           complexity;
 
     /** The portability. */
-    @OneToMany(cascade = {CascadeType.REMOVE,CascadeType.PERSIST},
-               targetEntity = Portability.class,
-               orphanRemoval = true,
-               fetch=LAZY)
-    
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Portability.class, cascade = CascadeType.ALL)
+    @JoinTable(name = "document_portability")
     private List<Portability> portabilities = new ArrayList<Portability>();
 
     /** The url wiki. */
