@@ -7,7 +7,6 @@
     -->
 	<property file="${build.properties}" />
 
-
 	<!--
     ============================================================================
     = OS
@@ -20,8 +19,6 @@
 		<os family="windows" />
 	</condition>   
 
-
-
 	<!--
     ============================================================================
     = TARGET
@@ -32,6 +29,7 @@
 		<exec executable="mvn" failonerror="true">
 			<arg value="clean" />
 			<arg value="install" />
+			<arg value="${mvn.opts}" />
 		</exec>
 	</target>
 	
@@ -41,10 +39,8 @@
 			<arg value="clean" />
 			<arg value="install" />
 			<arg value="-Dmaven.test.skip=true" />
+			<arg value="${mvn.opts}" />
 		</exec>
 	</target>
-
-
-
 
 </project>
