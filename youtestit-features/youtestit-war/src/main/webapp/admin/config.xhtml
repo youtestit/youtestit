@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui" 
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="/layout/template.xhtml">
+
+    <ui:remove>
+    <!--*************************************************************
+    *    BODY
+    **************************************************************-->
+    </ui:remove>
+    <ui:define name="body">
+        <h:form id="adminConfigForm">
+            <rich:tabPanel id="adminTabConfig">
+                <!-- GLOBALS -->
+                <rich:tab header="#{messages['label.admin.config.tab.globals']}">
+                    <ui:include src="config/globals.xhtml" />
+                </rich:tab>
+                <!-- USERS -->
+                <rich:tab header="#{messages['label.admin.config.tab.users']}">
+                    <ui:include src="config/users.xhtml" />
+                </rich:tab>
+                <!-- GROUPS -->
+                <rich:tab header="#{messages['label.admin.config.tab.groups']}">
+                    <ui:include src="config/groups.xhtml" />
+                </rich:tab>
+                <!-- NODES -->
+                <rich:tab header="#{messages['label.admin.config.tab.nodes']}">
+                    <ui:include src="config/nodes.xhtml" />
+                </rich:tab>
+            </rich:tabPanel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

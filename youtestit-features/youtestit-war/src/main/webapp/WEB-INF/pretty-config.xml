@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pretty-config xmlns="http://ocpsoft.com/prettyfaces/2.0.4"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
-        http://ocpsoft.com/prettyfaces/2.0.4
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://ocpsoft.com/prettyfaces/2.0.4
         http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-2.0.4.xsd">
 
     <!--======================================================================== 
@@ -12,39 +11,41 @@
     
     <rewrite match="^/(app[\w\d-_]+[.]{1}xhtml[?]path=)([\w\d/-_]+)$" substitute="/app/$2" redirect="301" />
     
-    
-
-
     <!--======================================================================== 
     = IDENTIFY
     =========================================================================-->
-	<url-mapping id="login">
-		<pattern value="/login"></pattern>
-		<view-id>/login.xhtml</view-id>
-	</url-mapping>
-	
-	<url-mapping id="subscribe">
-		<pattern value="/subscribe"></pattern>
-		<view-id>/subscribe.xhtml</view-id>
-	</url-mapping>
-	
-	<url-mapping id="logout">
+   <url-mapping id="login">
+      <pattern value="/login"></pattern>
+      <view-id>/login.xhtml</view-id>
+   </url-mapping>
+   
+   <url-mapping id="subscribe">
+      <pattern value="/subscribe"></pattern>
+      <view-id>/subscribe.xhtml</view-id>
+   </url-mapping>
+   
+   <url-mapping id="logout">
         <pattern value="/logout"></pattern>
         <view-id>/login.xhtml</view-id>
         <action>#{identity.logout}</action>
         <action phaseId="RENDER_RESPONSE">#{redirect.redirectToHome}</action>
     </url-mapping>
     
-    
     <!--======================================================================== 
     = HOME
     =========================================================================-->
-	<url-mapping id="home">
-		<pattern value="/home"></pattern>
-		<view-id>#{redirect.getHome}</view-id>
-	</url-mapping>
+   <url-mapping id="home">
+      <pattern value="/home"></pattern>
+      <view-id>#{redirect.getHome}</view-id>
+   </url-mapping>
 
-
+    <!--======================================================================== 
+    = ADMIN CONFIG
+    =========================================================================-->
+    <url-mapping id="adminConfig">
+        <pattern value="/admin/config/"></pattern>
+        <view-id>/admin/config.xhtml</view-id>
+    </url-mapping>
     
     <!--========================================================================
     = APPLICATION SECTIONS
@@ -53,7 +54,6 @@
         <pattern value="/app/#{/.*/ path:currentDocument.path}"></pattern>
         <view-id>#{redirect.getAppHome}</view-id>
     </url-mapping>
-    
     
     <!--========================================================================
     = FORMS
@@ -68,11 +68,9 @@
         <view-id>/createProject.xhtml</view-id>
     </url-mapping>
     
-    
     <url-mapping id="createTest">
         <pattern value="/createTest/#{/.*/ path:currentDocument.path}"></pattern>
         <view-id>/createTest.xhtml</view-id>
     </url-mapping>
-
 
 </pretty-config>
