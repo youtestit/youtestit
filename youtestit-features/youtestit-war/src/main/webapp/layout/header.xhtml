@@ -1,8 +1,8 @@
 <f:subview xmlns:ui="http://java.sun.com/jsf/facelets"
-	       xmlns:h="http://java.sun.com/jsf/html"
-    	   xmlns:f="http://java.sun.com/jsf/core"
-    	   xmlns:ytiButton="http://java.sun.com/jsf/composite/youtestit/button"
-    	   id="header">
+         xmlns:h="http://java.sun.com/jsf/html"
+         xmlns:f="http://java.sun.com/jsf/core"
+         xmlns:ytiButton="http://java.sun.com/jsf/composite/youtestit/button"
+         id="header">
 
 <ui:remove>
 <!--****************************************************************************
@@ -28,93 +28,93 @@
 *   ======
 *   Homepage : http://www.youtestit.org
 *   Git      : https://github.com/youtestit
-*	Author   : pguillerm
+*  Author   : pguillerm
 *
 *****************************************************************************-->
 </ui:remove>
 
 <header id="headerContent">
-	
-	<section id="headerSection">
-		<div id="headerLogo">
-			<a href="#">
-				<span id="logo">
-				  <span>Logo</span>
-				</span>
-			</a>
-		</div>
-		
-		<div id="identity">
-		  <a href="logout" class="logout">
-			<span>logout</span>
-		  </a>
-	
-		  <span id="headerUserNameProfile">
-			<span id="headerUserName">#{currentUser.firstname} #{currentUser.lastname}</span>
-			<span class="profileSeparator">/</span>
-			<span id="headerProfile">Profile</span>
-		  </span>
-		</div>
-	
-		<div id="search">
-		  <input type="text" />
-		  <a href="#" class="searchButton"><span>Ok</span></a>
-		</div>
-		
-		<div class="clear"></div>
-	</section>
-	
-	<menu id="headerActionsMenu">
-	  <ul>
-		<ytiButton:buttonMenu id="buttonHome"
-							  href="/youtestit/home"
-							  styleClass="iconHome"
-							  show="#{true}"
-							  label="button.go.home.label"
-							  title="button.go.home.title"/>
+  
+  <section id="headerSection">
+    <div id="headerLogo">
+      <a href="#">
+        <span id="logo">
+          <span>Logo</span>
+        </span>
+      </a>
+    </div>
+    
+    <div id="identity">
+      <a href="/youtestit/logout" class="logout">
+      <span>logout</span>
+      </a>
+  
+      <span id="headerUserNameProfile">
+      <span id="headerUserName">#{currentUser.firstname} #{currentUser.lastname}</span>
+      <span class="profileSeparator">/</span>
+      <span id="headerProfile">Profile</span>
+      </span>
+    </div>
+  
+    <div id="search">
+      <input type="text" />
+      <a href="#" class="searchButton"><span>Ok</span></a>
+    </div>
+    
+    <div class="clear"></div>
+  </section>
+  
+  <menu id="headerActionsMenu">
+    <ul>
+    <ytiButton:buttonMenu id="buttonHome"
+                href="/youtestit/home"
+                styleClass="iconHome"
+                show="#{true}"
+                label="button.go.home.label"
+                title="button.go.home.title"/>
 
-		<ytiButton:buttonMenu id="buttonCreateProject"
-							  href="/youtestit/createProject#{currentDocument.path}"
-							  styleClass="iconCreateProject"
-							  show="#{true}"
-							  label="button.create.project.label"
-							  title="button.create.project.title"/>
-	
-		<li class="menuSeparator"></li>
+    <ytiButton:buttonMenu id="buttonCreateProject"
+                href="/youtestit/createProject#{currentDocument.path}"
+                styleClass="iconCreateProject"
+                show="#{true}"
+                label="button.create.project.label"
+                title="button.create.project.title"/>
+  
+    <li class="menuSeparator"></li>
 
-		<ytiButton:buttonMenu id="buttonCreateTest"
-							  href="/youtestit/createTest#{currentDocument.path}"
-							  styleClass="iconCreateTest"
-							  show="#{actionsButtonsVisibility.showInnerSection}"
-							  label="button.create.test.label"
-							  title="button.create.test.title"/>
-		
-		<ytiButton:buttonMenu id="buttonConfig"
-							  href="/youtestit/config#{currentDocument.path}"
-							  styleClass="iconConfigure"
-							  show="#{actionsButtonsVisibility.showInnerSection}"
-							  label="button.config.label"
-							  title="button.config.title"/>
-		
-		<ytiButton:buttonMenu id="buttonRun"
-							  href="/youtestit/run#{currentDocument.path}"
-							  styleClass="iconRun"
-							  show="#{actionsButtonsVisibility.showInnerSection}"
-							  label="button.run.label"
-							  title="button.run.title"/>
+    <ytiButton:buttonMenu id="buttonCreateTest"
+                href="/youtestit/createTest#{currentDocument.path}"
+                styleClass="iconCreateTest"
+                show="#{actionsButtonsVisibility.showInnerSection}"
+                label="button.create.test.label"
+                title="button.create.test.title"/>
+    
+    <ytiButton:buttonMenu id="buttonConfig"
+                href="/youtestit/config#{currentDocument.path}"
+                styleClass="iconConfigure"
+                show="#{actionsButtonsVisibility.showInnerSection}"
+                label="button.config.label"
+                title="button.config.title"/>
+    
+    <ytiButton:buttonMenu id="buttonRun"
+                href="/youtestit/run#{currentDocument.path}"
+                styleClass="iconRun"
+                show="#{actionsButtonsVisibility.showInnerSection}"
+                label="button.run.label"
+                title="button.run.title"/>
 
-		<ytiButton:buttonMenu id="buttonAdminConfig"
-							  href="/youtestit/admin/config"
-							  styleClass="iconAdminConfig"
-							  show="#{actionsButtonsVisibility.showAdminConfig}"
-							  label="button.admin.config.label"
-							  title="button.admin.config.title"
-							  listStyle="menuRightIcon"/>
-		
-	  </ul>
-	  <div class="clear"></div>
-	</menu>
-	
+    <ytiButton:buttonMenu id="buttonAdminConfig"
+                href="/youtestit/admin/config"
+                styleClass="iconAdminConfig"
+                show="#{actionsButtonsVisibility.showAdminConfig}"
+                label="button.admin.config.label"
+                title="button.admin.config.title"
+                listStyle="menuRightIcon"/>
+    
+    </ul>
+    <div class="clear"></div>
+  </menu>
+  
 </header>
 
 </f:subview>
