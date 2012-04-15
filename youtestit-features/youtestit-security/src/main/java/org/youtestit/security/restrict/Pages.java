@@ -30,14 +30,7 @@ public interface Pages {
         @Owner
         HOME,
         
-        @ViewPattern("/dashboardAdmin*")
-        @RestrictAtPhase(PhaseIdType.RENDER_RESPONSE)
-        @LoginView("/login")
-        @AccessDeniedView("/denied")
-        @Admin
-        DASHBOARD_ADMIN,
-        
-        @ViewPattern("/app/admin/*")
+        @ViewPattern("/admin*")
         @RestrictAtPhase(PhaseIdType.RENDER_RESPONSE)
         @LoginView("/login")
         @AccessDeniedView("/denied")
