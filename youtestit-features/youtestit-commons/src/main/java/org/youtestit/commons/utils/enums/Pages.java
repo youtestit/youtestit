@@ -21,22 +21,30 @@
  *   Homepage : http://www.youtestit.org
  *   Git      : https://github.com/youtestit
  */
-package org.youtestit.actions.user.helpers;
-
+package org.youtestit.commons.utils.enums;
 
 /**
  * Pages helpers, it's define all user pages name
  * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
- * @since Dec 16, 2011
+ * @author "<a href='mailto:clement.lardeur@gmail.com'>Clement Lardeur</a>"
+ * @since Dec 16, 2012
  */
 public enum Pages {
+
+    create,
+
+    edit,
+
     home,
-    
+
     login,
 
-    subscrive;
+    subscrive,
 
+    unknown,
+
+    view;
 
     /**
      * {@inheritDoc}

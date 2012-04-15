@@ -27,8 +27,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 
-import org.youtestit.commons.utils.Constants;
-import org.youtestit.commons.utils.ConstantsProperties;
+import org.youtestit.commons.utils.constants.Constants;
+import org.youtestit.commons.utils.constants.ConstantsProperties;
 
 
 

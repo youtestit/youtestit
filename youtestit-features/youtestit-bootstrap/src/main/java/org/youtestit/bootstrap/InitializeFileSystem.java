@@ -35,7 +35,7 @@ import org.jboss.logging.Logger;
 import org.jboss.seam.servlet.WebApplication;
 import org.jboss.seam.servlet.event.Initialized;
 import org.youtestit.bootstrap.events.InitializeUser;
-import org.youtestit.commons.utils.Constants;
+import org.youtestit.commons.utils.constants.Constants;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.commons.utils.exceptions.FatalException;
 

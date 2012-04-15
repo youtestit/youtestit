@@ -23,7 +23,7 @@
  */
 package org.youtestit.core.controllers.createProject;
 
-import static org.youtestit.commons.utils.Constants.PATH_SPLIT;
+import static org.youtestit.commons.utils.constants.Constants.PATH_SPLIT;
 
 import java.io.Serializable;
 import java.text.Normalizer;

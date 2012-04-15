@@ -32,7 +32,7 @@ import javax.inject.Named;
 import org.apache.commons.lang.StringUtils;
 import org.jboss.logging.Logger;
 import org.jboss.seam.international.status.Messages;
-import org.youtestit.actions.user.helpers.Pages;
+import org.youtestit.commons.utils.enums.Pages;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.commons.utils.exceptions.YoutestitMSG;
 import org.youtestit.datamodel.dao.UserDAO;

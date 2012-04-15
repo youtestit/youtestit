@@ -37,7 +37,7 @@ public interface Pages {
         @Admin
         ADMIN,
         
-        @ViewPattern("/app-project*")
+        @ViewPattern("/app*")
         @RestrictAtPhase(PhaseIdType.RENDER_RESPONSE)
         @LoginView(LOGIN_PAGE)
         @Owner

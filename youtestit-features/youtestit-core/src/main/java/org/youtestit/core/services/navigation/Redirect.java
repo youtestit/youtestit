@@ -23,22 +23,17 @@
  */
 package org.youtestit.core.services.navigation;
 
-import static org.youtestit.commons.utils.Constants.PATH_SPLIT;
-
 import java.io.Serializable;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 
 import org.jboss.logging.Logger;
+import org.youtestit.commons.utils.constants.Constants;
+import org.youtestit.commons.utils.enums.DocTypes;
+import org.youtestit.commons.utils.enums.Pages;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.datamodel.dao.ProjectDAO;
 import org.youtestit.datamodel.entity.Document;
@@ -46,41 +41,32 @@ import org.youtestit.datamodel.services.TxHelper;
 import org.youtestit.security.identification.CurrentUserManager;
 
 import com.ocpsoft.pretty.PrettyContext;
-import com.ocpsoft.pretty.faces.url.URL;
-
 
 /**
  * RedirectHome
  * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
+ * @author "<a href='mailto:clem.lardeur@gmail.com'>Clement Lardeur</a>"
  * @since Dec 30, 2011
  */
 @Named
 @RequestScoped
 public class Redirect implements Serializable {
 
-
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
-    /** The Constant serialVersionUID. */
-    private static final long  serialVersionUID = -8966639370051990933L;
-
     @Inject
     private CurrentUserManager currentUserManager;
 
     @Inject
-    private ProjectDAO         projectDAO;
-
-    @PersistenceContext
-    private EntityManager      entityManager;
-
+    private ProjectDAO projectDAO;
 
     @Inject
     TxHelper txHelper;
 
     @Inject
-    private Logger             log;
+    private Logger log;
 
     // =========================================================================
     // METHODS
@@ -94,9 +80,10 @@ public class Redirect implements Serializable {
      * @throws ClientException the client exception
      */
     public String getHome() throws ClientException {
-        String homePage = "/home.xhtml";
-        if (currentUserManager.getCurrentAccount() != null && currentUserManager.isAdmin()) {
-            homePage = "/admin" + homePage;
+        String homePage = Pages.home.toString();
+        if (currentUserManager.getCurrentAccount() != null
+                && currentUserManager.isAdmin()) {
+            homePage = "/admin/" + homePage;
         }
         return homePage;
     }
@@ -110,44 +97,109 @@ public class Redirect implements Serializable {
         log.info("redirectToHome");
     }
 
-
     /**
-     * Gets the app home.
+     * Compute the path to view a Document depending of her type.
      * 
-     * @return the app home
+     * @return document view path
      * @throws ClientException the client exception
-     * @throws SystemException
-     * @throws NotSupportedException
-     * @throws HeuristicRollbackException
-     * @throws HeuristicMixedException
-     * @throws RollbackException
-     * @throws IllegalStateException
-     * @throws SecurityException
      */
-    public String getAppHome() throws ClientException {
-        //
-        URL currentPath = PrettyContext.getCurrentInstance().getRequestURL();
-        Document currentDocument = null;
+    public String viewDocument() throws ClientException {
+        PrettyContext pc = PrettyContext.getCurrentInstance();
+        String path = pc.getRequestURL().decode().toString();
+        path = path.replace(Constants.PATH_APPLICATION + "view/",
+                Constants.PATH_SPLIT);
+        Document currentDocument = setCurrentDocument(path);
 
-        if (currentPath != null && currentPath.toString().startsWith("/app/")) {
-            final String requestUrl = currentPath.decode().toString().replace("/app", "");
-            
-            txHelper.begin();
-            currentDocument = projectDAO.readDocByPath(requestUrl);
-            txHelper.commit();
-
-        }
-        String result = "/app-unknown.xhtml";
-
+        String result;
         if (currentDocument != null) {
-            StringBuilder url = new StringBuilder(PATH_SPLIT);
-            url.append("app-");
+            StringBuilder url = new StringBuilder(Constants.PATH_APPLICATION);
             url.append(currentDocument.getClass().getSimpleName());
-            url.append(".xhtml");
-
+            url.append(Constants.PATH_SPLIT);
+            url.append(Pages.view.toString());
             result = url.toString();
+        } else {
+            result = Constants.PATH_APPLICATION + Pages.unknown.toString();
         }
-        return result;
+
+        return result.toLowerCase();
     }
 
+    /**
+     * Compute the path to create a Document depending of her type.
+     * 
+     * @return document create path
+     * @throws ClientException the client exception
+     */
+    public String createDocument() throws ClientException {
+        PrettyContext pc = PrettyContext.getCurrentInstance();
+        List<String> segments = pc.getRequestURL().getSegments();
+        String docType = "";
+        if (segments != null && !segments.isEmpty()) {
+            docType = segments.get(2);
+        }
+
+        boolean existDocType = false;
+        for (DocTypes dc : DocTypes.values()) {
+            if (dc.name().toLowerCase().equals(docType)) {
+                existDocType = true;
+            }
+        }
+
+        String result;
+        if (existDocType) {
+            StringBuilder url = new StringBuilder(Constants.PATH_APPLICATION);
+            url.append(docType);
+            url.append(Constants.PATH_SPLIT);
+            url.append(Pages.edit.toString());
+            result = url.toString();
+        } else {
+            result = Constants.PATH_APPLICATION + Pages.unknown.toString();
+        }
+
+        return result.toLowerCase();
+    }
+
+    /**
+     * Compute the path to edit a Document depending of her type.
+     * 
+     * @return document create path
+     * @throws ClientException the client exception
+     */
+    public String editDocument() throws ClientException {
+        PrettyContext pc = PrettyContext.getCurrentInstance();
+        String path = pc.getRequestURL().decode().toString();
+        path = path.replace(Constants.PATH_APPLICATION + "edit/",
+                Constants.PATH_SPLIT);
+        Document currentDocument = setCurrentDocument(path);
+
+        String result;
+        if (currentDocument != null) {
+            StringBuilder url = new StringBuilder(Constants.PATH_APPLICATION);
+            url.append(currentDocument.getClass().getSimpleName());
+            url.append(Pages.edit.toString());
+            result = url.toString();
+        } else {
+            result = Constants.PATH_APPLICATION + Pages.unknown.toString();
+        }
+
+        return result.toLowerCase();
+    }
+
+    /**
+     * Sets the current document.
+     * 
+     * @param path the path
+     * @return the document
+     * @throws ClientException the client exception
+     */
+    private Document setCurrentDocument(String path) throws ClientException {
+        if (path == null) {
+            return null;
+        }
+        Document doc = null;
+        txHelper.begin();
+        doc = projectDAO.readDocByPath(path);
+        txHelper.commit();
+        return doc;
+    }
 }

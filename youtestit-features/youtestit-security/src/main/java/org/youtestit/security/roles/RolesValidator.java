@@ -29,8 +29,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import org.youtestit.commons.utils.Constants;
-import org.youtestit.commons.utils.ConstantsProperties;
+import org.youtestit.commons.utils.constants.Constants;
+import org.youtestit.commons.utils.constants.ConstantsProperties;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.datamodel.dao.UserDAO;
 import org.youtestit.datamodel.entity.User;

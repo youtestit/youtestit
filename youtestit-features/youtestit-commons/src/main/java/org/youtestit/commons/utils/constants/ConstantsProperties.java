@@ -21,7 +21,7 @@
  *   Homepage : http://www.youtestit.org
  *   Git      : https://github.com/youtestit
  */
-package org.youtestit.commons.utils;
+package org.youtestit.commons.utils.constants;
 
 
 /**

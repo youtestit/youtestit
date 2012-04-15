@@ -29,8 +29,8 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.youtestit.commons.utils.Constants;
 import org.youtestit.commons.utils.JUnitLogger;
+import org.youtestit.commons.utils.constants.Constants;
 import org.youtestit.commons.utils.exceptions.ClientException;
 
 

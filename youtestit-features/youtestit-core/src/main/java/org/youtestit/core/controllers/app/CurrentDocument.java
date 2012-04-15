@@ -23,7 +23,7 @@
  */
 package org.youtestit.core.controllers.app;
 
-import static org.youtestit.commons.utils.Constants.PATH_SPLIT;
+import static org.youtestit.commons.utils.constants.Constants.PATH_SPLIT;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,6 +35,7 @@ import javax.inject.Named;
 
 import org.apache.commons.lang.StringUtils;
 import org.jboss.logging.Logger;
+import org.youtestit.commons.utils.constants.Constants;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.datamodel.dao.ProjectDAO;
 import org.youtestit.datamodel.entity.Document;
@@ -71,14 +72,11 @@ public class CurrentDocument implements Serializable {
     /** The project. */
     private Boolean project = null;
 
-    private String path = "";
+    private String path = Constants.PATH_SPLIT;
 
     private Document document;
 
     private List<BreadCrumb> breadCrumbs = new ArrayList<BreadCrumb>(0);
-
-    
-    
 
     // =========================================================================
     // METHODS
@@ -177,15 +175,14 @@ public class CurrentDocument implements Serializable {
      * @param path the new path
      */
     public void setPath(String path) {
-        this.path = "/" + path;
-
+        this.path = path;
     }
 
     /**
      * Gets the document.
      * 
      * @return the document
-     * @throws ClientException 
+     * @throws ClientException
      */
     public Document getDocument() throws ClientException {
         if (document == null) {

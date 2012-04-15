@@ -69,13 +69,13 @@
 							
 							<p:treeNode type="Project" collapsedIcon="ui-icon ui-icon-project-close"
 													   expandedIcon="ui-icon ui-icon-project">
-								<a href="/youtestit/app#{doc.path}" title="#{doc.subject}">
+								<a href="/youtestit/app/view#{doc.path}" title="#{doc.subject}">
 									<h:outputText value="#{doc.title}"/>
 								</a>
 							</p:treeNode>
 							
 							<p:treeNode type="TestCase" icon="ui-icon ui-icon-test">
-								<a href="/youtestit/app#{doc.path}"><h:outputText value="#{doc.title}"/></a>
+								<a href="/youtestit/app/view#{doc.path}"><h:outputText value="#{doc.title}"/></a>
 							</p:treeNode>
 					        
 					     </p:tree>

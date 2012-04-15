@@ -23,8 +23,8 @@
  */
 package org.youtestit.core.controllers.app;
 
-import static org.youtestit.commons.utils.Constants.PATH_APPLICATION;
-import static org.youtestit.commons.utils.Constants.PATH_SPLIT;
+import static org.youtestit.commons.utils.constants.Constants.PATH_APPLICATION;
+import static org.youtestit.commons.utils.constants.Constants.PATH_SPLIT;
 
 import java.io.Serializable;
 import java.util.List;
@@ -39,12 +39,13 @@ import org.primefaces.model.DefaultMenuModel;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.MenuModel;
 import org.primefaces.model.TreeNode;
+import org.youtestit.commons.utils.constants.Constants;
+import org.youtestit.commons.utils.enums.Modes;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.datamodel.dao.ProjectDAO;
 import org.youtestit.datamodel.entity.Document;
 import org.youtestit.datamodel.entity.DublinCore;
 import org.youtestit.datamodel.pojo.BreadCrumb;
-
 
 /**
  * AppActions
@@ -56,7 +57,6 @@ import org.youtestit.datamodel.pojo.BreadCrumb;
 @ViewScoped
 public class AppActions implements Serializable {
 
-
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
@@ -64,24 +64,19 @@ public class AppActions implements Serializable {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1679635671732315892L;
 
-
     /** The logger. */
     @Inject
-    private Logger            log;
+    private Logger log;
 
+    private MenuModel breadCrumbs = null;
 
-    private MenuModel         breadCrumbs      = null;
-
-    private TreeNode          tree;
-
+    private TreeNode tree;
 
     @Inject
-    private CurrentDocument   currentDocument;
-
+    private CurrentDocument currentDocument;
 
     @Inject
-    private ProjectDAO        projectDAO;
-
+    private ProjectDAO projectDAO;
 
     // =========================================================================
     // METHODS
@@ -94,29 +89,28 @@ public class AppActions implements Serializable {
         log.debug("initializeBreadCrumbs");
         breadCrumbs = new DefaultMenuModel();
 
-
         final MenuItem home = new MenuItem();
 
-
-        home.setUrl(PATH_APPLICATION);
+        home.setUrl(PATH_APPLICATION + Modes.view.name() + Constants.PATH_SPLIT);
         home.setStyleClass("homeIcon");
         home.setValue("home");
         home.setId("breadcrumbHome");
         breadCrumbs.addMenuItem(home);
 
-        if (currentDocument != null && !currentDocument.getBreadCrumbs().isEmpty()) {
+        if (currentDocument != null
+                && !currentDocument.getBreadCrumbs().isEmpty()) {
             int index = 0;
             for (BreadCrumb breadItem : currentDocument.getBreadCrumbs()) {
                 final MenuItem item = new MenuItem();
                 item.setValue(breadItem.getName());
-                item.setUrl(PATH_APPLICATION + breadItem.getPath());
+                item.setUrl(PATH_APPLICATION + Modes.view.name()
+                        + Constants.PATH_SPLIT + breadItem.getPath());
                 item.setId("breadcrumbItem-" + index);
                 breadCrumbs.addMenuItem(item);
                 index++;
             }
         }
     }
-
 
     /**
      * Initialize tree.
@@ -125,7 +119,6 @@ public class AppActions implements Serializable {
      */
     protected void initializeTree() throws ClientException {
         tree = new DefaultTreeNode("root", null);
-
 
         List<Document> documents = projectDAO.readDocByPathParent(PATH_SPLIT);
 
@@ -138,7 +131,6 @@ public class AppActions implements Serializable {
         log.debug(tree);
     }
 
-
     /**
      * Grab children node.
      * 
@@ -147,10 +139,13 @@ public class AppActions implements Serializable {
      * @return the tree node
      * @throws ClientException the client exception
      */
-    protected TreeNode grabChildrenNode(final Document parent, final TreeNode parentNode) throws ClientException {
-        TreeNode result = new DefaultTreeNode(parent.getClass().getSimpleName(), parent, parentNode);
+    protected TreeNode grabChildrenNode(final Document parent,
+            final TreeNode parentNode) throws ClientException {
+        TreeNode result = new DefaultTreeNode(
+                parent.getClass().getSimpleName(), parent, parentNode);
 
-        final boolean startsWith = currentDocument.getPath().startsWith(parent.getPath() + PATH_SPLIT);
+        final boolean startsWith = currentDocument.getPath().startsWith(
+                parent.getPath() + PATH_SPLIT);
         final boolean sizeValid = parent.getPath().length() <= currentDocument.getPath().length();
         final boolean same = currentDocument.getPath().equals(parent.getPath());
 
@@ -169,7 +164,6 @@ public class AppActions implements Serializable {
 
         return result;
     }
-
 
     // =========================================================================
     // GETTERS & SETTERS

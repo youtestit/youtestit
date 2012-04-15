@@ -24,7 +24,8 @@
 package org.youtestit.datamodel.entity;
 
 import static javax.persistence.FetchType.LAZY;
-import static org.youtestit.commons.utils.Constants.SEP;
+import static org.youtestit.commons.utils.constants.Constants.SEP;
+
 import java.util.Calendar;
 import java.util.List;
 

@@ -24,10 +24,10 @@
 package org.youtestit.datamodel.entity;
 
 import static javax.persistence.FetchType.LAZY;
-import static org.youtestit.commons.utils.Constants.DOCUMENT_PART;
-import static org.youtestit.commons.utils.Constants.ITEM_CLOSE;
-import static org.youtestit.commons.utils.Constants.ITEM_OPEN;
-import static org.youtestit.commons.utils.Constants.NULL_OBJ;
+import static org.youtestit.commons.utils.constants.Constants.DOCUMENT_PART;
+import static org.youtestit.commons.utils.constants.Constants.ITEM_CLOSE;
+import static org.youtestit.commons.utils.constants.Constants.ITEM_OPEN;
+import static org.youtestit.commons.utils.constants.Constants.NULL_OBJ;
 
 import java.io.Serializable;
 import java.util.ArrayList;

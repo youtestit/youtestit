@@ -74,7 +74,7 @@
                 title="button.go.home.title"/>
 
     <ytiButton:buttonMenu id="buttonCreateProject"
-                href="/youtestit/createProject#{currentDocument.path}"
+                href="/youtestit/app/create/project#{currentDocument.path}"
                 styleClass="iconCreateProject"
                 show="#{true}"
                 label="button.create.project.label"
@@ -82,8 +82,8 @@
   
     <li class="menuSeparator"></li>
 
-    <ytiButton:buttonMenu id="buttonCreateTest"
-                href="/youtestit/createTest#{currentDocument.path}"
+    <ytiButton:buttonMenu id="buttonCreateTestCase"
+                href="/youtestit/app/create/testcase#{currentDocument.path}"
                 styleClass="iconCreateTest"
                 show="#{actionsButtonsVisibility.showInnerSection}"
                 label="button.create.test.label"
