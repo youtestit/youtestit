@@ -88,20 +88,17 @@ public class Redirect implements Serializable {
 
     /**
      * Allow to gets the home page. If user is an administrator the home page is
-     * the dashboardAdmin.xhtml. For other it's will be home.xhtml
+     * the /admin/home.xhtml. For other it's will be /home.xhtml
      * 
      * @return the home URL
      * @throws ClientException the client exception
      */
     public String getHome() throws ClientException {
         String homePage = "/home.xhtml";
-
         if (currentUserManager.getCurrentAccount() != null && currentUserManager.isAdmin()) {
-            homePage = "/dashboardAdmin.xhtml";
+            homePage = "/admin" + homePage;
         }
-
         return homePage;
-
     }
 
     /**
