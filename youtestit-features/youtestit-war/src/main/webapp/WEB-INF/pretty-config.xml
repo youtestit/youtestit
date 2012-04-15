@@ -61,7 +61,7 @@
     </url-mapping>
     
     <url-mapping id="editDocument">
-        <pattern value="/app/edit#{ /.*/ path:currentDocument.path }/" />
+        <pattern value="/app/edit#{ /.*/ path:currentDocument.path }" />
         <view-id>#{redirect.editDocument}</view-id>
     </url-mapping>
     

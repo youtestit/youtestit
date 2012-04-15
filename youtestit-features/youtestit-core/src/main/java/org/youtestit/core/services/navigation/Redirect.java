@@ -33,6 +33,7 @@ import javax.inject.Named;
 import org.jboss.logging.Logger;
 import org.youtestit.commons.utils.constants.Constants;
 import org.youtestit.commons.utils.enums.DocTypes;
+import org.youtestit.commons.utils.enums.Modes;
 import org.youtestit.commons.utils.enums.Pages;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.datamodel.dao.ProjectDAO;
@@ -106,8 +107,7 @@ public class Redirect implements Serializable {
     public String viewDocument() throws ClientException {
         PrettyContext pc = PrettyContext.getCurrentInstance();
         String path = pc.getRequestURL().decode().toString();
-        path = path.replace(Constants.PATH_APPLICATION + "view/",
-                Constants.PATH_SPLIT);
+        path = path.replace(Constants.PATH_APPLICATION + Modes.view.name(), "");
         Document currentDocument = setCurrentDocument(path);
 
         String result;
@@ -168,14 +168,14 @@ public class Redirect implements Serializable {
     public String editDocument() throws ClientException {
         PrettyContext pc = PrettyContext.getCurrentInstance();
         String path = pc.getRequestURL().decode().toString();
-        path = path.replace(Constants.PATH_APPLICATION + "edit/",
-                Constants.PATH_SPLIT);
+        path = path.replace(Constants.PATH_APPLICATION + Modes.edit.name(), "");
         Document currentDocument = setCurrentDocument(path);
 
         String result;
         if (currentDocument != null) {
             StringBuilder url = new StringBuilder(Constants.PATH_APPLICATION);
             url.append(currentDocument.getClass().getSimpleName());
+            url.append(Constants.PATH_SPLIT);
             url.append(Pages.edit.toString());
             result = url.toString();
         } else {
