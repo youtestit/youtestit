@@ -92,6 +92,16 @@
             <name>Patrick Guillerm</name>
             <email>patrickguillerm@gmail.com</email>
         </developer>
+        <developer>
+            <id>cllar</id>
+            <name>Clement Lardeur</name>
+            <email>clem.lardeur@gmail.com</email>
+        </developer>
+        <developer>
+            <id>joand</id>
+            <name>Joel ANDRIAMANAMPISOA</name>
+            <email>joelandria@gmail.com</email>
+        </developer>        
     </developers>
 
     <scm>

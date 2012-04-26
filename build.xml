@@ -19,13 +19,11 @@
 				<include name="youtestit*.war"/>
 			</fileset>
 		</delete>
-		
-		<echo> deploy ${basedir}/youtestit-features/youtestit-war/target/youtestit.war</echo>
-		<delete dir="${deploy.dir}/youtestit.war" verbose="true"/>
-		
-		<unzip	src="${basedir}/youtestit-features/youtestit-war/target/youtestit.war"
-				dest="${deploy.dir}/youtestit.war"
-				overwrite="true"/>
+
+		<copy file="${basedir}/youtestit-features/youtestit-war/target/youtestit.war" 
+			tofile="${deploy.dir}/youtestit.war" 
+			overwrite="true" />
+
 	</target>
 
 </project>
