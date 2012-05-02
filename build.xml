@@ -20,10 +20,11 @@
 			</fileset>
 		</delete>
 
-		<copy file="${basedir}/youtestit-features/youtestit-war/target/youtestit.war" 
-			tofile="${deploy.dir}/youtestit.war" 
-			overwrite="true" />
-
+		<delete dir="${deploy.dir}/youtestit.war" verbose="true"/>
+		
+		<unzip	src="${basedir}/youtestit-features/youtestit-war/target/youtestit.war"
+				dest="${deploy.dir}/youtestit.war"
+				overwrite="true"/>
 	</target>
 
 </project>
