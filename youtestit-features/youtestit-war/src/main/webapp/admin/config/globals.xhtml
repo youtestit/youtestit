@@ -1,15 +1,16 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <f:subview xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     id="globalsView">
 
-	<h:form>
-		<h:commandButton value="#{messages['label.admin.config.button.refresh']}">
-			<f:ajax render="output" />
-		</h:commandButton>
-		<h:outputText id="output" value="#{readProperties.run}" escape="false"/>
-	</h:form>
-	
+    <h1>PROPERTIES OF THE APPLICATION</h1>
+
+    <h:form>
+        <h:commandButton value="#{messages['label.admin.config.button.refresh']}">
+            <f:ajax render="output" />
+        </h:commandButton>
+        <h:outputText id="output" value="#{readProperties.run}" escape="false"/>
+    </h:form>
+
 </f:subview>
