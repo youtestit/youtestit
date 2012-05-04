@@ -131,9 +131,8 @@ public class ReadProperties implements Serializable {
 
         // load the file
         if (FILE_CONFIG.getFile() == null) {
-            // TODO find a way not to write here the absolute path 
-            final File youtestit = new File(
-                    Constants.USER_HOME+".youtestit/config/youtestit.properties");
+            final File youtestit = new File(Constants.USER_HOME
+                    + ".youtestit/config/youtestit.properties");
             FILE_CONFIG.setFile(youtestit);
         }
         FILE_CONFIG.clear();
