@@ -1,106 +1,100 @@
-<?xml version='1.0' encoding='UTF-8' ?>  
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:rich="http://richfaces.org/rich"
+    xmlns:rich="http://richfaces.org/rich" 
     xmlns:p="http://primefaces.org/ui"
-    template="layout/template-login.xhtml">
+    template="/templates/login.xhtml">
 
-
-    <ui:remove><!--*************************************************************
-    *    TITLE
-    *************************************************************************-->
-    </ui:remove>
     <ui:define name="title">
        #{messages['label.subscribe.title']}
     </ui:define>
 
+    <ui:define name="content">
+        <h:form id="formSubscribe">
+            <p:panel id="subscribeFormPanel"
+                header="#{messages['label.subscribe.panel.title']}">
+                <h:panelGrid id="loginFormPanelGrid" columns="3"
+                    rowClasses="prop" columnClasses="name,value,error">
+                    <ui:remove>
+                    <!-- LOGIN -->
+                    </ui:remove>
+                    <h:outputLabel id="loginLabel" for="login"
+                        value="#{messages['label.subscribe.form.login']}" />
+                    <h:inputText id="login"
+                        value="#{subscribeAction.user.login}">
+                        <rich:validator />
+                    </h:inputText>
+                    <rich:message for="login" id="loginError" />
 
-    <ui:remove><!--*************************************************************
-    *    BODY
-    *************************************************************************-->
-    </ui:remove>
-    <ui:define name="body">
-		<f:subview id="subscrib">
+                    <ui:remove>
+                    <!-- FIRSTNAME -->
+                    </ui:remove>
+                    <h:outputLabel id="firstnameLabel" for="firstname"
+                        value="#{messages['label.subscribe.form.firstname']}" />
+                    <h:inputText id="firstname"
+                        value="#{subscribeAction.user.firstname}">
+                        <rich:validator />
+                    </h:inputText>
+                    <rich:message for="firstname" id="firstnameError" />
 
-			<div id="subscribContent" class="centeredContent">
-				<h:form id="form">
-					
-					<p:panel  id="subscribFormPanel" header="#{messages['label.subscribe.panel.title']}" >
-					
-						<h:panelGrid    id="loginFormPanelGrid"
-				                        columns="3"
-				                        rowClasses="prop"
-				                        columnClasses="name,value,error">
-				              
-				                     
-				            <h:outputLabel id="login_label" for="login" value="#{messages['label.subscribe.form.login']}"/>
-				            <h:inputText id="login" value="#{subscribeAction.user.login}">
-				            	<rich:validator />
-				            </h:inputText>
-				            <rich:message for="login" id="login_error" />
-				            
-				            
-				            <h:outputLabel id="firstName_label" for="firstName" value="#{messages['label.subscribe.form.firstName']}"/>
-				            <h:inputText id="firstName" value="#{subscribeAction.user.firstname}">
-				            	<rich:validator />
-				            </h:inputText>
-				            <rich:message for="firstName" id="firstName_error"/>
-				            
-				            
-				            <h:outputLabel id="lastName_label" for="lastName" value="#{messages['label.subscribe.form.lastName']}"/>
-				            <h:inputText id="lastName" value="#{subscribeAction.user.lastname}">
-				            	<rich:validator />
-				            </h:inputText>
-				            <rich:message for="lastName" id="lastName_error"/>
-				            
-				            
-				            <h:outputLabel id="email_label" for="email" value="#{messages['label.subscribe.form.email']}"/>
-				            <h:inputText id="email" value="#{subscribeAction.user.email}" >
-				            	<rich:validator />
-				            </h:inputText>
-				            <rich:message for="email" id="email_error"/>
-				            
-				            
-				            
-				            <h:outputLabel id="password_label" for="password" value="#{messages['label.subscribe.form.password']}"/>
-				            <p:password id="password"
-	                              value="#{subscribeAction.user.password}"
-	                              promptLabel="#{messages['label.subscribe.form.password.prompt']}"
-	                              weakLabel="Weak"
-	                              goodLabel="Good"
-	                              strongLabel="Strong">
-	                              <rich:validator />
-	                        </p:password>
-	                        <rich:message for="password" id="password_error"/>
-	                              
-	                        
-	                        <h:outputLabel id="password_confirm_label" for="password_confirm" value="#{messages['label.subscribe.form.password.confirm']}"/>
-				            <p:password id="password_confirm"
-	                              value="#{subscribeAction.passwordConfirm}"
-	                              promptLabel="#{messages['label.subscribe.form.password.prompt']}"
-	                              weakLabel="Weak"
-	                              goodLabel="Good"
-	                              strongLabel="Strong" />
-				            
-				            
-				                     
-				                        
-				        </h:panelGrid>
-					               
-			            <div class="buttons-actions">
-	        		        <h:commandButton value="#{messages['label.subscribe.action.submit']}"
-	                          		         action="#{subscribeAction.subscribe()}"
-	                          		         id="subscribe_actions_submit"/>
-	         			</div>
-					                    
-					</p:panel>
-				
-				
-				</h:form>
-			</div>
-		</f:subview>
+                    <ui:remove>
+                    <!-- LASTNAME -->
+                    </ui:remove>
+                    <h:outputLabel id="lastnameLabel" for="lastname"
+                        value="#{messages['label.subscribe.form.lastname']}" />
+                    <h:inputText id="lastname"
+                        value="#{subscribeAction.user.lastname}">
+                        <rich:validator />
+                    </h:inputText>
+                    <rich:message for="lastname" id="lastnameError" />
+
+                    <ui:remove>
+                    <!-- EMAIL -->
+                    </ui:remove>
+                    <h:outputLabel id="emailLabel" for="email"
+                        value="#{messages['label.subscribe.form.email']}" />
+                    <h:inputText id="email"
+                        value="#{subscribeAction.user.email}">
+                        <rich:validator />
+                    </h:inputText>
+                    <rich:message for="email" id="emailError" />
+
+                    <ui:remove>
+                    <!-- PASSWORD -->
+                    </ui:remove>
+                    <h:outputLabel id="passwordLabel" for="password"
+                        value="#{messages['label.subscribe.form.password']}" />
+                    <p:password id="password"
+                        value="#{subscribeAction.user.password}"
+                        promptLabel="#{messages['label.subscribe.form.password.prompt']}"
+                        weakLabel="Weak" goodLabel="Good" strongLabel="Strong">
+                        <rich:validator />
+                    </p:password>
+                    <rich:message for="password" id="passwordError" />
+
+                    <ui:remove>
+                    <!-- PASSWORD CONFIRM -->
+                    </ui:remove>
+                    <h:outputLabel id="passwordConfirmLabel"
+                        for="passwordConfirm"
+                        value="#{messages['label.subscribe.form.password.confirm']}" />
+                    <p:password id="passwordConfirm"
+                        value="#{subscribeAction.passwordConfirm}"
+                        promptLabel="#{messages['label.subscribe.form.password.prompt']}"
+                        weakLabel="Weak" goodLabel="Good" strongLabel="Strong" />
+                </h:panelGrid>
+
+                <ui:remove>
+                <!-- SUBMIT BUTTONS -->
+                </ui:remove>
+                <div class="buttonsActions">
+                    <h:commandButton
+                        value="#{messages['label.subscribe.action.submit']}"
+                        action="#{subscribeAction.subscribe()}"
+                        id="subscribeActionsSubmit" />
+                </div>
+            </p:panel>
+        </h:form>
     </ui:define>
 </ui:composition>

@@ -1,93 +1,61 @@
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:s="http://jboss.org/seam/faces"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:rich="http://richfaces.org/rich"
     xmlns:p="http://primefaces.org/ui"
-    template="layout/template-login.xhtml">
-<ui:remove>
-<!--****************************************************************************
-*
-*   YouTestit source code:
-*   ======================
-*   Licensed to the Apache Software Foundation (ASF) under one or more
-*   contributor license agreements.  See the NOTICE file distributed with
-*   this work for additional information regarding copyright ownership.
-*   The ASF licenses this file to You under the Apache License, Version 2.0
-*   (the "License"); you may not use this file except in compliance with
-*   the License.  You may obtain a copy of the License at
-*  
-*       http://www.apache.org/licenses/LICENSE-2.0
-* 
-*   Unless required by applicable law or agreed to in writing, software
-*   distributed under the License is distributed on an "AS IS" BASIS,
-*   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*   See the License for the specific language governing permissions and
-*   limitations under the License.
-*
-*   Links:
-*   ======
-*   Homepage : http://www.youtestit.org
-*   Git      : https://github.com/youtestit
-*	Author   : "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
-*
-*****************************************************************************-->
-</ui:remove>
+    template="/templates/login.xhtml">
 
-    <ui:remove><!--*************************************************************
-    *    BODY
-    *************************************************************************-->
-    </ui:remove>
-    <ui:define name="body">
-		<f:subview id="login">
-			
-			<div id="loginContent" class="centeredContent">
-				<h:form id="form">
-					<p:panel  id="panel" header="#{messages['label.login.panel.title']}" >
-						<h2 id="loginFormPanelTitle">
-							<h:outputLabel  id="loginFormPanelTitle-label"  value="#{messages['label.login.form.title']}"/>
-						</h2>
-						
-						<div id="errorsMessages"> 
-							<h:messages errorClass="errorMSG" 
-										infoClass="infoMSG"
-										warnClass="warnMSG"
-										globalOnly="true" />
-						</div>
-						
-						<h:panelGrid	id="PanelGrid"
-										columns="2"
-										rowClasses="prop"
-										columnClasses="name,value">
-						
-							<h:outputLabel  id="username-label" for="username" value="#{messages['label.login.form.login']}"/>                
-							<h:inputText    id="username" value="#{credentials.username}"/>
-							
-							<h:outputLabel  id="password-label" for="password" value="#{messages['label.login.form.password']}"/>
-							<h:inputSecret  id="password"   value="#{credentials.password}"/>
-						
-						</h:panelGrid>
-						
-						
-						<div>
-							<a	id="link_subscribe" href="subscribe" title="#{messages['label.subscribe.panel.title']}">
-								<h:outputText id="link_subscrib_label" value="#{messages['label.subscribe.title']}" />
-							</a>
-						</div>
-						
-						<div class="actionButtons">
-							<h:commandButton  id="submit"
-											  value="#{messages['label.login.button.ok']}"
-											  action="#{identity.login}"/>
-						</div>
-					
-					</p:panel>
-				</h:form>
-			</div>
-		</f:subview>
+    <ui:define name="content">
+        <h:form id="formLogin">
+            <p:panel id="panel" header="#{messages['label.login.panel.title']}">
+                <h2 id="loginFormPanelTitle">
+                    <h:outputLabel id="loginFormPanelTitleLabel"
+                        value="#{messages['label.login.form.title']}" />
+                </h2>
 
+                <div id="errorsMessages">
+                    <h:messages errorClass="errorMSG" infoClass="infoMSG"
+                        warnClass="warnMSG" globalOnly="true" />
+                </div>
+
+                <h:panelGrid id="PanelGrid" columns="2" rowClasses="prop"
+                    columnClasses="name,value">
+                    <ui:remove>
+                    <!-- LOGIN -->
+                    </ui:remove>
+                    <h:outputLabel id="username-label" for="username"
+                        value="#{messages['label.login.form.login']}" />
+                    <h:inputText id="username" value="#{credentials.username}" />
+
+                    <ui:remove>
+                    <!-- PASSWORD -->
+                    </ui:remove>
+                    <h:outputLabel id="password-label" for="password"
+                        value="#{messages['label.login.form.password']}" />
+                    <h:inputSecret id="password" value="#{credentials.password}" />
+                </h:panelGrid>
+
+                <ui:remove>
+                <!-- SUBSCRIBE LINK -->
+                </ui:remove>
+                <div id="subscribe-link">
+                    <h:outputLink id="link-ubscribe" value="subscribe"
+                        title="#{messages['label.subscribe.panel.title']}">
+                        <h:outputText id="link-subscrib-label"
+                            value="#{messages['label.subscribe.title']}" />
+                    </h:outputLink>
+                </div>
+
+                <ui:remove>
+                <!-- SUBMIT BUTTONS -->
+                </ui:remove>
+                <div id="submit-buttons" class="action-buttons">
+                    <h:commandButton id="submit"
+                        value="#{messages['label.login.button.ok']}"
+                        action="#{identity.login}" />
+                </div>
+            </p:panel>
+        </h:form>
     </ui:define>
+    
 </ui:composition>

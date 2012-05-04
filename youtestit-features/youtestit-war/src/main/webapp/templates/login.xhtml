@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <title>#{messages['project.name']}</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="application/xhtml+xml" />
+        <meta http-equiv="imagetoolbar" content="no" />
+        <link href="#{resource['img/icons/favicon.ico']}" type="image/x-icon" rel="icon" />
+        <link href="#{resource['stylesheet/default/login.css']}" type="text/css" rel="stylesheet" />
+        <link href="#{resource['stylesheet/default/main.css']}" type="text/css" rel="stylesheet" />
+    </h:head>
+    
+    <h:body id="body">
+        <f:view id="#{messages['project.name']}">
+            <div id="contentContainer" class="bg-grey-color">
+                <section id="loginSection" class="bg-grey-color">
+                    <ui:insert name="content" />
+                </section>
+            </div>
+            <ui:include src="incl/footer.xhtml" />
+        </f:view>
+    </h:body>
+
+</html>
