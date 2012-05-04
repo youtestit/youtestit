@@ -33,6 +33,7 @@ import javax.inject.Singleton;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.FileConfiguration;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.youtestit.commons.utils.constants.Constants;
 
 /**
  * ReadProperties.
@@ -130,8 +131,9 @@ public class ReadProperties implements Serializable {
 
         // load the file
         if (FILE_CONFIG.getFile() == null) {
+            // TODO find a way not to write here the absolute path 
             final File youtestit = new File(
-                    "~/.youtestit/config/youtestit.properties");
+                    Constants.USER_HOME+".youtestit/config/youtestit.properties");
             FILE_CONFIG.setFile(youtestit);
         }
         FILE_CONFIG.clear();

@@ -9,9 +9,8 @@
     <h1>PROPERTIES OF THE APPLICATION</h1>
 
 	<h:form>
-		<h:inputText id="name" value="#{readProperties.foobar}"></h:inputText>
 		<h:commandButton value="#{messages['label.admin.config.button.refresh']}">
-			<f:ajax execute="name" render="output" />
+			<f:ajax render="output" />
 		</h:commandButton>
 		<h:outputText id="output" value="#{readProperties.run}" escape="false"/>
 	</h:form>
