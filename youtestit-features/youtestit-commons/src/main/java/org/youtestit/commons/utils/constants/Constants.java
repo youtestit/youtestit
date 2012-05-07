@@ -77,6 +77,9 @@ public final class Constants {
 
     public static final String PATH_APPLICATION = "/app/";
 
+    /** The Constant PATH_HOME. */
+    public static final String PATH_HOME = "/home";
+
     /** The Constant NULL_OBJ. */
     public static final String NULL_OBJ = "null";
 
@@ -93,6 +96,36 @@ public final class Constants {
 
     /** The Constant PATH_SPLIT. */
     public static final String PATH_SPLIT = "/";
+
+    /** The DELIMITER. */
+    public static final String DELIMITER = " : ";
+
+    /** End of line. */
+    public static final String EOL = "<br/>";
+
+    /** The Constant VERSION. */
+    public static final String VERSION = "application.version";
+
+    /** The Constant COMMIT. */
+    public static final String COMMIT = "application.commit";
+
+    /** The Constant BUILD_DATE. */
+    public static final String BUILD_DATE = "application.build.date";
+
+    /** The Constant ADMIN_LOGIN. */
+    public static final String ADMIN_LOGIN = "user.admin";
+
+    /** The Constant ADMIN_PASSWORD. */
+    public static final String ADMIN_PASSWORD = "user.admin.password";
+
+    /** The Constant ADMIN_EMAIL. */
+    public static final String ADMIN_EMAIL = "user.admin.email";
+
+    /** The Constant GROUP_ADMIN. */
+    public static final String GROUP_ADMIN = "group.administrator";
+
+    /** The Constant PROFILE_ADMIN. */
+    public static final String PROFILE_ADMIN = "profile.administrator";
 
     // =========================================================================
     // ATTRIBUTS

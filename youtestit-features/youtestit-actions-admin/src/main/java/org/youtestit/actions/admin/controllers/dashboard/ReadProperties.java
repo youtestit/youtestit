@@ -51,36 +51,6 @@ public class ReadProperties implements Serializable {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 2220721531008409722L;
 
-    /** The DELIMITER. */
-    private static final String DELIMITER = " : ";
-
-    /** End of line. */
-    private static final String EOL = "<br/>";
-
-    /** The Constant VERSION. */
-    private static final String VERSION = "application.version";
-
-    /** The Constant COMMIT. */
-    private static final String COMMIT = "application.commit";
-
-    /** The Constant BUILD_DATE. */
-    private static final String BUILD_DATE = "application.build.date";
-
-    /** The Constant ADMIN_LOGIN. */
-    private static final String ADMIN_LOGIN = "user.admin";
-
-    /** The Constant ADMIN_PASSWORD. */
-    private static final String ADMIN_PASSWORD = "user.admin.password";
-
-    /** The Constant ADMIN_EMAIL. */
-    private static final String ADMIN_EMAIL = "user.admin.email";
-
-    /** The Constant GROUP_ADMIN. */
-    private static final String GROUP_ADMIN = "group.administrator";
-
-    /** The Constant PROFILE_ADMIN. */
-    private static final String PROFILE_ADMIN = "profile.administrator";
-
     /** The file config. */
     @Singleton
     private static final FileConfiguration FILE_CONFIG = new PropertiesConfiguration();
@@ -132,7 +102,7 @@ public class ReadProperties implements Serializable {
         // load the file
         if (FILE_CONFIG.getFile() == null) {
             final File youtestit = new File(Constants.USER_HOME
-                    + ".youtestit/config/youtestit.properties");
+                    + ".youtestit/config/" + Constants.PROPERTIES_FILE);
             FILE_CONFIG.setFile(youtestit);
         }
         FILE_CONFIG.clear();
@@ -141,24 +111,24 @@ public class ReadProperties implements Serializable {
         FILE_CONFIG.load();
 
         // read the file
-        version = FILE_CONFIG.getString(VERSION);
-        commit = FILE_CONFIG.getString(COMMIT);
-        buildDate = FILE_CONFIG.getString(BUILD_DATE);
-        adminLogin = FILE_CONFIG.getString(ADMIN_LOGIN);
-        adminPassword = FILE_CONFIG.getString(ADMIN_PASSWORD);
-        adminEmail = FILE_CONFIG.getString(ADMIN_EMAIL);
-        groupAdmin = FILE_CONFIG.getString(GROUP_ADMIN);
-        profileAdmin = FILE_CONFIG.getString(PROFILE_ADMIN);
+        version = FILE_CONFIG.getString(Constants.VERSION);
+        commit = FILE_CONFIG.getString(Constants.COMMIT);
+        buildDate = FILE_CONFIG.getString(Constants.BUILD_DATE);
+        adminLogin = FILE_CONFIG.getString(Constants.ADMIN_LOGIN);
+        adminPassword = FILE_CONFIG.getString(Constants.ADMIN_PASSWORD);
+        adminEmail = FILE_CONFIG.getString(Constants.ADMIN_EMAIL);
+        groupAdmin = FILE_CONFIG.getString(Constants.GROUP_ADMIN);
+        profileAdmin = FILE_CONFIG.getString(Constants.PROFILE_ADMIN);
 
-        res.append(EOL).append(VERSION).append(DELIMITER).append(version);
-        res.append(EOL).append(COMMIT).append(DELIMITER).append(commit);
-        res.append(EOL).append(BUILD_DATE).append(DELIMITER).append(buildDate);
-        res.append(EOL).append(ADMIN_LOGIN).append(DELIMITER).append(adminLogin);
-        res.append(EOL).append(ADMIN_PASSWORD).append(DELIMITER).append(
+        res.append(Constants.EOL).append(Constants.VERSION).append(Constants.DELIMITER).append(version);
+        res.append(Constants.EOL).append(Constants.COMMIT).append(Constants.DELIMITER).append(commit);
+        res.append(Constants.EOL).append(Constants.BUILD_DATE).append(Constants.DELIMITER).append(buildDate);
+        res.append(Constants.EOL).append(Constants.ADMIN_LOGIN).append(Constants.DELIMITER).append(adminLogin);
+        res.append(Constants.EOL).append(Constants.ADMIN_PASSWORD).append(Constants.DELIMITER).append(
                 adminPassword);
-        res.append(EOL).append(ADMIN_EMAIL).append(DELIMITER).append(adminEmail);
-        res.append(EOL).append(GROUP_ADMIN).append(DELIMITER).append(groupAdmin);
-        res.append(EOL).append(PROFILE_ADMIN).append(DELIMITER).append(
+        res.append(Constants.EOL).append(Constants.ADMIN_EMAIL).append(Constants.DELIMITER).append(adminEmail);
+        res.append(Constants.EOL).append(Constants.GROUP_ADMIN).append(Constants.DELIMITER).append(groupAdmin);
+        res.append(Constants.EOL).append(Constants.PROFILE_ADMIN).append(Constants.DELIMITER).append(
                 profileAdmin);
         return res.toString();
     }
