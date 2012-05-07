@@ -32,6 +32,7 @@ import javax.inject.Named;
 
 import org.jboss.logging.Logger;
 import org.jboss.seam.international.status.Messages;
+import org.youtestit.commons.utils.constants.Constants;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.commons.utils.exceptions.YoutestitMSG;
 import org.youtestit.datamodel.dao.ProjectDAO;
@@ -45,14 +46,15 @@ import org.youtestit.datamodel.entity.Project;
  */
 @ViewScoped
 @Named
-public class CreateProjectAction extends AbstractCreateDocument implements Serializable {
+public class CreateProjectAction extends AbstractCreateDocument implements
+        Serializable {
 
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 6418054593725481561L;
-   
+
     /** The log. */
     @Inject
     private Logger log;
@@ -66,7 +68,6 @@ public class CreateProjectAction extends AbstractCreateDocument implements Seria
 
     /** The project. */
     private Project project;
-
 
     // =========================================================================
     // INITIALIZE
@@ -84,33 +85,30 @@ public class CreateProjectAction extends AbstractCreateDocument implements Seria
 
     }
 
-
     // =========================================================================
     // METHODS
     // =========================================================================
 
     /**
      * Allow to create current project.
-     *
+     * 
      * @return the string
      */
     public String create() {
         log.debug("ceate new project...");
         project = applyPath(project, Project.class);
-        
+
         String pathResult = determineAppDocUrl(project);
-        
+
         try {
             projectDAO.create(project);
         } catch (ClientException e) {
             log.error(e);
             messages.error(new YoutestitMSG("error.create.project"));
         }
-        
+        pathResult = Constants.PATH_HOME;
         return pathResult;
     }
-
-
 
     // =========================================================================
     // GETTERS & SETTERS
