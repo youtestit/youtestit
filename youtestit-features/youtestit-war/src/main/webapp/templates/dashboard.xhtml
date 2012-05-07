@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core" 
+    template="main.xhtml">
+
+    <ui:define name="content">
+        <div id="dashboard">
+            <ui:remove>
+            <!-- LEFT SIDE -->
+            </ui:remove>
+            <div id="dashboardLeft" class="dashboard-left">
+                <f:subview id="dashboardLeftView">
+                    <ui:insert name="dashboardLeft" />
+                </f:subview>
+            </div>
+            
+            <ui:remove>
+            <!--  CENTER -->
+            </ui:remove>
+            <div id="dashboardCenter" class="dashboard-center">
+                <f:subview id="dashboardCenterView">
+                    <ui:insert name="dashboardCenter" />
+                </f:subview>
+            </div>
+            <!-- RIGHT SIDE -->
+            <div id="dashboardRight" class="dashboard-right">
+                <f:subview id="dashboardRightView">
+                    <ui:insert name="dashboardRight" />
+                </f:subview>
+            </div>
+        </div>
+        <div class="clear" />
+    </ui:define>
+ 
+</ui:composition>

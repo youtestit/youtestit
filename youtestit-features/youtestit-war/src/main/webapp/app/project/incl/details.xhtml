@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:yti="http://java.sun.com/jsf/composite/youtestit" 
+    id="detailsView">
+    
+    <ui:remove>
+    <!-- SUCCESS STAT -->
+    </ui:remove>
+    <div id="projectSuccessStat">
+        <yti:globleStat id="projectB" percentage="77.5" />
+    </div>
+
+    <ui:remove>
+    <!-- EXPORT BLOCK -->
+    </ui:remove>
+    <div id="projectExportBlock" class="project-export-block">
+        <ul id="projectExportList" class="project-export-list">
+            <li><yti:export path="#{currentDocument.path}" type="PDF" id="exportPDF" /></li>
+            <li><yti:export path="#{currentDocument.path}" type="HTML" id="exportHTML" /></li>
+            <li><yti:export path="#{currentDocument.path}" type="LATEX" id="exportLaTeX" /></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+
+    <!-- LINKS -->
+    <div id="projectLinks">
+        <ul class="simple-list">
+            <li id="projectLinkServer">
+                <h:outputLabel  value="Server" id="serverLinkLabel" for="serverLink" />
+                <h:outputLink value="#{currentDocument.document.urlServer}" id="serverLink">
+                    <h:outputText value="#{currentDocument.document.urlServer}" id="serverLinkTxt" />
+                </h:outputLink>
+            </li>
+            <li id="projectLinkWiki">
+                <h:outputLabel value="Wiki" id="wikiLinkLabel" for="wikiLink" />
+                <h:outputLink value="#{currentDocument.document.urlServer}" id="wikiLink">
+                    <h:outputText value="#{currentDocument.document.urlWiki}" id="wikiLinkTxt" />
+                </h:outputLink>
+            </li>
+            <li id="projectLinkTracker">
+                <h:outputLabel value="Tracker" id="trackerLinkLabel" for="trackerLink" />
+                <h:outputLink href="#{currentDocument.document.urlServer}" id="trackerLink">
+                    <h:outputText value="#{currentDocument.document.urlTracker}" id="trackerLinkTxt" />
+                </h:outputLink>
+            </li>
+        </ul>
+    </div>
+
+    <ui:remove>
+    <!-- PORTABILITIES -->
+    </ui:remove>
+    <div id="projectPortabilities"></div>
+
+    <ui:remove>
+    <!-- SUBJECT -->
+    </ui:remove>
+    <div id="projectSubject">
+        <h:outputLabel value="Subject :" id="subjectLabel" />
+        <div class="text-area-display">
+            <h:outputText value="#{currentDocument.document.subject}" escape="false" id="subjectTxt" />
+        </div>
+    </div>
+
+    <ui:remove>
+    <!-- DESCRIPTION -->
+    </ui:remove>
+    <div id="projectDescription">
+        <div class="text-rich-display">
+            <h:outputText value="#{currentDocument.document.description}" escape="false" />
+        </div>
+        <div class="clear"></div>
+    </div>
+    
+</f:subview>

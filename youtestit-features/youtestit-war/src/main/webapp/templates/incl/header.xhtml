@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<f:subview xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    id="header">
+    
+    <header id="headerContent">
+        <section id="headerSection">
+            <!-- LOGO -->
+            <h:outputLink value="/youtestit/home" class="logo" />
+            
+            <!-- IDENTITY -->
+            <div id="identity">
+                <h:outputLink value="/youtestit/logout" class="logout" />
+                <h:outputText value="#{currentUser.firstname} " id="headerFirstname" />
+                <h:outputText value="#{currentUser.lastname}" id="headerLastname" />
+                <h:outputText value=" / " class="profile-separator" />
+                <h:outputText value="#{currentUser.profile.name}" />
+            </div>
+            
+            <!-- SEARCH -->
+            <div id="search">
+                <h:inputText value="" /> 
+                <span class="search-button" />
+            </div>
+            <div class="clear"></div>
+        </section>
+    </header>
+</f:subview>

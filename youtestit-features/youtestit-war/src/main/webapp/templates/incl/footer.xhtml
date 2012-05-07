@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<f:subview xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core" 
+    id="footerView">
+
+    <footer id="footer">
+        <hr />
+        <div id="license">
+            <h:outputText value="YouTestIt!, Licensed under the " />
+            <h:outputLink value="http://www.apache.org/licenses/LICENSE-2.0.txt" id="licenseLink">
+                <h:outputText value="Apache licence, Version 2.0" />
+            </h:outputLink>
+        </div>
+        <div id="appInfo">
+            <ul>
+                <li id="appVersion">
+                    <h:outputText value="#{constantsActions.constants.applicationVersion}" />
+                </li>
+                <li id="appCommit">
+                    <h:outputText value="#{constantsActions.constants.applicationCommit}" />
+                </li>
+                <li id="appBuildDate">
+                    <h:outputText value="#{constantsActions.constants.applicationBuildDate}" />
+                </li>
+                <li class="clear" />
+            </ul>
+        </div>
+    </footer>
+    
+</f:subview>

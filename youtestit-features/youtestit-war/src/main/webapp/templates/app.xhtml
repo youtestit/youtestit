@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/templates/main.xhtml">
+
+    <ui:define name="content">
+        <ui:remove>
+        <!-- BREADCRUMB (Top) -->
+        </ui:remove>
+        <nav id="breadcrumbNav">
+            <p:breadCrumb model="#{appActions.breadCrumbs}" id="breadcrumbApp" />
+        </nav>
+
+        <ui:remove>
+        <!-- APP NAV (Left) -->
+        </ui:remove>
+        <section id="appNav">
+            <ui:include src="/app/nav.xhtml"></ui:include>
+        </section>
+        
+        <ui:remove>
+        <!--  CURRENT DOCUMENT (Right) -->
+        </ui:remove>
+        <section id="appContent">
+            <ui:insert name="appContent" />
+        </section>
+        <div class="clear" />
+    </ui:define>
+
+</ui:composition>

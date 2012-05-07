@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<f:subview xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ytiButton="http://java.sun.com/jsf/composite/youtestit/button"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    id="menuView">
+
+    <menu id="menu" type="list">
+        <ui:remove>
+        <!-- HOME -->
+        </ui:remove>
+        <ytiButton:buttonMenu href="/youtestit/home" 
+            show="#{true}" 
+            label="button.go.home.label"
+            title="button.go.home.title" 
+            id="buttonHome" 
+            styleClass="icon-home" />
+
+        <ui:remove>
+        <!-- CREATE PROJECT -->
+        </ui:remove>
+        <ytiButton:buttonMenu href="/youtestit/app/create/project#{currentDocument.path}"
+            show="#{true}"
+            label="button.create.project.label"
+            title="button.create.project.title"
+            id="buttonCreateProject"
+            styleClass="icon-create-project" />
+
+        <li class="menu-separator"></li>
+
+        <ui:remove>
+        <!-- CREATE TEST CASE -->
+        </ui:remove>
+        <ytiButton:buttonMenu href="/youtestit/app/create/testcase#{currentDocument.path}"
+            show="#{actionsButtonsVisibility.showInnerSection}"
+            label="button.create.test.label" 
+            title="button.create.test.title" 
+            id="buttonCreateTestCase"
+            styleClass="icon-create-test" />
+
+        <ui:remove>
+        <!-- CONFIG -->
+        </ui:remove>
+        <ytiButton:buttonMenu href="/youtestit/config#{currentDocument.path}"
+            show="#{actionsButtonsVisibility.showInnerSection}"
+            label="button.config.label" 
+            title="button.config.title" 
+            id="buttonConfig"
+            styleClass="icon-configure" />
+
+        <ui:remove>
+        <!-- RUN -->
+        </ui:remove>
+        <ytiButton:buttonMenu href="/youtestit/run#{currentDocument.path}"
+            show="#{actionsButtonsVisibility.showInnerSection}"
+            label="button.run.label" 
+            title="button.run.title"
+            id="buttonRun"
+            styleClass="icon-run" />
+
+        <ui:remove>
+        <!-- ADMIN CONFIG -->
+        </ui:remove>
+        <ytiButton:buttonMenu href="/youtestit/admin/config" 
+            show="#{actionsButtonsVisibility.showAdminConfig}"
+            label="button.admin.config.label" 
+            title="button.admin.config.title"
+            listStyle="menu-right-icon"
+            id="buttonAdminConfig"
+            styleClass="icon-admin-config" />
+    </menu>
+
+</f:subview>

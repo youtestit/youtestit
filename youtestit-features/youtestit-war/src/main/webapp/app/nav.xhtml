@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+    xmlns:rich="http://richfaces.org/rich" id="appNavView">
+
+    <h:form id="appNavForm">
+        <rich:tabPanel id="appNavTab">
+            <rich:tab id="appTree" header="Tree">
+                <nav class="treeNav">
+                    <p:tree id="docTree" value="#{appActions.tree}" var="doc">
+                        <p:treeNode icon="ui-icon">
+                            <h:outputText value="#{doc.title}" />
+                        </p:treeNode>
+                        <p:treeNode type="root" icon="ui-icon ui-icon-root">
+                            <h:outputText value="#{doc.title}" />
+                        </p:treeNode>
+                        <p:treeNode type="Project"
+                            collapsedIcon="ui-icon ui-icon-project-close"
+                            expandedIcon="ui-icon ui-icon-project">
+                            <h:outputLink value="/youtestit/app/view#{doc.path}"
+                                title="#{doc.subject}">
+                                <h:outputText value="#{doc.title}" />
+                            </h:outputLink>
+                        </p:treeNode>
+                        <p:treeNode type="TestCase" icon="ui-icon ui-icon-test">
+                            <h:outputLink value="/youtestit/app/view#{doc.path}">
+                                <h:outputText value="#{doc.title}" />
+                            </h:outputLink>
+                        </p:treeNode>
+                    </p:tree>
+                </nav>
+            </rich:tab>
+            <rich:tab id="appProps" header="Properties">
+            PROPERTIES
+        </rich:tab>
+        </rich:tabPanel>
+    </h:form>
+
+</f:subview>

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets" 
+    template="/templates/main.xhtml">
+
+    <ui:define name="content">
+        <ui:remove>
+        <!-- TITLE FORM -->
+        </ui:remove>
+        <header id="formTitle" class="form-title">
+            <h1 id="formTitleLabel">
+                <ui:insert name="formTitle" />
+            </h1>
+        </header>
+        
+        <ui:remove>
+        <!-- FORM CONTENT -->
+        </ui:remove>
+        <div id="formContent">
+            <ui:insert name="formContent" />
+        </div>
+    </ui:define>
+
+</ui:composition>
