@@ -40,9 +40,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
+import javax.persistence.NamedQuery;
 
 import org.youtestit.datamodel.enums.ServerType;
-
 
 /**
  * Project.
@@ -51,15 +51,18 @@ import org.youtestit.datamodel.enums.ServerType;
  * @since Jan 10, 2012
  */
 @Entity
+@NamedQuery(name = Project.ALL_PROJECTS, query = "FROM Project")
 public class Project extends Document {
 
+    // =========================================================================
+    // STATICS ATTRIBUTES
+    // =========================================================================
+    /** The Constant ALL_USERS. */
+    public static final String ALL_PROJECTS = "allProjects";
 
     // =========================================================================
     // ATTRIBUTES
     // =========================================================================
-    /** The Constant serialVersionUID. */
-    private static final long   serialVersionUID = 2176044979636221411L;
-
     /** The team. */
     @ElementCollection
     @CollectionTable(name = "teams", joinColumns = @JoinColumn(name = "group_fk"))
@@ -69,17 +72,15 @@ public class Project extends Document {
 
     /** The version. */
     @Basic(fetch = LAZY)
-    private String              version;
+    private String version;
 
     /** The server type. */
     @Enumerated(EnumType.STRING)
-    private ServerType          serverType;
-
+    private ServerType serverType;
 
     // =========================================================================
     // CONSTRUCTORS
     // =========================================================================
-
     /**
      * Instantiates a new project.
      */
@@ -96,8 +97,8 @@ public class Project extends Document {
      * @param creator the creator
      * @param dateCreation the date creation
      */
-    public Project(final String title, final String path, final String subject, final User creator,
-            final Calendar dateCreation) {
+    public Project(final String title, final String path, final String subject,
+            final User creator, final Calendar dateCreation) {
         super(title, path, subject, creator, dateCreation);
     }
 
@@ -114,14 +115,12 @@ public class Project extends Document {
     // =========================================================================
     // OVERRIDES
     // =========================================================================
-
     /**
      * {@inheritDoc}
      */
     @Override
     protected String toStringContent() {
         final StringBuilder result = new StringBuilder(super.toStringContent());
-
 
         result.append(", version=" + version);
         result.append(", tests=");
@@ -149,8 +148,6 @@ public class Project extends Document {
     // =========================================================================
     // GETTERS & SETTERS
     // =========================================================================
-
-
     /**
      * Gets the version.
      * 
@@ -168,7 +165,6 @@ public class Project extends Document {
     public void setVersion(final String version) {
         this.version = version;
     }
-
 
     /**
      * Gets the server type.

@@ -53,12 +53,11 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
 
     /** The logger. */
     @Inject
-    private Logger            log;
-
+    private Logger log;
 
     /** The portabilities dao. */
     @Inject
-    private PortabilityDAO    portabilitiesDAO;
+    private PortabilityDAO portabilitiesDAO;
 
     // =========================================================================
     // CONSTRUCTORS
@@ -91,7 +90,8 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
      * @param log the log
      * @param portabilitiesDAO the portabilities dao
      */
-    protected ProjectDAO(EntityManager entityManager, Logger log, PortabilityDAO portabilitiesDAO) {
+    protected ProjectDAO(EntityManager entityManager, Logger log,
+            PortabilityDAO portabilitiesDAO) {
         super();
         this.setEntityManager(entityManager);
         this.log = log;
@@ -123,9 +123,8 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
 
         Project resultSet = null;
         try {
-            resultSet = getEntityManager().createQuery(jpql, Project.class)
-                                          .setParameter(param, project.getPath())
-                                          .getSingleResult();
+            resultSet = getEntityManager().createQuery(jpql, Project.class).setParameter(
+                    param, project.getPath()).getSingleResult();
         } catch (NoResultException e) {
             // it can have no Entity in database. it isn't an error !
             log.debug(e);
@@ -152,8 +151,10 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
      * @param project the project
      * @throws ClientException the client exception
      */
-    protected void persistePortability(final Project project) throws ClientException {
-        if (project.getPortabilities() != null && !project.getPortabilities().isEmpty()) {
+    protected void persistePortability(final Project project)
+            throws ClientException {
+        if (project.getPortabilities() != null
+                && !project.getPortabilities().isEmpty()) {
             final List<Portability> result = new ArrayList<Portability>();
 
             for (Portability item : project.getPortabilities()) {
@@ -175,5 +176,49 @@ public class ProjectDAO extends DocumentDAO implements Serializable {
         getEntityManager().persist(project);
     }
 
-
+    // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    // GET
+    // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    /**
+     * Gets all projects.
+     * 
+     * @return the all projects
+     */
+    public List<Project> getAllProjects() {
+        return getEntityManager().createNamedQuery(Project.ALL_PROJECTS,
+                Project.class).getResultList();
+    }
+    
+    // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    // UPDATE
+    // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    /**
+     * Update project.
+     *
+     * @param project the project
+     * @return the project
+     * @throws ClientException the client exception
+     */
+    public Project updateProject(final Project project) throws ClientException {
+        if (project == null) {
+            throw new ClientException(ErrorsMSG.VALUE_NOT_NULL);
+        }
+        return getEntityManager().merge(project);
+    }
+    
+    // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    // DELETE
+    // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    /**
+     * Delete project.
+     *
+     * @param project the project
+     * @throws ClientException the client exception
+     */
+    public void deleteProject(final Project project) throws ClientException {
+        if (project == null) {
+            throw new ClientException(ErrorsMSG.VALUE_NOT_NULL);
+        }
+        getEntityManager().remove(project);
+    }
 }
