@@ -35,18 +35,20 @@ import org.jboss.seam.international.status.Messages;
 import org.youtestit.commons.utils.constants.Constants;
 import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.commons.utils.exceptions.YoutestitMSG;
+import org.youtestit.core.controllers.app.CurrentDocument;
 import org.youtestit.datamodel.dao.ProjectDAO;
 import org.youtestit.datamodel.entity.Project;
 
 /**
- * Controler for create new project.
+ * Controler for create/edit new project.
  * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
+ * @author "<a href='mailto:clem.lardeur@gmail.com'>Clement Lardeur</a>"
  * @since Jan 12, 2012
  */
 @ViewScoped
 @Named
-public class CreateProjectAction extends AbstractCreateDocument implements
+public class ProjectAction extends AbstractCreateDocument implements
         Serializable {
 
     // =========================================================================
@@ -63,8 +65,13 @@ public class CreateProjectAction extends AbstractCreateDocument implements
     @Inject
     private Messages messages;
 
+    /** The project dao. */
     @Inject
     private ProjectDAO projectDAO;
+    
+    /** The current document. */
+    @Inject
+    private CurrentDocument currentDocument;
 
     /** The project. */
     private Project project;
@@ -79,16 +86,29 @@ public class CreateProjectAction extends AbstractCreateDocument implements
     @PostConstruct
     public void initialize() {
         log.debug("initialize");
-        if (project == null) {
+        if (currentDocument.getDocument() != null) {
+            project = (Project) currentDocument.getDocument();
+        } else {
             project = new Project();
         }
-
     }
 
     // =========================================================================
     // METHODS
     // =========================================================================
-
+    /**
+     * Create/Update the project.
+     *
+     * @return the string
+     */
+    public String save(){
+        if (currentDocument.getDocument() != null) {
+            return edit();
+        } else {
+            return create();
+        }
+    }
+    
     /**
      * Allow to create current project.
      * 
@@ -108,6 +128,22 @@ public class CreateProjectAction extends AbstractCreateDocument implements
         }
         pathResult = Constants.PATH_HOME;
         return pathResult;
+    }
+    
+    /**
+     * Update the project.
+     *
+     * @return the string
+     */
+    public String edit() {
+        log.debug("edit existing project...");
+        try {
+            project = projectDAO.updateProject(project);
+        } catch (ClientException e) {
+            log.error(e);
+            messages.error(new YoutestitMSG("error.create.project"));
+        }
+        return Constants.PATH_HOME;
     }
 
     // =========================================================================
