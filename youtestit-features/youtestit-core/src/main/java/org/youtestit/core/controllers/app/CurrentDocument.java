@@ -36,7 +36,6 @@ import javax.inject.Named;
 import org.apache.commons.lang.StringUtils;
 import org.jboss.logging.Logger;
 import org.youtestit.commons.utils.constants.Constants;
-import org.youtestit.commons.utils.exceptions.ClientException;
 import org.youtestit.datamodel.dao.ProjectDAO;
 import org.youtestit.datamodel.entity.Document;
 import org.youtestit.datamodel.entity.Project;
@@ -48,6 +47,7 @@ import org.youtestit.datamodel.pojo.BreadCrumb;
  * project and test element. It's use for get the current project or test.
  * 
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
+ * @author "<a href='mailto:clem.lardeur@gmail.com'>Clement Lardeur</a>"
  * @since Dec 30, 2011
  */
 @Named
@@ -60,9 +60,11 @@ public class CurrentDocument implements Serializable {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -4683368922352737218L;
 
+    /** The project dao. */
     @Inject
     private ProjectDAO projectDAO;
     
+    /** The log. */
     @Inject
     private Logger log;
     
@@ -72,21 +74,22 @@ public class CurrentDocument implements Serializable {
     /** The project. */
     private Boolean project = null;
 
+    /** The path. */
     private String path = Constants.PATH_SPLIT;
 
+    /** The document. */
     private Document document;
 
+    /** The bread crumbs. */
     private List<BreadCrumb> breadCrumbs = new ArrayList<BreadCrumb>(0);
 
     // =========================================================================
     // METHODS
     // =========================================================================
-
     /**
      * Load document.
-     * @throws ClientException 
      */
-    protected void loadDocument() throws ClientException {
+    protected void loadDocument() {
         log.debug("loadDocument()");
         if(!StringUtils.isEmpty(path)){
             document =projectDAO.readDocByPath(path);    
@@ -120,9 +123,8 @@ public class CurrentDocument implements Serializable {
      * Gets the checks if is test.
      * 
      * @return the checks if is test
-     * @throws ClientException 
      */
-    public boolean getIsTest() throws ClientException {
+    public boolean getIsTest() {
         if (test == null) {
             if (document == null) {
                 loadDocument();
@@ -142,9 +144,8 @@ public class CurrentDocument implements Serializable {
      * Gets the checks if is project.
      * 
      * @return the checks if is project
-     * @throws ClientException 
      */
-    public boolean getIsProject() throws ClientException {
+    public boolean getIsProject() {
         if (project == null) {
             if (document == null) {
                 loadDocument();
@@ -161,8 +162,8 @@ public class CurrentDocument implements Serializable {
     }
 
     /**
-     * get url path to section
-     * 
+     * get url path to section.
+     *
      * @return the path
      */
     public String getPath() {
@@ -170,8 +171,8 @@ public class CurrentDocument implements Serializable {
     }
 
     /**
-     * Sets url path to section
-     * 
+     * Sets url path to section.
+     *
      * @param path the new path
      */
     public void setPath(String path) {
@@ -182,9 +183,8 @@ public class CurrentDocument implements Serializable {
      * Gets the document.
      * 
      * @return the document
-     * @throws ClientException
      */
-    public Document getDocument() throws ClientException {
+    public Document getDocument() {
         if (document == null) {
             loadDocument();
         }

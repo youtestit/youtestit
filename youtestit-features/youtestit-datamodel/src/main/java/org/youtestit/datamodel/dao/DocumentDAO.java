@@ -108,9 +108,8 @@ public class DocumentDAO implements Serializable {
      * 
      * @param path the path
      * @return the list
-     * @throws ClientException the client exception
      */
-    public Document readDocByPath(final String path) throws ClientException {
+    public Document readDocByPath(final String path) {
         log.debug("readDocByPath");
 
         if (path == null) {
