@@ -21,18 +21,19 @@
                 <h:panelGrid id="grid" columns="3" rowClasses="prop"
                     columnClasses="name,value,error">
                     <ui:remove>
-                    <!-- TITLE -->
+                        <!-- TITLE -->
                     </ui:remove>
-                    <h:outputLabel value="#{messages['label.create.test.form.title']}"
+                    <h:outputLabel
+                        value="#{messages['label.create.test.form.title']}"
                         id="titleLabel" for="title" />
                     <h:inputText value="#{createTestAction.test.title}"
-                         id="title" size="50">
+                        id="title" size="50">
                         <rich:validator />
                     </h:inputText>
                     <rich:message for="title" id="titleError" />
 
                     <ui:remove>
-                    <!-- PARENT PATH -->
+                        <!-- PARENT PATH -->
                     </ui:remove>
                     <h:outputLabel id="parentPathLabel" for="parentPath"
                         value="#{messages['label.create.project.form.parent.path']}" />
@@ -43,7 +44,7 @@
                     <rich:message for="parentPath" id="parentPathError" />
 
                     <ui:remove>
-                    <!-- SUBJECT -->
+                        <!-- SUBJECT -->
                     </ui:remove>
                     <h:outputLabel id="subjectLabel" for="subject"
                         value="#{messages['label.create.project.form.subject']}" />
@@ -54,7 +55,7 @@
                     <rich:message for="subject" id="subjectError" />
 
                     <ui:remove>
-                   <!-- IMPORTANCE -->
+                        <!-- IMPORTANCE -->
                     </ui:remove>
                     <h:outputLabel id="importanceLabel" for="importance"
                         value="#{messages['label.create.test.form.importance']}" />
@@ -63,7 +64,7 @@
                     <rich:message for="importance" id="importanceError" />
 
                     <ui:remove>
-                    <!-- COMPLEXITY -->
+                        <!-- COMPLEXITY -->
                     </ui:remove>
                     <h:outputLabel id="complexityLabel" for="complexity"
                         value="#{messages['label.create.test.form.complexity']}" />
@@ -72,16 +73,17 @@
                     <rich:message for="importance" id="complexityError" />
 
                     <ui:remove>
-                    <!-- FONCTIONNAL REFERER -->
+                        <!-- FONCTIONNAL REFERER -->
                     </ui:remove>
                     <h:outputLabel id="fonctionnalRefererLabel"
                         for="fonctionnalReferer" value="fonctionnalReferer" />
                     <yti:userAutocomplete id="fonctionnalReferer"
                         value="#{createTestAction.test.fonctionnalReferer}" />
-                    <rich:message for="fonctionnalReferer" id="fonctionnalRefererError" />
+                    <rich:message for="fonctionnalReferer"
+                        id="fonctionnalRefererError" />
 
                     <ui:remove>
-                    <!-- TESTER -->
+                        <!-- TESTER -->
                     </ui:remove>
                     <h:outputLabel id="testerLabel" for="tester" value="tester" />
                     <yti:userAutocomplete id="tester"
@@ -89,16 +91,17 @@
                     <rich:message for="tester" id="testerError" />
 
                     <ui:remove>
-                    <!-- DEVELOPPER -->
+                        <!-- DEVELOPPER -->
                     </ui:remove>
-                    <h:outputLabel id="developperLabel" for="developper" value="developper" />
+                    <h:outputLabel id="developperLabel" for="developper"
+                        value="developper" />
                     <yti:userAutocomplete id="developper"
                         value="#{createTestAction.test.developper}" />
                     <rich:message for="developper" id="developperError" />
                 </h:panelGrid>
 
                 <ui:remove>
-                <!-- SUBMIT BUTTONS -->
+                    <!-- SUBMIT BUTTONS -->
                 </ui:remove>
                 <div class="buttons-actions">
                     <h:commandButton

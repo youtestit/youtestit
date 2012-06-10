@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich" 
+    id="dashletAccountRequest">
+
+    <rich:panel header="#{messages['label.dashboard.accout.request']}"
+        id="panelAccountRequest">
+        <rich:dataTable value="#{dashboardAdmin.userAccountToEnable}" var="user"
+            id="listUsersToEnable" rows="10">
+            <rich:column>
+                <f:facet name="header">
+                    <h:outputText value="Login" />
+                </f:facet>
+                <h:outputText value="#{user.login}" />
+            </rich:column>
+
+            <rich:column>
+                <f:facet name="header">
+                    <h:outputText value="Name" />
+                </f:facet>
+                <h:outputText value="#{user.firstname}" />
+                <h:outputText value="#{user.lastname}" />
+            </rich:column>
+
+            <rich:column>
+                <f:facet name="header">
+                    <h:outputText value="Actions" />
+                </f:facet>
+                <h:form>
+                    <h:commandButton value="active"
+                        action="#{dashboardAdmin.activeUser(user)}" />
+                </h:form>
+            </rich:column>
+        </rich:dataTable>
+        <rich:dataScroller for="listUsersToEnable" maxPages="5" />
+    </rich:panel>
+
+</f:subview>

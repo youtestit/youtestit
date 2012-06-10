@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:yti="http://java.sun.com/jsf/composite/youtestit" id="dashletProjects">
+
+    <rich:panel header="#{messages['label.dashboard.projects']}"
+        id="panelProjects">
+        <rich:dataTable value="#{projectDAO.allProjects}" var="project"
+            id="listProjects" rows="10">
+            <rich:column id="columnProjectState">
+                <yti:globleStat percentage="75" id="projectStat" />
+            </rich:column>
+
+            <rich:column id="columnProjectTitle">
+                <h:outputLink value="/youtestit/app/view#{project.path}"
+                    id="projectLink">
+                    <h:outputText value="#{project.title}" id="projectTitle" />
+                </h:outputLink>
+            </rich:column>
+
+            <rich:column id="columnProjectForm">
+                <h:form id="formProject" styleClass="form-project">
+                    <h:commandLink action="#{projectDAO.deleteProject(project)}"
+                        styleClass="icon-delete" id="removeProject" />
+                    <h:outputLink
+                        value="/youtestit/app/edit#{project.path}"
+                        styleClass="icon-configure" id="editProject" />
+                </h:form>
+            </rich:column>
+        </rich:dataTable>
+        <rich:dataScroller for="listProjects" maxPages="5" />
+    </rich:panel>
+
+</f:subview>
