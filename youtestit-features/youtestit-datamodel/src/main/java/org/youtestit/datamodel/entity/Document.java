@@ -42,8 +42,9 @@ import javax.persistence.Table;
 
 /**
  * Generic Youtestit Document.
- * 
+ *
  * @author "<a href='mailto:patrickguillerm@gmail.com'>Patrick Guillerm</a>"
+ * @author "<a href='mailto:clem.lardeur@gmail.com'>Clement Lardeur</a>"
  * @since Dec 30, 2011
  */
 @Entity
@@ -57,7 +58,7 @@ public class Document extends DublinCore implements Serializable {
     // =========================================================================
     /** The Constant QUERY_DOC_BY_PATH. */
     public static final String QUERY_DOC_BY_PATH = "getDocByPath";
-    
+
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 6251772001497647256L;
 
@@ -70,7 +71,8 @@ public class Document extends DublinCore implements Serializable {
     private Double           complexity;
 
     /** The portability. */
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Portability.class, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Portability.class,
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "document_portability")
     private List<Portability> portabilities = new ArrayList<Portability>();
 
@@ -111,13 +113,13 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Instantiates a new document.
-     * 
+     *
      * @param title the document title
      * @param path the document path (like /foo/bar )
      * @param subject the document subject, it's document short description
      * @param creator the document creator
      * @param dateCreation the document name
-     * 
+     *
      * @see org.youtestit.datamodel.entity.User
      */
     public Document(final String title, final String path, final String subject, final User creator,
@@ -127,7 +129,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Instantiates a new document with require values.
-     * 
+     *
      * @param name the document name
      * @param path the document path
      */
@@ -187,7 +189,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Gets the importance.
-     * 
+     *
      * @return the importance
      */
     public Double getImportance() {
@@ -197,7 +199,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Sets the importance.
-     * 
+     *
      * @param importance the new importance
      */
     public void setImportance(Double importance) {
@@ -206,7 +208,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Gets the complexity.
-     * 
+     *
      * @return the complexity
      */
     public Double getComplexity() {
@@ -215,7 +217,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Sets the complexity.
-     * 
+     *
      * @param complexity the new complexity
      */
     public void setComplexity(Double complexity) {
@@ -224,7 +226,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Gets the portability.
-     * 
+     *
      * @return the portability
      */
     public List<Portability> getPortabilities() {
@@ -233,7 +235,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Sets the portability.
-     * 
+     *
      * @param portabilities the new portabilities
      */
     public void setPortabilities(final List<Portability> portabilities) {
@@ -242,7 +244,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Add portability.
-     * 
+     *
      * @param portability the portability to add
      */
     public void addPortability(final Portability portability) {
@@ -256,7 +258,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Removes portability.
-     * 
+     *
      * @param portability the portability to remove
      */
     public void removePortability(final Portability portability) {
@@ -267,7 +269,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Gets the url wiki.
-     * 
+     *
      * @return the url wiki
      */
     public String getUrlWiki() {
@@ -276,7 +278,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Sets the url wiki.
-     * 
+     *
      * @param urlWiki the new url wiki
      */
     public void setUrlWiki(String urlWiki) {
@@ -285,7 +287,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Gets the url tracker.
-     * 
+     *
      * @return the url tracker
      */
     public String getUrlTracker() {
@@ -294,7 +296,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Sets the url tracker.
-     * 
+     *
      * @param urlTracker the new url tracker
      */
     public void setUrlTracker(String urlTracker) {
@@ -303,7 +305,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Gets the url server.
-     * 
+     *
      * @return the url server
      */
     public String getUrlServer() {
@@ -312,7 +314,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Sets the url server.
-     * 
+     *
      * @param urlServer the new url server
      */
     public void setUrlServer(String urlServer) {
@@ -321,7 +323,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Gets the sucess.
-     * 
+     *
      * @return the sucess
      */
     public Double getSucess() {
@@ -330,7 +332,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Sets the sucess.
-     * 
+     *
      * @param sucess the new sucess
      */
     public void setSucess(final Double sucess) {
@@ -339,7 +341,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Checks if is last build sucess.
-     * 
+     *
      * @return true, if is last build sucess
      */
     public boolean isLastBuildSucess() {
@@ -348,7 +350,7 @@ public class Document extends DublinCore implements Serializable {
 
     /**
      * Sets the last build sucess.
-     * 
+     *
      * @param lastBuildSucess the new last build sucess
      */
     public void setLastBuildSucess(final boolean lastBuildSucess) {
@@ -372,6 +374,6 @@ public class Document extends DublinCore implements Serializable {
     public void setDuration(long duration) {
         this.duration = duration;
     }
-    
-    
+
+
 }
