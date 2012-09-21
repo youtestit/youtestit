@@ -6,7 +6,9 @@ target
 .pmd
 .project
 .checkstyle
-.log
+*.log
 .tmp
+.idea
+*.iml
 testdb.properties
 testdb.script
